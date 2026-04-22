@@ -1,0 +1,236 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 4%;
+    --foreground: 210 40% 98%;
+
+    --primary: 187 85% 53%;
+    --primary-foreground: 222 47% 4%;
+
+    --secondary: 234 89% 74%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 234 89% 74%;
+    --accent-foreground: 210 40% 98%;
+
+    --card: 222 47% 6%;
+    --card-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --ring: 187 85% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ============================================
+   Gradient Text Effects
+   ============================================ */
+.gradient-text {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(135deg, #06b6d4, #6366f1, #8b5cf6);
+}
+
+.gradient-text-cyan {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(135deg, #06b6d4, #3b82f6);
+}
+
+.gradient-text-indigo {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(135deg, #6366f1, #8b5cf6);
+}
+
+/* ============================================
+   Glassmorphism Card Effect
+   ============================================ */
+.glass-card {
+  @apply relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.glass-card::before {
+  content: "";
+  @apply absolute inset-0 rounded-2xl;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  pointer-events: none;
+}
+
+.glass-card:hover {
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow:
+    0 0 0 1px rgba(6, 182, 212, 0.15),
+    0 8px 32px rgba(6, 182, 212, 0.1),
+    0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================
+   Hero Gradient Background
+   ============================================ */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    #020617 0%,
+    #0c1929 25%,
+    #0e2a3d 50%,
+    #1a1043 75%,
+    #020617 100%
+  );
+}
+
+.hero-glow {
+  position: relative;
+}
+
+.hero-glow::before {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(
+    ellipse,
+    rgba(6, 182, 212, 0.15) 0%,
+    rgba(99, 102, 241, 0.08) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================
+   Animation Keyframes
+   ============================================ */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(6, 182, 212, 0.4);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes grid-fade {
+  0%,
+  100% {
+    opacity: 0.03;
+  }
+  50% {
+    opacity: 0.08;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+  background-size: 200% 100%;
+}
+
+/* ============================================
+   Grid Background Pattern
+   ============================================ */
+.grid-pattern {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+  animation: grid-fade 8s ease-in-out infinite;
+}
+
+/* ============================================
+   Scrollbar Styling
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* ============================================
+   Button Glow Effect
+   ============================================ */
+.btn-glow {
+  @apply relative overflow-hidden;
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-glow:hover {
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   Section Divider Glow
+   ============================================ */
+.section-divider {
+  @apply w-full h-px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(6, 182, 212, 0.3),
+    transparent
+  );
+}
