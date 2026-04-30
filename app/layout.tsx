@@ -3,6 +3,7 @@ import { Inter, Outfit } from "next/font/google"
 import "./globals.css"
 import { siteConfig } from "@/lib/site-config"
 import { FeedbackWidget } from "@/components/feedback-widget"
+import { WaitlistPopup } from "@/components/waitlist-popup"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -50,6 +51,7 @@ export default function RootLayout({
       >
         {children}
         <FeedbackWidget />
+        <WaitlistPopup />
       </body>
     </html>
   )
