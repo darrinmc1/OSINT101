@@ -1418,6 +1418,680 @@ Document findings, do not advise on crossing lines.
       },
     ],
   },
+
+  'digital-identity-analysis': {
+    id: 'digital-identity-analysis',
+    title: 'Digital Identity Analysis',
+    description: 'Learn how to reconstruct a person\'s digital footprint from publicly available information across social media, professional networks, and public records.',
+    level: 'Intermediate',
+    estimatedTime: '3-4 hours',
+    sections: [
+      {
+        title: 'The Digital Identity Concept',
+        duration: '25 min',
+        content: `
+### What is a Digital Identity?
+
+Every person online leaves traces. Email addresses, social media accounts, forum posts, professional profiles, public records, and even "deleted" content. Together, these traces form a digital identity — a composite picture of who someone is online.
+
+### The Three Pillars
+
+1. **Self-declared Identity**: What people say about themselves (LinkedIn, personal websites, social bios).
+2. **Behavioral Identity**: What people do online (posts they engage with, groups they join, content they share).
+3. **Attributed Identity**: What others say or what public records show (news mentions, court records, property records).
+
+### Why This Matters for OSINT
+
+- Corroborating or contradicting claims
+- Finding alternative contact methods
+- Building target profiles for further investigation
+- Identifying potential risks or credibility issues
+
+### Legal Boundaries
+
+Always respect privacy laws in your jurisdiction. Public information is not the same as ethically collected information. Know the difference.
+        `,
+        exercise: 'Pick a public figure and document their digital identity across 5 different platforms. Note what each platform reveals.',
+      },
+      {
+        title: 'Email Address Analysis',
+        duration: '30 min',
+        content: `
+### Email as an Identifier
+
+An email address is often the single most valuable piece of OSINT data. It can reveal:
+- Name patterns (john.doe@, jdoe@, john.doe1985@)
+- Provider clues (gmail vs. custom domain vs. disposable service)
+- Organization context (company emails reveal structure)
+
+### Verification Tools
+
+- **Hunter.io** — Find email patterns for organizations
+- **HaveIBeenPwned** — Check if emails appear in known breaches
+- **Emailrep.io** — Reputation and risk scoring
+- **Dehashed** — Search breached credentials
+
+### Cross-Platform Discovery
+
+Search email addresses across social platforms:
+- Gravatar — profile images tied to email
+- Social search — many platforms allow email-based lookup
+- Custom search: "[email] site:linkedin.com"
+
+### Disposable vs. Permanent
+
+Disposable emails (GuerrillaMail, 10MinuteMail) suggest anonymity efforts. Permanent emails (Gmail, Outlook, custom domains) are more useful for tracking.
+        `,
+        exercise: 'Take a known email address and document every platform you can associate with it. Write up your findings chain.',
+      },
+      {
+        title: 'Username Correlation',
+        duration: '30 min',
+        content: `
+### Username as a Cross-Platform Key
+
+Many people reuse usernames across platforms. A single username can lead to profiles on dozens of services.
+
+### Automated Search Tools
+
+- **WhatsMyName** (WebBreacher) — 400+ site username checker
+- **Sherlock** — CLI username search across social networks
+- **Maigret** — Advanced Sherlock fork with profile extraction
+- **Namechk** — Quick web-based check
+
+### Common Patterns
+
+| Pattern | Example | Reliability |
+|---------|---------|-------------|
+| Exact match | cyberjake on every platform | High — same person likely |
+| Slight variant | cyberjake2024, cyberjake_ | Medium-high |
+| Reverse | jakecyber | Medium |
+| Random suffix | cyberjake_x7f92 | Low — could be coincidence |
+
+### Manual Verification
+
+Never trust automated tools alone. Always:
+1. Visit the identified profile manually
+2. Compare bio details, photo, posting style
+3. Check for cross-references (same email in bio, same links)
+4. Look at join dates and activity patterns
+        `,
+        exercise: 'Pick a username, run it through Sherlock/WhatsMyName, then manually verify the top 3 matches.',
+      },
+      {
+        title: 'Social Media Profile Analysis',
+        duration: '35 min',
+        content: `
+### What Profiles Reveal
+
+Social media profiles contain a wealth of structured and unstructured data:
+
+**LinkedIn:**
+- Employment history and timeline
+- Education, certifications, skills
+- Recommendations and endorsements
+- Groups and connections
+
+**Facebook / Meta:**
+- Friends, family connections, locations
+- Interests, groups, events
+- Check-ins and travel history
+- Photos and tagged content
+
+**Instagram:**
+- Location data in posts and stories
+- Social graph (followers/following overlap)
+- Temporal patterns in posting
+- Engagement with specific topics
+
+### Profile Analysis Workflow
+
+1. **Capture** — Screenshot or archive the profile (archive.is, singlefile)
+2. **Extract** — Pull all visible data into a structured format
+3. **Cross-reference** — Match data points across platforms
+4. **Verify** — Check claims against other sources
+5. **Document** — Record sources and confidence levels
+
+### Red Flags
+
+- Recently created profiles with minimal activity
+- Inconsistent details across platforms
+- Overly generic bios ("I like technology and coffee")
+- Photos that appear on multiple unrelated profiles
+        `,
+        exercise: 'Analyze a LinkedIn profile and an Instagram profile belonging to the same person. Document discrepancies and consistencies.',
+      },
+      {
+        title: 'Public Records Integration',
+        duration: '25 min',
+        content: `
+### Types of Public Records
+
+- **Property records**: Ownership, valuations, tax history
+- **Court records**: Civil and criminal cases, judgments
+- **Business registrations**: LLC filings, officers, addresses
+- **Professional licenses**: State certification boards
+- **Voter registration**: Where available publicly
+- **Marriage and divorce records**: County records
+
+### Search Strategies
+
+Start broad, narrow down:
+1. Full name + state → narrow to county
+2. Add middle initial for disambiguation
+3. Cross-reference addresses from other sources
+4. Use approximate age or known associates
+
+### Connecting the Dots
+
+Public records often provide the missing link between:
+- A known email and a physical address
+- A username and a legal name
+- A social profile and a business entity
+
+### Documentation Requirements
+
+- Record the exact search terms used
+- Note which jurisdiction/agency provided the data
+- Save screenshots or copies of the records
+- Include date and time of access
+        `,
+        exercise: 'Take a fictional or public figure persona and find what public records exist for them in your state or county. Document the search path and results.',
+      },
+    ],
+  },
+
+  'osint-reporting': {
+    id: 'osint-reporting',
+    title: 'OSINT Reporting and Presentation',
+    description: 'Transform raw intelligence into actionable reports. Learn structured analytical techniques, source citation standards, and how to present findings to different audiences.',
+    level: 'Intermediate',
+    estimatedTime: '3-5 hours',
+    sections: [
+      {
+        title: 'The Intelligence Product Framework',
+        duration: '20 min',
+        content: `
+### Why Reporting Matters
+
+Good OSINT is invisible if the report is bad. Your analysis is only as valuable as your ability to communicate it.
+
+### Types of Intelligence Products
+
+- **Spot Report**: Quick, single-finding alert (email, chat)
+- **Situation Brief**: Multi-source summary of a current situation
+- **Deep Dive**: Comprehensive analysis with methodology
+- **Threat Assessment**: Risk-focused analysis with recommendations
+- **Periodic Summary**: Regular updates on a monitored subject
+
+### The Pyramid Principle
+
+Start with the conclusion, then support with evidence:
+
+1. **Bottom line up front** — One sentence stating the key finding
+2. **Supporting evidence** — Facts that support the conclusion
+3. **Methodology** — How you found the evidence
+4. **Confidence assessment** — How sure you are
+5. **Gaps and next steps** — What you don't know yet
+        `,
+        exercise: 'Take a finished OSINT investigation and rewrite the summary using the Pyramid Principle.',
+      },
+      {
+        title: 'Source Citation Standards',
+        duration: '25 min',
+        content: `
+### Why Citations Matter
+
+Without citations, your work is opinion. With proper citations, your work is intelligence.
+
+### Citation Components
+
+Every source citation should include:
+- **URL or location** — Where you found it
+- **Date accessed** — Because content changes
+- **Capture evidence** — Screenshot, archive, or local copy
+- **Search query used** — How you found it
+- **Confidence in source** — Official vs. secondary vs. anonymous
+
+### Archiving Sources
+
+Always archive because sources disappear:
+- **archive.is / archive.today** — Web page snapshots
+- **Wayback Machine** — Historical captures
+- **Local HTML saves** — Full page with assets
+- **Screenshots** — Quick visual evidence
+
+### Citation Formats
+
+For informal intelligence work, a structured but flexible format works best:
+
+> Source: Facebook profile "John Doe" (facebook.com/john.doe.123)
+> Accessed: 2026-05-15
+> Archived: archive.is/abc123
+> Note: Profile photo shows person at [location] based on background landmarks
+        `,
+        exercise: 'Take 3 web sources from a previous OSINT exercise and create proper citations with archives.',
+      },
+      {
+        title: 'Analytical Techniques',
+        duration: '30 min',
+        content: `
+### Structured Analytical Techniques
+
+Move beyond intuition to reproducible analysis.
+
+**Analysis of Competing Hypotheses (ACH):**
+1. List all possible explanations
+2. List evidence for and against each
+3. Identify the hypothesis with the most supporting evidence
+4. Track how your confidence changes
+
+**Devil's Advocacy:**
+Actively argue against your own conclusion. This helps identify:
+- Confirmation bias
+- Missing evidence
+- Alternative explanations you dismissed too quickly
+
+**Indicators and Warnings:**
+Identify observable events that would confirm or deny your hypothesis before they happen. If you expect X, what would you see?
+
+### Common Analytical Biases
+
+- **Confirmation bias**: Seeking evidence that supports your view
+- **Anchoring**: Over-relying on the first piece of information
+- **Availability bias**: Overweighting recent or memorable examples
+- **Groupthink**: Consensus overriding critical thinking
+        `,
+        exercise: 'Take a previous investigation finding and run it through ACH with at least 3 competing hypotheses.',
+      },
+      {
+        title: 'Audience-Tailored Reporting',
+        duration: '25 min',
+        content: `
+### Know Your Reader
+
+Different audiences need different formats:
+
+**Executive / Decision-Maker:**
+- 1-page executive summary
+- Bottom line first
+- Actionable recommendations only
+- No methodology details
+
+**Technical / Analyst:**
+- Detailed methodology
+- Source citations
+- Raw data appendices
+- Full analytical reasoning
+
+**Legal / Compliance:**
+- Chain of custody documentation
+- Admissible evidence standards
+- Strict privacy/compliance boundaries
+- Signed affidavits where needed
+
+### The One-Page Report
+
+A classic intelligence format:
+1. Classification header
+2. Subject line
+3. Key finding (1-2 sentences)
+4. Supporting evidence (3-5 bullet points)
+5. Confidence assessment
+6. Recommendations or next steps
+7. Source line with date
+        `,
+        exercise: 'Take one investigation finding and write three versions: one for a CEO, one for a fellow analyst, and one for legal/compliance.',
+      },
+      {
+        title: 'OPSEC in Reporting',
+        duration: '20 min',
+        content: `
+### Protecting Sources and Methods
+
+Your report may be shared beyond its intended audience.
+
+**What NOT to include:**
+- Your full methodology (unless needed for legal)
+- Tools and techniques that reveal capabilities
+- Information about ongoing operations
+- Identifying details about sources
+
+**Classification and Handling:**
+- Mark reports with appropriate sensitivity labels
+- Use distribution lists, not open sharing
+- Encrypt sensitive attachments
+- Track who has received each version
+
+### The Clean Report
+
+A clean report protects both the subject and the investigator:
+- Remove metadata from documents
+- Avoid identifying details about your process
+- Redact sensitive information clearly
+- Use a consistent, professional format
+
+### When to Walk Away
+
+Not every finding needs to be a report. Ask:
+- Does this meet the original collection requirement?
+- Is the information sufficiently verified?
+- Would publishing this cause harm?
+- Is there a responsible disclosure path?
+        `,
+        exercise: 'Review a previous OSINT exercise report. Redact or remove any information that could compromise OPSEC or source protection.',
+      },
+    ],
+  },
+
+  'breach-data-analysis': {
+    id: 'breach-data-analysis',
+    title: 'Breach Data Analysis',
+    description: 'Learn how to search, analyse, and interpret data from known security breaches for OSINT investigations. Understand credential stuffing, exposure assessment, and timeline analysis.',
+    level: 'Intermediate',
+    estimatedTime: '2-3 hours',
+    sections: [
+      {
+        title: 'Understanding Breach Data',
+        duration: '20 min',
+        content: `
+### What Breach Data Contains
+
+Data breaches leak various types of information:
+- **Credentials**: Email + password combinations (sometimes plaintext, sometimes hashed)
+- **Personal data**: Names, addresses, phone numbers, dates of birth
+- **Financial data**: Credit card numbers, bank account details
+- **Internal communications**: Emails, messages, documents
+- **Source code**: Proprietary code, API keys, internal infrastructure details
+
+### Common Sources
+
+- **HaveIBeenPwned**: Largest public breach aggregation (12B+ records)
+- **Dehashed**: Searchable breach database with cracked passwords
+- **IntelX**: Dark web data search engine
+- **Public Telegram channels**: Leak announcement groups
+- **RaidForums / Breached**: (historical, now defunct or migrated)
+
+### Legal and Ethical Boundaries
+
+- Accessing stolen data may be illegal in your jurisdiction
+- Viewing leaked credentials of a living person may violate privacy laws
+- Never use breached passwords to access accounts
+- Document your source and the legal basis for accessing it
+        `,
+        exercise: 'Using HaveIBeenPwned, check 3 email addresses you own and document what breaches they appear in.',
+      },
+      {
+        title: 'Credential Analysis Workflow',
+        duration: '30 min',
+        content: `
+### From Breach to Intelligence
+
+1. **Identify relevant breaches** for your target's email/username
+2. **Extract credential pairs** (email:password) where available
+3. **Analyse password patterns** — reuse rates, complexity, themes
+4. **Correlate across breaches** — same password used on multiple platforms?
+5. **Assess exposure risk** — what accounts are vulnerable?
+
+### Password Analysis
+
+Passwords themselves can reveal intelligence:
+- Personal details (birth years, names, pet names) — confirms other data points
+- Professional themes (company name-based passwords)
+- Reuse patterns — suggests which additional accounts might share passwords
+
+### Password Cracking Context
+
+- Many breached passwords are stored as hashes
+- Tools like Hashcat can crack weak hashes with GPU/cloud
+- Already-cracked databases (e.g., Dehashed) save time
+- Ethical note: cracking for intelligence purposes has legal implications
+        `,
+        exercise: 'Analyse a known breached credential (use a test/exercise dataset, not real). What patterns or intelligence can you extract from the password?',
+      },
+      {
+        title: 'Timeline and Correlation',
+        duration: '25 min',
+        content: `
+### Building a Breach Timeline
+
+When multiple breaches contain the same target:
+1. Chronologically order the breaches by date
+2. Track what information was exposed at each point
+3. Identify: did later breaches expose credentials that were changed after earlier breaches?
+
+### Cross-Breach Correlation
+
+- Same email in multiple breaches indicates active usage
+- Password changes between breaches suggest security awareness
+- Corporate email in personal breaches suggests poor opsec
+- New email addresses appearing in recent breaches suggest migration patterns
+
+### Assessment Report Template
+
+A structured breach analysis report includes:
+- **Subject**: Target email/username
+- **Breaches found**: Names, dates, data types exposed
+- **Exposure severity**: Credentials, PII, financial, none
+- **Password analysis**: Reuse patterns, complexity, changes over time
+- **Recommendations**: Password changes, account review, monitoring
+        `,
+        exercise: 'Take a known public breach dataset and map out a timeline for a single target across multiple breaches.',
+      },
+    ],
+  },
+
+  'telegram-osint': {
+    id: 'telegram-osint',
+    title: 'Telegram OSINT Investigations',
+    description: 'Master the art of gathering intelligence from Telegram — one of the most valuable OSINT sources for monitoring groups, channels, and user activity.',
+    level: 'Intermediate',
+    estimatedTime: '2-3 hours',
+    sections: [
+      {
+        title: 'Why Telegram Matters for OSINT',
+        duration: '15 min',
+        content: `
+### Telegram as an Intelligence Goldmine
+
+Telegram has become the platform of choice for:
+- Organised groups and communities
+- News and information channels
+- Leak and whistleblower publications
+- Criminal and hacking forums
+- Activist networks and protest coordination
+
+### What Makes Telegram Different
+
+- **Public channels** with unlimited subscribers
+- **Searchable history** (not always possible on other platforms)
+- **Bots** that can automate collection and analysis
+- **Forwarding chains** that reveal information spread
+- **Metadata-rich messages** (timestamps, forwarding info)
+
+### Key OSINT Use Cases
+
+- Monitoring threat actor communications
+- Tracking disinformation campaigns
+- Following leak publications in real time
+- Investigating organised crime coordination
+- Mapping information spread through forwarding chains
+        `,
+        exercise: 'Find 3 public Telegram channels in a topic area of interest. Document their purpose, subscriber count, and posting frequency.',
+      },
+      {
+        title: 'Telegram Search and Discovery',
+        duration: '20 min',
+        content: `
+### Finding Relevant Channels
+
+- **Telegram's built-in search**: Search within the app
+- **Lyzem.com**: Telegram search engine
+- **TGStat / Telemetr**: Channel analytics and discovery
+- **Google dorks**: site:t.me + keyword searches
+- **Cross-referencing**: Follow forward chains from known channels
+
+### Telegram Search Operators
+
+- Exact phrase matching for specific topics
+- Date range filtering for recent activity
+- Language filtering to narrow results
+- Forward chain analysis to find source channels
+
+### Channel Metadata Collection
+
+For each discovered channel, collect:
+- Channel name and username
+- Subscriber count and growth trend
+- Post frequency and engagement patterns
+- Forwarded content analysis
+- Admin/moderator identification (where visible)
+        `,
+        exercise: 'Using Lyzem and Telegram search, find 5 channels related to a specific topic. Document discovery methodology.',
+      },
+      {
+        title: 'Automated Collection and Monitoring',
+        duration: '25 min',
+        content: `
+### Collection Tools
+
+- **Telegram API**: Official API for bot and user-based collection
+- **Telethon**: Python library for interacting with Telegram API
+- **TGCLI**: Command-line interface for Telegram
+- **Telegram Bots**: Create monitoring bots for specific channels
+- **RSS bridges**: Convert Telegram channels to RSS feeds
+
+### Setting Up Collection
+
+1. Create a Telegram application (my.telegram.org)
+2. Get API ID and API hash
+3. Use Telethon to connect as a user or bot
+4. Join target channels
+5. Listen for new messages or scrape history
+
+### Storage and Analysis
+
+- Store messages in a structured database (SQLite, Postgres)
+- Tag and categorise by topic, sentiment, urgency
+- Create alerts for specific keywords or patterns
+- Track forwarding chains and information propagation
+- Export for further analysis or report generation
+
+### OPSEC Considerations
+
+- Use dedicated accounts for collection (not your personal account)
+- Be aware that Telegram can see all API activity
+- Rate limits apply — don't trigger spam detection
+- Some channels may be private and require invitation
+- Document your collection methodology for reproducibility
+        `,
+        exercise: 'Set up a Telethon script that connects to the Telegram API and collects the last 50 messages from a public channel.',
+      },
+    ],
+  },
+
+  'geolocation-osint': {
+    id: 'geolocation-osint',
+    title: 'Geolocation and Imagery OSINT',
+    description: 'Master the techniques of determining locations from photos, videos, and descriptive information. From EXIF data to visual clues, learn to pinpoint locations with precision.',
+    level: 'Advanced',
+    estimatedTime: '3-4 hours',
+    sections: [
+      {
+        title: 'Visual Geolocation Fundamentals',
+        duration: '25 min',
+        content: `
+### The Art of Photo Geolocation
+
+Determining where a photo was taken is one of the most valuable OSINT skills. It combines visual analysis, geographic knowledge, and methodical research.
+
+### Key Visual Clues
+
+- **Landscape**: Mountains, coastlines, vegetation types, soil colour
+- **Infrastructure**: Road markings, power lines, lamp posts, signage
+- **Architecture**: Building styles, rooflines, window types, construction materials
+- **Language**: Street signs, billboards, shop names, license plates
+- **Lighting**: Sun position, shadow angles, weather conditions
+- **Culture**: Clothing, vehicle models, business names, flags
+
+### The Reverse Image Search Workflow
+
+1. **Google Images**: Best for well-known locations
+2. **Yandex Images**: Often better for non-Western locations
+3. **TinEye**: Finds exact matches and modified versions
+4. **Bing Visual Search**: Good alternative when others fail
+5. **Social media platforms**: Some have built-in reverse search
+        `,
+        exercise: 'Find 5 photos online with unknown locations. Use visual clues only (no metadata) to determine where each was taken.',
+      },
+      {
+        title: 'EXIF and Metadata Analysis',
+        duration: '20 min',
+        content: `
+### What EXIF Data Reveals
+
+Photos contain embedded metadata that can reveal:
+- **GPS coordinates**: Exact location (if enabled)
+- **Timestamp**: When the photo was taken
+- **Device info**: Camera make, model, software
+- **Orientation**: Which direction the photographer faced
+- **Thumbnails**: Sometimes embedded thumbnails of edited versions
+
+### Tools for EXIF Extraction
+
+- **exiftool**: The gold standard for metadata extraction
+- **Jeffrey's Image Metadata Viewer**: Web-based viewer
+- **ExifData.com**: Quick online check
+- **Python PIL/Pillow**: Programmatic extraction
+
+### Limitations
+
+- Social media platforms strip EXIF data on upload
+- Most phones require explicit permission to share location
+- Screenshots contain no useful location data
+- Some cameras allow disabling GPS tracking
+- Professional photographers often strip metadata intentionally
+        `,
+        exercise: 'Take a photo with your phone (with location enabled) and extract all EXIF data using exiftool or a web viewer.',
+      },
+      {
+        title: 'Advanced Techniques',
+        duration: '30 min',
+        content: `
+### Beyond the Photo
+
+- **Video frame extraction**: Extract key frames from videos for geolocation
+- **360-degree imagery**: Compare with Google Street View history
+- **Shadow analysis**: Calculate approximate time and location from shadow angles (suncalc.org)
+- **Star mapping**: Identify astronomical features in night photos
+- **Audio analysis**: Background sounds can reveal location (bird species, traffic patterns, languages)
+
+### Cross-Referencing Platforms
+
+- **Google Earth**: Historical imagery comparison
+- **Wikimapia**: User-contributed location labels
+- **OpenStreetMap**: Detailed geographic data
+- **Mapillary / KartaView**: Crowd-sourced street-level imagery
+- **PeakFinder**: Mountain silhouette identification
+
+### Documentation
+
+- Save your search path: every search, every result, every dead end
+- Create a \`geolocation log\` with timestamps and URLs
+- Annotate photos with your findings
+- Record confidence levels for each determination
+
+### Practice Resources
+
+- **GeoGuessr**: Gamified geolocation practice
+- **Reddit r/whereisthis**: Community geolocation challenges
+- **Bellingcat's Geolocation Guide**: Professional methodology reference
+- **Quiztime / @quiztime**: Regular geolocation puzzles on Twitter/X
+        `,
+        exercise: 'Pick a photo from Reddit r/whereisthis and attempt to locate it using at least 3 different clues. Document your methodology.',
+      },
+    ],
+  },
 }
 
 // =============================================================================
