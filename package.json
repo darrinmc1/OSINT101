@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.39.3",
+    "@radix-ui/react-scroll-area": "^1.2.12",
+    "@radix-ui/react-slot": "^1.3.0",
+    "@radix-ui/react-tabs": "^1.1.15",
     "@supabase/supabase-js": "^2.104.0",
     "@tailwindcss/typography": "^0.5.0",
     "autoprefixer": "^10.4.0",
