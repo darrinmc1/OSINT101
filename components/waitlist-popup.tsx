@@ -82,7 +82,7 @@ export function WaitlistPopup() {
                             Get 50% off OSINT101
                         </h2>
                         <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "24px", lineHeight: 1.5 }}>
-                            Join the waitlist and lock in founder pricing — 50% off when we launch. Master open-source intelligence from scratch.
+                            Join the waitlist and lock in founder pricing — 50% off when we launch. Learn to find what's already there.
                         </p>
 
                         <iframe
@@ -146,7 +146,7 @@ export function WaitlistPopup() {
                     <div style={{ textAlign: "center", padding: "16px 0" }}>
                         <div style={{ fontSize: "40px", marginBottom: "12px" }}>🎉</div>
                         <p style={{ color: "#fff", fontSize: "18px", fontWeight: 600, marginBottom: "8px" }}>
-                            You&apos;re on the list!
+                            On the list. Case opened.
                         </p>
                         <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "20px" }}>
                             We&apos;ll email your 50% discount code the day we launch.

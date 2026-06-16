@@ -38,6 +38,7 @@ export interface SiteConfig {
     ctaSecondary: string
     emailCaptureHeading: string
     emailCaptureSubheading: string
+    feedbackPlaceholder: string
   }
   pricing: {
     founder: { monthly: number; yearly: number }
@@ -95,11 +96,12 @@ export const siteConfig: SiteConfig = {
 
   copy: {
     heroTitle: "Open-Source Intelligence, Explained",
-    heroSubtitle: "Free training with a twist. Earn badges, track progress, and actually enjoy learning.",
-    ctaButton: "Start Learning",
+    heroSubtitle: "The information is already public. The skill is finding it before someone else does — and knowing whether it's worth anything when you do.",
+    ctaButton: "Open the Case File",
     ctaSecondary: "Browse Lessons",
-    emailCaptureHeading: "Stay Updated",
-    emailCaptureSubheading: "Get notified when new lessons drop. Founding members get exclusive perks.",
+    emailCaptureHeading: "Get the Case Files",
+    emailCaptureSubheading: "New lessons, occasional tradecraft notes. Founding members read the dossier first.",
+    feedbackPlaceholder: "What did you find? Be specific — vague reports get filed under 'cold case'.",
   },
 
   pricing: {

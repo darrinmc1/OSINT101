@@ -53,11 +53,11 @@ export function FeedbackWidget() {
         }, 3000)
       } else {
         setStatus("error")
-        setResponseMessage(data.error || "Something went wrong.")
+        setResponseMessage(data.error || "Something went sideways. Try again.")
       }
     } catch {
       setStatus("error")
-      setResponseMessage("Network error. Please try again.")
+      setResponseMessage("Lost the trail. Check your connection and try again.")
     }
   }
 
@@ -97,7 +97,7 @@ export function FeedbackWidget() {
               <div className="text-4xl mb-3 animate-bounce">
                 {siteConfig.badges.tierEmojis[4]}
               </div>
-              <p className="font-bold text-white mb-1">Thank you!</p>
+              <p className="font-bold text-white mb-1">Report logged.</p>
               <p className="text-sm text-slate-400">{responseMessage}</p>
             </div>
           ) : (
@@ -222,7 +222,7 @@ export function FeedbackWidget() {
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
                       />
                     </svg>
-                    Sending...
+                    Filing report...
                   </span>
                 ) : (
                   "Send Feedback"

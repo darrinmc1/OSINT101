@@ -103,11 +103,11 @@ export function EmailCapture({
         setName("")
       } else {
         setStatus("error")
-        setMessage(data.error || "Something went wrong.")
+        setMessage(data.error || "Something went sideways. Try again.")
       }
     } catch {
       setStatus("error")
-      setMessage("Network error. Please try again.")
+      setMessage("Lost the trail. Check your connection and try again.")
     }
   }
 
@@ -123,12 +123,12 @@ export function EmailCapture({
           {siteConfig.theme.emoji}
         </div>
         <h3 className={`text-2xl font-extrabold ${colors.text} mb-2`}>
-          You&apos;re In!
+          On the list. Case opened.
         </h3>
         <p className={`${colors.textMuted} text-lg`}>{message}</p>
         <div className="mt-4 inline-flex items-center gap-2 bg-cyan-500/10 rounded-full px-4 py-2 border border-cyan-500/30">
           <span className="text-sm font-semibold text-cyan-400">
-            Founding Member Status: Confirmed
+            Founding Member Status: Verified
           </span>
           <span>{siteConfig.badges.tierEmojis[4]}</span>
         </div>
@@ -207,7 +207,7 @@ export function EmailCapture({
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
                       />
                     </svg>
-                    Joining...
+                    Cross-referencing...
                   </span>
                 ) : (
                   siteConfig.copy.ctaButton
@@ -270,7 +270,7 @@ export function EmailCapture({
             disabled={status === "loading"}
             className={`${colors.primary} ${colors.primaryHover} text-white font-bold px-6 py-3 rounded-xl shadow-lg shadow-cyan-500/25 transition-all duration-300 hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap text-sm`}
           >
-            {status === "loading" ? "Joining..." : "Join Free"}
+            {status === "loading" ? "Cross-referencing..." : "Join Free"}
           </button>
         </form>
       </div>
