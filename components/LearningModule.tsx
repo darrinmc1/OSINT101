@@ -103,7 +103,7 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                 className={`mb-3 rounded-none px-4 py-1 text-sm ${
                   module.level === 'Beginner'
                     ? 'bg-intel-green text-black'
-                    : module.level === 'Expert'
+                    : module.level === 'Advanced'
                       ? 'bg-intel-red text-white'
                       : 'bg-intel-blue text-white'
                 }`}
