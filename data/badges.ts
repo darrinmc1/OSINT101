@@ -16,7 +16,7 @@ export interface Badge {
   lessonsRequired: number
 }
 
-export type SpecialBadge = Badge & { category: NonNullable<Badge['category']> }
+export type SpecialBadge = Badge & { category: NonNullable<Badge['category']>; condition: string }
 
 export const TIER_CONFIG = {
   tierNames: siteConfig.badges.tierNames,

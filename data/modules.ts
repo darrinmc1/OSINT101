@@ -537,7 +537,7 @@ An analyst who can rank findings sensibly is more valuable than one who discover
     id: 'digital-forensics',
     title: 'Digital Forensics',
     description: 'Investigate digital crime scenes. CSI: Cyber edition, with more coffee.',
-    level: 'Expert',
+    level: 'Advanced',
     estimatedTime: '12-15 hours',
     sections: [
       {

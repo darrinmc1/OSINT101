@@ -1,25 +1,23 @@
-"use client"
+﻿"use client"
 
 import { useEffect, useState } from "react"
+import { HoneypotField } from "@/components/HoneypotField"
 
-const MAILCHIMP_ACTION_URL =
-    "https://gmail.us19.list-manage.com/subscribe/post?u=b8898b94266e53179fa3bc7ff&id=cc2cbb82cb&f_id=0018f7e3f0"
-const HONEYPOT_FIELD_NAME = "b_b8898b94266e53179fa3bc7ff_cc2cbb82cb"
 const POPUP_STORAGE_KEY = "osint101-waitlist-seen"
-
 const SHOW_AFTER_MS = 5000
 const SUPPRESS_DAYS = 30
 
 export function WaitlistPopup() {
     const [isOpen, setIsOpen] = useState(false)
     const [email, setEmail] = useState("")
+    const [honeypot, setHoneypot] = useState("")
     const [submitted, setSubmitted] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const lastSeen = localStorage.getItem(POPUP_STORAGE_KEY)
         if (lastSeen) {
-            const daysSince =
-                (Date.now() - parseInt(lastSeen, 10)) / (1000 * 60 * 60 * 24)
+            const daysSince = (Date.now() - parseInt(lastSeen, 10)) / (1000 * 60 * 60 * 24)
             if (daysSince < SUPPRESS_DAYS) return
         }
         const timer = setTimeout(() => setIsOpen(true), SHOW_AFTER_MS)
@@ -28,20 +26,39 @@ export function WaitlistPopup() {
 
     const markSeen = () => localStorage.setItem(POPUP_STORAGE_KEY, Date.now().toString())
     const handleClose = () => { setIsOpen(false); markSeen() }
-    const handleSubmit = () => markSeen()
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (honeypot !== '') {
+            handleClose()
+            return
+        }
+        setLoading(true)
+        try {
+            const res = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, source: 'popup', website: honeypot }),
+            })
+            if (res.ok) {
+                setSubmitted(true)
+                markSeen()
+            } else {
+                handleClose()
+            }
+        } catch (error) {
+            console.error('Error:', error)
+            handleClose()
+        } finally {
+            setLoading(false)
+        }
+    }
 
     if (!isOpen) return null
 
     return (
         <>
-            {/* Backdrop */}
-            <div style={{
-                position: "fixed",
-                inset: 0,
-                backgroundColor: "rgba(0,0,0,0.7)",
-                zIndex: 9998,
-            }} />
-            {/* Modal */}
+            <div style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.7)", zIndex: 9998 }} />
             <div style={{
                 position: "fixed",
                 top: "50%",
@@ -56,7 +73,6 @@ export function WaitlistPopup() {
                 maxWidth: "440px",
                 boxShadow: "0 25px 50px rgba(0,0,0,0.5)",
             }}>
-                {/* Close button */}
                 <button
                     onClick={handleClose}
                     style={{
@@ -82,24 +98,13 @@ export function WaitlistPopup() {
                             Get 50% off OSINT101
                         </h2>
                         <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "24px", lineHeight: 1.5 }}>
-                            Join the waitlist and lock in founder pricing — 50% off when we launch. Learn to find what's already there.
+                            Join the waitlist and lock in founder pricing – 50% off when we launch. Learn to find what's already there.
                         </p>
 
-                        <iframe
-                            name="mailchimp-target"
-                            style={{ display: "none" }}
-                            title="Mailchimp submission target"
-                            onLoad={() => { if (email) setSubmitted(true) }}
-                        />
-                        <form
-                            action={MAILCHIMP_ACTION_URL}
-                            method="post"
-                            target="mailchimp-target"
-                            onSubmit={handleSubmit}
-                        >
+                        <form onSubmit={handleSubmit}>
                             <input
                                 type="email"
-                                name="EMAIL"
+                                name="email"
                                 required
                                 placeholder="you@example.com"
                                 value={email}
@@ -117,11 +122,11 @@ export function WaitlistPopup() {
                                     outline: "none",
                                 }}
                             />
-                            <div style={{ position: "absolute", left: "-5000px" }} aria-hidden="true">
-                                <input type="text" name={HONEYPOT_FIELD_NAME} tabIndex={-1} defaultValue="" />
-                            </div>
+                            <HoneypotField />
+                            <input type="hidden" name="website" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
                             <button
                                 type="submit"
+                                disabled={loading}
                                 style={{
                                     width: "100%",
                                     padding: "12px",
@@ -131,11 +136,12 @@ export function WaitlistPopup() {
                                     color: "#fff",
                                     fontSize: "15px",
                                     fontWeight: 600,
-                                    cursor: "pointer",
+                                    cursor: loading ? "not-allowed" : "pointer",
                                     marginBottom: "12px",
+                                    opacity: loading ? 0.7 : 1,
                                 }}
                             >
-                                Join the Waitlist — Get 50% Off
+                                {loading ? "Joining..." : "Join the Waitlist – Get 50% Off"}
                             </button>
                             <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "12px", textAlign: "center" }}>
                                 Founder pricing locked in for early subscribers. No spam, unsubscribe anytime.
@@ -149,7 +155,7 @@ export function WaitlistPopup() {
                             On the list. Case opened.
                         </p>
                         <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "20px" }}>
-                            We&apos;ll email your 50% discount code the day we launch.
+                            We'll email your 50% discount code the day we launch.
                         </p>
                         <button
                             onClick={handleClose}

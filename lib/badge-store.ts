@@ -107,11 +107,11 @@ export type BadgeStoreState = {
 
 // ---- Tier order for progression ----
 const TIER_ORDER: BadgeTier[] = [
-  "basic-bot",
-  "smart-assistant",
-  "neural-network",
-  "deep-mind",
-  "superintelligence",
+  0,
+  1,
+  2,
+  3,
+  4,
 ]
 
 // ---- Store ----
