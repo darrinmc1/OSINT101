@@ -1,9 +1,7 @@
-import { SignIn } from "@clerk/nextjs"
-
-export default function Page() {
+export default function SignInPage() {
   return (
-    <main className="min-h-screen flex items-center justify-center px-4 py-16">
-      <SignIn />
-    </main>
+    <div className="flex min-h-screen items-center justify-center">
+      <p className="text-slate-400">Sign in coming soon.</p>
+    </div>
   )
 }

@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 import { siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
 import { Menu, X } from "lucide-react"
@@ -39,16 +38,12 @@ export function Header() {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <SignedOut>
-              <SignInButton>
-                <button className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors">
-                  Log In
-                </button>
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton afterSignOutUrl="/" />
-            </SignedIn>
+            <Link
+              href="/sign-in"
+              className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors"
+            >
+              Log In
+            </Link>
             <Link
               href="/modules"
               className={cn(
@@ -89,21 +84,13 @@ export function Header() {
               </Link>
             ))}
             <div className="pt-4 border-t border-white/10 space-y-2">
-              <SignedOut>
-                <SignInButton>
-                  <button
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full px-4 py-3 text-sm font-medium text-slate-300 hover:text-white text-center rounded-lg hover:bg-white/5"
-                  >
-                    Log In
-                  </button>
-                </SignInButton>
-              </SignedOut>
-              <SignedIn>
-                <div className="flex justify-center py-2">
-                  <UserButton afterSignOutUrl="/" />
-                </div>
-              </SignedIn>
+              <Link
+                href="/sign-in"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block w-full px-4 py-3 text-sm font-medium text-slate-300 hover:text-white text-center rounded-lg hover:bg-white/5"
+              >
+                Log In
+              </Link>
               <Link
                 href="/modules"
                 onClick={() => setMobileMenuOpen(false)}
