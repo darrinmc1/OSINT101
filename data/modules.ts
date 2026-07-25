@@ -2092,7 +2092,6 @@ Photos contain embedded metadata that can reveal:
       },
     ],
   },
-}
   'osint-methodology': {
     id: 'osint-methodology',
     title: 'OSINT Methodology & Structured Workflow',
