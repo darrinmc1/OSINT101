@@ -2201,14 +2201,10 @@ Good documentation is what separates intelligence from "trust me, I checked." It
 ### Naming convention that saves sanity
 
 Use a consistent format for files:
-\\`
 YYYY-MM-DD_CaseName_SourceType_Description.ext
-\\`
 
 Example:
-\\`
 2026-07-25_AcmeCorp_WHOIS_registrant-contact.png
-\\`
 
 This way sorting by name also sorts by date and case, and you can find files without opening every folder like a digital archaeologist.
 
