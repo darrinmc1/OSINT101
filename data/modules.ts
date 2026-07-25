@@ -2292,7 +2292,7 @@ Not everyone uses the exact same username. Look for variations:
 - [ ] Overlapping followers or connections?
 - [ ] Activity patterns that match (same timezone, same topics)?
         `,
-        exercise: 'Pick a username you rarely use (or a colleague's public username) and run it through 3 different tools or manual searches. Document which platforms returned results and what the profiles revealed.',
+        exercise: 'Pick a username you rarely use (or a colleague\'s public username) and run it through 3 different tools or manual searches. Document which platforms returned results and what the profiles revealed.',
       },
       {
         title: 'Breach Data and Pivoting',
