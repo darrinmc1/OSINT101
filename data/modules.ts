@@ -2093,6 +2093,378 @@ Photos contain embedded metadata that can reveal:
     ],
   },
 }
+  'osint-methodology': {
+    id: 'osint-methodology',
+    title: 'OSINT Methodology & Structured Workflow',
+    description: 'Build a repeatable investigation workflow that keeps you organised, focused, and defensible.',
+    level: 'Beginner',
+    estimatedTime: '3-4 hours',
+    sections: [
+      {
+        title: 'Why Methodology Matters',
+        duration: '20 min',
+        content: `
+### Methodology is the difference between a lucky find and a reliable result
+
+OSINT without methodology is just enthusiastic googling. A structured approach ensures you can reproduce results, defend conclusions, and hand off work to someone else without them weeping.
+
+### What good methodology gives you
+
+- **Repeatability**: Someone else can follow your steps and reach similar conclusions.
+- **Coverage**: A checklist prevents forgetting whole categories of sources.
+- **Defensibility**: Your notes show how you got from question to answer.
+- **Efficiency**: You stop retracing steps because you recorded them the first time.
+
+### Common methodology frameworks
+
+### The Intelligence Cycle (Traditional)
+1. **Direction** — What question are we answering?
+2. **Collection** — Gather raw data from appropriate sources.
+3. **Processing** — Clean, translate, format, deduplicate.
+4. **Analysis** — Turn data into judgements.
+5. **Dissemination** — Deliver the product.
+
+### The PEAK Model (Practical for SMBs)
+1. **Prepare** — Scope, tools, legal boundaries.
+2 **Explore** — Broad search, open questions, hypothesis generation.
+3. **Analyze** — Filter, verify, connect dots.
+4. **Know** — Report, recommend, close or continue.
+
+### Your First Investigation Plan
+
+Every investigation should start with five minutes of planning:
+
+1. **One-sentence objective**: "I need to find the registered owner of example.com."
+2. **Source list**: WHOIS, Wayback Machine, LinkedIn, Crunchbase.
+3. **Tools needed**: Terminal, browser, screenshot tool.
+4. **Time budget**: 2 hours. If it takes longer, reassess.
+5. **Stop condition**: "When I have a name and address, I am done."
+
+> Proper planning is how you avoid opening 47 tabs and realising 90 minutes later you forgot what you were looking for.
+        `,
+        exercise: 'Write a one-page investigation plan for researching a company you choose. Include the objective, source list, tools, time budget, and stop condition.',
+      },
+      {
+        title: 'The OSINT Pyramid',
+        duration: '30 min',
+        content: `
+### A mental model for how to prioritise sources and effort
+
+The OSINT pyramid visualises the relationship between volume, effort, and confidence.
+
+### Bottom layer — Broad collection (High volume, low effort)
+- Google searches, social media scans, public directories.
+- Generates leads, not conclusions.
+
+### Middle layer — Structured collection (Medium volume, medium effort)
+- Targeted searches with operators, platform-specific queries.
+- Generates data points that can be compared and cross-referenced.
+
+### Top layer — Verified intelligence (Low volume, high effort)
+- Cross-sourced corroboration, direct source confirmation.
+- Generates findings you would present to a decision-maker.
+
+### How to use it
+
+1. Start at the bottom and work up.
+2. Do not present a finding as "high confidence" if you never left the bottom layer.
+3. The pyramid reminds you that most of your work time is on the bottom and middle — and that is healthy.
+
+### Trap to avoid
+
+Analysts sometimes skip the foundation and try to jump straight to verified intelligence. That is how you get confident-but-wrong conclusions that look great in a report and fall apart under scrutiny.
+        `,
+        exercise: 'Take a research question and map what you would do at each layer of the pyramid. Write one paragraph per layer.',
+      },
+      {
+        title: 'Documentation Standards',
+        duration: '25 min',
+        content: `
+### You did not find it if you cannot show your work
+
+Good documentation is what separates intelligence from "trust me, I checked." It also saves your future self from asking "which screenshot was that again?"
+
+### What to document for every finding
+
+- **Timestamp**: When you found it (not when you wrote it down).
+- **Source URL**: Permanent link or archive link.
+- **Snapshot**: Screenshot or archived copy of the page as it appeared.
+- **Context**: Why you collected it and what you think it means.
+- **Confidence**: How reliable is this specific piece of evidence?
+
+### Tools for documentation
+
+- **Obsidian** or **Notion**: Structured notes with linking.
+- **Hunchly**: Browser extension that auto-captures pages during investigations.
+- **Wayback Machine**: Archive pages that might change or disappear.
+- **Simple text files**: Better than nothing, and nothing to break.
+
+### Naming convention that saves sanity
+
+Use a consistent format for files:
+\\`
+YYYY-MM-DD_CaseName_SourceType_Description.ext
+\\`
+
+Example:
+\\`
+2026-07-25_AcmeCorp_WHOIS_registrant-contact.png
+\\`
+
+This way sorting by name also sorts by date and case, and you can find files without opening every folder like a digital archaeologist.
+
+> Documentation is not optional. It is the only part of the work that survives to be questioned later.
+        `,
+        exercise: 'Take one finding from a previous exercise and document it properly using the timestamp-source-context-confidence format described above.',
+      },
+    ],
+  },
+
+  'email-osint': {
+    id: 'email-osint',
+    title: 'Email & Username Intelligence',
+    description: 'Trace email addresses and usernames across platforms to build identity profiles and connection maps.',
+    level: 'Beginner',
+    estimatedTime: '3-4 hours',
+    sections: [
+      {
+        title: 'Email Address Anatomy',
+        duration: '20 min',
+        content: `
+### An email address is not just a contact. It is a clue.
+
+Every email address contains structure, provider hints, and sometimes the person's name, handle, or employer.
+
+### Parts of an email address
+- **Local part** (before @): May contain name, initials, birth year, or a handle.
+- **Domain**: Reveals email provider, company, or custom domain.
+- **Plus addressing**: Some providers treat "name+tag@domain.com" as the same inbox — useful for tracking who sold your data.
+
+### What the domain tells you
+- **Gmail / Outlook / Yahoo**: Personal addresses, harder to trace.
+- **Company domain**: Likely work address — reveals employer.
+- **Custom domain**: Self-hosted or small business. WHOIS the domain for more.
+- **Disposable providers** (Mailinator, 10MinuteMail): Likely throwaway, low signal.
+
+### Quick email validation
+Before investing time investigating an email, check if it exists:
+
+- **Emailhippo** or **Hunter.io**: Verify if the address format is valid.
+- **Have I Been Pwned**: Check if the address appears in known breaches (useful for pivoting).
+- **Google search** in quotes: See if the address appears on public pages.
+
+> An email address that leads to a dead disposable domain is usually not worth the effort. Move on to higher-signal sources.
+        `,
+        exercise: 'Take 5 email addresses from public sources and analyse each one: provider, likely type (personal/work), any name clues in the local part, and any domains you can WHOIS.',
+      },
+      {
+        title: 'Username Correlation',
+        duration: '35 min',
+        content: `
+### People reuse usernames. Relentlessly. It is the gift that keeps giving.
+
+Most people use the same username across multiple platforms. Finding one profile can lead to a dozen others.
+
+### Username search tools
+
+- **WhatsMyName** (web): Checks hundreds of sites for a username.
+- **Namechk**: Checks username availability across platforms (inverted logic).
+- **Sherlock**: Python CLI tool for username enumeration.
+- **Maigret**: Enhanced Sherlock with more sites and better output.
+
+### Manual username patterns
+
+Not everyone uses the exact same username. Look for variations:
+
+- FirstnameLastname: johndoe, john.doe
+- InitialLastname: jdoe, j.doe
+- With numbers: johndoe87, jdoe1987
+- With underscores or dots: john_doe, john.doe.OSINT
+- Reversed: doejohn, doej
+
+### What to check with each username
+
+- **Social media**: LinkedIn, Twitter/X, Instagram, Facebook, Reddit, GitHub
+- **Professional**: AngelList, Crunchbase, Medium, Substack
+- **Communication**: Telegram, Discord, WhatsApp (public groups)
+- **Historical**: Wayback Machine, old forum posts, archived social media
+
+### Cross-platform correlation checklist
+
+- [ ] Same profile photo across platforms?
+- [ ] Same bio or tagline?
+- [ ] Same links (website, Linktree)?
+- [ ] Overlapping followers or connections?
+- [ ] Activity patterns that match (same timezone, same topics)?
+        `,
+        exercise: 'Pick a username you rarely use (or a colleague's public username) and run it through 3 different tools or manual searches. Document which platforms returned results and what the profiles revealed.',
+      },
+      {
+        title: 'Breach Data and Pivoting',
+        duration: '30 min',
+        content: `
+### When an email or username appears in a breach, the real investigation begins
+
+Breach data reveals associated emails, passwords (hashed or plaintext), IP addresses, and sometimes physical addresses. This is some of the highest-signal OSINT data available.
+
+### How to check breach data
+
+- **Have I Been Pwned**: Check if an email appears in known breaches.
+- **DeHashed** (paid): Search by email, username, IP, or name.
+- **IntelX**: Dark web intelligence search engine.
+- **Snusbase**: Data breach search engine.
+
+### Ethical boundaries
+
+Accessing breach data is legally and ethically sensitive:
+- **Do** use it to help someone secure their accounts.
+- **Do** use it in legitimate investigations with proper authorisation.
+- **Do not** access or share breached passwords for personal accounts you are not authorised to investigate.
+- **Do not** download or distribute breach databases.
+
+### Pivoting from breach data
+
+Breach data is not a destination — it is a launch point:
+
+1. Email → Breach → New email found → Search new email
+2. Email → Breach → Password hash → Correlate with other accounts
+3. Email → Breach → IP address → Geolocate or check for patterns
+4. Username → Breach → Associated email → WHOIS domain → Company
+
+### Automation consideration
+
+When you find one email in a breach, there are often more. Search related patterns — same domain, same name variations — before concluding the search.
+
+> Breach data is powerful and dangerous. Use it proportionally, lawfully, and with a clear purpose that you can articulate to anyone who asks.
+        `,
+        exercise: 'Take a test email address (yours) and check it on Have I Been Pwned. Document what breaches it appears in, what data was exposed, and identify at least one pivot point you could investigate further.',
+      },
+    ],
+  },
+
+  'business-osint': {
+    id: 'business-osint',
+    title: 'Company & Organisational Intelligence',
+    description: 'Research companies, their structure, leadership, and digital footprint using open sources.',
+    level: 'Beginner',
+    estimatedTime: '3-5 hours',
+    sections: [
+      {
+        title: 'Company Structure Research',
+        duration: '30 min',
+        content: `
+### Every company leaves a paper trail. The trick is knowing where to look.
+
+Company research is one of the most common OSINT tasks — for competitive intelligence, due diligence, investigations, or sales prospecting.
+
+### Start with the legal entity
+
+- **Company registers**: ASIC (Australia), Companies House (UK), SEC (US), OpenCorporates (global).
+- **Business registration numbers**: ABN, ACN, EIN, VAT — search these for associated entities.
+- **Trading names**: A company may operate under multiple trading names. Search all of them.
+
+### Leadership and people
+
+- **LinkedIn**: Search for current and former employees. Look for job titles that reveal structure.
+- **Crunchbase**: Funding, founding dates, investor information.
+- **Zoominfo / Apollo**: Contact data (often a paid tier, but free tiers provide limited useful data).
+- **Board members**: Search for directors on company registry sites.
+
+### Financial health signals
+
+- **Annual reports**: Public companies file these. Look for revenue trends, risk factors, and subsidiary mentions.
+- **News mentions**: Search for recent funding rounds, layoffs, acquisitions.
+- **Job postings**: Rapid hiring suggests growth; hiring freezes suggest trouble.
+- **Glassdoor / Indeed**: Employee reviews — biased but useful for culture and leadership signals.
+
+> A company that has been registered for 10 years with no website, no LinkedIn, and no reviews may be a shelf company. That is itself a finding.
+        `,
+        exercise: 'Research a local business online. Find its registration number, registered address, key personnel (CEO, directors), and approximate revenue range. Document all sources.',
+      },
+      {
+        title: 'Digital Footprint Mapping',
+        duration: '35 min',
+        content: `
+### A company's digital footprint reveals infrastructure, priorities, and vulnerabilities
+
+Every company leaves digital traces — some intentional, some accidental — that paint a picture of their operations.
+
+### Website analysis
+
+- **WHOIS**: Who registered the domain? When? Through which registrar?
+- **SSL certificate transparency**: Search crt.sh for all certificates issued to the domain — reveals subdomains and hosting infrastructure.
+- **DNS records**: MX (email provider), NS (nameservers), TXT (SPF, DKIM, verification records).
+- **Technology stack**: BuiltWith, Wappalyzer — what CMS, analytics, and tools the site uses.
+
+### Social media footprint
+
+- **Which platforms** does the company have a presence on?
+- **Posting frequency and engagement** — reveals marketing priorities.
+- **Employee advocacy** — do employees share company content?
+- **Customer interactions** — how does the company handle complaints or questions?
+
+### Third-party mentions
+
+- **Review sites**: Google Maps, Yelp, Trustpilot.
+- **Industry forums**: Discussions about the company or its products.
+- **News and press**: Media coverage, press releases, interviews.
+- **Partnership pages**: Companies listed as partners or clients.
+
+### What to build
+
+Create a single-page company profile with:
+- Legal identity and structure
+- Key personnel
+- Digital assets (domains, social profiles)
+- Technology stack
+- Recent news or signals
+- Confidence rating for each data point
+        `,
+        exercise: 'Pick a medium-sized business you are familiar with and map its complete digital footprint: domains, social profiles, tech stack, third-party mentions, and employee presence on LinkedIn. Create a one-page summary.',
+      },
+      {
+        title: 'Supply Chain and Relationships',
+        duration: '25 min',
+        content: `
+### A company is not an island. Its relationships reveal its real shape.
+
+Company-to-company connections often matter more than the company itself. Understanding who owns, supplies, partners with, and competes with a target provides critical context.
+
+### Ownership and corporate structure
+
+- **Parent companies**: Who owns the target? Who does the target own?
+- **Subsidiaries**: List known subsidiaries and their jurisdictions.
+- **Joint ventures**: Formal partnerships between companies.
+- **Former names**: Companies rebrand. Search old names for historical context.
+
+### Supplier and vendor intelligence
+
+- **Public contracts**: Government contracts reveal suppliers and pricing.
+- **Partnership announcements**: Press releases mentioning technology partners.
+- **Customer references**: Case studies on vendor sites (reveal who the target's customers are).
+- **Reverse supplier search**: Search for the target as a customer on other companies' case studies.
+
+### Competitor mapping
+
+- **Direct competitors**: Same product, same market.
+- **Indirect competitors**: Same problem, different solution.
+- **Emerging competitors**: Startups in the same space.
+- **Competitive signals**: Pricing changes, hiring patterns, product launches, regulatory filings.
+
+### Relationship visualisation
+
+For complex investigations, create a relationship map:
+- Nodes = Companies and people
+- Edges = Ownership, employment, investment, partnership
+- Annotate with confidence levels and sources
+
+> The most valuable insight in company OSINT is often not about the company itself, but about who is connected to it.
+        `,
+        exercise: 'Take the company you researched in the previous exercise and identify at least 3 relationships: ownership, partnership, supplier, or competitor. Create a simple text-based relationship map.',
+      },
+    ],
+  },
+}
 
 // =============================================================================
 // Compatibility exports — referenced by template pages copied from AI Hub.
@@ -2101,7 +2473,26 @@ Photos contain embedded metadata that can reveal:
 
 export const latestUpdates: Array<{ id: string; title: string; description: string; date: string }> = []
 export const aiTools: Array<{ id: string; name: string; description: string; category: string }> = []
-export const learningPaths: Array<{ id: string; title: string; description: string; modules: string[] }> = []
+export const learningPaths: Array<{ id: string; title: string; description: string; modules: string[] }> = [
+  {
+    id: "rookie-track",
+    title: "Rookie Track",
+    description: "Start here. No prior OSINT experience required — just curiosity.",
+    modules: ["osint-fundamentals", "domain-investigations", "osint-methodology", "email-osint", "business-osint"],
+  },
+  {
+    id: "sleuth-track",
+    title: "Sleuth Track",
+    description: "Level up with intermediate techniques: social media, geospatial, reporting, and breach analysis.",
+    modules: ["people-profiling", "social-media-investigations", "geospatial-intelligence", "digital-identity-analysis", "osint-reporting", "breach-data-analysis", "telegram-osint"],
+  },
+  {
+    id: "analyst-track",
+    title: "Analyst Track",
+    description: "Master-class techniques: network recon, dark web, crypto investigations, and advanced geolocation.",
+    modules: ["kali-tools", "social-media", "network-recon", "digital-forensics", "dark-web-research", "cryptocurrency-investigations", "geolocation-osint"],
+  },
+]
 
 // Template also imports these shapes in parts of the UI
 export const ALL_MODULES = Object.values(learningModules)
