@@ -88,6 +88,81 @@ const templates = [
       "Cleanup & debrief procedures",
     ],
   },
+  {
+    id: "username-tracker-template",
+    title: "Username Tracker",
+    description:
+      "Track usernames and identities across online platforms. Includes subject info, multi-platform tracking table with dates, post counts, and cross-platform linkage analysis.",
+    size: "3.3 KB",
+    icon: "👤",
+    features: [
+      "Subject information & primary alias fields",
+      "8+ row tracking table (username, platform, URL, dates)",
+      "Post count & connection tracking",
+      "Cross-platform linkage analysis",
+      "Investigation notes section",
+    ],
+  },
+  {
+    id: "social-media-investigation-template",
+    title: "Social Media Investigation Sheet",
+    description:
+      "Document findings from social media investigations with platform, profile type classification, key findings, screenshot tracking, and confidence assessment fields.",
+    size: "2.9 KB",
+    icon: "📱",
+    features: [
+      "Platform & account name tracking",
+      "Profile type classification (Personal/Business/Fake)",
+      "Key findings & screenshot evidence log",
+      "Confidence level assessment per account",
+      "Cross-referencing connection notes",
+    ],
+  },
+  {
+    id: "dark-web-monitor-log",
+    title: "Dark Web Monitor Log",
+    description:
+      "Weekly dark web monitoring log with date, site/forum, keyword search tracking, results found, risk level assessment, and chain of custody evidence logging.",
+    size: "3.2 KB",
+    icon: "🌐",
+    features: [
+      "Weekly monitoring format with analyst fields",
+      "Site/forum & keyword search tracking",
+      "Risk level definitions (Critical to Low)",
+      "Chain of custody evidence log",
+      "Weekly summary & action items",
+    ],
+  },
+  {
+    id: "geolocation-analysis-sheet",
+    title: "Geolocation Analysis Sheet",
+    description:
+      "Systematic image geolocation analysis with visual clue documentation (landmarks, signs, terrain, vegetation, architecture), coordinate estimation, and verification methods.",
+    size: "3.8 KB",
+    icon: "📍",
+    features: [
+      "Image reference & visual clue documentation",
+      "Coordinate estimate fields",
+      "Verification method catalog (maps, sun position, language)",
+      "Confidence level scale",
+      "Visual clue category reference guide",
+    ],
+  },
+  {
+    id: "search-operator-cheatsheet",
+    title: "Search Operator Cheatsheet",
+    description:
+      "Quick reference for 15+ advanced search operators covering site:, filetype:, intitle:, inurl:, intext:, cache:, daterange: and more. Includes syntax, descriptions, and real examples.",
+    size: "3.7 KB",
+    icon: "🔎",
+    features: [
+      "15+ operators with syntax & examples",
+      "Operator combination strategies",
+      "Common OSINT use case queries",
+      "Multi-engine compatibility notes",
+      "Advanced tips & pitfalls section",
+    ],
+  },
 ]
 
 export default function DownloadsPage() {
