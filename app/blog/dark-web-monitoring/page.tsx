@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowLeft, Calendar } from 'lucide-react'
 
-export default function BlogPost() {
+export default function BlogPost({ params }: { params: { slug: string } }) {
   return (
     <div className="min-h-screen bg-white">
       <div className="border-b bg-slate-50"><div className="mx-auto max-w-3xl px-4 md:px-6 py-8">
