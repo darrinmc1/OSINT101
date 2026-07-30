@@ -1,4 +1,4 @@
-// Site Content for OSINT 101 — ported from Vite OSINT Academy
+// Site Content for OSINT 101 - ported from Vite OSINT Academy
 // Resource library with markdown bodies embedded.
 
 export interface ResourceEntry {

@@ -1,4 +1,4 @@
-// Learning Modules for OSINT 101 — ported from Vite OSINT Academy
+// Learning Modules for OSINT 101 - ported from Vite OSINT Academy
 // Original structure preserved: modules have nested `sections` with
 // content + exercises, rather than a single content blob.
 
@@ -1432,7 +1432,7 @@ Document findings, do not advise on crossing lines.
         content: `
 ### What is a Digital Identity?
 
-Every person online leaves traces. Email addresses, social media accounts, forum posts, professional profiles, public records, and even "deleted" content. Together, these traces form a digital identity — a composite picture of who someone is online.
+Every person online leaves traces. Email addresses, social media accounts, forum posts, professional profiles, public records, and even "deleted" content. Together, these traces form a digital identity - a composite picture of who someone is online.
 
 ### The Three Pillars
 
@@ -1466,16 +1466,16 @@ An email address is often the single most valuable piece of OSINT data. It can r
 
 ### Verification Tools
 
-- **Hunter.io** — Find email patterns for organizations
-- **HaveIBeenPwned** — Check if emails appear in known breaches
-- **Emailrep.io** — Reputation and risk scoring
-- **Dehashed** — Search breached credentials
+- **Hunter.io** - Find email patterns for organizations
+- **HaveIBeenPwned** - Check if emails appear in known breaches
+- **Emailrep.io** - Reputation and risk scoring
+- **Dehashed** - Search breached credentials
 
 ### Cross-Platform Discovery
 
 Search email addresses across social platforms:
-- Gravatar — profile images tied to email
-- Social search — many platforms allow email-based lookup
+- Gravatar - profile images tied to email
+- Social search - many platforms allow email-based lookup
 - Custom search: "[email] site:linkedin.com"
 
 ### Disposable vs. Permanent
@@ -1494,19 +1494,19 @@ Many people reuse usernames across platforms. A single username can lead to prof
 
 ### Automated Search Tools
 
-- **WhatsMyName** (WebBreacher) — 400+ site username checker
-- **Sherlock** — CLI username search across social networks
-- **Maigret** — Advanced Sherlock fork with profile extraction
-- **Namechk** — Quick web-based check
+- **WhatsMyName** (WebBreacher) - 400+ site username checker
+- **Sherlock** - CLI username search across social networks
+- **Maigret** - Advanced Sherlock fork with profile extraction
+- **Namechk** - Quick web-based check
 
 ### Common Patterns
 
 | Pattern | Example | Reliability |
 |---------|---------|-------------|
-| Exact match | cyberjake on every platform | High — same person likely |
+| Exact match | cyberjake on every platform | High - same person likely |
 | Slight variant | cyberjake2024, cyberjake_ | Medium-high |
 | Reverse | jakecyber | Medium |
-| Random suffix | cyberjake_x7f92 | Low — could be coincidence |
+| Random suffix | cyberjake_x7f92 | Low - could be coincidence |
 
 ### Manual Verification
 
@@ -1546,11 +1546,11 @@ Social media profiles contain a wealth of structured and unstructured data:
 
 ### Profile Analysis Workflow
 
-1. **Capture** — Screenshot or archive the profile (archive.is, singlefile)
-2. **Extract** — Pull all visible data into a structured format
-3. **Cross-reference** — Match data points across platforms
-4. **Verify** — Check claims against other sources
-5. **Document** — Record sources and confidence levels
+1. **Capture** - Screenshot or archive the profile (archive.is, singlefile)
+2. **Extract** - Pull all visible data into a structured format
+3. **Cross-reference** - Match data points across platforms
+4. **Verify** - Check claims against other sources
+5. **Document** - Record sources and confidence levels
 
 ### Red Flags
 
@@ -1628,11 +1628,11 @@ Good OSINT is invisible if the report is bad. Your analysis is only as valuable 
 
 Start with the conclusion, then support with evidence:
 
-1. **Bottom line up front** — One sentence stating the key finding
-2. **Supporting evidence** — Facts that support the conclusion
-3. **Methodology** — How you found the evidence
-4. **Confidence assessment** — How sure you are
-5. **Gaps and next steps** — What you don't know yet
+1. **Bottom line up front** - One sentence stating the key finding
+2. **Supporting evidence** - Facts that support the conclusion
+3. **Methodology** - How you found the evidence
+4. **Confidence assessment** - How sure you are
+5. **Gaps and next steps** - What you don't know yet
         `,
         exercise: 'Take a finished OSINT investigation and rewrite the summary using the Pyramid Principle.',
       },
@@ -1647,19 +1647,19 @@ Without citations, your work is opinion. With proper citations, your work is int
 ### Citation Components
 
 Every source citation should include:
-- **URL or location** — Where you found it
-- **Date accessed** — Because content changes
-- **Capture evidence** — Screenshot, archive, or local copy
-- **Search query used** — How you found it
-- **Confidence in source** — Official vs. secondary vs. anonymous
+- **URL or location** - Where you found it
+- **Date accessed** - Because content changes
+- **Capture evidence** - Screenshot, archive, or local copy
+- **Search query used** - How you found it
+- **Confidence in source** - Official vs. secondary vs. anonymous
 
 ### Archiving Sources
 
 Always archive because sources disappear:
-- **archive.is / archive.today** — Web page snapshots
-- **Wayback Machine** — Historical captures
-- **Local HTML saves** — Full page with assets
-- **Screenshots** — Quick visual evidence
+- **archive.is / archive.today** - Web page snapshots
+- **Wayback Machine** - Historical captures
+- **Local HTML saves** - Full page with assets
+- **Screenshots** - Quick visual evidence
 
 ### Citation Formats
 
@@ -1829,16 +1829,16 @@ Data breaches leak various types of information:
 
 1. **Identify relevant breaches** for your target's email/username
 2. **Extract credential pairs** (email:password) where available
-3. **Analyse password patterns** — reuse rates, complexity, themes
-4. **Correlate across breaches** — same password used on multiple platforms?
-5. **Assess exposure risk** — what accounts are vulnerable?
+3. **Analyse password patterns** - reuse rates, complexity, themes
+4. **Correlate across breaches** - same password used on multiple platforms?
+5. **Assess exposure risk** - what accounts are vulnerable?
 
 ### Password Analysis
 
 Passwords themselves can reveal intelligence:
-- Personal details (birth years, names, pet names) — confirms other data points
+- Personal details (birth years, names, pet names) - confirms other data points
 - Professional themes (company name-based passwords)
-- Reuse patterns — suggests which additional accounts might share passwords
+- Reuse patterns - suggests which additional accounts might share passwords
 
 ### Password Cracking Context
 
@@ -1884,7 +1884,7 @@ A structured breach analysis report includes:
   'telegram-osint': {
     id: 'telegram-osint',
     title: 'Telegram OSINT Investigations',
-    description: 'Master the art of gathering intelligence from Telegram — one of the most valuable OSINT sources for monitoring groups, channels, and user activity.',
+    description: 'Master the art of gathering intelligence from Telegram - one of the most valuable OSINT sources for monitoring groups, channels, and user activity.',
     level: 'Intermediate',
     estimatedTime: '2-3 hours',
     sections: [
@@ -1981,7 +1981,7 @@ For each discovered channel, collect:
 
 - Use dedicated accounts for collection (not your personal account)
 - Be aware that Telegram can see all API activity
-- Rate limits apply — don't trigger spam detection
+- Rate limits apply - don't trigger spam detection
 - Some channels may be private and require invitation
 - Document your collection methodology for reproducibility
         `,
@@ -2117,17 +2117,17 @@ OSINT without methodology is just enthusiastic googling. A structured approach e
 ### Common methodology frameworks
 
 ### The Intelligence Cycle (Traditional)
-1. **Direction** — What question are we answering?
-2. **Collection** — Gather raw data from appropriate sources.
-3. **Processing** — Clean, translate, format, deduplicate.
-4. **Analysis** — Turn data into judgements.
-5. **Dissemination** — Deliver the product.
+1. **Direction** - What question are we answering?
+2. **Collection** - Gather raw data from appropriate sources.
+3. **Processing** - Clean, translate, format, deduplicate.
+4. **Analysis** - Turn data into judgements.
+5. **Dissemination** - Deliver the product.
 
 ### The PEAK Model (Practical for SMBs)
-1. **Prepare** — Scope, tools, legal boundaries.
-2 **Explore** — Broad search, open questions, hypothesis generation.
-3. **Analyze** — Filter, verify, connect dots.
-4. **Know** — Report, recommend, close or continue.
+1. **Prepare** - Scope, tools, legal boundaries.
+2 **Explore** - Broad search, open questions, hypothesis generation.
+3. **Analyze** - Filter, verify, connect dots.
+4. **Know** - Report, recommend, close or continue.
 
 ### Your First Investigation Plan
 
@@ -2151,15 +2151,15 @@ Every investigation should start with five minutes of planning:
 
 The OSINT pyramid visualises the relationship between volume, effort, and confidence.
 
-### Bottom layer — Broad collection (High volume, low effort)
+### Bottom layer - Broad collection (High volume, low effort)
 - Google searches, social media scans, public directories.
 - Generates leads, not conclusions.
 
-### Middle layer — Structured collection (Medium volume, medium effort)
+### Middle layer - Structured collection (Medium volume, medium effort)
 - Targeted searches with operators, platform-specific queries.
 - Generates data points that can be compared and cross-referenced.
 
-### Top layer — Verified intelligence (Low volume, high effort)
+### Top layer - Verified intelligence (Low volume, high effort)
 - Cross-sourced corroboration, direct source confirmation.
 - Generates findings you would present to a decision-maker.
 
@@ -2167,7 +2167,7 @@ The OSINT pyramid visualises the relationship between volume, effort, and confid
 
 1. Start at the bottom and work up.
 2. Do not present a finding as "high confidence" if you never left the bottom layer.
-3. The pyramid reminds you that most of your work time is on the bottom and middle — and that is healthy.
+3. The pyramid reminds you that most of your work time is on the bottom and middle - and that is healthy.
 
 ### Trap to avoid
 
@@ -2233,11 +2233,11 @@ Every email address contains structure, provider hints, and sometimes the person
 ### Parts of an email address
 - **Local part** (before @): May contain name, initials, birth year, or a handle.
 - **Domain**: Reveals email provider, company, or custom domain.
-- **Plus addressing**: Some providers treat "name+tag@domain.com" as the same inbox — useful for tracking who sold your data.
+- **Plus addressing**: Some providers treat "name+tag@domain.com" as the same inbox - useful for tracking who sold your data.
 
 ### What the domain tells you
 - **Gmail / Outlook / Yahoo**: Personal addresses, harder to trace.
-- **Company domain**: Likely work address — reveals employer.
+- **Company domain**: Likely work address - reveals employer.
 - **Custom domain**: Self-hosted or small business. WHOIS the domain for more.
 - **Disposable providers** (Mailinator, 10MinuteMail): Likely throwaway, low signal.
 
@@ -2319,7 +2319,7 @@ Accessing breach data is legally and ethically sensitive:
 
 ### Pivoting from breach data
 
-Breach data is not a destination — it is a launch point:
+Breach data is not a destination - it is a launch point:
 
 1. Email → Breach → New email found → Search new email
 2. Email → Breach → Password hash → Correlate with other accounts
@@ -2328,7 +2328,7 @@ Breach data is not a destination — it is a launch point:
 
 ### Automation consideration
 
-When you find one email in a breach, there are often more. Search related patterns — same domain, same name variations — before concluding the search.
+When you find one email in a breach, there are often more. Search related patterns - same domain, same name variations - before concluding the search.
 
 > Breach data is powerful and dangerous. Use it proportionally, lawfully, and with a clear purpose that you can articulate to anyone who asks.
         `,
@@ -2350,12 +2350,12 @@ When you find one email in a breach, there are often more. Search related patter
         content: `
 ### Every company leaves a paper trail. The trick is knowing where to look.
 
-Company research is one of the most common OSINT tasks — for competitive intelligence, due diligence, investigations, or sales prospecting.
+Company research is one of the most common OSINT tasks - for competitive intelligence, due diligence, investigations, or sales prospecting.
 
 ### Start with the legal entity
 
 - **Company registers**: ASIC (Australia), Companies House (UK), SEC (US), OpenCorporates (global).
-- **Business registration numbers**: ABN, ACN, EIN, VAT — search these for associated entities.
+- **Business registration numbers**: ABN, ACN, EIN, VAT - search these for associated entities.
 - **Trading names**: A company may operate under multiple trading names. Search all of them.
 
 ### Leadership and people
@@ -2370,7 +2370,7 @@ Company research is one of the most common OSINT tasks — for competitive intel
 - **Annual reports**: Public companies file these. Look for revenue trends, risk factors, and subsidiary mentions.
 - **News mentions**: Search for recent funding rounds, layoffs, acquisitions.
 - **Job postings**: Rapid hiring suggests growth; hiring freezes suggest trouble.
-- **Glassdoor / Indeed**: Employee reviews — biased but useful for culture and leadership signals.
+- **Glassdoor / Indeed**: Employee reviews - biased but useful for culture and leadership signals.
 
 > A company that has been registered for 10 years with no website, no LinkedIn, and no reviews may be a shelf company. That is itself a finding.
         `,
@@ -2382,21 +2382,21 @@ Company research is one of the most common OSINT tasks — for competitive intel
         content: `
 ### A company's digital footprint reveals infrastructure, priorities, and vulnerabilities
 
-Every company leaves digital traces — some intentional, some accidental — that paint a picture of their operations.
+Every company leaves digital traces - some intentional, some accidental - that paint a picture of their operations.
 
 ### Website analysis
 
 - **WHOIS**: Who registered the domain? When? Through which registrar?
-- **SSL certificate transparency**: Search crt.sh for all certificates issued to the domain — reveals subdomains and hosting infrastructure.
+- **SSL certificate transparency**: Search crt.sh for all certificates issued to the domain - reveals subdomains and hosting infrastructure.
 - **DNS records**: MX (email provider), NS (nameservers), TXT (SPF, DKIM, verification records).
-- **Technology stack**: BuiltWith, Wappalyzer — what CMS, analytics, and tools the site uses.
+- **Technology stack**: BuiltWith, Wappalyzer - what CMS, analytics, and tools the site uses.
 
 ### Social media footprint
 
 - **Which platforms** does the company have a presence on?
-- **Posting frequency and engagement** — reveals marketing priorities.
-- **Employee advocacy** — do employees share company content?
-- **Customer interactions** — how does the company handle complaints or questions?
+- **Posting frequency and engagement** - reveals marketing priorities.
+- **Employee advocacy** - do employees share company content?
+- **Customer interactions** - how does the company handle complaints or questions?
 
 ### Third-party mentions
 
@@ -2462,7 +2462,7 @@ For complex investigations, create a relationship map:
 }
 
 // =============================================================================
-// Compatibility exports — referenced by template pages copied from AI Hub.
+// Compatibility exports - referenced by template pages copied from AI Hub.
 // Empty for now; populate if/when OSINT adds those features.
 // =============================================================================
 
@@ -2472,7 +2472,7 @@ export const learningPaths: Array<{ id: string; title: string; description: stri
   {
     id: "rookie-track",
     title: "Rookie Track",
-    description: "Start here. No prior OSINT experience required — just curiosity.",
+    description: "Start here. No prior OSINT experience required - just curiosity.",
     modules: ["osint-fundamentals", "domain-investigations", "osint-methodology", "email-osint", "business-osint"],
   },
   {

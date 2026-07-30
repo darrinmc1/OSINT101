@@ -39,7 +39,7 @@ const themes: Record<string, ThemeColors> = {
   },
   banana: {
     primary: "bg-yellow-900",
-    primaryHover: "hover:bg-yellow-950",
+    primaryHover: "active:scale-[0.96] transition-transform hover:bg-yellow-950",
     bg: "bg-gradient-to-br from-yellow-50 to-amber-50",
     bgGradient: "hero-gradient",
     border: "border-yellow-200/60",

@@ -1,4 +1,4 @@
-// Badges for OSINT 101 — shape matches template stubs expected by badge-store.ts.
+// Badges for OSINT 101 - shape matches template stubs expected by badge-store.ts.
 
 import { siteConfig } from '@/lib/site-config'
 

@@ -23,7 +23,7 @@ const ResourceDetailPage = () => {
             The requested asset wandered off into the fog. It may have been renamed, removed, or promoted to folklore.
           </CardDescription>
           <CardContent className="px-0 pt-6">
-            <Button asChild className="rounded-none bg-intel-green text-black hover:bg-intel-green/80">
+            <Button asChild className="rounded-none bg-intel-green text-black active:scale-[0.96] transition-transform hover:bg-intel-green/80">
               <Link href="/resources">Back to asset library</Link>
             </Button>
           </CardContent>
@@ -35,7 +35,7 @@ const ResourceDetailPage = () => {
   return (
     <div className="mx-auto max-w-5xl p-6 animate-in fade-in duration-700">
       <div className="mb-6">
-        <Button asChild variant="outline" className="rounded-none border-intel-green/30 text-intel-green hover:bg-intel-green/10">
+        <Button asChild variant="outline" className="rounded-none border-intel-green/30 text-intel-green active:scale-[0.96] transition-transform hover:bg-intel-green/10">
           <Link href="/resources">Back to asset library</Link>
         </Button>
       </div>
@@ -71,7 +71,7 @@ const ResourceDetailPage = () => {
         <CardContent className="space-y-8 p-8">
           <MarkdownContent content={resource.body} />
           <div className="border-t border-intel-green/10 pt-6">
-            <Button asChild className="rounded-none bg-intel-green font-mono font-bold text-black hover:bg-intel-green/80">
+            <Button asChild className="rounded-none bg-intel-green font-mono font-bold text-black active:scale-[0.96] transition-transform hover:bg-intel-green/80">
               <Link href="/requests">Request a related asset</Link>
             </Button>
           </div>

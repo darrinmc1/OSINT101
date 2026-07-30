@@ -109,7 +109,7 @@ const ResourcesPage = () => {
             <Calendar className="mr-2 h-3 w-3" />
             VINTAGE: {new Date(resource.lastUpdated).toLocaleDateString()}
           </div>
-          <Button asChild className="h-9 rounded-none bg-intel-green px-6 font-mono text-xs font-bold text-black hover:bg-intel-green/80">
+          <Button asChild className="h-9 rounded-none bg-intel-green px-6 font-mono text-xs font-bold text-black active:scale-[0.96] transition-transform hover:bg-intel-green/80">
             <Link href={`/resources/${resource.id}`}>
               <Download className="mr-2 h-4 w-4" />
               EXTRACT
@@ -234,10 +234,10 @@ const ResourcesPage = () => {
             THAT IS FAR MORE EFFICIENT THAN STARE-WARS WITH THE SEARCH BOX.
           </p>
           <div className="flex flex-col justify-center gap-6 sm:flex-row">
-            <Button asChild className="h-12 rounded-none bg-intel-green px-10 font-mono font-bold text-black shadow-[0_0_15px_rgba(34,197,94,0.3)] hover:bg-intel-green/80">
+            <Button asChild className="h-12 rounded-none bg-intel-green px-10 font-mono font-bold text-black shadow-[0_0_15px_rgba(34,197,94,0.3)] active:scale-[0.96] transition-transform hover:bg-intel-green/80">
               <Link href="/requests">REQUEST_INTEL</Link>
             </Button>
-            <Button asChild variant="outline" className="h-12 rounded-none border-intel-blue px-10 font-mono font-bold text-intel-blue hover:bg-intel-blue/10">
+            <Button asChild variant="outline" className="h-12 rounded-none border-intel-blue px-10 font-mono font-bold text-intel-blue active:scale-[0.96] transition-transform hover:bg-intel-blue/10">
               <Link href="/contribute">UPLINK_DATA</Link>
             </Button>
           </div>

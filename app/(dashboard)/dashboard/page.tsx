@@ -12,7 +12,7 @@ import {
   ChevronRight,
 } from "lucide-react"
 
-// Mock data — will be replaced with real user state from zustand/API
+// Mock data - will be replaced with real user state from zustand/API
 const mockUser = {
   name: "Analyst",
   xp: 150,

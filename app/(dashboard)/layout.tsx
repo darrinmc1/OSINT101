@@ -83,7 +83,7 @@ export default function DashboardLayout({
                     "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
                     isActive
                       ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
-                      : "text-slate-400 hover:text-white hover:bg-white/5"
+                      : "text-slate-400 hover:text-white active:scale-[0.96] transition-transform hover:bg-white/5"
                   )}
                 >
                   <Icon className="h-4 w-4 flex-shrink-0" />
@@ -95,7 +95,7 @@ export default function DashboardLayout({
 
           {/* Bottom section */}
           <div className="px-3 py-4 border-t border-white/10">
-            <button className="flex w-full items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+            <button className="flex w-full items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white active:scale-[0.96] transition-transform hover:bg-white/5 transition-all">
               <LogOut className="h-4 w-4" />
               Sign Out
             </button>

@@ -1,4 +1,4 @@
-// lib/email.ts — Resend transactional send
+// lib/email.ts - Resend transactional send
 // Install: npm i resend
 //
 // Usage:
@@ -23,7 +23,7 @@ async function send(
   html: string
 ): Promise<SendResult> {
   if (!resend) {
-    console.warn("[email] RESEND_API_KEY not set — skipping send");
+    console.warn("[email] RESEND_API_KEY not set - skipping send");
     return { ok: false, reason: "resend_not_configured" };
   }
   const { error } = await resend.emails.send({
@@ -49,7 +49,7 @@ export async function sendWelcome(args: { email: string; name?: string }) {
       <p>${greeting}</p>
       <p>Thanks for signing up. You'll be the first to know about new modules, updates, and early-access features.</p>
       <p>If this wasn't you, just ignore this email and you won't hear from us again.</p>
-      <p style="margin-top: 32px; color: #888; font-size: 14px;">— The ${SITE_NAME} team</p>
+      <p style="margin-top: 32px; color: #888; font-size: 14px;">- The ${SITE_NAME} team</p>
     </div>
   `;
   return send(args.email, subject, html);

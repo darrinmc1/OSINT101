@@ -149,7 +149,7 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                     <div
                       key={section.title}
                       className={`cursor-pointer border-l-4 p-4 transition-all duration-200 ${
-                        currentSection === index ? 'border-l-intel-green bg-intel-green/10' : 'border-l-transparent hover:bg-white/5'
+                        currentSection === index ? 'border-l-intel-green bg-intel-green/10' : 'border-l-transparent active:scale-[0.96] transition-transform hover:bg-white/5'
                       }`}
                       onClick={() => setCurrentSection(index)}
                     >
@@ -186,13 +186,13 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
             <CardContent className="space-y-3 p-4">
               <Button
                 variant="outline"
-                className="h-10 w-full justify-start rounded-none border-intel-green/20 font-mono text-xs text-intel-green hover:bg-intel-green hover:text-black"
+                className="h-10 w-full justify-start rounded-none border-intel-green/20 font-mono text-xs text-intel-green active:scale-[0.96] transition-transform hover:bg-intel-green hover:text-black"
                 onClick={() => onRequestMoreInfo?.(module.id)}
               >
                 <MessageCircle className="mr-3 h-4 w-4" />
                 INITIATE_COMS
               </Button>
-              <Button asChild variant="outline" className="h-10 w-full justify-start rounded-none border-intel-green/20 font-mono text-xs text-intel-green hover:bg-intel-green hover:text-black">
+              <Button asChild variant="outline" className="h-10 w-full justify-start rounded-none border-intel-green/20 font-mono text-xs text-intel-green active:scale-[0.96] transition-transform hover:bg-intel-green hover:text-black">
                 <Link href={`/resources/${resourceLinks[0] || 'osint-checklist'}`}>
                   <Download className="mr-3 h-4 w-4" />
                   EXTRACT_RESOURCES
@@ -258,7 +258,7 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                           <span className="mr-2 animate-pulse text-intel-amber">!</span>
                           WARNING: LIVE TARGETS NOT PERMITTED FOR THIS PHASE. HR ALSO INSISTED WE ADD THAT.
                         </div>
-                        <Button className="mt-6 w-full rounded-none bg-intel-green px-8 font-mono font-bold text-black hover:bg-intel-green/80 md:w-auto" onClick={() => onRequestMoreInfo?.(module.id)}>
+                        <Button className="mt-6 w-full rounded-none bg-intel-green px-8 font-mono font-bold text-black active:scale-[0.96] transition-transform hover:bg-intel-green/80 md:w-auto" onClick={() => onRequestMoreInfo?.(module.id)}>
                           LAUNCH_SCENARIO_BRIEF
                         </Button>
                       </div>
@@ -269,10 +269,10 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                           <h4 className="font-mono text-sm uppercase tracking-widest text-intel-blue">KNOWLEDGE_VERIFICATION</h4>
                         </div>
                         <div className="space-y-3">
-                          <Button variant="outline" className="h-auto w-full justify-start rounded-none border-intel-blue/20 py-3 text-left font-mono text-xs hover:bg-intel-blue/10">
+                          <Button variant="outline" className="h-auto w-full justify-start rounded-none border-intel-blue/20 py-3 text-left font-mono text-xs active:scale-[0.96] transition-transform hover:bg-intel-blue/10">
                             <span className="mr-3 text-intel-blue">01.</span> CAN YOU EXPLAIN THE PROCESS WITHOUT SUMMONING BUZZWORDS?
                           </Button>
-                          <Button variant="outline" className="h-auto w-full justify-start rounded-none border-intel-blue/20 py-3 text-left font-mono text-xs hover:bg-intel-blue/10">
+                          <Button variant="outline" className="h-auto w-full justify-start rounded-none border-intel-blue/20 py-3 text-left font-mono text-xs active:scale-[0.96] transition-transform hover:bg-intel-blue/10">
                             <span className="mr-3 text-intel-blue">02.</span> CAN YOU DEFEND THE EVIDENCE LIKE AN ADULT IN A MEETING?
                           </Button>
                         </div>
@@ -289,7 +289,7 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                         </div>
                         <div className="space-y-2 p-4">
                           {resourceLinks.map((resourceId) => (
-                            <Button key={resourceId} asChild variant="ghost" size="sm" className="w-full justify-start rounded-none font-mono text-xs hover:bg-intel-green/10">
+                            <Button key={resourceId} asChild variant="ghost" size="sm" className="w-full justify-start rounded-none font-mono text-xs active:scale-[0.96] transition-transform hover:bg-intel-green/10">
                               <Link href={`/resources/${resourceId}`}>[ EXTRACT ] {resourceLabelMap[resourceId] || resourceId.toUpperCase()}</Link>
                             </Button>
                           ))}
@@ -303,7 +303,7 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                         </div>
                         <div className="space-y-2 p-4">
                           {externalLinks.map((link) => (
-                            <Button key={link.to} asChild variant="ghost" size="sm" className="w-full justify-start rounded-none font-mono text-xs underline hover:bg-intel-blue/10">
+                            <Button key={link.to} asChild variant="ghost" size="sm" className="w-full justify-start rounded-none font-mono text-xs underline active:scale-[0.96] transition-transform hover:bg-intel-blue/10">
                               <Link href={link.to}>{link.label}</Link>
                             </Button>
                           ))}
@@ -318,7 +318,7 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                 <div className="flex items-center justify-between">
                   <Button
                     variant="outline"
-                    className="rounded-none border-intel-green/30 font-mono text-xs uppercase tracking-widest text-intel-green hover:bg-intel-green/10 disabled:opacity-30"
+                    className="rounded-none border-intel-green/30 font-mono text-xs uppercase tracking-widest text-intel-green active:scale-[0.96] transition-transform hover:bg-intel-green/10 disabled:opacity-30"
                     disabled={currentSection === 0}
                     onClick={() => setCurrentSection(Math.max(0, currentSection - 1))}
                   >
@@ -329,7 +329,7 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                     {!completedSections.has(currentSection) ? (
                       <Button
                         variant="outline"
-                        className="hidden rounded-none border-intel-green bg-intel-green/10 font-mono text-xs uppercase tracking-widest text-intel-green hover:bg-intel-green hover:text-black sm:flex"
+                        className="hidden rounded-none border-intel-green bg-intel-green/10 font-mono text-xs uppercase tracking-widest text-intel-green active:scale-[0.96] transition-transform hover:bg-intel-green hover:text-black sm:flex"
                         onClick={() => markSectionComplete(currentSection)}
                       >
                         <CheckCircle className="mr-2 h-4 w-4" />
@@ -338,7 +338,7 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                     ) : null}
 
                     <Button
-                      className="rounded-none bg-intel-amber px-6 font-mono text-xs font-bold uppercase tracking-widest text-black hover:bg-intel-amber/80"
+                      className="rounded-none bg-intel-amber px-6 font-mono text-xs font-bold uppercase tracking-widest text-black active:scale-[0.96] transition-transform hover:bg-intel-amber/80"
                       onClick={() => onRequestMoreInfo?.(module.id)}
                     >
                       SECURE_HELP
@@ -346,7 +346,7 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                   </div>
 
                   <Button
-                    className="rounded-none bg-intel-green px-6 font-mono text-xs font-bold uppercase tracking-widest text-black hover:bg-intel-green/80 disabled:opacity-50"
+                    className="rounded-none bg-intel-green px-6 font-mono text-xs font-bold uppercase tracking-widest text-black active:scale-[0.96] transition-transform hover:bg-intel-green/80 disabled:opacity-50"
                     disabled={currentSection >= (module.sections?.length || 1) - 1}
                     onClick={() => setCurrentSection(Math.min((module.sections?.length || 1) - 1, currentSection + 1))}
                   >

@@ -11,7 +11,7 @@ import {
 } from "@/data/badges"
 
 // =============================================================================
-// BADGE / XP STORE — AI Mastery Hub (Robot Evolution Theme)
+// BADGE / XP STORE - AI Mastery Hub (Robot Evolution Theme)
 // =============================================================================
 // Adapted from Peel Boss badge-store pattern for AI Hub's robot evolution tiers.
 // =============================================================================

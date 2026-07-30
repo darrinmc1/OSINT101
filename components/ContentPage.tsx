@@ -20,7 +20,7 @@ const ContentPage = ({ title, eyebrow, description, body, backTo = '/', backLabe
   return (
     <div className="mx-auto max-w-5xl p-6 animate-in fade-in duration-700">
       <div className="mb-6">
-        <Button asChild variant="outline" className="rounded-none border-intel-green/30 text-intel-green hover:bg-intel-green/10">
+        <Button asChild variant="outline" className="rounded-none border-intel-green/30 text-intel-green active:scale-[0.96] transition-transform hover:bg-intel-green/10">
           <Link href={backTo}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             {backLabel}
@@ -41,7 +41,7 @@ const ContentPage = ({ title, eyebrow, description, body, backTo = '/', backLabe
 
           {cta ? (
             <div className="border-t border-intel-green/10 pt-6">
-              <Button asChild className="rounded-none bg-intel-green font-mono font-bold text-black hover:bg-intel-green/80">
+              <Button asChild className="rounded-none bg-intel-green font-mono font-bold text-black active:scale-[0.96] transition-transform hover:bg-intel-green/80">
                 <Link href={cta.to}>
                   {cta.label}
                   <ExternalLink className="ml-2 h-4 w-4" />

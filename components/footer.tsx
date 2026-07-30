@@ -64,6 +64,20 @@ export function Footer() {
               </li>
             </ul>
           </div>
+
+          {/* Empire Network */}
+          <div>
+            <h4 className="font-display font-bold text-sm text-slate-200 uppercase tracking-wider mb-4">
+              Empire Network
+            </h4>
+            <ul className="space-y-2 text-xs text-slate-400">
+              <li><a href="https://intelacademy.com" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">Intel Academy</a></li>
+              <li><a href="https://abcofcyber.com" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">ABC of Cyber</a></li>
+              <li><a href="https://aitraining.com" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">AI Training</a></li>
+              <li><a href="https://peelboss.com" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">Peel Boss</a></li>
+              <li><a href="https://pilatesflow.com" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">PilatesFlow</a></li>
+            </ul>
+          </div>
         </div>
 
         {/* Bottom Bar */}
