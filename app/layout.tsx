@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Inter, Outfit } from "next/font/google"
+import { ClerkProvider } from "@clerk/nextjs"
 import "./globals.css"
 import { siteConfig } from "@/lib/site-config"
 import { FeedbackWidget } from "@/components/feedback-widget"
@@ -45,11 +46,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark">
-      <body
-        className={`${inter.variable} ${outfit.variable} font-sans antialiased ${siteConfig.theme.bgClass} ${siteConfig.theme.textClass}`}
-      >
-        {children}
+    <ClerkProvider>
+      <html lang="en" className="dark">
+        <body
+          className={`${inter.variable} ${outfit.variable} font-sans antialiased ${siteConfig.theme.bgClass} ${siteConfig.theme.textClass}`}
+        >
+          {children}
           <footer className="border-t border-white/10 bg-slate-900/80 mt-16">
             <div className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-slate-400">
               <p className="font-semibold text-slate-300 mb-2">Empire-HQ Portfolio</p>
@@ -70,8 +72,9 @@ export default function RootLayout({
             </div>
           </footer>
           <FeedbackWidget />
-        <WaitlistPopup />
-      </body>
-    </html>
+          <WaitlistPopup />
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }

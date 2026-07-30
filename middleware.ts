@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server"
 
 // Known AI crawlers and scrapers that ignore robots.txt
 const BLOCKED_BOTS = [
@@ -19,7 +20,44 @@ const rateLimit = new Map<string, { count: number; resetAt: number }>()
 const RATE_LIMIT_WINDOW = 60_000 // 1 minute
 const RATE_LIMIT_MAX = 60 // 60 requests per minute per IP
 
-export function middleware(request: NextRequest) {
+// Clerk public routes (no auth required)
+const isPublicRoute = createRouteMatcher([
+  "/",
+  "/sign-in(.*)",
+  "/sign-up(.*)",
+  "/api(.*)",
+  "/modules(.*)",
+  "/resources(.*)",
+  "/blog(.*)",
+  "/about",
+  "/contact",
+  "/pricing",
+  "/privacy",
+  "/terms",
+  "/cookies",
+  "/sitemap.xml",
+  "/_next(.*)",
+])
+
+// Clerk keys may not be set yet — gracefully skip auth if missing
+const hasClerkKeys = !!(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && process.env.CLERK_SECRET_KEY)
+
+// Build the Clerk middleware handler (or noop)
+let clerkHandler: ((req: NextRequest) => Promise<any>) | null = null
+if (hasClerkKeys) {
+  const clerkMw = clerkMiddleware(async (auth, req) => {
+    if (!isPublicRoute(req)) {
+      await auth.protect()
+    }
+  })
+  clerkHandler = async (req: NextRequest) => {
+    // Create a mock event object
+    const result = clerkMw(req, {} as any)
+    return result || undefined
+  }
+}
+
+export default async function middleware(request: NextRequest) {
   const url = request.nextUrl.pathname
   const userAgent = request.headers.get("user-agent") || ""
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
@@ -38,11 +76,9 @@ export function middleware(request: NextRequest) {
   const uaLower = userAgent.toLowerCase()
   for (const bot of BLOCKED_BOTS) {
     if (uaLower.includes(bot.toLowerCase())) {
-      // Return 403 for API/admin paths, otherwise pass through with headers
       if (url.startsWith("/api/") || url.startsWith("/admin/")) {
         return new NextResponse("Forbidden", { status: 403 })
       }
-      // For page routes, just block with the headers set
       response.headers.set("X-Robots-Tag", "noindex, nofollow, noai, noimageai")
     }
   }
@@ -64,23 +100,19 @@ export function middleware(request: NextRequest) {
       }
     }
 
-    // Cleanup old entries every 100 requests to prevent memory leaks
+    // Cleanup old entries every 100 stored IPs to prevent memory leaks
     if (rateLimit.size > 10000) {
       const cutoff = now - RATE_LIMIT_WINDOW
-      for (const [key, val] of rateLimit) {
+      rateLimit.forEach((val, key) => {
         if (val.resetAt < cutoff) rateLimit.delete(key)
-      }
+      })
     }
   }
 
-  // === 4. Honeypot protection ===
-  // If someone is POSTing to a form and has the honeypot field filled (common scraper pattern)
-  if (request.method === "POST") {
-    const contentType = request.headers.get("content-type") || ""
-    if (contentType.includes("application/json")) {
-      // Check for common scraper patterns in POST data
-      response.headers.set("X-Content-Type-Options", "nosniff")
-    }
+  // === 4. Clerk auth (runs only if keys are set) ===
+  if (clerkHandler) {
+    const clerkResponse = await clerkHandler(request)
+    if (clerkResponse) return clerkResponse
   }
 
   return response
