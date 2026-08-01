@@ -84,6 +84,7 @@ export const siteConfig: SiteConfig = {
   nav: {
     marketing: [
       { label: "Lessons", href: "/lessons" },
+      { label: "Pricing", href: "/pricing" },
       { label: "About", href: "/about" },
     ],
     dashboard: [
