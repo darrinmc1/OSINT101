@@ -1,5 +1,5 @@
-// lib/mailchimp.ts — Mailchimp add-contact helper
-// Uses native fetch — no extra package needed.
+// lib/mailchimp.ts - Mailchimp add-contact helper
+// Uses native fetch - no extra package needed.
 
 const API_KEY = process.env.MAILCHIMP_API_KEY;
 const SERVER = process.env.MAILCHIMP_SERVER_PREFIX;
@@ -21,7 +21,7 @@ export async function addToMailchimp(args: {
   tags?: string[];
 }): Promise<MailchimpResult> {
   if (!API_KEY || !SERVER || !AUDIENCE) {
-    console.warn("[mailchimp] API creds missing — skipping list add");
+    console.warn("[mailchimp] API creds missing - skipping list add");
     return { ok: false, reason: "mailchimp_not_configured" };
   }
 

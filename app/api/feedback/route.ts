@@ -1,4 +1,4 @@
-// app/api/feedback/route.ts — unified feedback endpoint
+// app/api/feedback/route.ts - unified feedback endpoint
 // Writes to Supabase, sends admin notification via Resend.
 
 import { NextRequest, NextResponse } from "next/server";

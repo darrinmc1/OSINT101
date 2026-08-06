@@ -96,12 +96,12 @@ export const siteConfig: SiteConfig = {
 
   copy: {
     heroTitle: "Open-Source Intelligence, Explained",
-    heroSubtitle: "The information is already public. The skill is finding it before someone else does — and knowing whether it's worth anything when you do.",
+    heroSubtitle: "The information is already public. The skill is finding it before someone else does - and knowing whether it's worth anything when you do.",
     ctaButton: "Open the Case File",
     ctaSecondary: "Browse Lessons",
     emailCaptureHeading: "Get the Case Files",
     emailCaptureSubheading: "New lessons, occasional tradecraft notes. Founding members read the dossier first.",
-    feedbackPlaceholder: "What did you find? Be specific — vague reports get filed under 'cold case'.",
+    feedbackPlaceholder: "What did you find? Be specific - vague reports get filed under 'cold case'.",
   },
 
   pricing: {

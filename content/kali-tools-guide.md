@@ -6,7 +6,7 @@
 
 Kali Linux is like the Batman utility belt of the cybersecurity world. It comes pre-loaded with over 600 tools designed for penetration testing, digital forensics, and yes, OSINT investigations. Think of it as a digital toolbox where every tool is specifically designed to help you understand how systems work, find vulnerabilities, and gather intelligence.
 
-But before we dive into the tools, let's address the elephant in the room: Kali Linux looks intimidating. It's got a dragon logo, it's primarily command-line based, and it has tools with names like "Metasploit" and "Aircrack-ng" that sound like they belong in a sci-fi movie. Don't worry – we're going to demystify this powerful platform and show you how to use it for legitimate OSINT work.
+But before we dive into the tools, let's address the elephant in the room: Kali Linux looks intimidating. It's got a dragon logo, it's primarily command-line based, and it has tools with names like "Metasploit" and "Aircrack-ng" that sound like they belong in a sci-fi movie. Don't worry – we're going to explain this powerful platform and show you how to use it for legitimate OSINT work.
 
 ### What Makes Kali Special?
 
@@ -482,7 +482,7 @@ john --wordlist=wordlist.txt password_hashes.txt
 
 ## Chapter 10: Reporting and Documentation Tools - Sharing Your Findings
 
-Good documentation is crucial for any OSINT investigation. These tools help you organize, analyze, and present your findings.
+Good documentation is important for any OSINT investigation. These tools help you organize, analyze, and present your findings.
 
 ### KeepNote: Note-Taking Application
 
@@ -625,7 +625,7 @@ As you gain experience, you might want to build custom tools for specific tasks.
 
 ## Chapter 13: Staying Legal and Ethical
 
-Throughout this guide, we've emphasized the importance of staying within legal and ethical boundaries. Let's dive deeper into this crucial topic.
+Throughout this guide, we've emphasized the importance of staying within legal and ethical boundaries. Let's dive deeper into this important topic.
 
 ### Legal Considerations
 
@@ -647,7 +647,7 @@ Throughout this guide, we've emphasized the importance of staying within legal a
 
 ## Chapter 14: Building Your OSINT Lab
 
-Setting up a proper OSINT lab environment is crucial for effective and safe investigations.
+Setting up a proper OSINT lab environment is important for effective and safe investigations.
 
 ### Virtual Machine Setup
 

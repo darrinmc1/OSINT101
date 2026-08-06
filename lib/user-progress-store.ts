@@ -2,7 +2,7 @@ import { create } from "zustand"
 import { persist } from "zustand/middleware"
 
 // =============================================================================
-// USER PROGRESS STORE — AI Mastery Hub
+// USER PROGRESS STORE - AI Mastery Hub
 // =============================================================================
 // Tracks lesson completion, reading progress, streak data, and bookmarks.
 // Same pattern as Peel Boss, adapted for AI Hub modules.
