@@ -46,12 +46,40 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid category" }, { status: 400 });
   }
 
-  // 1. Persist to Supabase
+  // Resolve the full page URL (widget sends a relative pathname; the pipeline maps
+  // the site by this URL's domain, so a full URL is required).
+  const origin =
+    req.headers.get("origin") ??
+    (req.headers.get("host") ? `https://${req.headers.get("host")}` : null);
+  const pageUrl =
+    page && page.startsWith("http")
+      ? page
+      : origin && page
+      ? `${origin}${page.startsWith("/") ? page : `/${page}`}`
+      : origin ?? null;
+  const feedbackType =
+    category === "Bug" ? "bug"
+      : category === "Suggestion" ? "suggestion"
+      : category === "Content Request" ? "content_request"
+      : "general";
+
+  // 1. Persist to Supabase (status "new" so the ingest workflow picks it up)
   let dbWrote = false;
   if (supabaseAdmin) {
     const { error } = await supabaseAdmin
       .from("feedback")
-      .insert({ site: SITE_KEY, rating, category, message, page: page ?? null, email: email ?? null });
+      .insert({
+        site: SITE_KEY,
+        category,
+        rating,
+        message,
+        page: page ?? null,
+        page_url: pageUrl,
+        email: email ?? null,
+        ip_address: ip,
+        feedback_type: feedbackType,
+        status: "new",
+      });
     if (error) console.error("[feedback] supabase error", error);
     else dbWrote = true;
   }
