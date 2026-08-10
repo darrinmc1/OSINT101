@@ -36,8 +36,7 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-2 mb-8">
               <span className="text-lg">{siteConfig.theme.emoji}</span>
               <span className="text-sm font-semibold text-indigo-300 tracking-wide uppercase">
-                From {siteConfig.badges.tierNames[0]} to{" "}
-                {siteConfig.badges.tierNames[4]}
+                Free OSINT Training &amp; Investigation Tools
               </span>
             </div>
 
