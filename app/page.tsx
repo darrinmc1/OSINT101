@@ -4,9 +4,8 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { EmailCapture } from "@/components/email-capture"
 import { learningModules } from "@/data/modules"
-import {
 import WhatsNew from "@/components/whats-new"
-
+import {
   ArrowRight,
   BookOpen,
   Clock,
