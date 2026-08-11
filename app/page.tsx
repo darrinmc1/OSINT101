@@ -5,6 +5,8 @@ import { Footer } from "@/components/footer"
 import { EmailCapture } from "@/components/email-capture"
 import { learningModules } from "@/data/modules"
 import {
+import WhatsNew from "@/components/whats-new"
+
   ArrowRight,
   BookOpen,
   Clock,
@@ -80,6 +82,8 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+      <WhatsNew />
+
 
         {/* ============================================================
             LEARNING MODULES SECTION
