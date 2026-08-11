@@ -15,6 +15,22 @@ export interface SiteUpdate {
 }
 
 export const ALL_UPDATES: SiteUpdate[] = [
+  {
+    "id": "modules-updated-2026-08-11",
+    "title": "OSINT Modules",
+    "description": "Refreshed: OSINT Modules",
+    "date": "2026-08-11",
+    "kind": "updated",
+    "href": "/learn/modules"
+  },
+  {
+    "id": "www-osint101-com-updated-2026-08-11",
+    "title": "OSINT101 - Error Handling in Parse Operations",
+    "description": "Refreshed: OSINT101 - Error Handling in Parse Operations",
+    "date": "2026-08-11",
+    "kind": "updated",
+    "href": "/learn/www-osint101-com"
+  },
 ]
 
 export const latestUpdates = ALL_UPDATES.slice(0, 5)
