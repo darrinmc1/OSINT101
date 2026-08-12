@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { clusterFor, SELF_URL } from "@/lib/network"
 import { siteConfig } from "@/lib/site-config"
 
 export function Footer() {
@@ -71,11 +72,13 @@ export function Footer() {
               Empire Network
             </h4>
             <ul className="space-y-2 text-xs text-slate-400">
-              <li><a href="https://intelacademy.com" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">Intel Academy</a></li>
-              <li><a href="https://abcofcyber.com" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">ABC of Cyber</a></li>
-              <li><a href="https://aitraining.com" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">AI Training</a></li>
-              <li><a href="https://peelboss.com" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">Peel Boss</a></li>
-              <li><a href="https://pilatesflow.com" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">PilatesFlow</a></li>
+              {clusterFor(SELF_URL, 5).map((s) => (
+                <li key={s.url}>
+                  <a href={s.url} title={s.blurb} target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">
+                    {s.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
