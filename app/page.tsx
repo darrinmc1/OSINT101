@@ -32,6 +32,7 @@ export default function HomePage() {
             HERO SECTION
             ============================================================ */}
         <section className="relative hero-gradient hero-glow overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/images/hero-osint101.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
           <div className="grid-pattern absolute inset-0" />
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-36 text-center">
             <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-2 mb-8">
