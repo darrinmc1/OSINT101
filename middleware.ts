@@ -2,23 +2,25 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server"
 
-// Known AI crawlers and scrapers that ignore robots.txt
+// Abusive scrapers only. Search engines and AI answer engines are NOT blocked:
+// being crawlable and quotable is a distribution channel, not a threat.
+// Do not add GPTBot, ClaudeBot, PerplexityBot, Google-Extended, FacebookBot,
+// Applebot-Extended or OAI-SearchBot here — robots.ts governs those.
 const BLOCKED_BOTS = [
-  "GPTBot", "ChatGPT-User", "CCBot", "anthropic-ai", "Claude-Web",
-  "Diffbot", "Bytespider", "cohere-ai", "PerplexityBot", "Imagesift",
-  "FacebookBot", "meta-externalagent", "DataForSeoBot", "DotBot",
-  "Meltwater", "Applebot-Extended", "Google-Extended", "PetalBot",
-  "Scrapy", "python-requests", "aiohttp", "httpx", "curl", "wget",
-  "Go-http-client", "Java/", "okhttp",
+  "Bytespider", "Diffbot", "DataForSeoBot", "DotBot", "Meltwater",
+  "PetalBot", "Imagesift", "Scrapy",
 ]
 
-// Paths that are safe from rate limiting (static assets)
-const SAFE_PATHS = ["/_next/", "/favicon", "/og-image", "/opengraph", "/icon"]
+// Paths that are safe from rate limiting (static assets + crawl endpoints)
+const SAFE_PATHS = [
+  "/_next/", "/favicon", "/og-image", "/opengraph", "/icon",
+  "/robots.txt", "/sitemap.xml",
+]
 
 // Simple in-memory rate limiter
 const rateLimit = new Map<string, { count: number; resetAt: number }>()
 const RATE_LIMIT_WINDOW = 60_000 // 1 minute
-const RATE_LIMIT_MAX = 60 // 60 requests per minute per IP
+const RATE_LIMIT_MAX = 240 // per minute per IP - high enough not to 429 a legitimate crawl
 
 // Clerk public routes (no auth required)
 const isPublicRoute = createRouteMatcher([
@@ -36,6 +38,7 @@ const isPublicRoute = createRouteMatcher([
   "/terms",
   "/cookies",
   "/sitemap.xml",
+  "/robots.txt",
   "/_next(.*)",
 ])
 
@@ -66,7 +69,8 @@ export default async function middleware(request: NextRequest) {
   const response = NextResponse.next()
 
   // === 1. Security Headers ===
-  response.headers.set("X-Robots-Tag", "noai, noimageai")
+  // No blanket X-Robots-Tag here: it overrides robots.ts and app metadata,
+  // and "noai" cost this site every AI-search citation it could have earned.
   response.headers.set("X-Content-Type-Options", "nosniff")
   response.headers.set("X-Frame-Options", "DENY")
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
@@ -79,7 +83,7 @@ export default async function middleware(request: NextRequest) {
       if (url.startsWith("/api/") || url.startsWith("/admin/")) {
         return new NextResponse("Forbidden", { status: 403 })
       }
-      response.headers.set("X-Robots-Tag", "noindex, nofollow, noai, noimageai")
+      response.headers.set("X-Robots-Tag", "noindex, nofollow")
     }
   }
 
