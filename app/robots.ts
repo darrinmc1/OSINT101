@@ -22,7 +22,7 @@ export default function robots(): MetadataRoute.Robots {
           "Google-Extended",
           "CCBot",
         ],
-        allow: "/",
+        allow: ["/", "/llm.txt", "/llms.txt", "/pricing.json", "/case-file", "/pricing"],
         disallow: ["/api/", "/admin/", "/dashboard/"],
       },
     ],

@@ -83,13 +83,15 @@ export const siteConfig: SiteConfig = {
 
   nav: {
     marketing: [
-      { label: "Lessons", href: "/lessons" },
+      { label: "Case File", href: "/case-file" },
+      { label: "Lessons", href: "/modules" },
       { label: "Pricing", href: "/pricing" },
       { label: "About", href: "/about" },
     ],
     dashboard: [
       { label: "Dashboard", href: "/dashboard", icon: "LayoutDashboard" },
-      { label: "Lessons", href: "/lessons", icon: "BookOpen" },
+      { label: "Case File", href: "/case-file", icon: "FolderOpen" },
+      { label: "Lessons", href: "/modules", icon: "BookOpen" },
       { label: "Badges", href: "/badges", icon: "Award" },
       { label: "Progress", href: "/progress", icon: "TrendingUp" },
     ],
