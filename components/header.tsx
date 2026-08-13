@@ -77,7 +77,7 @@ export function Header() {
                 Log In
               </Link>
               <Link
-                href="/modules"
+                href="/case-file"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block px-4 py-3 text-sm font-bold text-white text-center rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600"
               >

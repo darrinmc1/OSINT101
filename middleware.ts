@@ -14,7 +14,7 @@ const BLOCKED_BOTS = [
 // Paths that are safe from rate limiting (static assets + crawl endpoints)
 const SAFE_PATHS = [
   "/_next/", "/favicon", "/og-image", "/opengraph", "/icon",
-  "/robots.txt", "/sitemap.xml",
+  "/robots.txt", "/sitemap.xml", "/llm.txt", "/llms.txt", "/pricing.json",
 ]
 
 // Simple in-memory rate limiter
@@ -34,6 +34,10 @@ const isPublicRoute = createRouteMatcher([
   "/about",
   "/contact",
   "/pricing",
+  "/case-file",
+  "/llm.txt",
+  "/llms.txt",
+  "/pricing.json",
   "/privacy",
   "/terms",
   "/cookies",

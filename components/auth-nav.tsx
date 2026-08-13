@@ -9,7 +9,7 @@ import { hasClerkPublishableKey } from "@/lib/clerk"
 function GuestCta() {
   return (
     <Link
-      href="/modules"
+      href="/case-file"
       className={cn(
         "px-5 py-2 text-sm font-bold rounded-xl text-white",
         "bg-gradient-to-r from-indigo-500 to-violet-600",
@@ -34,7 +34,7 @@ function ClerkAuthNav() {
             href="/modules"
             className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
           >
-            Dashboard
+            Lessons
           </Link>
           <UserButton afterSignOutUrl="/" />
         </>

@@ -52,17 +52,17 @@ export default function HomePage() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/modules"
+                href="/case-file"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-300 hover:scale-105 text-lg"
               >
                 {siteConfig.copy.ctaButton}
                 <ArrowRight className="h-5 w-5" />
               </Link>
               <Link
-                href="/resources"
+                href="/modules"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-slate-300 border-2 border-white/10 hover:border-white/20 hover:text-white active:scale-[0.96] transition-transform hover:bg-white/5 transition-all duration-300 text-lg"
               >
-                Browse Resources
+                Browse Lessons
               </Link>
             </div>
 
@@ -84,6 +84,28 @@ export default function HomePage() {
         </section>
       <WhatsNew />
 
+        <section className="py-16 md:py-20 border-t border-white/5">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <div className="rounded-3xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/15 via-violet-500/5 to-transparent p-8 md:p-12">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-indigo-300 mb-3">
+                One job · not a chatbot
+              </p>
+              <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white mb-3">
+                Paste a target. Get a case file.
+              </h2>
+              <p className="text-slate-400 mb-6 max-w-2xl">
+                The archive stays the archive. This layer turns a collection question into a cited investigation plan using the OSINT 101 method — intelligence cycle, OPSEC, and real module links. Foundations are free.
+              </p>
+              <Link
+                href="/case-file"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 transition-all"
+              >
+                Open the Case File Planner
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
 
         {/* ============================================================
             LEARNING MODULES SECTION

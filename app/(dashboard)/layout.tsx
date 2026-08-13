@@ -14,6 +14,7 @@ import {
   Menu,
   X,
   LogOut,
+  FolderOpen,
 } from "lucide-react"
 import { useState } from "react"
 
@@ -24,6 +25,7 @@ const iconMap: Record<string, React.ElementType> = {
   Award,
   Users,
   Settings,
+  FolderOpen,
 }
 
 export default function DashboardLayout({

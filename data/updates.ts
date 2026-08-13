@@ -14,6 +14,16 @@ export interface SiteUpdate {
   href: string
 }
 
-export const ALL_UPDATES: SiteUpdate[] = []
+export const ALL_UPDATES: SiteUpdate[] = [
+  {
+    id: "case-file-planner",
+    title: "Case File Planner",
+    description:
+      "Paste a collection target and get a cited OSINT 101 investigation plan. Foundations free; advanced techniques gated.",
+    date: "2026-08-13",
+    kind: "new",
+    href: "/case-file",
+  },
+]
 
 export const latestUpdates = ALL_UPDATES.slice(0, 5)

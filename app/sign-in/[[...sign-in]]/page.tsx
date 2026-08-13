@@ -11,8 +11,8 @@ export default function SignInPage() {
           <p className="text-sm text-slate-400">
             Authentication is not configured in this environment.
           </p>
-          <Link href="/modules" className="inline-block text-sm text-cyan-400 hover:text-cyan-300">
-            Continue to modules
+          <Link href="/case-file" className="inline-block text-sm text-cyan-400 hover:text-cyan-300">
+            Continue to Case File Planner
           </Link>
         </div>
       </div>
