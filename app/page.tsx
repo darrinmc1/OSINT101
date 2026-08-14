@@ -5,6 +5,7 @@ import { Footer } from "@/components/footer"
 import { EmailCapture } from "@/components/email-capture"
 import { learningModules } from "@/data/modules"
 import WhatsNew from "@/components/whats-new"
+import { CASE_FILE_PRO } from "@/lib/pricing"
 import {
   ArrowRight,
   BookOpen,
@@ -93,16 +94,31 @@ export default function HomePage() {
               <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white mb-3">
                 Paste a target. Get a case file.
               </h2>
-              <p className="text-slate-400 mb-6 max-w-2xl">
+              <p className="text-slate-400 mb-4 max-w-2xl">
                 The archive stays the archive. This layer turns a collection question into a cited investigation plan using the OSINT 101 method — intelligence cycle, OPSEC, and real module links. Foundations are free.
               </p>
-              <Link
-                href="/case-file"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 transition-all"
-              >
-                Open the Case File Planner
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <p className="text-sm text-indigo-200 mb-6">
+                Advanced techniques are a paid gate:{" "}
+                <Link href="/pricing" className="font-semibold underline underline-offset-2 hover:text-white">
+                  {CASE_FILE_PRO.name} — {CASE_FILE_PRO.displayPrice}
+                </Link>
+                . Checkout coming.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/case-file"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 transition-all"
+                >
+                  Open the Case File Planner
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/pricing"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-slate-200 border border-white/15 hover:bg-white/5"
+                >
+                  {CASE_FILE_PRO.name} — {CASE_FILE_PRO.displayPrice}
+                </Link>
+              </div>
             </div>
           </div>
         </section>

@@ -13,9 +13,9 @@ export default function ImprovementsPage() {
           </div>
           <h1 className="text-3xl font-bold tracking-tight mb-3">We&apos;re Building Something Better</h1>
           <p className="text-slate-600 max-w-lg mx-auto mb-8 text-lg">
-            The payment system isn&apos;t live yet — we&apos;re putting the finishing touches on 
-            our subscription platform. When it launches, early adopters lock in the 
-            <strong className="text-cyan-600"> $5/month rate forever</strong>.
+            The payment system isn&apos;t live yet — checkout coming. The paid SKU is{" "}
+            <strong className="text-cyan-600">Case File Pro — $19/mo</strong>.
+            No cards are charged.
           </p>
           <div className="flex items-center justify-center gap-4">
             <Link href="/" className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">

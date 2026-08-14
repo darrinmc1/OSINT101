@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Lock, BookOpen, Shield } from "lucide-react"
+import { CASE_FILE_PRO } from "@/lib/pricing"
 import type { CaseFilePlan, PlanStep } from "@/lib/case-file/types"
 
 const phaseLabel: Record<PlanStep["phase"], string> = {
@@ -134,9 +135,9 @@ export function CaseFilePlanView({ plan }: { plan: CaseFilePlan }) {
             <div className="flex items-start gap-3 mb-4">
               <Lock className="h-5 w-5 text-violet-300 mt-0.5" />
               <div>
-                <p className="font-bold text-white">Sign in to unlock advanced collection lanes</p>
+                <p className="font-bold text-white">{CASE_FILE_PRO.name} — {CASE_FILE_PRO.displayPrice}</p>
                 <p className="text-sm text-slate-400 mt-1">
-                  Intermediate and Advanced module methods (people profiling, SOCMINT, GEOINT, recon, dark web, crypto, forensics) sit behind existing auth on this MVP. Analyst access is listed on the pricing page.
+                  Intermediate and Advanced module methods (people profiling, SOCMINT, GEOINT, recon, dark web, crypto, forensics) are a paid gate: {CASE_FILE_PRO.name} — {CASE_FILE_PRO.displayPrice}. Checkout coming. Clerk sign-in still unlocks this MVP.
                 </p>
               </div>
             </div>
@@ -161,8 +162,11 @@ export function CaseFilePlanView({ plan }: { plan: CaseFilePlan }) {
                 Sign in
               </Link>
               <Link href="/pricing" className="inline-flex items-center rounded-xl border border-white/15 px-4 py-2 text-sm font-semibold text-slate-200">
-                Parseable pricing
+                {CASE_FILE_PRO.name} — {CASE_FILE_PRO.displayPrice}
               </Link>
+              <span className="inline-flex items-center rounded-xl border border-white/10 px-4 py-2 text-sm font-semibold text-slate-400">
+                checkout coming
+              </span>
             </div>
           </div>
         )}

@@ -33,7 +33,7 @@ export const CASE_FILE_FAQS = [
   {
     question: "What is free vs advanced?",
     answer:
-      "Foundations — Beginner modules such as OSINT Fundamentals, methodology, domain investigations, email/username intelligence, and company research — are free. Intermediate and Advanced techniques (people profiling, SOCMINT, GEOINT, network recon, dark web, crypto, forensics) are gated behind sign-in on this MVP, matching the Analyst plan on the pricing page.",
+      "Foundations — Beginner modules such as OSINT Fundamentals, methodology, domain investigations, email/username intelligence, and company research — are free. Intermediate and Advanced techniques (people profiling, SOCMINT, GEOINT, network recon, dark web, crypto, forensics) are a paid gate: Case File Pro — $19/mo. Clerk sign-in still unlocks this MVP. Checkout coming.",
   },
   {
     question: "Does it need an AI key?",
