@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 import { Menu, X } from "lucide-react"
 
 import AuthNav from "@/components/auth-nav"
+import HumorToggle from "@/components/humor-toggle"
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -40,7 +41,8 @@ export function Header() {
 
           {/* Auth */}
           <div className="hidden md:flex items-center gap-3">
-            <AuthNav />
+            <HumorToggle />
+        <AuthNav />
           </div>
 
           {/* Mobile Menu Toggle */}

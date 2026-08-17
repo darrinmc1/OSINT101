@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ArrowLeft, Calendar } from 'lucide-react'
+import HumorBreak from "@/components/humor-break"
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
   return (
@@ -59,7 +60,9 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
             During a targeted investigation, discovering a login portal is often step one. The last string here targets a specific organization: <code className="bg-slate-100 px-1 rounded">site:targetcompany.com intitle:\"login\" -inurl:blog</code>. This strips out blog subdomains and returns only login pages. Combine with <code className="bg-slate-100 px-1 rounded">inurl:vpn</code> or <code className="bg-slate-100 px-1 rounded">inurl:portal</code> for internal access points.
           </p>
 
-          <h2 className="text-xl font-bold mt-8 mb-4">The Limitations (and Workarounds)</h2>
+          <HumorBreak tag="general" />
+
+        <h2 className="text-xl font-bold mt-8 mb-4">The Limitations (and Workarounds)</h2>
           <p className="text-base text-slate-700 leading-relaxed mb-4">
             Google aggressively rate-limits automated dorking. Running more than a few dozen queries from the same IP in rapid succession triggers CAPTCHAs or temporary blocks. The workaround: use the Google Custom Search JSON API (100 free queries per day) or rotate residential proxies. Even then, the API doesn't support <code className="bg-slate-100 px-1 rounded">intitle:</code> or <code className="bg-slate-100 px-1 rounded">inurl:</code> — only the web UI does.
           </p>

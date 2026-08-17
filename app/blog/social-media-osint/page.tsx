@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ArrowLeft, Calendar } from 'lucide-react'
+import HumorBreak from "@/components/humor-break"
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
   return (
@@ -79,7 +80,9 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
             The most effective technique: search for a subject's username across subreddits and look for patterns in writing style, timezone of posting, and self-disclosed locations in niche subreddits like r/cityname or r/profession. A user who posted in r/Chicago about their commute and in r/sysadmin about their homelab setup has revealed more than they realize.
           </p>
 
-          <h2 className="text-xl font-bold mt-8 mb-4">Cross-Platform Identity Resolution</h2>
+          <HumorBreak tag="general" />
+
+        <h2 className="text-xl font-bold mt-8 mb-4">Cross-Platform Identity Resolution</h2>
           <p className="text-base text-slate-700 leading-relaxed mb-4">
             The most powerful technique in social media OSINT is connecting identities across platforms. A Reddit username, a Twitter handle, a GitHub account, a Discord tag, and a Telegram username belonging to the same person create a composite profile far richer than any single platform provides.
           </p>

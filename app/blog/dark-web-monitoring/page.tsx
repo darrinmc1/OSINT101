@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ArrowLeft, Calendar } from 'lucide-react'
+import HumorBreak from "@/components/humor-break"
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
   return (
@@ -51,7 +52,9 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
             <li><strong>Ransomware leak sites</strong> — not forums, but .onion sites operated by ransomware groups. Each group maintains its own blog where victim data is published when ransoms go unpaid. These are the most time-sensitive monitoring targets.</li>
           </ul>
 
-          <h2 className="text-xl font-bold mt-8 mb-4">Setting Up a Monitoring Pipeline</h2>
+          <HumorBreak tag="general" />
+
+        <h2 className="text-xl font-bold mt-8 mb-4">Setting Up a Monitoring Pipeline</h2>
           <p className="text-base text-slate-700 leading-relaxed mb-4">
             Ethical and legal constraints matter here. Accessing dark web sites is not illegal in most jurisdictions. However, downloading stolen data, interacting with illegal marketplaces, or making purchases absolutely is. The standard posture: <strong>observe, record, do not engage</strong>.
           </p>
