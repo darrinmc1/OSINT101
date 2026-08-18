@@ -16,6 +16,14 @@ export interface SiteUpdate {
 
 export const ALL_UPDATES: SiteUpdate[] = [
   {
+    "id": "resources-updated-2026-08-18",
+    "title": "OSINT Resources",
+    "description": "Refreshed: OSINT Resources",
+    "date": "2026-08-18",
+    "kind": "updated",
+    "href": "/learn/resources"
+  },
+  {
     id: "case-file-planner",
     title: "Case File Planner",
     description:
