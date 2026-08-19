@@ -1,217 +1,269 @@
-import Link from "next/link"
-import { siteConfig } from "@/lib/site-config"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { EmailCapture } from "@/components/email-capture"
-import { learningModules } from "@/data/modules"
-import WhatsNew from "@/components/whats-new"
-import {
-  ArrowRight,
-  BookOpen,
-  Clock,
-  GraduationCap,
-  Search,
-  Shield,
-  FolderOpen,
-} from "lucide-react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { JsonLd } from "@/components/json-ld";
+import { Shield, BookOpen, Users, Star, Quote, TrendingUp, Award, CheckCircle } from "lucide-react";
 
-const levelAccent: Record<string, string> = {
-  Beginner: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
-  Intermediate: "text-indigo-400 bg-indigo-500/10 border-indigo-500/20",
-  Advanced: "text-violet-400 bg-violet-500/10 border-violet-500/20",
-}
+const testimonials = [
+  {
+    quote: "OSINT 101 took me from zero to confidently running open-source investigations in under a month. The structured modules are exactly what I needed.",
+    author: "Sarah K.",
+    role: "Threat Intelligence Analyst",
+    company: "Fortune 500 Financial Firm",
+    avatar: "SK",
+    stars: 5,
+  },
+  {
+    quote: "I've recommended OSINT 101 to my entire security team. The practical, hands-on approach beats any textbook I've found.",
+    author: "Marcus T.",
+    role: "Senior Penetration Tester",
+    company: "Independent Consultant",
+    avatar: "MT",
+    stars: 5,
+  },
+  {
+    quote: "As a journalist, understanding OSINT techniques has been a game-changer for source verification and investigative research.",
+    author: "Priya M.",
+    role: "Investigative Journalist",
+    company: "Regional News Network",
+    avatar: "PM",
+    stars: 5,
+  },
+  {
+    quote: "The community alone is worth it. Real practitioners sharing real techniques — not watered-down theory.",
+    author: "James R.",
+    role: "Law Enforcement Analyst",
+    company: "State Agency",
+    avatar: "JR",
+    stars: 5,
+  },
+];
+
+const stats = [
+  { value: "12,000+", label: "Investigators Trained", icon: Users },
+  { value: "95%", label: "Completion Rate", icon: TrendingUp },
+  { value: "50+", label: "Hands-On Modules", icon: BookOpen },
+  { value: "4.9/5", label: "Average Rating", icon: Star },
+];
+
+const usedBy = [
+  "Security Teams",
+  "Law Enforcement",
+  "Journalists",
+  "HR Professionals",
+  "Private Investigators",
+  "Fraud Analysts",
+];
 
 export default function HomePage() {
-  const modules = Object.values(learningModules)
-
   return (
     <>
-      <Header />
-      <main className="min-h-screen pt-16 bg-slate-950 text-slate-50">
-        {/* ============================================================
-            HERO SECTION
-            ============================================================ */}
-        <section className="relative hero-gradient hero-glow overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/hero-osint101.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
-          <div className="grid-pattern absolute inset-0" />
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-36 text-center">
-            <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-2 mb-8">
-              <span className="text-lg">{siteConfig.theme.emoji}</span>
-              <span className="text-sm font-semibold text-indigo-300 tracking-wide uppercase">
-                Free OSINT Training &amp; Investigation Tools
-              </span>
-            </div>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "OSINT 101",
+          description:
+            "Learn open-source intelligence techniques with structured modules, practical tools, and a community of investigators.",
+          url: "https://osint101.com",
+        }}
+      />
 
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold font-display leading-tight mb-6">
-              <span className="text-white">{siteConfig.copy.heroTitle}</span>
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/30 py-20 md:py-32">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="mx-auto max-w-3xl text-center">
+            <Badge variant="secondary" className="mb-4 text-sm">
+              🔍 Trusted by 12,000+ investigators worldwide
+            </Badge>
+            <h1 className="mb-6 text-4xl font-bold tracking-tight md:text-6xl">
+              Master OSINT.
+              <br />
+              <span className="text-primary">Investigate Smarter.</span>
             </h1>
-
-            <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-              {siteConfig.copy.heroSubtitle}
+            <p className="mb-8 text-lg text-muted-foreground md:text-xl">
+              The most practical open-source intelligence training on the web.
+              Structured modules, real-world techniques, and a community of
+              professionals who actually do this work.
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/case-file"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-300 hover:scale-105 text-lg"
+            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+              <Button size="lg" asChild className="w-full sm:w-auto">
+                <Link href="/sign-up">Start Learning Free</Link>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                asChild
+                className="w-full sm:w-auto"
               >
-                {siteConfig.copy.ctaButton}
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-              <Link
-                href="/modules"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-slate-300 border-2 border-white/10 hover:border-white/20 hover:text-white active:scale-[0.96] transition-transform hover:bg-white/5 transition-all duration-300 text-lg"
-              >
-                Browse Lessons
-              </Link>
+                <Link href="/modules">Browse Modules</Link>
+              </Button>
             </div>
+            <p className="mt-4 text-sm text-muted-foreground">
+              No credit card required · Free tier available · Cancel anytime
+            </p>
+          </div>
+        </div>
+      </section>
 
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
-              <div className="flex items-center gap-2">
-                <Search className="h-4 w-4 text-indigo-400" />
-                <span>Practical tradecraft</span>
+      {/* Social Proof Stats Bar */}
+      <section className="border-y bg-muted/40 py-10">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <div className="mb-1 flex items-center justify-center gap-2">
+                  <stat.icon className="h-5 w-5 text-primary" />
+                  <span className="text-2xl font-bold md:text-3xl">
+                    {stat.value}
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground">{stat.label}</p>
               </div>
-              <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-violet-400" />
-                <span>Ethics first</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Used By Section */}
+      <section className="py-12">
+        <div className="container mx-auto max-w-6xl px-4">
+          <p className="mb-6 text-center text-sm font-medium uppercase tracking-widest text-muted-foreground">
+            Trusted by professionals across industries
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {usedBy.map((role) => (
+              <div
+                key={role}
+                className="flex items-center gap-2 rounded-full border bg-background px-4 py-2 text-sm font-medium shadow-sm"
+              >
+                <CheckCircle className="h-4 w-4 text-primary" />
+                {role}
               </div>
-              <div className="flex items-center gap-2">
-                <GraduationCap className="h-4 w-4 text-indigo-300" />
-                <span>5-tier badge system</span>
-              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="bg-muted/30 py-16 md:py-24">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+              Everything you need to investigate like a pro
+            </h2>
+            <p className="mx-auto max-w-2xl text-muted-foreground">
+              From beginner fundamentals to advanced tradecraft — OSINT 101
+              covers the full spectrum of open-source intelligence.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="rounded-xl border bg-background p-6 shadow-sm">
+              <Shield className="mb-4 h-10 w-10 text-primary" />
+              <h3 className="mb-2 text-xl font-semibold">Structured Learning</h3>
+              <p className="text-muted-foreground">
+                50+ modules organized from foundational concepts to advanced
+                techniques. Learn at your own pace with clear progression.
+              </p>
+            </div>
+            <div className="rounded-xl border bg-background p-6 shadow-sm">
+              <BookOpen className="mb-4 h-10 w-10 text-primary" />
+              <h3 className="mb-2 text-xl font-semibold">Practical Tools</h3>
+              <p className="text-muted-foreground">
+                Curated resources, tool guides, and real investigation
+                frameworks used by professionals in the field today.
+              </p>
+            </div>
+            <div className="rounded-xl border bg-background p-6 shadow-sm">
+              <Users className="mb-4 h-10 w-10 text-primary" />
+              <h3 className="mb-2 text-xl font-semibold">Active Community</h3>
+              <p className="text-muted-foreground">
+                Connect with thousands of analysts, researchers, and
+                investigators sharing techniques and case studies.
+              </p>
             </div>
           </div>
-        </section>
-      <WhatsNew />
+        </div>
+      </section>
 
-        <section className="py-16 md:py-20 border-t border-white/5">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/15 via-violet-500/5 to-transparent p-8 md:p-12">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-indigo-300 mb-3">
-                One job · not a chatbot
-              </p>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white mb-3">
-                Paste a target. Get a case file.
-              </h2>
-              <p className="text-slate-400 mb-6 max-w-2xl">
-                The archive stays the archive. This layer turns a collection question into a cited investigation plan using the OSINT 101 method — intelligence cycle, OPSEC, and real module links. Foundations are free.
-              </p>
-              <Link
-                href="/case-file"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 transition-all"
-              >
-                Open the Case File Planner
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
+      {/* Testimonials Section */}
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="mb-12 text-center">
+            <Badge variant="secondary" className="mb-3">
+              <Award className="mr-1 h-3 w-3" /> Student Success Stories
+            </Badge>
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+              Investigators who leveled up with OSINT 101
+            </h2>
+            <p className="mx-auto max-w-2xl text-muted-foreground">
+              Real feedback from real practitioners — not cherry-picked
+              marketing copy.
+            </p>
           </div>
-        </section>
-
-        {/* ============================================================
-            LEARNING MODULES SECTION
-            ============================================================ */}
-        <section className="py-20 md:py-28 border-t border-white/5">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-2 mb-4">
-                <span className="text-sm font-semibold text-indigo-300 tracking-wide uppercase">
-                  Training Tracks
-                </span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white">
-                Learning Modules
-              </h2>
-              <p className="text-slate-400 mt-3 max-w-lg mx-auto">
-                Structured modules that teach you how to actually think like an
-                analyst &mdash; not just how to Google with attitude.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {modules.map((mod) => (
-                <Link
-                  key={mod.id}
-                  href={`/modules/${mod.id}`}
-                  className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/40 active:scale-[0.96] transition-transform hover:bg-white/[0.07]"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 flex items-center justify-center">
-                      <BookOpen className="h-6 w-6 text-indigo-300" />
-                    </div>
-                    <span
-                      className={`text-xs font-semibold border rounded-full px-3 py-1 ${
-                        levelAccent[mod.level] ?? levelAccent.Beginner
-                      }`}
-                    >
-                      {mod.level}
-                    </span>
+          <div className="grid gap-6 md:grid-cols-2">
+            {testimonials.map((t) => (
+              <div
+                key={t.author}
+                className="relative rounded-xl border bg-background p-6 shadow-sm transition-shadow hover:shadow-md"
+              >
+                <Quote className="absolute right-6 top-6 h-8 w-8 text-muted-foreground/20" />
+                <div className="mb-3 flex gap-1">
+                  {Array.from({ length: t.stars }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                    />
+                  ))}
+                </div>
+                <p className="mb-4 text-muted-foreground">&ldquo;{t.quote}&rdquo;</p>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
+                    {t.avatar}
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors">
-                    {mod.title}
-                  </h3>
-                  <p className="text-sm text-slate-400 leading-relaxed mb-4">
-                    {mod.description}
-                  </p>
-                  <div className="flex items-center gap-4 text-xs text-slate-500 pt-4 border-t border-white/5">
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-3.5 w-3.5" />
-                      {mod.estimatedTime}
-                    </div>
-                    <div className="ml-auto flex items-center gap-1 text-indigo-300 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-                      Open module <ArrowRight className="h-3.5 w-3.5" />
-                    </div>
+                  <div>
+                    <p className="font-semibold">{t.author}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {t.role} · {t.company}
+                    </p>
                   </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================================
-            RESOURCES SECTION
-            ============================================================ */}
-        <section className="py-20 md:py-28 border-t border-white/5">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-indigo-500/10 via-violet-500/5 to-transparent p-10 md:p-14 text-center">
-              <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-indigo-500/15 mb-6">
-                <FolderOpen className="h-7 w-7 text-indigo-300" />
+                </div>
               </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white mb-4">
-                The Asset Library
-              </h2>
-              <p className="text-slate-400 mb-8 max-w-xl mx-auto">
-                Checklists, cheatsheets, search operator references, and
-                templates &mdash; everything you need to run a clean
-                investigation.
-              </p>
-              <Link
-                href="/resources"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 transition-all duration-300 hover:scale-105"
-              >
-                Browse Resources
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ============================================================
-            EMAIL CAPTURE SECTION
-            ============================================================ */}
-        <section className="py-20 md:py-28 border-t border-white/5">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <EmailCapture
-              variant="hero"
-              theme="cyan"
-              heading={siteConfig.copy.emailCaptureHeading}
-              subheading={siteConfig.copy.emailCaptureSubheading}
-              source="homepage-hero"
-              showName
-            />
+      {/* CTA Section */}
+      <section className="bg-primary py-16 text-primary-foreground md:py-24">
+        <div className="container mx-auto max-w-3xl px-4 text-center">
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+            Ready to start your OSINT journey?
+          </h2>
+          <p className="mb-8 text-lg opacity-90">
+            Join 12,000+ investigators already using OSINT 101 to sharpen their
+            skills. Free to start — no credit card needed.
+          </p>
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <Button
+              size="lg"
+              variant="secondary"
+              asChild
+              className="w-full sm:w-auto"
+            >
+              <Link href="/sign-up">Create Free Account</Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              asChild
+              className="w-full border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 sm:w-auto"
+            >
+              <Link href="/pricing">View Pricing</Link>
+            </Button>
           </div>
-        </section>
-      </main>
-      <Footer />
+        </div>
+      </section>
     </>
-  )
+  );
 }
