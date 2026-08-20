@@ -16,6 +16,70 @@ export interface SiteUpdate {
 
 export const ALL_UPDATES: SiteUpdate[] = [
   {
+    "id": "llms-txt-updated-2026-08-20",
+    "title": "Understanding Large Language Models (LLMs) in OSINT",
+    "description": "Refreshed: Understanding Large Language Models (LLMs) in OSINT",
+    "date": "2026-08-20",
+    "kind": "updated",
+    "href": "/learn/llms-txt"
+  },
+  {
+    "id": "llm-updated-2026-08-20",
+    "title": "Understanding Large Language Models (LLMs) for OSINT",
+    "description": "Refreshed: Understanding Large Language Models (LLMs) for OSINT",
+    "date": "2026-08-20",
+    "kind": "updated",
+    "href": "/learn/llm"
+  },
+  {
+    "id": "pricing-updated-2026-08-20",
+    "title": "Accurate Pricing for OSINT Training",
+    "description": "Refreshed: Accurate Pricing for OSINT Training",
+    "date": "2026-08-20",
+    "kind": "updated",
+    "href": "/learn/pricing"
+  },
+  {
+    "id": "case-file-updated-2026-08-20",
+    "title": "OSINT Case File Analysis: Identifying and Verifying Information",
+    "description": "Refreshed: OSINT Case File Analysis: Identifying and Verifying Information",
+    "date": "2026-08-20",
+    "kind": "updated",
+    "href": "/learn/case-file"
+  },
+  {
+    "id": "requests-updated-2026-08-20",
+    "title": "Mastering Information Requests for Open-Source Intelligence",
+    "description": "Refreshed: Mastering Information Requests for Open-Source Intelligence",
+    "date": "2026-08-20",
+    "kind": "updated",
+    "href": "/learn/requests"
+  },
+  {
+    "id": "contact-updated-2026-08-20",
+    "title": "Understanding Contact Information in OSINT",
+    "description": "Refreshed: Understanding Contact Information in OSINT",
+    "date": "2026-08-20",
+    "kind": "updated",
+    "href": "/learn/contact"
+  },
+  {
+    "id": "contribute-updated-2026-08-20",
+    "title": "Contributing to Open Source Intelligence (OSINT) Projects",
+    "description": "Refreshed: Contributing to Open Source Intelligence (OSINT) Projects",
+    "date": "2026-08-20",
+    "kind": "updated",
+    "href": "/learn/contribute"
+  },
+  {
+    "id": "community-updated-2026-08-20",
+    "title": "Community Building and Engagement",
+    "description": "Refreshed: Community Building and Engagement",
+    "date": "2026-08-20",
+    "kind": "updated",
+    "href": "/learn/community"
+  },
+  {
     "id": "resources-updated-2026-08-18",
     "title": "OSINT Resources",
     "description": "Refreshed: OSINT Resources",
