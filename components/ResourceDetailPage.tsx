@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { Calendar, Download, Star } from 'lucide-react'
+import { Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -54,14 +54,6 @@ const ResourceDetailPage = () => {
             {resource.description}
           </CardDescription>
           <div className="flex flex-wrap items-center gap-6 pt-4 font-mono text-xs uppercase tracking-widest text-intel-green/60">
-            <div className="flex items-center text-sm">
-              <Star className="mr-2 h-4 w-4" />
-              {resource.rating} rating
-            </div>
-            <div className="flex items-center text-sm">
-              <Download className="mr-2 h-4 w-4" />
-              {resource.downloads.toLocaleString()} extractions
-            </div>
             <div className="flex items-center text-sm">
               <Calendar className="mr-2 h-4 w-4" />
               Updated {new Date(resource.lastUpdated).toLocaleDateString()}
