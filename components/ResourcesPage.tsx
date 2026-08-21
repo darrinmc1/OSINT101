@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
-import { Download, FileText, CheckSquare, Terminal, Users, Search, Star, Calendar, Filter, Activity, Database, Radar } from 'lucide-react'
+import { Download, FileText, CheckSquare, Terminal, Users, Search, Calendar, Filter, Activity, Database, Radar } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -79,16 +79,6 @@ const ResourcesPage = () => {
                 <Badge variant="secondary" className="rounded-none border border-gray-800 bg-gray-900 font-mono text-xs">{resource.size}</Badge>
                 {featured ? <Badge className="rounded-none bg-intel-green font-mono text-xs text-black">FEATURED</Badge> : null}
               </div>
-            </div>
-          </div>
-          <div className="text-right font-mono text-xs text-intel-green/60">
-            <div className="flex items-center justify-end space-x-1">
-              <Star className="h-3 w-3 fill-intel-green text-intel-green" />
-              <span>{resource.rating}</span>
-            </div>
-            <div className="mt-1 flex items-center justify-end space-x-1">
-              <Download className="h-3 w-3" />
-              <span>{resource.downloads.toLocaleString()}</span>
             </div>
           </div>
         </div>
@@ -175,11 +165,9 @@ const ResourcesPage = () => {
           </TabsList>
 
           <TabsContent value="all" className="mt-12 focus-visible:outline-none">
-            <div className="mb-12 grid grid-cols-2 gap-6 md:grid-cols-4">
+            <div className="mb-12 grid grid-cols-2 gap-6">
               {[
                 { label: 'TOTAL_RESOURCES', value: resources.length, icon: <Database className="h-4 w-4" />, color: 'text-intel-green' },
-                { label: 'TOTAL_EXTRACTIONS', value: resources.reduce((sum, resource) => sum + resource.downloads, 0).toLocaleString(), icon: <Download className="h-4 w-4" />, color: 'text-intel-blue' },
-                { label: 'AVG_QUALITY', value: (resources.reduce((sum, resource) => sum + resource.rating, 0) / resources.length).toFixed(1), icon: <Star className="h-4 w-4" />, color: 'text-intel-amber' },
                 { label: 'ACCESS_LEVEL', value: 'USEFUL', icon: <Activity className="h-4 w-4" />, color: 'text-intel-green' },
               ].map((stat) => (
                 <div key={stat.label} className="tactical-panel border-l-2 border-l-intel-green/30 bg-black/40 p-4">

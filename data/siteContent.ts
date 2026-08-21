@@ -8,8 +8,6 @@ export interface ResourceEntry {
   category: string
   type: string
   size: string
-  downloads: number
-  rating: number
   lastUpdated: string
   tags: string[]
   featured?: boolean
@@ -25,8 +23,6 @@ export const resourceLibrary = [
     category: 'checklists',
     type: 'Guide',
     size: '2.1 MB',
-    downloads: 1247,
-    rating: 4.9,
     lastUpdated: '2026-04-14',
     tags: ['investigation', 'methodology', 'systematic'],
     featured: true,
@@ -90,8 +86,6 @@ Good OSINT is not dramatic keyboard mashing under neon lights. It is boring, str
     category: 'cheatsheets',
     type: 'Guide',
     size: '1.8 MB',
-    downloads: 2156,
-    rating: 4.8,
     lastUpdated: '2026-04-14',
     tags: ['kali', 'commands', 'reference'],
     featured: true,
@@ -146,8 +140,6 @@ The right command is rarely the longest command. Start small, confirm assumption
     category: 'templates',
     type: 'Template',
     size: '3.2 MB',
-    downloads: 892,
-    rating: 4.7,
     lastUpdated: '2026-04-14',
     tags: ['profiling', 'investigation', 'template'],
     featured: true,
@@ -207,8 +199,6 @@ People-focused investigations need tighter legal and ethical controls than gener
     category: 'guides',
     type: 'Guide',
     size: '1.5 MB',
-    downloads: 1834,
-    rating: 4.6,
     lastUpdated: '2026-04-14',
     tags: ['search', 'google', 'operators'],
     body: `
@@ -261,8 +251,6 @@ Build queries iteratively. Start broad, inspect the noise, then tighten. If your
     category: 'lists',
     type: 'Index',
     size: '0.8 MB',
-    downloads: 3421,
-    rating: 4.9,
     lastUpdated: '2026-04-14',
     tags: ['tools', 'comprehensive', 'links'],
     body: `
@@ -310,8 +298,6 @@ Owning 200 tools and understanding 3 of them is how people end up screenshotting
     category: 'guides',
     type: 'Policy',
     size: '2.7 MB',
-    downloads: 756,
-    rating: 4.8,
     lastUpdated: '2026-04-14',
     tags: ['legal', 'ethics', 'compliance'],
     body: `
