@@ -16,6 +16,22 @@ export interface SiteUpdate {
 
 export const ALL_UPDATES: SiteUpdate[] = [
   {
+    "id": "resources-updated-2026-08-22",
+    "title": "OSINT Resources Hub",
+    "description": "Refreshed: OSINT Resources Hub",
+    "date": "2026-08-22",
+    "kind": "updated",
+    "href": "/learn/resources"
+  },
+  {
+    "id": "build-vs-buy-ai-updated-2026-08-22",
+    "title": "The Million-Dollar Question: Build vs. Buy for AI Solutions",
+    "description": "Refreshed: The Million-Dollar Question: Build vs. Buy for AI Solutions",
+    "date": "2026-08-22",
+    "kind": "updated",
+    "href": "/learn/build-vs-buy-ai"
+  },
+  {
     "id": "llms-txt-updated-2026-08-20",
     "title": "Understanding Large Language Models (LLMs) in OSINT",
     "description": "Refreshed: Understanding Large Language Models (LLMs) in OSINT",
