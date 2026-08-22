@@ -107,7 +107,7 @@ export const ALL_UPDATES: SiteUpdate[] = [
     id: "case-file-planner",
     title: "Case File Planner",
     description:
-      "Paste a collection target and get a cited OSINT 101 investigation plan. Foundations free; advanced techniques gated.",
+      "Paste a collection target and get a cited OSINT 101 investigation plan. Foundations free; advanced techniques are Case File Pro — $19/mo.",
     date: "2026-08-13",
     kind: "new",
     href: "/case-file",

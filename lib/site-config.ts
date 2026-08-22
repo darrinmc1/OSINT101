@@ -107,6 +107,7 @@ export const siteConfig: SiteConfig = {
     feedbackPlaceholder: "What did you find? Be specific - vague reports get filed under 'cold case'.",
   },
 
+  // Internal template leftovers only. Public paid SKU is Case File Pro — $19/mo (see lib/pricing.ts).
   pricing: {
     founder: { monthly: 5, yearly: 48 },
     standard: { monthly: 9, yearly: 90 },
