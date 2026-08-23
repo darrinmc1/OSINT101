@@ -1,217 +1,163 @@
 import Link from "next/link"
-import { siteConfig } from "@/lib/site-config"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { EmailCapture } from "@/components/email-capture"
-import { learningModules } from "@/data/modules"
-import WhatsNew from "@/components/whats-new"
-import {
-  ArrowRight,
-  BookOpen,
-  Clock,
-  GraduationCap,
-  Search,
-  Shield,
-  FolderOpen,
-} from "lucide-react"
-
-const levelAccent: Record<string, string> = {
-  Beginner: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
-  Intermediate: "text-indigo-400 bg-indigo-500/10 border-indigo-500/20",
-  Advanced: "text-violet-400 bg-violet-500/10 border-violet-500/20",
-}
+import { ArrowRight, Shield, Search, BookOpen, Users, Zap, Lock } from "lucide-react"
 
 export default function HomePage() {
-  const modules = Object.values(learningModules)
-
   return (
-    <>
-      <Header />
-      <main className="min-h-screen pt-16 bg-slate-950 text-slate-50">
-        {/* ============================================================
-            HERO SECTION
-            ============================================================ */}
-        <section className="relative hero-gradient hero-glow overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/hero-osint101.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
-          <div className="grid-pattern absolute inset-0" />
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-36 text-center">
-            <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-2 mb-8">
-              <span className="text-lg">{siteConfig.theme.emoji}</span>
-              <span className="text-sm font-semibold text-indigo-300 tracking-wide uppercase">
-                Free OSINT Training &amp; Investigation Tools
-              </span>
+    <main className="min-h-screen bg-[#0a0f1e] text-white">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden px-4 pt-24 pb-20 sm:pt-32 sm:pb-28">
+        {/* Background glow */}
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <div className="h-[600px] w-[600px] rounded-full bg-blue-600/10 blur-3xl" />
+        </div>
+
+        <div className="relative mx-auto max-w-4xl text-center">
+          {/* Badge */}
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-sm text-blue-400">
+            <Shield className="h-4 w-4" />
+            <span>Free & Open Source Intelligence Training</span>
+          </div>
+
+          {/* Headline */}
+          <h1 className="mb-6 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            Master OSINT Skills{" "}
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              From Zero to Expert
+            </span>
+          </h1>
+
+          {/* Value Proposition */}
+          <p className="mx-auto mb-4 max-w-2xl text-lg text-slate-300 sm:text-xl">
+            OSINT 101 gives you a structured, hands-on path to learn Open Source Intelligence — the same techniques used by investigators, journalists, and security professionals worldwide.
+          </p>
+
+          {/* Supporting benefit bullets */}
+          <ul className="mx-auto mb-10 flex max-w-xl flex-col gap-2 text-left sm:flex-row sm:justify-center sm:gap-6">
+            <li className="flex items-center gap-2 text-slate-400">
+              <Zap className="h-4 w-4 shrink-0 text-cyan-400" />
+              <span>Beginner-friendly modules</span>
+            </li>
+            <li className="flex items-center gap-2 text-slate-400">
+              <Lock className="h-4 w-4 shrink-0 text-cyan-400" />
+              <span>Real-world techniques</span>
+            </li>
+            <li className="flex items-center gap-2 text-slate-400">
+              <BookOpen className="h-4 w-4 shrink-0 text-cyan-400" />
+              <span>Always free to access</span>
+            </li>
+          </ul>
+
+          {/* CTAs */}
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <Link
+              href="/learn"
+              className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-blue-600/30 transition hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#0a0f1e]"
+            >
+              Start Learning for Free
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800/50 px-6 py-3 text-base font-semibold text-slate-300 transition hover:border-slate-500 hover:text-white"
+            >
+              What is OSINT?
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Social proof / stats strip */}
+      <section className="border-y border-slate-800 bg-slate-900/50 px-4 py-8">
+        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-6 text-center sm:grid-cols-4">
+          {[
+            { value: "50+", label: "Lessons" },
+            { value: "10k+", label: "Learners" },
+            { value: "100%", label: "Free" },
+            { value: "Always", label: "Up to Date" },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <p className="text-2xl font-bold text-white">{stat.value}</p>
+              <p className="text-sm text-slate-400">{stat.label}</p>
             </div>
+          ))}
+        </div>
+      </section>
 
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold font-display leading-tight mb-6">
-              <span className="text-white">{siteConfig.copy.heroTitle}</span>
-            </h1>
-
-            <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-              {siteConfig.copy.heroSubtitle}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/case-file"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-300 hover:scale-105 text-lg"
+      {/* Features Section */}
+      <section className="px-4 py-20">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="mb-4 text-center text-3xl font-bold">Everything you need to get started</h2>
+          <p className="mx-auto mb-12 max-w-xl text-center text-slate-400">
+            Whether you are a complete beginner or looking to sharpen existing skills, OSINT 101 has a clear learning path for you.
+          </p>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                icon: Search,
+                title: "Structured Curriculum",
+                description:
+                  "Follow a carefully designed path from foundational concepts to advanced investigative techniques.",
+              },
+              {
+                icon: Shield,
+                title: "Ethical & Legal Focus",
+                description:
+                  "Every module emphasises responsible, legal use of open source intelligence methods.",
+              },
+              {
+                icon: BookOpen,
+                title: "Practical Exercises",
+                description:
+                  "Apply what you learn with real-world scenarios and hands-on challenges.",
+              },
+              {
+                icon: Zap,
+                title: "Quick to Start",
+                description:
+                  "No prior experience required. Jump straight in and start building skills today.",
+              },
+              {
+                icon: Users,
+                title: "Community Driven",
+                description:
+                  "Join a growing community of investigators, researchers, and security enthusiasts.",
+              },
+              {
+                icon: Lock,
+                title: "Privacy Aware",
+                description:
+                  "Learn how to protect your own digital footprint while investigating others.",
+              },
+            ].map((feature) => (
+              <div
+                key={feature.title}
+                className="rounded-xl border border-slate-800 bg-slate-900/60 p-6 transition hover:border-blue-500/40"
               >
-                {siteConfig.copy.ctaButton}
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-              <Link
-                href="/modules"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-slate-300 border-2 border-white/10 hover:border-white/20 hover:text-white active:scale-[0.96] transition-transform hover:bg-white/5 transition-all duration-300 text-lg"
-              >
-                Browse Lessons
-              </Link>
-            </div>
-
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
-              <div className="flex items-center gap-2">
-                <Search className="h-4 w-4 text-indigo-400" />
-                <span>Practical tradecraft</span>
+                <feature.icon className="mb-4 h-8 w-8 text-blue-400" />
+                <h3 className="mb-2 text-lg font-semibold">{feature.title}</h3>
+                <p className="text-sm text-slate-400">{feature.description}</p>
               </div>
-              <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-violet-400" />
-                <span>Ethics first</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <GraduationCap className="h-4 w-4 text-indigo-300" />
-                <span>5-tier badge system</span>
-              </div>
-            </div>
+            ))}
           </div>
-        </section>
-      <WhatsNew />
+        </div>
+      </section>
 
-        <section className="py-16 md:py-20 border-t border-white/5">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/15 via-violet-500/5 to-transparent p-8 md:p-12">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-indigo-300 mb-3">
-                One job · not a chatbot
-              </p>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white mb-3">
-                Paste a target. Get a case file.
-              </h2>
-              <p className="text-slate-400 mb-6 max-w-2xl">
-                The archive stays the archive. This layer turns a collection question into a cited investigation plan using the OSINT 101 method — intelligence cycle, OPSEC, and real module links. Foundations are free.
-              </p>
-              <Link
-                href="/case-file"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 transition-all"
-              >
-                Open the Case File Planner
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================================
-            LEARNING MODULES SECTION
-            ============================================================ */}
-        <section className="py-20 md:py-28 border-t border-white/5">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-2 mb-4">
-                <span className="text-sm font-semibold text-indigo-300 tracking-wide uppercase">
-                  Training Tracks
-                </span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white">
-                Learning Modules
-              </h2>
-              <p className="text-slate-400 mt-3 max-w-lg mx-auto">
-                Structured modules that teach you how to actually think like an
-                analyst &mdash; not just how to Google with attitude.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {modules.map((mod) => (
-                <Link
-                  key={mod.id}
-                  href={`/modules/${mod.id}`}
-                  className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/40 active:scale-[0.96] transition-transform hover:bg-white/[0.07]"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 flex items-center justify-center">
-                      <BookOpen className="h-6 w-6 text-indigo-300" />
-                    </div>
-                    <span
-                      className={`text-xs font-semibold border rounded-full px-3 py-1 ${
-                        levelAccent[mod.level] ?? levelAccent.Beginner
-                      }`}
-                    >
-                      {mod.level}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors">
-                    {mod.title}
-                  </h3>
-                  <p className="text-sm text-slate-400 leading-relaxed mb-4">
-                    {mod.description}
-                  </p>
-                  <div className="flex items-center gap-4 text-xs text-slate-500 pt-4 border-t border-white/5">
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-3.5 w-3.5" />
-                      {mod.estimatedTime}
-                    </div>
-                    <div className="ml-auto flex items-center gap-1 text-indigo-300 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-                      Open module <ArrowRight className="h-3.5 w-3.5" />
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================================
-            RESOURCES SECTION
-            ============================================================ */}
-        <section className="py-20 md:py-28 border-t border-white/5">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-indigo-500/10 via-violet-500/5 to-transparent p-10 md:p-14 text-center">
-              <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-indigo-500/15 mb-6">
-                <FolderOpen className="h-7 w-7 text-indigo-300" />
-              </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white mb-4">
-                The Asset Library
-              </h2>
-              <p className="text-slate-400 mb-8 max-w-xl mx-auto">
-                Checklists, cheatsheets, search operator references, and
-                templates &mdash; everything you need to run a clean
-                investigation.
-              </p>
-              <Link
-                href="/resources"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 transition-all duration-300 hover:scale-105"
-              >
-                Browse Resources
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================================
-            EMAIL CAPTURE SECTION
-            ============================================================ */}
-        <section className="py-20 md:py-28 border-t border-white/5">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <EmailCapture
-              variant="hero"
-              theme="cyan"
-              heading={siteConfig.copy.emailCaptureHeading}
-              subheading={siteConfig.copy.emailCaptureSubheading}
-              source="homepage-hero"
-              showName
-            />
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </>
+      {/* CTA Banner */}
+      <section className="px-4 pb-24">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-900/30 to-slate-900/60 p-10 text-center">
+          <h2 className="mb-3 text-3xl font-bold">Ready to start your OSINT journey?</h2>
+          <p className="mb-8 text-slate-400">
+            Join thousands of learners who have already taken the first step toward becoming skilled open source intelligence practitioners.
+          </p>
+          <Link
+            href="/learn"
+            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-8 py-3 text-base font-semibold text-white shadow-lg shadow-blue-600/30 transition hover:bg-blue-500"
+          >
+            Get Started — It is Free
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </section>
+    </main>
   )
 }
