@@ -3,6 +3,7 @@
 import { siteConfig, getBadgeDisplay, getTierProgress } from "@/lib/site-config"
 import { learningModules } from "@/data/modules"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 import {
   BookOpen,
   TrendingUp,
@@ -10,6 +11,8 @@ import {
   Zap,
   Clock,
   ChevronRight,
+  Star,
+  Lock,
 } from "lucide-react"
 
 // Mock data - will be replaced with real user state from zustand/API
@@ -19,6 +22,7 @@ const mockUser = {
   lessonsCompleted: 3,
   streakDays: 5,
   totalHours: 8.5,
+  plan: "free" as "free" | "premium",
 }
 
 const moduleEmojis = ["\u{1F50D}", "\u{1F5A5}", "\u{1F9D1}"]
@@ -68,6 +72,26 @@ export default function DashboardPage() {
         </p>
       </div>
 
+      {/* Free Plan Upsell Banner */}
+      {mockUser.plan === "free" && (
+        <div className="rounded-2xl border border-violet-500/30 bg-violet-500/10 backdrop-blur-xl p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div className="flex-1">
+            <p className="text-sm font-bold text-white mb-0.5">You&apos;re on the Free Plan</p>
+            <p className="text-xs text-slate-300">
+              <span className="text-emerald-400 font-semibold">Free:</span> 3 modules, basic badges &nbsp;·&nbsp;
+              <span className="text-violet-300 font-semibold">Premium:</span> All modules, advanced certifications, priority support
+            </p>
+          </div>
+          <Link
+            href="/pricing"
+            className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 transition-all"
+          >
+            <Star className="h-4 w-4" />
+            Upgrade to Premium
+          </Link>
+        </div>
+      )}
+
       {/* Stats Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
@@ -99,154 +123,125 @@ export default function DashboardPage() {
             color: "text-violet-400",
             bgColor: "bg-violet-500/10",
           },
-        ].map((stat) => (
-          <div key={stat.label} className="glass-card p-5">
-            <div className="relative z-10">
-              <div
-                className={cn(
-                  "h-10 w-10 rounded-xl flex items-center justify-center mb-3",
-                  stat.bgColor
-                )}
-              >
-                <stat.icon className={cn("h-5 w-5", stat.color)} />
-              </div>
-              <p className="text-2xl font-extrabold text-white">{stat.value}</p>
-              <p className="text-xs text-slate-500 mt-1">{stat.label}</p>
+        ].map(({ label, value, icon: Icon, color, bgColor }) => (
+          <div
+            key={label}
+            className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-5"
+          >
+            <div className={cn("h-10 w-10 rounded-xl flex items-center justify-center mb-3", bgColor)}>
+              <Icon className={cn("h-5 w-5", color)} />
             </div>
+            <p className="text-2xl font-extrabold text-white">{value}</p>
+            <p className="text-xs text-slate-400 mt-0.5">{label}</p>
           </div>
         ))}
       </div>
 
-      {/* Tier Progress */}
-      <div className="glass-card p-6">
-        <div className="relative z-10">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <span className="text-3xl">{badge.emoji}</span>
-              <div>
-                <h3 className="font-bold text-white">{badge.name}</h3>
-                <p className="text-xs text-slate-500">
-                  {badge.isMaxTier
-                    ? "Maximum tier reached!"
-                    : `${progress}% to ${
-                        siteConfig.badges.tierNames[badge.tier + 1]
-                      }`}
-                </p>
+      {/* Recent Lessons */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-bold text-white">Recent Modules</h2>
+          <Link
+            href="/modules"
+            className="text-xs text-indigo-400 hover:text-indigo-300 font-semibold flex items-center gap-1 transition-colors"
+          >
+            View all <ChevronRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+        <div className="grid md:grid-cols-3 gap-4">
+          {recentLessons.map((lesson) => (
+            <Link
+              key={lesson.id}
+              href={`/modules/${lesson.id}`}
+              className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-5 hover:border-indigo-500/40 hover:bg-white/[0.07] transition-all"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-2xl">{lesson.emoji}</span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-bold text-white truncate group-hover:text-indigo-300 transition-colors">
+                    {lesson.title}
+                  </p>
+                  <p className="text-xs text-slate-500 capitalize">{lesson.category}</p>
+                </div>
               </div>
-            </div>
-            <div className="text-right">
-              <p className="text-sm font-bold text-cyan-400">
-                {mockUser.xp} XP
-              </p>
-              <p className="text-xs text-slate-500">
-                {badge.isMaxTier
-                  ? "Max tier"
-                  : `${siteConfig.badges.xpPerTier[badge.tier + 1]} XP needed`}
-              </p>
-            </div>
-          </div>
-          <div className="w-full h-3 bg-white/5 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full transition-all duration-500"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <div className="flex justify-between mt-2">
-            {siteConfig.badges.tierEmojis.map((emoji, i) => (
-              <span
-                key={i}
-                className={cn(
-                  "text-lg transition-opacity",
-                  i <= badge.tier ? "opacity-100" : "opacity-30"
-                )}
-              >
-                {emoji}
-              </span>
-            ))}
-          </div>
+              <div className="space-y-1">
+                <div className="flex justify-between text-xs text-slate-400">
+                  <span>Progress</span>
+                  <span>{lesson.progress}%</span>
+                </div>
+                <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-violet-500"
+                    style={{ width: `${lesson.progress}%` }}
+                  />
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        {/* Recent Lessons */}
-        <div className="glass-card p-6">
-          <div className="relative z-10">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-white font-display">
-                Recent Lessons
-              </h3>
-              <a
-                href="/dashboard/lessons"
-                className="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
-              >
-                View All <ChevronRight className="h-3 w-3" />
-              </a>
-            </div>
-            <div className="space-y-3">
-              {recentLessons.map((lesson) => (
-                <div
-                  key={lesson.id}
-                  className="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"
-                >
-                  <span className="text-2xl">{lesson.emoji}</span>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-white truncate">
-                      {lesson.title}
-                    </p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <div className="flex-1 h-1.5 bg-white/5 rounded-full overflow-hidden">
-                        <div
-                          className={cn(
-                            "h-full rounded-full",
-                            lesson.progress === 100
-                              ? "bg-emerald-500"
-                              : "bg-cyan-500"
-                          )}
-                          style={{ width: `${lesson.progress}%` }}
-                        />
-                      </div>
-                      <span className="text-xs text-slate-500">
-                        {lesson.progress}%
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+      {/* Badges */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-bold text-white">Earned Badges</h2>
+          <span className="text-xs text-slate-500">
+            {mockUser.plan === "free" ? (
+              <Link href="/pricing" className="text-violet-400 hover:text-violet-300 font-semibold transition-colors flex items-center gap-1">
+                <Lock className="h-3 w-3" /> Unlock advanced badges with Premium
+              </Link>
+            ) : (
+              <span className="text-emerald-400 font-semibold">All badges unlocked</span>
+            )}
+          </span>
         </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {earnedBadges.map((b) => (
+            <div
+              key={b.name}
+              className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-5 flex items-center gap-4"
+            >
+              <span className="text-3xl">{b.emoji}</span>
+              <div>
+                <p className="text-sm font-bold text-white">{b.name}</p>
+                <p className="text-xs text-slate-400 mt-0.5">{b.description}</p>
+              </div>
+            </div>
+          ))}
+          {mockUser.plan === "free" && (
+            <Link
+              href="/pricing"
+              className="rounded-2xl border border-violet-500/30 bg-violet-500/10 backdrop-blur-xl p-5 flex items-center gap-4 hover:border-violet-500/50 hover:bg-violet-500/20 transition-all group"
+            >
+              <span className="text-3xl">🏆</span>
+              <div>
+                <p className="text-sm font-bold text-white group-hover:text-violet-300 transition-colors">Advanced Badges</p>
+                <p className="text-xs text-violet-400 mt-0.5">Upgrade to unlock</p>
+              </div>
+            </Link>
+          )}
+        </div>
+      </div>
 
-        {/* Badges Earned */}
-        <div className="glass-card p-6">
-          <div className="relative z-10">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-white font-display">
-                Badges Earned
-              </h3>
-              <a
-                href="/dashboard/badges"
-                className="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
-              >
-                View All <ChevronRight className="h-3 w-3" />
-              </a>
-            </div>
-            <div className="space-y-3">
-              {earnedBadges.map((b) => (
-                <div
-                  key={b.name}
-                  className="flex items-center gap-3 p-3 rounded-xl bg-white/5"
-                >
-                  <div className="h-10 w-10 rounded-xl bg-cyan-500/10 flex items-center justify-center">
-                    <span className="text-xl">{b.emoji}</span>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-white">{b.name}</p>
-                    <p className="text-xs text-slate-500">{b.description}</p>
-                  </div>
-                  <Award className="h-4 w-4 text-cyan-500/50 ml-auto" />
-                </div>
-              ))}
-            </div>
+      {/* XP Progress */}
+      <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <Award className="h-5 w-5 text-amber-400" />
+            <h2 className="text-lg font-bold text-white">Rank Progress</h2>
+          </div>
+          <span className="text-sm font-bold text-amber-400">{badge.label}</span>
+        </div>
+        <div className="space-y-2">
+          <div className="flex justify-between text-xs text-slate-400">
+            <span>{mockUser.xp} XP</span>
+            <span>{progress.next} XP to next rank</span>
+          </div>
+          <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-700"
+              style={{ width: `${progress.percent}%` }}
+            />
           </div>
         </div>
       </div>
