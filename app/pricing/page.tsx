@@ -1,127 +1,194 @@
 import Link from "next/link"
-import { CheckCircle, ArrowRight } from "lucide-react"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { JsonLd } from "@/components/json-ld"
-import { pricingFaqJsonLd, pricingJson, pricingPlans } from "@/lib/pricing"
-import { CASE_FILE_FAQS } from "@/data/case-file"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import { SELF_URL } from "@/lib/network"
-import type { Metadata } from "next"
+import { Check, X, Zap, Shield, Star } from "lucide-react"
 
-export const metadata: Metadata = {
-  title: "Pricing",
-  description:
-    "OSINT 101 pricing: Free foundations and Case File plans, founding $5/mo, Analyst $19/mo for advanced techniques. Machine-readable at /pricing.json.",
-  alternates: { canonical: "/pricing" },
+export const metadata = {
+  title: "Pricing | OSINT 101",
+  description: "OSINT 101 is free forever for core content. See what's included in every tier.",
 }
 
-const pricingFaqs = [
-  ...CASE_FILE_FAQS.filter((faq) => faq.question.toLowerCase().includes("free") || faq.question.toLowerCase().includes("legal")),
+const tiers = [
   {
-    question: "How much does OSINT 101 cost?",
-    answer:
-      "Foundations and the Case File Planner foundations lane are $0. Founding is $5/month (waitlist while billing finishes). Analyst is $19/month and includes advanced Case File techniques. Parseable offers: https://www.osint101.com/pricing.json.",
+    name: "Free",
+    price: "$0",
+    period: "forever",
+    description: "Everything you need to learn OSINT fundamentals.",
+    cta: "Get Started Free",
+    ctaHref: "/learn",
+    highlight: false,
+    icon: Shield,
+    features: [
+      { text: "Full access to all written guides & tutorials", included: true },
+      { text: "Beginner, intermediate & advanced modules", included: true },
+      { text: "OSINT tool directory", included: true },
+      { text: "Community forum access", included: true },
+      { text: "Search & filter all resources", included: true },
+      { text: "No account required for most content", included: true },
+      { text: "Live instructor-led workshops", included: false },
+      { text: "Downloadable cheat sheets & templates", included: false },
+      { text: "Certificate of completion", included: false },
+      { text: "Priority support", included: false },
+    ],
   },
   {
-    question: "Is there a crypto or x402 checkout?",
-    answer: "No. Paid access uses the existing founding/waitlist and upcoming card billing pattern. There is no x402 payment path.",
+    name: "Pro",
+    price: "$9",
+    period: "per month",
+    description: "For practitioners who want structured learning and credentials.",
+    cta: "Coming Soon",
+    ctaHref: "#notify",
+    highlight: true,
+    icon: Zap,
+    features: [
+      { text: "Everything in Free", included: true },
+      { text: "Live instructor-led workshops", included: true },
+      { text: "Downloadable cheat sheets & templates", included: true },
+      { text: "Certificate of completion", included: true },
+      { text: "Priority support", included: true },
+      { text: "Early access to new content", included: true },
+      { text: "Ad-free experience", included: true },
+      { text: "Private Discord community", included: true },
+      { text: "Monthly live Q&A sessions", included: true },
+      { text: "Custom learning paths", included: true },
+    ],
+  },
+  {
+    name: "Team",
+    price: "$29",
+    period: "per seat / month",
+    description: "For organisations training analysts at scale.",
+    cta: "Contact Us",
+    ctaHref: "/contact",
+    highlight: false,
+    icon: Star,
+    features: [
+      { text: "Everything in Pro", included: true },
+      { text: "Team progress dashboard", included: true },
+      { text: "Bulk seat management", included: true },
+      { text: "Custom onboarding", included: true },
+      { text: "Dedicated account manager", included: true },
+      { text: "SSO / SAML support", included: true },
+      { text: "Invoice billing", included: true },
+      { text: "SLA-backed support", included: true },
+      { text: "Private workshops on request", included: true },
+      { text: "White-label option", included: true },
+    ],
   },
 ]
 
 export default function PricingPage() {
   return (
-    <>
-      <Header />
-      <JsonLd data={pricingJson()} />
-      <JsonLd data={pricingFaqJsonLd(pricingFaqs)} />
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          name: "OSINT 101 Pricing",
-          url: `${SELF_URL}/pricing`,
-          relatedLink: [`${SELF_URL}/pricing.json`, `${SELF_URL}/llm.txt`],
-        }}
-      />
-      <main className="min-h-screen pt-16 bg-slate-950 text-slate-50">
-        <section className="border-b border-white/10 py-16 text-center">
-          <div className="mx-auto max-w-6xl px-4 md:px-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-300 mb-3">Pricing</p>
-            <h1 className="text-4xl font-bold tracking-tight md:text-5xl mb-4">Simple, parseable pricing</h1>
-            <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-              Foundations are free. Advanced Case File techniques sit on the Analyst plan. Machine-readable copy lives at{" "}
-              <Link href="/pricing.json" className="text-indigo-300 underline underline-offset-2">
-                /pricing.json
-              </Link>
-              .
-            </p>
-          </div>
-        </section>
-        <section className="mx-auto max-w-6xl px-4 md:px-6 py-12">
-          <div className="grid gap-6 md:grid-cols-3 items-start">
-            {pricingPlans.map((plan) => (
+    <main className="min-h-screen bg-background">
+      {/* Hero */}
+      <section className="py-20 px-4 text-center">
+        <div className="max-w-3xl mx-auto">
+          <span className="inline-block mb-4 px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300">
+            Core content is free — always
+          </span>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            Simple, transparent pricing
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            OSINT 101 was built on the belief that open-source intelligence education should be
+            accessible to everyone. All written guides, tutorials and the tool directory are{" "}
+            <strong>free forever</strong>. Premium tiers unlock live training, credentials and
+            team features.
+          </p>
+        </div>
+      </section>
+
+      {/* Pricing cards */}
+      <section className="pb-20 px-4">
+        <div className="max-w-6xl mx-auto grid gap-8 md:grid-cols-3">
+          {tiers.map((tier) => {
+            const Icon = tier.icon
+            return (
               <div
-                key={plan.id}
-                className={`rounded-xl border p-6 md:p-8 ${
-                  plan.highlighted
-                    ? "border-indigo-400 bg-white/5 shadow-lg ring-1 ring-indigo-400"
-                    : "border-white/10 bg-white/[0.03]"
+                key={tier.name}
+                className={`relative rounded-2xl border p-8 flex flex-col ${
+                  tier.highlight
+                    ? "border-primary shadow-lg shadow-primary/10 bg-primary/5"
+                    : "border-border bg-card"
                 }`}
               >
-                <h2 className="font-bold text-xl mb-2">{plan.name}</h2>
-                <div className="mb-4">
-                  <span className="text-4xl font-bold">{plan.priceLabel}</span>
-                  <span className="text-sm text-slate-500">{plan.period}</span>
+                {tier.highlight && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold bg-primary text-primary-foreground">
+                    Most Popular
+                  </span>
+                )}
+                <div className="mb-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Icon className="h-5 w-5 text-primary" />
+                    <h2 className="text-xl font-bold">{tier.name}</h2>
+                  </div>
+                  <div className="flex items-end gap-1 mb-2">
+                    <span className="text-4xl font-extrabold">{tier.price}</span>
+                    <span className="text-muted-foreground mb-1 text-sm">/{tier.period}</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{tier.description}</p>
                 </div>
-                <p className="text-sm text-slate-400 mb-6">{plan.description}</p>
-                <p className="text-xs font-semibold uppercase tracking-wider text-indigo-300 mb-4">
-                  Case File: {plan.caseFileAccess}
-                </p>
-                <Link
-                  href={plan.href}
-                  className={`flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold transition-colors mb-8 ${
-                    plan.highlighted
-                      ? "bg-indigo-600 text-white hover:bg-indigo-500"
-                      : "border border-white/15 text-slate-200 hover:bg-white/5"
-                  }`}
-                >
-                  {plan.cta} <ArrowRight className="h-4 w-4" />
-                </Link>
-                <ul className="space-y-3">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3 text-sm text-slate-300">
-                      <CheckCircle
-                        className={`h-4 w-4 mt-0.5 shrink-0 ${
-                          plan.highlighted ? "text-indigo-400" : "text-slate-500"
-                        }`}
-                      />
-                      {feature}
+
+                <ul className="space-y-3 mb-8 flex-1">
+                  {tier.features.map((f) => (
+                    <li key={f.text} className="flex items-start gap-2 text-sm">
+                      {f.included ? (
+                        <Check className="h-4 w-4 text-green-500 mt-0.5 shrink-0" />
+                      ) : (
+                        <X className="h-4 w-4 text-muted-foreground/40 mt-0.5 shrink-0" />
+                      )}
+                      <span className={f.included ? "" : "text-muted-foreground/50"}>
+                        {f.text}
+                      </span>
                     </li>
                   ))}
                 </ul>
+
+                <Link
+                  href={tier.ctaHref}
+                  className={`block text-center rounded-lg px-6 py-3 text-sm font-semibold transition-colors ${
+                    tier.highlight
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                      : "border border-border hover:bg-accent"
+                  }`}
+                >
+                  {tier.cta}
+                </Link>
+              </div>
+            )
+          })}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="pb-24 px-4" id="notify">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-2xl font-bold text-center mb-10">Frequently asked questions</h2>
+          <div className="space-y-6">
+            {[
+              {
+                q: "Will the free content ever go behind a paywall?",
+                a: "No. All written guides, tutorials and the tool directory will remain free forever. We believe open access to OSINT education is a public good.",
+              },
+              {
+                q: "When will Pro launch?",
+                a: "Pro is currently in development. Sign up for our newsletter to be notified when it launches — early subscribers will receive a discounted rate.",
+              },
+              {
+                q: "How does the site sustain itself on a free model?",
+                a: "OSINT 101 is currently supported by the community and optional donations. Future revenue will come from Pro subscriptions and Team plans, which fund ongoing content creation.",
+              },
+              {
+                q: "Do you offer discounts for students or non-profits?",
+                a: "Yes. Once Pro launches we will offer 50% discounts for verified students and registered non-profit organisations. Contact us for details.",
+              },
+            ].map(({ q, a }) => (
+              <div key={q} className="border-b border-border pb-6">
+                <h3 className="font-semibold mb-2">{q}</h3>
+                <p className="text-sm text-muted-foreground">{a}</p>
               </div>
             ))}
           </div>
-        </section>
-        <section className="mx-auto max-w-3xl px-4 md:px-6 pb-20">
-          <h2 className="text-2xl font-bold mb-4">Pricing FAQs</h2>
-          <Accordion type="single" collapsible className="rounded-2xl border border-white/10 px-4">
-            {pricingFaqs.map((faq, index) => (
-              <AccordionItem key={faq.question} value={`p-faq-${index}`}>
-                <AccordionTrigger className="text-left text-slate-100">{faq.question}</AccordionTrigger>
-                <AccordionContent className="text-slate-400">{faq.answer}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </section>
-      </main>
-      <Footer />
-    </>
+        </div>
+      </section>
+    </main>
   )
 }
