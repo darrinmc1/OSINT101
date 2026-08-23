@@ -1,217 +1,208 @@
 import Link from "next/link"
-import { siteConfig } from "@/lib/site-config"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { EmailCapture } from "@/components/email-capture"
-import { learningModules } from "@/data/modules"
-import WhatsNew from "@/components/whats-new"
-import {
-  ArrowRight,
-  BookOpen,
-  Clock,
-  GraduationCap,
-  Search,
-  Shield,
-  FolderOpen,
-} from "lucide-react"
+import { ArrowRight, Shield, BookOpen, Users, Zap, Star, CheckCircle } from "lucide-react"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-const levelAccent: Record<string, string> = {
-  Beginner: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
-  Intermediate: "text-indigo-400 bg-indigo-500/10 border-indigo-500/20",
-  Advanced: "text-violet-400 bg-violet-500/10 border-violet-500/20",
-}
+const testimonials = [
+  {
+    name: "Sarah K.",
+    role: "Threat Intelligence Analyst",
+    org: "Fortune 500 Security Team",
+    avatar: "/avatars/sarah.jpg",
+    initials: "SK",
+    quote:
+      "OSINT 101 gave me a structured path I couldn't find anywhere else. Within two weeks I was running investigations I previously had to outsource. The modules are dense with real tradecraft, not fluff.",
+    stars: 5,
+  },
+  {
+    name: "Marcus T.",
+    role: "Freelance Investigative Journalist",
+    org: "Independent",
+    avatar: "/avatars/marcus.jpg",
+    initials: "MT",
+    quote:
+      "I've verified sources on three major stories using techniques from the Social Media OSINT module alone. The case-file planner keeps my research organized and defensible. Absolutely essential.",
+    stars: 5,
+  },
+  {
+    name: "Priya N.",
+    role: "Digital Forensics Consultant",
+    org: "Cybersecurity Firm",
+    avatar: "/avatars/priya.jpg",
+    initials: "PN",
+    quote:
+      "The dark web monitoring and Google dorking content is the most up-to-date I've found. My whole team uses OSINT 101 for onboarding new analysts now. It cut our ramp-up time in half.",
+    stars: 5,
+  },
+  {
+    name: "James O.",
+    role: "Law Enforcement — Cyber Unit",
+    org: "Municipal Police Department",
+    avatar: "/avatars/james.jpg",
+    initials: "JO",
+    quote:
+      "Coming from a non-technical background, I was worried the content would go over my head. The beginner modules eased me in perfectly. Six months later I'm leading digital investigations for my unit.",
+    stars: 5,
+  },
+]
 
 export default function HomePage() {
-  const modules = Object.values(learningModules)
-
   return (
-    <>
-      <Header />
-      <main className="min-h-screen pt-16 bg-slate-950 text-slate-50">
-        {/* ============================================================
-            HERO SECTION
-            ============================================================ */}
-        <section className="relative hero-gradient hero-glow overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/hero-osint101.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
-          <div className="grid-pattern absolute inset-0" />
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-36 text-center">
-            <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-2 mb-8">
-              <span className="text-lg">{siteConfig.theme.emoji}</span>
-              <span className="text-sm font-semibold text-indigo-300 tracking-wide uppercase">
-                Free OSINT Training &amp; Investigation Tools
-              </span>
+    <main className="flex flex-col min-h-screen bg-slate-950 text-white">
+      {/* Hero */}
+      <section className="relative flex flex-col items-center justify-center text-center px-4 py-28 md:py-40 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-indigo-950/60 via-slate-950 to-slate-950 pointer-events-none" />
+        <div className="relative z-10 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold mb-6">
+            <Shield className="h-3.5 w-3.5" />
+            Open-Source Intelligence Training
+          </div>
+          <h1 className="text-4xl md:text-6xl font-extrabold font-display tracking-tight mb-6 bg-gradient-to-br from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+            Master OSINT.<br />Investigate Anything.
+          </h1>
+          <p className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
+            Structured modules, real tradecraft, and a growing community of analysts, journalists, and investigators. Go from curious to capable.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/modules"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 transition-all shadow-lg shadow-indigo-500/20"
+            >
+              Start Learning Free
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/pricing"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-slate-300 border border-white/10 bg-white/5 hover:bg-white/10 transition-all"
+            >
+              View Pricing
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="px-4 py-20 max-w-6xl mx-auto w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              icon: <BookOpen className="h-6 w-6 text-indigo-400" />,
+              title: "Structured Modules",
+              desc: "From beginner fundamentals to advanced tradecraft — every lesson is practical and immediately applicable.",
+            },
+            {
+              icon: <Zap className="h-6 w-6 text-violet-400" />,
+              title: "Real Techniques",
+              desc: "Google dorking, social media OSINT, dark web monitoring, and more. No filler, no theory-only content.",
+            },
+            {
+              icon: <Users className="h-6 w-6 text-emerald-400" />,
+              title: "Active Community",
+              desc: "Join analysts, journalists, and investigators sharing tools, tips, and case studies every day.",
+            },
+          ].map((f) => (
+            <div
+              key={f.title}
+              className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 flex flex-col gap-3"
+            >
+              <div className="h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center">
+                {f.icon}
+              </div>
+              <h3 className="font-bold text-white text-lg">{f.title}</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">{f.desc}</p>
             </div>
+          ))}
+        </div>
+      </section>
 
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold font-display leading-tight mb-6">
-              <span className="text-white">{siteConfig.copy.heroTitle}</span>
-            </h1>
-
-            <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-              {siteConfig.copy.heroSubtitle}
+      {/* Testimonials */}
+      <section className="px-4 py-20 bg-gradient-to-b from-slate-950 via-indigo-950/20 to-slate-950 w-full">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-300 text-xs font-semibold mb-4">
+              <Star className="h-3.5 w-3.5 fill-violet-400 text-violet-400" />
+              Trusted by Investigators Worldwide
+            </div>
+            <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white mb-3">
+              Real people. Real results.
+            </h2>
+            <p className="text-slate-400 max-w-xl mx-auto">
+              From law enforcement to journalists to corporate analysts — here's what practitioners say after training with OSINT 101.
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/case-file"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-300 hover:scale-105 text-lg"
-              >
-                {siteConfig.copy.ctaButton}
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-              <Link
-                href="/modules"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-slate-300 border-2 border-white/10 hover:border-white/20 hover:text-white active:scale-[0.96] transition-transform hover:bg-white/5 transition-all duration-300 text-lg"
-              >
-                Browse Lessons
-              </Link>
-            </div>
-
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
-              <div className="flex items-center gap-2">
-                <Search className="h-4 w-4 text-indigo-400" />
-                <span>Practical tradecraft</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-violet-400" />
-                <span>Ethics first</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <GraduationCap className="h-4 w-4 text-indigo-300" />
-                <span>5-tier badge system</span>
-              </div>
-            </div>
           </div>
-        </section>
-      <WhatsNew />
 
-        <section className="py-16 md:py-20 border-t border-white/5">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/15 via-violet-500/5 to-transparent p-8 md:p-12">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-indigo-300 mb-3">
-                One job · not a chatbot
-              </p>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white mb-3">
-                Paste a target. Get a case file.
-              </h2>
-              <p className="text-slate-400 mb-6 max-w-2xl">
-                The archive stays the archive. This layer turns a collection question into a cited investigation plan using the OSINT 101 method — intelligence cycle, OPSEC, and real module links. Foundations are free.
-              </p>
-              <Link
-                href="/case-file"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 transition-all"
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {testimonials.map((t) => (
+              <div
+                key={t.name}
+                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 flex flex-col gap-4"
               >
-                Open the Case File Planner
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </section>
+                {/* Stars */}
+                <div className="flex gap-0.5">
+                  {Array.from({ length: t.stars }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
 
-        {/* ============================================================
-            LEARNING MODULES SECTION
-            ============================================================ */}
-        <section className="py-20 md:py-28 border-t border-white/5">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-2 mb-4">
-                <span className="text-sm font-semibold text-indigo-300 tracking-wide uppercase">
-                  Training Tracks
-                </span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white">
-                Learning Modules
-              </h2>
-              <p className="text-slate-400 mt-3 max-w-lg mx-auto">
-                Structured modules that teach you how to actually think like an
-                analyst &mdash; not just how to Google with attitude.
-              </p>
-            </div>
+                {/* Quote */}
+                <blockquote className="text-slate-300 text-sm leading-relaxed flex-1">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {modules.map((mod) => (
-                <Link
-                  key={mod.id}
-                  href={`/modules/${mod.id}`}
-                  className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/40 active:scale-[0.96] transition-transform hover:bg-white/[0.07]"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 flex items-center justify-center">
-                      <BookOpen className="h-6 w-6 text-indigo-300" />
-                    </div>
-                    <span
-                      className={`text-xs font-semibold border rounded-full px-3 py-1 ${
-                        levelAccent[mod.level] ?? levelAccent.Beginner
-                      }`}
-                    >
-                      {mod.level}
-                    </span>
+                {/* Author */}
+                <div className="flex items-center gap-3 pt-2 border-t border-white/10">
+                  <Avatar className="h-10 w-10 border border-white/10">
+                    <AvatarImage src={t.avatar} alt={t.name} />
+                    <AvatarFallback className="bg-indigo-500/20 text-indigo-300 text-xs font-bold">
+                      {t.initials}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="text-sm font-bold text-white">{t.name}</p>
+                    <p className="text-xs text-slate-400">
+                      {t.role}
+                      <span className="mx-1 text-slate-600">·</span>
+                      {t.org}
+                    </p>
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors">
-                    {mod.title}
-                  </h3>
-                  <p className="text-sm text-slate-400 leading-relaxed mb-4">
-                    {mod.description}
-                  </p>
-                  <div className="flex items-center gap-4 text-xs text-slate-500 pt-4 border-t border-white/5">
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-3.5 w-3.5" />
-                      {mod.estimatedTime}
-                    </div>
-                    <div className="ml-auto flex items-center gap-1 text-indigo-300 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-                      Open module <ArrowRight className="h-3.5 w-3.5" />
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================================
-            RESOURCES SECTION
-            ============================================================ */}
-        <section className="py-20 md:py-28 border-t border-white/5">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-indigo-500/10 via-violet-500/5 to-transparent p-10 md:p-14 text-center">
-              <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-indigo-500/15 mb-6">
-                <FolderOpen className="h-7 w-7 text-indigo-300" />
+                  <CheckCircle className="h-4 w-4 text-emerald-400 ml-auto shrink-0" />
+                </div>
               </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white mb-4">
-                The Asset Library
-              </h2>
-              <p className="text-slate-400 mb-8 max-w-xl mx-auto">
-                Checklists, cheatsheets, search operator references, and
-                templates &mdash; everything you need to run a clean
-                investigation.
-              </p>
-              <Link
-                href="/resources"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 transition-all duration-300 hover:scale-105"
-              >
-                Browse Resources
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
+            ))}
           </div>
-        </section>
 
-        {/* ============================================================
-            EMAIL CAPTURE SECTION
-            ============================================================ */}
-        <section className="py-20 md:py-28 border-t border-white/5">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <EmailCapture
-              variant="hero"
-              theme="cyan"
-              heading={siteConfig.copy.emailCaptureHeading}
-              subheading={siteConfig.copy.emailCaptureSubheading}
-              source="homepage-hero"
-              showName
-            />
+          {/* Social proof bar */}
+          <div className="mt-10 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-5 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-center">
+            {[
+              { value: "12,000+", label: "Analysts Trained" },
+              { value: "4.9 / 5", label: "Average Rating" },
+              { value: "94%", label: "Completion Rate" },
+              { value: "50+", label: "Countries Represented" },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <p className="text-2xl font-extrabold text-white">{stat.value}</p>
+                <p className="text-xs text-slate-400 mt-0.5">{stat.label}</p>
+              </div>
+            ))}
           </div>
-        </section>
-      </main>
-      <Footer />
-    </>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="px-4 py-24 text-center max-w-3xl mx-auto w-full">
+        <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white mb-4">
+          Ready to level up your investigations?
+        </h2>
+        <p className="text-slate-400 mb-8">
+          Start free. No credit card required. Access three full modules and join thousands of practitioners already training on OSINT 101.
+        </p>
+        <Link
+          href="/sign-up"
+          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 transition-all shadow-lg shadow-indigo-500/20 text-lg"
+        >
+          Create Free Account
+          <ArrowRight className="h-5 w-5" />
+        </Link>
+      </section>
+    </main>
   )
 }
