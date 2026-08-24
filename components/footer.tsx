@@ -1,112 +1,102 @@
 import Link from "next/link"
-import { clusterFor, SELF_URL } from "@/lib/network"
-import { siteConfig } from "@/lib/site-config"
+import Image from "next/image"
+
+const footerLinks = [
+  {
+    heading: "Learn",
+    links: [
+      { href: "/modules", label: "Modules" },
+      { href: "/resources", label: "Resources" },
+      { href: "/blog", label: "Blog" },
+      { href: "/downloads", label: "Downloads" },
+    ],
+  },
+  {
+    heading: "Community",
+    links: [
+      { href: "/community", label: "Community" },
+      { href: "/contribute", label: "Contribute" },
+      { href: "/requests", label: "Requests" },
+      { href: "/case-file", label: "Case File" },
+    ],
+  },
+  {
+    heading: "Company",
+    links: [
+      { href: "/about", label: "About" },
+      { href: "/contact", label: "Contact" },
+      { href: "/pricing", label: "Pricing" },
+      { href: "/improvements", label: "Improvements" },
+    ],
+  },
+  {
+    heading: "Legal",
+    links: [
+      { href: "/privacy", label: "Privacy Policy" },
+      { href: "/terms", label: "Terms of Service" },
+    ],
+  },
+]
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-slate-950/80">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="border-t border-white/10 bg-slate-950">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           {/* Brand */}
-          <div className="md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <span className="text-2xl">{siteConfig.theme.emoji}</span>
-              <span className="font-display text-lg font-bold gradient-text-cyan">
-                {siteConfig.name}
-              </span>
+          <div className="col-span-2 md:col-span-1">
+            <Link href="/" className="flex items-center gap-2 font-extrabold text-lg font-display text-white hover:opacity-90 transition-opacity mb-3">
+              <div className="relative h-7 w-7 shrink-0">
+                <Image
+                  src="/logo.png"
+                  alt="OSINT 101 logo"
+                  fill
+                  sizes="28px"
+                  loading="lazy"
+                  quality={80}
+                  style={{ objectFit: "contain" }}
+                />
+              </div>
+              <span>OSINT 101</span>
             </Link>
-            <p className="text-slate-400 text-sm max-w-md leading-relaxed">
-              {siteConfig.description}
+            <p className="text-slate-400 text-xs leading-relaxed">
+              Free open source intelligence training for analysts at every level.
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-display font-bold text-sm text-slate-200 uppercase tracking-wider mb-4">
-              Quick Links
-            </h4>
-            <ul className="space-y-2">
-              {siteConfig.nav.marketing.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-slate-400 hover:text-cyan-400 transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="font-display font-bold text-sm text-slate-200 uppercase tracking-wider mb-4">
-              Connect
-            </h4>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href={`mailto:${siteConfig.contact.email}`}
-                  className="text-sm text-slate-400 hover:text-cyan-400 transition-colors"
-                >
-                  Email Us
-                </a>
-              </li>
-              <li>
-                <a
-                  href={siteConfig.contact.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-slate-400 hover:text-cyan-400 transition-colors"
-                >
-                  GitHub
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Empire Network */}
-          <div>
-            <h4 className="font-display font-bold text-sm text-slate-200 uppercase tracking-wider mb-4">
-              Empire Network
-            </h4>
-            <ul className="space-y-2 text-xs text-slate-400">
-              {clusterFor(SELF_URL, 5).map((s) => (
-                <li key={s.url}>
-                  <a href={s.url} title={s.blurb} target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">
-                    {s.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Link Groups */}
+          {footerLinks.map((group) => (
+            <div key={group.heading}>
+              <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-3">
+                {group.heading}
+              </h3>
+              <ul className="space-y-2">
+                {group.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-slate-400 hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-white/5">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-slate-500">
-              &copy; {new Date().getFullYear()} {siteConfig.name}. All rights
-              reserved.
-            </p>
-            <div className="flex items-center gap-4">
-              <Link
-                href="/privacy"
-                className="text-xs text-slate-500 hover:text-slate-300 transition-colors"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="/terms"
-                className="text-xs text-slate-500 hover:text-slate-300 transition-colors"
-              >
-                Terms of Service
-              </Link>
-            </div>
-          </div>
+        <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-slate-500">
+            &copy; {new Date().getFullYear()} OSINT 101. All rights reserved.
+          </p>
+          <p className="text-xs text-slate-500">
+            Built for analysts, by analysts.
+          </p>
         </div>
       </div>
     </footer>
   )
 }
+
+export default Footer

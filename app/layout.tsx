@@ -1,61 +1,56 @@
 import type { Metadata } from "next"
-import { Inter, Outfit } from "next/font/google"
+import { Inter } from "next/font/google"
 import { ClerkProvider } from "@clerk/nextjs"
 import "./globals.css"
-import { siteConfig } from "@/lib/site-config"
-import { FeedbackWidget } from "@/components/feedback-widget"
-import { WaitlistPopup } from "@/components/waitlist-popup"
-import { hasClerkPublishableKey } from "@/lib/clerk"
-import { NetworkFooter } from "@/components/network-footer"
-import { SELF_URL } from "@/lib/network"
 
 const inter = Inter({
   subsets: ["latin"],
+  display: "swap",
   variable: "--font-inter",
 })
 
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-})
-
 export const metadata: Metadata = {
-  metadataBase: new URL(SELF_URL),
-  alternates: { canonical: "/" },
-  robots: { index: true, follow: true },
   title: {
-    default: `${siteConfig.name} - ${siteConfig.tagline}`,
-    template: `%s | ${siteConfig.name}`,
+    default: "OSINT 101 — Learn Open Source Intelligence",
+    template: "%s | OSINT 101",
   },
-  description: siteConfig.description,
-  keywords: [
-    "OSINT",
-    "open source intelligence",
-    "OSINT training",
-    "OSINT course",
-    "investigation techniques",
-    "geolocation OSINT",
-    "intelligence analysis",
-  ],
-  authors: [{ name: siteConfig.name }],
+  description:
+    "Master open source intelligence with structured modules, hands-on exercises, and a community of analysts. Free to start.",
+  metadataBase: new URL("https://osint101.com"),
   openGraph: {
-    title: siteConfig.name,
-    description: siteConfig.description,
     type: "website",
     locale: "en_US",
-    url: SELF_URL,
-    siteName: siteConfig.name,
-    images: ["/opengraph-image"],
+    url: "https://osint101.com",
+    siteName: "OSINT 101",
+    title: "OSINT 101 — Learn Open Source Intelligence",
+    description:
+      "Master open source intelligence with structured modules, hands-on exercises, and a community of analysts.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "OSINT 101",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: ["/opengraph-image"],
+    title: "OSINT 101 — Learn Open Source Intelligence",
+    description:
+      "Master open source intelligence with structured modules, hands-on exercises, and a community of analysts.",
+    images: ["/og-image.png"],
   },
-  icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml", sizes: "any" }],
-    shortcut: "/favicon.svg",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 }
 
@@ -64,29 +59,21 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // Preview / CI often lack Clerk env vars. Middleware already skips auth when
-  // keys are missing; ClerkProvider must do the same or static prerender fails.
-  const body = (
-    <html lang="en" className="dark">
-      <body
-        className={`${inter.variable} ${outfit.variable} font-sans antialiased ${siteConfig.theme.bgClass} ${siteConfig.theme.textClass}`}
-      >
-        {children}
-        <footer className="border-t border-white/10 bg-slate-900/80 mt-16">
-          <div className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-slate-400">
-            <NetworkFooter />
-            <p className="mt-3">&copy; {new Date().getFullYear()} OSINT Training</p>
-          </div>
-        </footer>
-        <FeedbackWidget />
-        <WaitlistPopup />
-      </body>
-    </html>
+  return (
+    <ClerkProvider>
+      <html lang="en" className={inter.variable}>
+        <head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="anonymous"
+          />
+        </head>
+        <body className={`${inter.className} antialiased bg-slate-950 text-white`}>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   )
-
-  if (!hasClerkPublishableKey()) {
-    return body
-  }
-
-  return <ClerkProvider>{body}</ClerkProvider>
 }
