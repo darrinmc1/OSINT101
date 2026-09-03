@@ -369,8 +369,8 @@
   animation: dossier-ken-burns 32s ease-in-out alternate infinite;
 }
 
-.dossier-still-motion .dossier-paste-still {
-  padding: 1rem;
+.dossier-still-motion .dossier-lesson-still {
+  padding: 0.85rem;
 }
 
 @keyframes dossier-ken-burns {

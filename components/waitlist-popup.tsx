@@ -1,6 +1,7 @@
 ﻿"use client"
 
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 import { HoneypotField } from "@/components/HoneypotField"
 
 const POPUP_STORAGE_KEY = "osint101-waitlist-seen"
@@ -8,6 +9,7 @@ const SHOW_AFTER_MS = 5000
 const SUPPRESS_DAYS = 30
 
 export function WaitlistPopup() {
+    const pathname = usePathname()
     const [isOpen, setIsOpen] = useState(false)
     const [email, setEmail] = useState("")
     const [honeypot, setHoneypot] = useState("")
@@ -15,6 +17,7 @@ export function WaitlistPopup() {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        if (pathname === "/") return
         const lastSeen = localStorage.getItem(POPUP_STORAGE_KEY)
         if (lastSeen) {
             const daysSince = (Date.now() - parseInt(lastSeen, 10)) / (1000 * 60 * 60 * 24)
@@ -22,7 +25,7 @@ export function WaitlistPopup() {
         }
         const timer = setTimeout(() => setIsOpen(true), SHOW_AFTER_MS)
         return () => clearTimeout(timer)
-    }, [])
+    }, [pathname])
 
     const markSeen = () => localStorage.setItem(POPUP_STORAGE_KEY, Date.now().toString())
     const handleClose = () => { setIsOpen(false); markSeen() }
@@ -54,7 +57,7 @@ export function WaitlistPopup() {
         }
     }
 
-    if (!isOpen) return null
+    if (pathname === "/" || !isOpen) return null
 
     return (
         <>

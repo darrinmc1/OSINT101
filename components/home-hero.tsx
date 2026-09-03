@@ -2,7 +2,7 @@ import Link from "next/link"
 import { IBM_Plex_Mono, IBM_Plex_Serif } from "next/font/google"
 import { learningModules } from "@/data/modules"
 import { resourceLibrary } from "@/data/siteContent"
-import { CaseFilePasteStill } from "@/components/case-file-paste-still"
+import { OsintLessonStill } from "@/components/osint-lesson-still"
 
 const dossierSerif = IBM_Plex_Serif({
   subsets: ["latin"],
@@ -49,14 +49,8 @@ export function HomeHero() {
       <div className="dossier-hero-rule" aria-hidden="true" />
 
       <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14 lg:px-8">
-        <header className="dossier-jacket">
-          <div className="dossier-jacket-meta">
-            <p className="dossier-stamp">Case file 101-HOME</p>
-            <p className="dossier-classif">Unclassified · training use</p>
-            <p className="dossier-classif">Opened 03 Sep 2026</p>
-          </div>
-
-          <p className="dossier-kicker">Subject</p>
+        <div className="dossier-jacket">
+          <p className="dossier-kicker">Subject · case file 101-HOME · training</p>
           <h1 id="dossier-subject" className={`${dossierSerif.className} dossier-h1`}>
             Trace a claim back to a source you can show your boss.
           </h1>
@@ -70,16 +64,16 @@ export function HomeHero() {
             If you cannot point at a URL, a date, and a confidence call, you do
             not have a finding. You have a vibe. Vibes die in meetings.
           </p>
-        </header>
+        </div>
 
         <div className="dossier-fold">
           <figure className="dossier-exhibit">
             <figcaption className="dossier-exhibit-cap">
-              Exhibit A · Case File Planner paste tool
+              Exhibit A · OSINT Fundamentals · Source Evaluation
             </figcaption>
             <div className="dossier-exhibit-frame">
               <div className="dossier-still-motion">
-                <CaseFilePasteStill />
+                <OsintLessonStill />
               </div>
             </div>
           </figure>
@@ -117,7 +111,7 @@ export function HomeHero() {
           </aside>
         </div>
 
-        <nav className="dossier-actions" aria-label="Start training">
+        <div className="dossier-actions">
           <Link href="/modules/osint-fundamentals" className="dossier-action dossier-action-primary">
             Start a free OSINT lesson
           </Link>
@@ -127,7 +121,7 @@ export function HomeHero() {
           <Link href="#waitlist" className="dossier-action">
             Join the waitlist
           </Link>
-        </nav>
+        </div>
       </div>
     </section>
   )
