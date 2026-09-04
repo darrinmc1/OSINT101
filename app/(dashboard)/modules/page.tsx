@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { ArrowRight, BookOpen, Clock, Lock, Star } from "lucide-react"
-import { learningModules } from "@/data/modules"
+import { CORE_TRAINING_MODULE_IDS, learningModules } from "@/data/modules"
 
 const levelAccent: Record<string, string> = {
   Beginner: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
@@ -9,9 +9,13 @@ const levelAccent: Record<string, string> = {
 }
 
 export default function ModulesIndexPage() {
-  const modules = Object.values(learningModules)
-  const freeModules = modules.slice(0, 3)
-  const premiumModules = modules.slice(3)
+  const catalog = Object.values(learningModules)
+  const coreIds = new Set<string>(CORE_TRAINING_MODULE_IDS)
+  const coreModules = catalog.filter((mod) => coreIds.has(mod.id))
+  const ancillaryModules = catalog.filter((mod) => !coreIds.has(mod.id))
+  const freeModules = catalog.filter((mod) => mod.level === "Beginner")
+  const premiumModules = catalog.filter((mod) => mod.level !== "Beginner")
+  const coreSectionCount = coreModules.reduce((sum, mod) => sum + (mod.sections?.length ?? 0), 0)
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
@@ -20,7 +24,10 @@ export default function ModulesIndexPage() {
           Learning Modules
         </h1>
         <p className="text-slate-400 mt-1">
-          Structured training tracks from Rookie to Spymaster.
+          {coreModules.length} core training modules ({coreSectionCount} lessons),
+          plus {ancillaryModules.length} short catalog extras. Beginner modules are
+          free. Intermediate and Advanced methods match the Analyst plan when billing
+          is live.
         </p>
       </div>
 
@@ -31,14 +38,18 @@ export default function ModulesIndexPage() {
             <span className="mt-0.5 h-6 w-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-xs font-bold shrink-0">✓</span>
             <div>
               <p className="text-sm font-bold text-white">Free Plan</p>
-              <p className="text-xs text-slate-400 mt-0.5">3 modules · Basic badges · Core OSINT skills</p>
+              <p className="text-xs text-slate-400 mt-0.5">
+                {freeModules.length} beginner modules · Case File foundations · No card
+              </p>
             </div>
           </div>
           <div className="flex items-start gap-3">
             <span className="mt-0.5 h-6 w-6 rounded-full bg-violet-500/20 flex items-center justify-center text-violet-400 text-xs font-bold shrink-0">★</span>
             <div>
               <p className="text-sm font-bold text-white">Premium Plan</p>
-              <p className="text-xs text-slate-400 mt-0.5">All modules · Advanced certifications · Priority support</p>
+              <p className="text-xs text-slate-400 mt-0.5">
+                {premiumModules.length} intermediate/advanced modules · Advanced Case File methods when billing is live
+              </p>
             </div>
           </div>
         </div>

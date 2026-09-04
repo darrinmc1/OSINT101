@@ -289,6 +289,10 @@ No single tool gives you "the answer." Tools produce clues, context, pivots, and
 ### Reality check
 
 Owning 200 tools and understanding 3 of them is how people end up screenshotting error messages like they are collectible art.
+
+### Coming Soon on this site
+
+OSINT 101 does not currently ship an in-app scanner, username terminal, or downloadable PDF pack. Those buttons were leftovers. Until files exist, treat them as Coming Soon — not as a 404 treasure hunt and not as a paid unlock.
     `,
   },
   {
