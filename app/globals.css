@@ -235,6 +235,107 @@
   );
 }
 
+/* ============================================
+   ScrollCraft home — layered depth, light parallax
+   Brand chrome stays slate / indigo. No cream kit.
+   ============================================ */
+.scrollcraft-dots {
+  background-image: radial-gradient(
+    rgba(148, 163, 184, 0.16) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+  transform: translate3d(0, calc(var(--hero-parallax, 0px) * -0.18), 0);
+  will-change: transform;
+}
+
+.scrollcraft-glow {
+  background: radial-gradient(
+    ellipse,
+    rgba(99, 102, 241, 0.22) 0%,
+    rgba(139, 92, 246, 0.1) 38%,
+    transparent 70%
+  );
+  filter: blur(8px);
+  transform: translate3d(-50%, calc(var(--hero-parallax, 0px) * -0.28), 0);
+  will-change: transform;
+}
+
+.scrollcraft-glow-side {
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.16) 0%,
+    transparent 68%
+  );
+  filter: blur(20px);
+  transform: translate3d(0, calc(var(--hero-parallax, 0px) * -0.12), 0);
+  will-change: transform;
+}
+
+.hero-card-stack {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-card-back {
+  position: absolute;
+  top: 8%;
+  right: 0;
+  z-index: 0;
+  width: min(16.5rem, 46%);
+  transform: rotate(2.4deg) translate3d(0, calc(var(--hero-parallax, 0px) * 0.06), 0);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.hero-card-front {
+  position: relative;
+  z-index: 2;
+  box-shadow:
+    0 0 0 1px rgba(129, 140, 248, 0.18),
+    0 0 48px rgba(99, 102, 241, 0.16),
+    0 28px 64px rgba(0, 0, 0, 0.45);
+}
+
+@media (min-width: 1024px) {
+  .hero-card-stack {
+    min-height: 32rem;
+  }
+
+  .hero-card-front {
+    margin-right: 2.25rem;
+  }
+}
+
+.what-you-get-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 42%),
+    rgba(15, 23, 42, 0.92);
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+  animation: scroll-reveal-fallback 0.01s linear 1.25s forwards;
+}
+
+.scroll-reveal-in {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+@keyframes scroll-reveal-fallback {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Home hero still — light pan only. Brand chrome stays on the live palette. */
 .dossier-exhibit-frame {
   overflow: hidden;
@@ -264,5 +365,20 @@
   .dossier-still-motion {
     animation: none;
     transform: none;
+  }
+
+  .scrollcraft-dots,
+  .scrollcraft-glow,
+  .scrollcraft-glow-side,
+  .hero-card-back {
+    transform: none;
+    will-change: auto;
+  }
+
+  .scroll-reveal,
+  .scroll-reveal-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
