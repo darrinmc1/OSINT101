@@ -131,7 +131,7 @@ When you draft the investigation plan in the exercise, force the cycle onto the 
 
         `,
         exercise: 'Draft a simple investigation plan for a hypothetical corporate research task.',
-      },,
+      },
       {
         title: 'Source Evaluation and Confidence',
         duration: '50 min',
@@ -204,7 +204,7 @@ Use that method on the three-source exercise. Rank reliability, then explain the
 
         `,
         exercise: 'Take three public sources about the same topic and rank their reliability, then explain the ranking in one paragraph.',
-      },,
+      },
       {
         title: 'OPSEC and Anonymity',
         duration: '45 min',
@@ -270,7 +270,7 @@ Set up the dedicated profile for the exercise and write down the mistakes you ar
 
         `,
         exercise: 'Set up a basic research environment using a dedicated browser profile and list the OPSEC mistakes you are trying to avoid.',
-      },,
+      },
       {
         title: 'Documentation and Evidence Handling',
         duration: '55 min',
@@ -342,7 +342,7 @@ Build the mini evidence log in the exercise with five findings. Force every row 
 
         `,
         exercise: 'Create a mini evidence log for five findings, including source, timestamp, and why each item matters.',
-      },,
+      },
       {
         title: 'Advanced Google Dorking',
         duration: '60 min',
@@ -414,7 +414,7 @@ Use the operators on the exercise: public PDFs on a sample university domain, th
 
         `,
         exercise: 'Use dorks to find public PDF documents on a sample university domain and explain why each query worked.',
-      },,
+      },
       {
         title: 'Analysis and Reporting Basics',
         duration: '60 min',
@@ -581,7 +581,7 @@ Close with the exercise: write a one-page investigation plan for researching a c
 
         `,
         exercise: 'Write a one-page investigation plan for researching a company you choose. Include the objective, source list, tools, time budget, and stop condition.',
-      },,
+      },
       {
         title: 'The OSINT Pyramid',
         duration: '30 min',
@@ -660,7 +660,7 @@ Close with the exercise: take a research question and map what you would do at e
 
         `,
         exercise: 'Take a research question and map what you would do at each layer of the pyramid. Write one paragraph per layer.',
-      },,
+      },
       {
         title: 'Documentation Standards',
         duration: '25 min',
@@ -821,7 +821,7 @@ Close with the exercise: take five email addresses from *public* sources and ana
 
         `,
         exercise: 'Take 5 email addresses from public sources and analyse each one: provider, likely type (personal/work), any name clues in the local part, and any domains you can WHOIS.',
-      },,
+      },
       {
         title: 'Username Correlation',
         duration: '35 min',
@@ -907,7 +907,7 @@ Close with the exercise: pick a username you rarely use (or a colleague's public
 
         `,
         exercise: 'Pick a username you rarely use (or a colleague\'s public username) and run it through 3 different tools or manual searches. Document which platforms returned results and what the profiles revealed.',
-      },,
+      },
       {
         title: 'Breach Data and Pivoting',
         duration: '30 min',
@@ -1061,7 +1061,7 @@ Your exercise: research a public website and document all publicly visible regis
 
         `,
         exercise: 'Research a public website and document all publicly visible registration and technical information.',
-      },,
+      },
       {
         title: 'Website Content Analysis',
         duration: '45 min',
@@ -1139,7 +1139,7 @@ Your exercise: analyze a website and document findings about its legitimacy, tec
 
         `,
         exercise: 'Analyze a website and document findings about its legitimacy, technology stack, and any suspicious indicators.',
-      },,
+      },
       {
         title: 'Historical Analysis',
         duration: '50 min',
@@ -1301,7 +1301,7 @@ Close with the exercise: research a local business online. Find its registration
 
         `,
         exercise: 'Research a local business online. Find its registration number, registered address, key personnel (CEO, directors), and approximate revenue range. Document all sources.',
-      },,
+      },
       {
         title: 'Digital Footprint Mapping',
         duration: '35 min',
@@ -1383,7 +1383,7 @@ Close with the exercise: pick a medium-sized business you are familiar with and 
 
         `,
         exercise: 'Pick a medium-sized business you are familiar with and map its complete digital footprint: domains, social profiles, tech stack, third-party mentions, and employee presence on LinkedIn. Create a one-page summary.',
-      },,
+      },
       {
         title: 'Supply Chain and Relationships',
         duration: '25 min',
@@ -1551,7 +1551,7 @@ Your exercise is to pick a public figure and document their digital identity acr
 
         `,
         exercise: 'Pick a public figure and document their digital identity across 5 different platforms. Note what each platform reveals.',
-      },,
+      },
       {
         title: 'Email Address Analysis',
         duration: '30 min',
@@ -1633,7 +1633,7 @@ Your exercise is to take a known email address — ideally one you own, or a pre
 
         `,
         exercise: 'Take a known email address and document every platform you can associate with it. Write up your findings chain.',
-      },,
+      },
       {
         title: 'Username Correlation',
         duration: '30 min',
@@ -1717,7 +1717,7 @@ Your exercise is to pick a username, run it through Sherlock or WhatsMyName, the
 
         `,
         exercise: 'Pick a username, run it through Sherlock/WhatsMyName, then manually verify the top 3 matches.',
-      },,
+      },
       {
         title: 'Social Media Profile Analysis',
         duration: '35 min',
@@ -1802,7 +1802,7 @@ Your exercise is to analyze a LinkedIn profile and an Instagram profile that app
 
         `,
         exercise: 'Analyze a LinkedIn profile and an Instagram profile belonging to the same person. Document discrepancies and consistencies.',
-      },,
+      },
       {
         title: 'Public Records Integration',
         duration: '25 min',
@@ -1956,7 +1956,7 @@ Find the registered agent for a sample local business and note the source reliab
 
         `,
         exercise: 'Find the registered agent for a sample local business and note the source reliability.',
-      },,
+      },
       {
         title: 'Identity Resolution and Disambiguation',
         duration: '70 min',
@@ -2025,7 +2025,7 @@ Compare two similar public profiles and document whether they likely refer to th
 
         `,
         exercise: 'Compare two similar public profiles and document whether they likely refer to the same person, including the gaps in your reasoning.',
-      },,
+      },
       {
         title: 'Social and Professional Mapping',
         duration: '75 min',
@@ -2097,7 +2097,7 @@ Build a simple relationship map around a public subject and identify which links
 
         `,
         exercise: 'Build a simple relationship map around a public subject and identify which links are confirmed, probable, or merely adjacent.',
-      },,
+      },
       {
         title: 'Timeline Building for Individuals',
         duration: '65 min',
@@ -2168,7 +2168,7 @@ Build a short timeline for a public person from three different source types and
 
         `,
         exercise: 'Build a short timeline for a public person from three different source types and mark any unresolved gaps.',
-      },,
+      },
       {
         title: 'Ethics, Privacy, and Reporting',
         duration: '60 min',
@@ -2325,7 +2325,7 @@ Your exercise: document the publicly visible information available from each maj
 
         `,
         exercise: 'Document the publicly visible information available from each major social platform about a public figure.',
-      },,
+      },
       {
         title: 'Username Correlation and Cross-Platform Analysis',
         duration: '60 min',
@@ -2392,7 +2392,7 @@ Your exercise: take one username and map it across five platforms, noting verifi
 
         `,
         exercise: 'Take one username and map it across five platforms, noting verification steps for each match.',
-      },,
+      },
       {
         title: 'Content Analysis and Image Verification',
         duration: '70 min',
@@ -2468,7 +2468,7 @@ Your exercise: take an image from social media and walk through the full verific
 
         `,
         exercise: 'Take an image from social media and walk through the full verification process, documenting each finding.',
-      },,
+      },
       {
         title: 'Behavioral Patterns and Sentiment Analysis',
         duration: '55 min',
@@ -2619,7 +2619,7 @@ The exercise is waiting: take a *test* username, trace it across three different
 
         `,
         exercise: 'Trace a test username across three different social platforms and rank your confidence for each match.',
-      },,
+      },
       {
         title: 'Cross-Platform Correlation',
         duration: '75 min',
@@ -2692,7 +2692,7 @@ Document a confidence model for linking one public profile to another without re
 
         `,
         exercise: 'Document a confidence model for linking one public profile to another without relying on a single identifier.',
-      },,
+      },
       {
         title: 'Narrative and Sentiment Analysis',
         duration: '55 min',
@@ -2761,7 +2761,7 @@ Take a public post sequence and produce a short assessment of tone, likely audie
 
         `,
         exercise: 'Take a public post sequence and produce a short assessment of tone, likely audience, and one thing you still cannot safely conclude.',
-      },,
+      },
       {
         title: 'AI in SOCMINT',
         duration: '45 min',
@@ -2917,7 +2917,7 @@ Close this lesson by doing the exercise: find three public Telegram channels in 
 
         `,
         exercise: 'Find 3 public Telegram channels in a topic area of interest. Document their purpose, subscriber count, and posting frequency.',
-      },,
+      },
       {
         title: 'Telegram Search and Discovery',
         duration: '20 min',
@@ -2989,7 +2989,7 @@ Close with the exercise: using Lyzem and Telegram search, find five channels rel
 
         `,
         exercise: 'Using Lyzem and Telegram search, find 5 channels related to a specific topic. Document discovery methodology.',
-      },,
+      },
       {
         title: 'Automated Collection and Monitoring',
         duration: '25 min',
@@ -3149,7 +3149,7 @@ Your exercise: document three ways GEOINT could support an investigation in your
 
         `,
         exercise: 'Document three ways GEOINT could support an investigation in your typical work context.',
-      },,
+      },
       {
         title: 'Geolocation from Images',
         duration: '55 min',
@@ -3217,7 +3217,7 @@ Your exercise: geolocate three images from public sources using only visible ind
 
         `,
         exercise: 'Geolocate three images from public sources using only visible indicators, then check your work.',
-      },,
+      },
       {
         title: 'Mapping and Visualization',
         duration: '50 min',
@@ -3378,7 +3378,7 @@ Close with the exercise: find five photos online with unknown locations. Use vis
 
         `,
         exercise: 'Find 5 photos online with unknown locations. Use visual clues only (no metadata) to determine where each was taken.',
-      },,
+      },
       {
         title: 'EXIF and Metadata Analysis',
         duration: '20 min',
@@ -3448,7 +3448,7 @@ Close with the exercise: take a photo with your phone (location enabled) and ext
 
         `,
         exercise: 'Take a photo with your phone (with location enabled) and extract all EXIF data using exiftool or a web viewer.',
-      },,
+      },
       {
         title: 'Advanced Techniques',
         duration: '30 min',
@@ -3607,7 +3607,7 @@ Run the stealth scan on your local test target for the exercise. Identify open p
 
         `,
         exercise: 'Run a stealth scan on a local test target and identify open ports, probable services, and one follow-up question you would ask next.',
-      },,
+      },
       {
         title: 'Web Enumeration with Dirb and WhatWeb',
         duration: '75 min',
@@ -3684,7 +3684,7 @@ For the exercise, fingerprint an authorized site, enumerate likely content paths
 
         `,
         exercise: 'Fingerprint a public website, enumerate likely content paths, and identify which findings are operationally interesting versus merely untidy.',
-      },,
+      },
       {
         title: 'Visualizing with Maltego',
         duration: '90 min',
@@ -3756,7 +3756,7 @@ Create the Maltego graph for the exercise around a public domain and map the obv
 
         `,
         exercise: 'Create a Maltego graph for a public domain and map the obvious infrastructure relationships.',
-      },,
+      },
       {
         title: 'Traffic Analysis with Wireshark',
         duration: '80 min',
@@ -3831,7 +3831,7 @@ Capture the small authorized sample for the exercise and explain the services an
 
         `,
         exercise: 'Capture a small, authorized traffic sample and explain what services and patterns you can identify from it.',
-      },,
+      },
       {
         title: 'Operational Workflow and Note Discipline',
         duration: '55 min',
@@ -3982,7 +3982,7 @@ Perform a passive reconnaissance report on a sample company and identify three l
 
         `,
         exercise: 'Perform a passive reconnaissance report on a sample company and identify three likely pivot points for deeper research.',
-      },,
+      },
       {
         title: 'DNS and Subdomain Enumeration',
         duration: '75 min',
@@ -4050,7 +4050,7 @@ Map a target's externally visible subdomains and group them by likely business f
 
         `,
         exercise: 'Map a targetâs externally visible subdomains and group them by likely business function.',
-      },,
+      },
       {
         title: 'Infrastructure Fingerprinting',
         duration: '70 min',
@@ -4118,7 +4118,7 @@ Fingerprint a public-facing service and explain which clues are strong, weak, an
 
         `,
         exercise: 'Fingerprint a public-facing service and explain which clues are strong, weak, and purely speculative.',
-      },,
+      },
       {
         title: 'Exposure Analysis and Prioritization',
         duration: '65 min',
@@ -4270,7 +4270,7 @@ Your exercise: document the legitimate use cases for dark web access that apply 
 
         `,
         exercise: 'Document the legitimate use cases for dark web access that apply to your work context.',
-      },,
+      },
       {
         title: 'Access and Navigation',
         duration: '60 min',
@@ -4351,7 +4351,7 @@ Your exercise: set up a safe research environment and document three legitimate 
 
         `,
         exercise: 'Set up a safe research environment and document three legitimate dark web resources relevant to OSINT research.',
-      },,
+      },
       {
         title: 'Intelligence Sources and Collection',
         duration: '70 min',
@@ -4418,7 +4418,7 @@ Your exercise: identify and document three dark web sources that could support l
 
         `,
         exercise: 'Identify and document three dark web sources that could support legitimate OSINT research in your field.',
-      },,
+      },
       {
         title: 'Verification and Source Validation',
         duration: '65 min',
@@ -4590,7 +4590,7 @@ Your exercise is to trace a Bitcoin transaction through a public block explorer 
 
         `,
         exercise: 'Trace a Bitcoin transaction through a block explorer and document the path from source to destination.',
-      },,
+      },
       {
         title: 'Transaction Tracing',
         duration: '70 min',
@@ -4671,7 +4671,7 @@ Your exercise is to trace a real, public cryptocurrency transaction and document
 
         `,
         exercise: 'Trace a real cryptocurrency transaction and document the full path, identifying any services or entities encountered.',
-      },,
+      },
       {
         title: 'Real-World Attribution',
         duration: '65 min',
@@ -4828,7 +4828,7 @@ Create a forensic image of a test USB drive, record the acquisition steps, and v
 
         `,
         exercise: 'Create a forensic image of a test USB drive, record the acquisition steps, and verify the resulting hash.',
-      },,
+      },
       {
         title: 'Disk Imaging and Triage',
         duration: '95 min',
@@ -4898,7 +4898,7 @@ Design a triage checklist for a workstation suspected of being used in data exfi
 
         `,
         exercise: 'Design a triage checklist for a workstation suspected of being used in data exfiltration.',
-      },,
+      },
       {
         title: 'Timeline Reconstruction',
         duration: '80 min',
@@ -4967,7 +4967,7 @@ Build a short incident timeline from mixed browser, file, and log artifacts and 
 
         `,
         exercise: 'Build a short incident timeline from mixed browser, file, and log artifacts and identify one gap needing more evidence.',
-      },,
+      },
       {
         title: 'Artifact Analysis and Reporting',
         duration: '85 min',
@@ -5119,7 +5119,7 @@ Your exercise is to use Have I Been Pwned to check three email addresses **you o
 
         `,
         exercise: 'Using HaveIBeenPwned, check 3 email addresses you own and document what breaches they appear in.',
-      },,
+      },
       {
         title: 'Credential Analysis Workflow',
         duration: '30 min',
@@ -5190,7 +5190,7 @@ Your exercise is to analyse a known breached credential from a **test or exercis
 
         `,
         exercise: 'Analyse a known breached credential (use a test/exercise dataset, not real). What patterns or intelligence can you extract from the password?',
-      },,
+      },
       {
         title: 'Timeline and Correlation',
         duration: '25 min',
@@ -5350,7 +5350,7 @@ Your exercise is to take a finished OSINT investigation — classwork is fine �
 
         `,
         exercise: 'Take a finished OSINT investigation and rewrite the summary using the Pyramid Principle.',
-      },,
+      },
       {
         title: 'Source Citation Standards',
         duration: '25 min',
@@ -5438,7 +5438,7 @@ Your exercise is to take three web sources from a previous OSINT exercise and cr
 
         `,
         exercise: 'Take 3 web sources from a previous OSINT exercise and create proper citations with archives.',
-      },,
+      },
       {
         title: 'Analytical Techniques',
         duration: '30 min',
@@ -5512,7 +5512,7 @@ Your exercise is to take a previous investigation finding and run it through ACH
 
         `,
         exercise: 'Take a previous investigation finding and run it through ACH with at least 3 competing hypotheses.',
-      },,
+      },
       {
         title: 'Audience-Tailored Reporting',
         duration: '25 min',
@@ -5596,7 +5596,7 @@ Your exercise is to take one investigation finding and write three versions: one
 
         `,
         exercise: 'Take one investigation finding and write three versions: one for a CEO, one for a fellow analyst, and one for legal/compliance.',
-      },,
+      },
       {
         title: 'OPSEC in Reporting',
         duration: '20 min',
