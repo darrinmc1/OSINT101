@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Inter, Outfit } from "next/font/google"
 import { ClerkProvider } from "@clerk/nextjs"
 import "./globals.css"
+import Analytics from "./components/Analytics"
 import { siteConfig } from "@/lib/site-config"
 import { FeedbackWidget } from "@/components/feedback-widget"
 import { WaitlistPopup } from "@/components/waitlist-popup"
@@ -80,6 +81,7 @@ export default function RootLayout({
         </footer>
         <FeedbackWidget />
         <WaitlistPopup />
+        <Analytics />
       </body>
     </html>
   )
