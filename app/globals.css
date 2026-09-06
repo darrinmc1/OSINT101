@@ -437,12 +437,23 @@
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(143, 191, 143, 0.16) 35%,
-    rgba(165, 180, 252, 0.28) 50%,
-    rgba(143, 191, 143, 0.16) 65%,
+    rgba(143, 191, 143, 0.2) 35%,
+    rgba(165, 180, 252, 0.34) 50%,
+    rgba(143, 191, 143, 0.2) 65%,
     transparent 100%
   );
   animation: claim-trace-wipe 7s ease-in-out infinite;
+}
+
+.claim-trace-wipe::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: #c6ebc6;
+  box-shadow: 0 0 14px rgba(143, 191, 143, 0.95);
 }
 
 .trace-node {
@@ -619,6 +630,12 @@
   color: #64748b;
 }
 
+.claim-trace-lock {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+}
+
 .claim-trace-lockrail {
   flex: 1 1 auto;
   height: 1px;
@@ -667,10 +684,14 @@
   0%,
   100% {
     color: #64748b;
+    background: transparent;
+    border-color: transparent;
   }
   8%,
   32% {
-    color: #a5b4fc;
+    color: #e0e7ff;
+    background: rgba(99, 102, 241, 0.32);
+    border-color: rgba(165, 180, 252, 0.55);
   }
 }
 
@@ -679,10 +700,14 @@
   28%,
   100% {
     color: #64748b;
+    background: transparent;
+    border-color: transparent;
   }
   36%,
   62% {
-    color: #a5b4fc;
+    color: #e0e7ff;
+    background: rgba(99, 102, 241, 0.32);
+    border-color: rgba(165, 180, 252, 0.55);
   }
 }
 
@@ -691,10 +716,14 @@
   58%,
   100% {
     color: #64748b;
+    background: transparent;
+    border-color: transparent;
   }
   68%,
   90% {
-    color: #9ed49e;
+    color: #d7f5d7;
+    background: rgba(61, 107, 61, 0.55);
+    border-color: rgba(158, 212, 158, 0.7);
   }
 }
 
@@ -746,7 +775,13 @@
   }
 
   .claim-trace-lock-source {
-    color: #9ed49e;
+    color: #d7f5d7;
+    background: rgba(61, 107, 61, 0.55);
+    border-color: rgba(158, 212, 158, 0.7);
+  }
+
+  .claim-trace-wipe::after {
+    display: none;
   }
 
   .trace-node-source {
