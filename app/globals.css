@@ -380,7 +380,7 @@
 /* Home hero still — claim-to-source trace (~7s). Investigator chrome only. */
 .dossier-exhibit-frame {
   overflow: hidden;
-  height: min(28rem, 62vh);
+  height: min(26rem, 58vh);
 }
 
 .dossier-exhibit-frame .dossier-lesson-still {
@@ -402,12 +402,13 @@
 
 .claim-trace-line {
   fill: none;
-  stroke: #8fbf8f;
-  stroke-width: 1.6;
+  stroke: #9ed49e;
+  stroke-width: 2.3;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
+  filter: drop-shadow(0 0 5px rgba(143, 191, 143, 0.85));
   animation: claim-trace-draw 7s ease-in-out infinite;
 }
 
@@ -436,9 +437,9 @@
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(143, 191, 143, 0.08) 35%,
-    rgba(165, 180, 252, 0.14) 50%,
-    rgba(143, 191, 143, 0.08) 65%,
+    rgba(143, 191, 143, 0.16) 35%,
+    rgba(165, 180, 252, 0.28) 50%,
+    rgba(143, 191, 143, 0.16) 65%,
     transparent 100%
   );
   animation: claim-trace-wipe 7s ease-in-out infinite;
@@ -603,6 +604,100 @@
   }
 }
 
+.claim-trace-lockbar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #070b12;
+  padding: 0.7rem 1rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.claim-trace-lockrail {
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(148, 163, 184, 0.45),
+    transparent
+  );
+  transform-origin: left center;
+  animation: claim-lockrail 7s ease-in-out infinite;
+}
+
+.claim-trace-lock-claim {
+  animation: claim-lock-claim 7s ease-in-out infinite;
+}
+
+.claim-trace-lock-mid {
+  animation: claim-lock-mid 7s ease-in-out infinite;
+}
+
+.claim-trace-lock-source {
+  animation: claim-lock-source 7s ease-in-out infinite;
+}
+
+@keyframes claim-lockrail {
+  0% {
+    transform: scaleX(0.12);
+    opacity: 0.35;
+  }
+  70% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  88% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(0.12);
+    opacity: 0.35;
+  }
+}
+
+@keyframes claim-lock-claim {
+  0%,
+  100% {
+    color: #64748b;
+  }
+  8%,
+  32% {
+    color: #a5b4fc;
+  }
+}
+
+@keyframes claim-lock-mid {
+  0%,
+  28%,
+  100% {
+    color: #64748b;
+  }
+  36%,
+  62% {
+    color: #a5b4fc;
+  }
+}
+
+@keyframes claim-lock-source {
+  0%,
+  58%,
+  100% {
+    color: #64748b;
+  }
+  68%,
+  90% {
+    color: #9ed49e;
+  }
+}
+
 @keyframes claim-node-source {
   0%,
   58%,
@@ -628,7 +723,11 @@
   .trace-node-q-2,
   .trace-node-q-3,
   .trace-node-q-4,
-  .trace-node-source {
+  .trace-node-source,
+  .claim-trace-lockrail,
+  .claim-trace-lock-claim,
+  .claim-trace-lock-mid,
+  .claim-trace-lock-source {
     animation: none;
   }
 
@@ -639,6 +738,15 @@
   .claim-trace-bead,
   .claim-trace-wipe {
     display: none;
+  }
+
+  .claim-trace-lockrail {
+    transform: none;
+    opacity: 1;
+  }
+
+  .claim-trace-lock-source {
+    color: #9ed49e;
   }
 
   .trace-node-source {

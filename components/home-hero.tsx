@@ -144,6 +144,19 @@ export function HomeHero() {
                 <div className="dossier-exhibit-frame">
                   <OsintLessonStill />
                 </div>
+                <div className="claim-trace-lockbar" aria-hidden="true">
+                  <span className="claim-trace-lock claim-trace-lock-claim">
+                    Claim
+                  </span>
+                  <span className="claim-trace-lockrail" />
+                  <span className="claim-trace-lock claim-trace-lock-mid">
+                    Who / when
+                  </span>
+                  <span className="claim-trace-lockrail" />
+                  <span className="claim-trace-lock claim-trace-lock-source">
+                    Independent record
+                  </span>
+                </div>
               </figure>
 
               <aside

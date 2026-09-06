@@ -76,13 +76,13 @@ export function OsintLessonStill() {
               <span className="px-3 py-2 text-[#6b8f6b]">INTEL_REPOSITORY</span>
             </div>
 
-            <div className="relative space-y-2.5 px-4 py-3 text-[13px] leading-relaxed text-[#c8d2c4]">
+            <div className="relative space-y-2 px-4 py-3 text-[13px] leading-relaxed text-[#c8d2c4]">
               <p className="trace-node trace-node-claim font-semibold text-[#e8efe4]">
                 Not all sources deserve equal respect
               </p>
               <p>
-                An OSINT source is not automatically reliable just because it is
-                public, searchable, or wearing a respectable font.
+                Public and searchable is not the same as reliable. A respectable
+                font is not a source.
               </p>
               <p className="font-semibold text-[#e8efe4]">
                 Questions to ask every source
