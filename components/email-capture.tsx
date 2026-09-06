@@ -61,6 +61,8 @@ interface EmailCaptureProps {
   theme?: string
   heading?: string
   subheading?: string
+  buttonLabel?: string
+  badgeLabel?: string
   source?: string
   showName?: boolean
 }
@@ -71,6 +73,8 @@ export function EmailCapture({
   theme = "cyan",
   heading,
   subheading,
+  buttonLabel,
+  badgeLabel,
   source = "website",
   showName = false,
 }: EmailCaptureProps) {
@@ -128,7 +132,7 @@ export function EmailCapture({
         <p className={`${colors.textMuted} text-lg`}>{message}</p>
         <div className="mt-4 inline-flex items-center gap-2 bg-cyan-500/10 rounded-full px-4 py-2 border border-cyan-500/30">
           <span className="text-sm font-semibold text-cyan-400">
-            Founding Member Status: Verified
+            On the list. No trench coat included.
           </span>
           <span>{siteConfig.badges.tierEmojis[4]}</span>
         </div>
@@ -150,7 +154,7 @@ export function EmailCapture({
             <span
               className={`text-sm font-semibold ${colors.badgeText} tracking-wide uppercase`}
             >
-              Founding Member
+              {badgeLabel || "Waitlist"}
             </span>
           </div>
 
@@ -210,7 +214,7 @@ export function EmailCapture({
                     Cross-referencing...
                   </span>
                 ) : (
-                  siteConfig.copy.ctaButton
+                  buttonLabel || siteConfig.copy.ctaButton
                 )}
               </button>
             </div>

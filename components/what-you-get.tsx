@@ -2,17 +2,17 @@ const GET_ITEMS = [
   {
     n: "01",
     title: "Written lessons that teach the job",
-    body: "Fundamentals through reporting. Start with source evaluation. This is training, not leftover AI-school filler dressed up as a spy course.",
+    body: "Start with source evaluation, then methodology, people, domains, and reporting. Written, timed, and sequenced. No spy-school LARP.",
   },
   {
     n: "02",
     title: "A case file planner, not a chatbot",
-    body: "Paste a collection target. Get a cited investigation plan that uses the OSINT 101 method — intelligence cycle, OPSEC, and real module links.",
+    body: "Paste a collection target. Get a cited investigation plan that uses the OSINT 101 method: intelligence cycle, OPSEC, and real module links.",
   },
   {
     n: "03",
     title: "Sources you can show your boss",
-    body: "If you cannot point at a URL, a date, and a confidence call, you do not have a finding. You have a vibe. Vibes die in meetings.",
+    body: "URL, date, confidence call. That is the bar. The still on the fold is the Source Evaluation section from OSINT Fundamentals, not a costume HUD.",
   },
   {
     n: "04",
@@ -41,11 +41,11 @@ export function WhatYouGet() {
             id="what-you-get-heading"
             className="mt-3 font-display text-3xl font-extrabold leading-tight text-white md:text-4xl"
           >
-            A training product, not a slogan stack.
+            Four things you can open today.
           </h2>
           <p className="mt-4 max-w-md text-slate-400">
-            The site already has a job. These layers just make the scroll feel
-            finished. No invented headcount. No price on the fold.
+            Written lessons, a case-file planner, a source standard, and a short
+            field library. Cite it or drop it.
           </p>
         </header>
 

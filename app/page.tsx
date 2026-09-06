@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { siteConfig } from "@/lib/site-config"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { EmailCapture } from "@/components/email-capture"
@@ -46,9 +45,8 @@ export default function HomePage() {
                   Paste a target. Get a case file.
                 </h2>
                 <p className="mb-6 max-w-2xl text-slate-400">
-                  The archive stays the archive. This layer turns a collection
-                  question into a cited investigation plan using the OSINT 101
-                  method — intelligence cycle, OPSEC, and real module links.
+                  Paste a collection question. Get a cited plan: intelligence
+                  cycle, OPSEC, and links back into the real modules.
                   Foundations are free.
                 </p>
                 <Link
@@ -69,15 +67,15 @@ export default function HomePage() {
               <div className="mb-12 text-center">
                 <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-2">
                   <span className="text-sm font-semibold uppercase tracking-wide text-indigo-300">
-                    Training Tracks
+                    Lesson catalog
                   </span>
                 </div>
                 <h2 className="font-display text-3xl font-extrabold text-white md:text-4xl">
-                  Learning Modules
+                  The lesson list
                 </h2>
                 <p className="mx-auto mt-3 max-w-lg text-slate-400">
-                  Structured modules that teach you how to actually think like an
-                  analyst &mdash; not just how to Google with attitude.
+                  Written briefings with a clock on them. Fundamentals is free.
+                  Later modules assume you can already point at a source.
                 </p>
               </div>
 
@@ -130,18 +128,17 @@ export default function HomePage() {
                   <FolderOpen className="h-7 w-7 text-indigo-300" />
                 </div>
                 <h2 className="mb-4 font-display text-3xl font-extrabold text-white md:text-4xl">
-                  The Asset Library
+                  Field guides
                 </h2>
                 <p className="mx-auto mb-8 max-w-xl text-slate-400">
-                  Checklists, cheatsheets, search operator references, and
-                  templates &mdash; everything you need to run a clean
-                  investigation.
+                  Checklists, search operators, and templates you can open
+                  mid-case. Short on purpose.
                 </p>
                 <Link
                   href="/resources"
                   className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600 px-6 py-3 font-bold text-white shadow-lg shadow-indigo-500/25 transition-all duration-300 hover:scale-105 hover:from-indigo-400 hover:to-violet-500"
                 >
-                  Browse Resources
+                  Browse field guides
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -155,8 +152,9 @@ export default function HomePage() {
               <EmailCapture
                 variant="hero"
                 theme="cyan"
-                heading={siteConfig.copy.emailCaptureHeading}
-                subheading={siteConfig.copy.emailCaptureSubheading}
+                heading="Get the new lessons"
+                subheading="Occasional tradecraft notes. No drip-course carnival."
+                buttonLabel="Join the list"
                 source="homepage-hero"
                 showName
               />
