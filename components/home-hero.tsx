@@ -3,7 +3,7 @@ import { ArrowRight, Check } from "lucide-react"
 import { learningModules } from "@/data/modules"
 import { resourceLibrary } from "@/data/siteContent"
 import { OsintLessonStill } from "@/components/osint-lesson-still"
-import { HeroParallax } from "@/components/hero-parallax"
+import { InvestigatorChrome } from "@/components/investigator-chrome"
 
 const SOURCE_IDS = [
   "osint-fundamentals",
@@ -49,7 +49,7 @@ export function HomeHero() {
         className="relative overflow-hidden bg-slate-950"
         aria-labelledby="dossier-subject"
       >
-        <HeroParallax />
+        <InvestigatorChrome />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-24 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.95fr)] lg:gap-16">
@@ -134,14 +134,28 @@ export function HomeHero() {
                 </ul>
               </aside>
 
-              <figure className="hero-card-front overflow-hidden rounded-2xl border border-indigo-400/25 bg-slate-950/80">
-                <figcaption className="border-b border-white/10 px-5 py-3 text-sm font-semibold text-indigo-300">
-                  OSINT Fundamentals · Source Evaluation
+              <figure className="hero-card-front investigator-frame overflow-hidden rounded-2xl border border-indigo-400/25 bg-slate-950/80">
+                <figcaption className="flex items-center justify-between gap-3 border-b border-white/10 px-5 py-3 text-sm font-semibold text-indigo-300">
+                  <span>OSINT Fundamentals · Source Evaluation</span>
+                  <span className="hidden font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-slate-500 sm:inline">
+                    claim → source
+                  </span>
                 </figcaption>
                 <div className="dossier-exhibit-frame">
-                  <div className="dossier-still-motion">
-                    <OsintLessonStill />
-                  </div>
+                  <OsintLessonStill />
+                </div>
+                <div className="claim-trace-lockbar" aria-hidden="true">
+                  <span className="claim-trace-lock claim-trace-lock-claim">
+                    Claim
+                  </span>
+                  <span className="claim-trace-lockrail" />
+                  <span className="claim-trace-lock claim-trace-lock-mid">
+                    Who / when
+                  </span>
+                  <span className="claim-trace-lockrail" />
+                  <span className="claim-trace-lock claim-trace-lock-source">
+                    Independent record
+                  </span>
                 </div>
               </figure>
 

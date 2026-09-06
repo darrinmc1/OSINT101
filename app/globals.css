@@ -236,40 +236,53 @@
 }
 
 /* ============================================
-   ScrollCraft home — layered depth, light parallax
-   Brand chrome stays slate / indigo. No cream kit.
+   Home fold — investigator chrome + claim-to-source
+   Brand stays slate / indigo. No cream kit.
+   Not a grid parallax, charter float, or chip cascade.
    ============================================ */
-.scrollcraft-dots {
-  background-image: radial-gradient(
-    rgba(148, 163, 184, 0.16) 1px,
-    transparent 1px
-  );
-  background-size: 22px 22px;
-  transform: translate3d(0, calc(var(--hero-parallax, 0px) * -0.18), 0);
-  will-change: transform;
-}
-
-.scrollcraft-glow {
+.investigator-wash {
+  position: absolute;
+  inset: -10% 18% auto;
+  height: 22rem;
   background: radial-gradient(
     ellipse,
-    rgba(99, 102, 241, 0.22) 0%,
-    rgba(139, 92, 246, 0.1) 38%,
-    transparent 70%
+    rgba(99, 102, 241, 0.18) 0%,
+    rgba(139, 92, 246, 0.08) 42%,
+    transparent 72%
   );
-  filter: blur(8px);
-  transform: translate3d(-50%, calc(var(--hero-parallax, 0px) * -0.28), 0);
-  will-change: transform;
+  filter: blur(10px);
 }
 
-.scrollcraft-glow-side {
-  background: radial-gradient(
-    circle,
-    rgba(99, 102, 241, 0.16) 0%,
-    transparent 68%
-  );
-  filter: blur(20px);
-  transform: translate3d(0, calc(var(--hero-parallax, 0px) * -0.12), 0);
-  will-change: transform;
+.investigator-corner {
+  position: absolute;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-color: rgba(165, 180, 252, 0.45);
+  border-style: solid;
+}
+
+.investigator-corner-tl {
+  top: 1.25rem;
+  left: 1.25rem;
+  border-width: 2px 0 0 2px;
+}
+
+.investigator-corner-tr {
+  top: 1.25rem;
+  right: 1.25rem;
+  border-width: 2px 2px 0 0;
+}
+
+.investigator-corner-bl {
+  bottom: 1.25rem;
+  left: 1.25rem;
+  border-width: 0 0 2px 2px;
+}
+
+.investigator-corner-br {
+  bottom: 1.25rem;
+  right: 1.25rem;
+  border-width: 0 2px 2px 0;
 }
 
 .hero-card-stack {
@@ -283,7 +296,7 @@
   right: 0;
   z-index: 0;
   width: min(16.5rem, 46%);
-  transform: rotate(2.4deg) translate3d(0, calc(var(--hero-parallax, 0px) * 0.06), 0);
+  transform: rotate(2.4deg);
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.06),
     0 18px 40px rgba(0, 0, 0, 0.35);
@@ -296,6 +309,34 @@
     0 0 0 1px rgba(129, 140, 248, 0.18),
     0 0 48px rgba(99, 102, 241, 0.16),
     0 28px 64px rgba(0, 0, 0, 0.45);
+}
+
+.investigator-frame {
+  position: relative;
+}
+
+.investigator-frame::before,
+.investigator-frame::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-color: rgba(165, 180, 252, 0.7);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.investigator-frame::before {
+  top: 0.55rem;
+  left: 0.55rem;
+  border-width: 1.5px 0 0 1.5px;
+}
+
+.investigator-frame::after {
+  right: 0.55rem;
+  bottom: 0.55rem;
+  border-width: 0 1.5px 1.5px 0;
 }
 
 @media (min-width: 1024px) {
@@ -336,43 +377,420 @@
   }
 }
 
-/* Home hero still — light pan only. Brand chrome stays on the live palette. */
+/* Home hero still — claim-to-source trace (~7s). Investigator chrome only. */
 .dossier-exhibit-frame {
   overflow: hidden;
-  height: min(28rem, 62vh);
+  height: min(26rem, 58vh);
 }
 
-.dossier-still-motion {
-  height: 100%;
-  transform-origin: 20% 30%;
-  animation: dossier-ken-burns 32s ease-in-out alternate infinite;
-}
-
-.dossier-still-motion .dossier-lesson-still {
+.dossier-exhibit-frame .dossier-lesson-still {
   padding: 0.85rem;
 }
 
-@keyframes dossier-ken-burns {
+.claim-trace-stage {
+  isolation: isolate;
+}
+
+.claim-trace-svg {
+  position: absolute;
+  inset: 4.75rem 0 0.5rem 0;
+  width: 4.5rem;
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.claim-trace-line {
+  fill: none;
+  stroke: #9ed49e;
+  stroke-width: 2.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  filter: drop-shadow(0 0 5px rgba(143, 191, 143, 0.85));
+  animation: claim-trace-draw 7s ease-in-out infinite;
+}
+
+.claim-trace-bead {
+  position: absolute;
+  left: 0.7rem;
+  top: 5.1rem;
+  z-index: 3;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: #c6ebc6;
+  box-shadow: 0 0 10px rgba(143, 191, 143, 0.9);
+  pointer-events: none;
+  animation: claim-trace-bead 7s ease-in-out infinite;
+}
+
+.claim-trace-wipe {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 18%;
+  height: 22%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(143, 191, 143, 0.2) 35%,
+    rgba(165, 180, 252, 0.34) 50%,
+    rgba(143, 191, 143, 0.2) 65%,
+    transparent 100%
+  );
+  animation: claim-trace-wipe 7s ease-in-out infinite;
+}
+
+.claim-trace-wipe::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: #c6ebc6;
+  box-shadow: 0 0 14px rgba(143, 191, 143, 0.95);
+}
+
+.trace-node {
+  border-radius: 4px;
+  margin-left: -0.35rem;
+  padding-left: 0.35rem;
+  box-shadow: inset 0 0 0 0 transparent;
+}
+
+.trace-node-claim {
+  animation: claim-node-lock 7s ease-in-out infinite;
+}
+
+.trace-node-q-1 {
+  animation: claim-node-q1 7s ease-in-out infinite;
+}
+
+.trace-node-q-2 {
+  animation: claim-node-q2 7s ease-in-out infinite;
+}
+
+.trace-node-q-3 {
+  animation: claim-node-q3 7s ease-in-out infinite;
+}
+
+.trace-node-q-4 {
+  animation: claim-node-q4 7s ease-in-out infinite;
+}
+
+.trace-node-source {
+  animation: claim-node-source 7s ease-in-out infinite;
+}
+
+@keyframes claim-trace-draw {
   0% {
-    transform: scale(1.04) translate(0, 0);
+    stroke-dashoffset: 1;
+  }
+  72% {
+    stroke-dashoffset: 0;
+  }
+  88% {
+    stroke-dashoffset: 0;
   }
   100% {
-    transform: scale(1.12) translate(-2.4%, -1.6%);
+    stroke-dashoffset: 1;
+  }
+}
+
+@keyframes claim-trace-bead {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  78% {
+    transform: translateY(14.5rem);
+    opacity: 1;
+  }
+  90% {
+    transform: translateY(15.2rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+
+@keyframes claim-trace-wipe {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  78% {
+    transform: translateY(210%);
+    opacity: 0.85;
+  }
+  92% {
+    transform: translateY(230%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+
+@keyframes claim-node-lock {
+  0%,
+  100% {
+    background: transparent;
+    box-shadow: inset 3px 0 0 transparent;
+  }
+  6%,
+  28% {
+    background: rgba(20, 32, 20, 0.95);
+    box-shadow: inset 3px 0 0 #8fbf8f;
+  }
+}
+
+@keyframes claim-node-q1 {
+  0%,
+  18%,
+  100% {
+    background: transparent;
+    box-shadow: inset 3px 0 0 transparent;
+  }
+  22%,
+  34% {
+    background: rgba(20, 32, 20, 0.85);
+    box-shadow: inset 3px 0 0 #6b8f6b;
+  }
+}
+
+@keyframes claim-node-q2 {
+  0%,
+  30%,
+  100% {
+    background: transparent;
+    box-shadow: inset 3px 0 0 transparent;
+  }
+  34%,
+  46% {
+    background: rgba(20, 32, 20, 0.85);
+    box-shadow: inset 3px 0 0 #6b8f6b;
+  }
+}
+
+@keyframes claim-node-q3 {
+  0%,
+  42%,
+  100% {
+    background: transparent;
+    box-shadow: inset 3px 0 0 transparent;
+  }
+  46%,
+  56% {
+    background: rgba(20, 32, 20, 0.85);
+    box-shadow: inset 3px 0 0 #6b8f6b;
+  }
+}
+
+@keyframes claim-node-q4 {
+  0%,
+  52%,
+  100% {
+    background: transparent;
+    box-shadow: inset 3px 0 0 transparent;
+  }
+  56%,
+  66% {
+    background: rgba(20, 32, 20, 0.85);
+    box-shadow: inset 3px 0 0 #6b8f6b;
+  }
+}
+
+.claim-trace-lockbar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #070b12;
+  padding: 0.7rem 1rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.claim-trace-lock {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+}
+
+.claim-trace-lockrail {
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(148, 163, 184, 0.45),
+    transparent
+  );
+  transform-origin: left center;
+  animation: claim-lockrail 7s ease-in-out infinite;
+}
+
+.claim-trace-lock-claim {
+  animation: claim-lock-claim 7s ease-in-out infinite;
+}
+
+.claim-trace-lock-mid {
+  animation: claim-lock-mid 7s ease-in-out infinite;
+}
+
+.claim-trace-lock-source {
+  animation: claim-lock-source 7s ease-in-out infinite;
+}
+
+@keyframes claim-lockrail {
+  0% {
+    transform: scaleX(0.12);
+    opacity: 0.35;
+  }
+  70% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  88% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(0.12);
+    opacity: 0.35;
+  }
+}
+
+@keyframes claim-lock-claim {
+  0%,
+  100% {
+    color: #64748b;
+    background: transparent;
+    border-color: transparent;
+  }
+  8%,
+  32% {
+    color: #e0e7ff;
+    background: rgba(99, 102, 241, 0.32);
+    border-color: rgba(165, 180, 252, 0.55);
+  }
+}
+
+@keyframes claim-lock-mid {
+  0%,
+  28%,
+  100% {
+    color: #64748b;
+    background: transparent;
+    border-color: transparent;
+  }
+  36%,
+  62% {
+    color: #e0e7ff;
+    background: rgba(99, 102, 241, 0.32);
+    border-color: rgba(165, 180, 252, 0.55);
+  }
+}
+
+@keyframes claim-lock-source {
+  0%,
+  58%,
+  100% {
+    color: #64748b;
+    background: transparent;
+    border-color: transparent;
+  }
+  68%,
+  90% {
+    color: #d7f5d7;
+    background: rgba(61, 107, 61, 0.55);
+    border-color: rgba(158, 212, 158, 0.7);
+  }
+}
+
+@keyframes claim-node-source {
+  0%,
+  58%,
+  100% {
+    background: transparent;
+    box-shadow: inset 3px 0 0 transparent;
+  }
+  66%,
+  90% {
+    background: rgba(20, 32, 20, 0.98);
+    box-shadow:
+      inset 3px 0 0 #8fbf8f,
+      0 0 0 1px rgba(143, 191, 143, 0.28);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dossier-still-motion {
+  .claim-trace-line,
+  .claim-trace-bead,
+  .claim-trace-wipe,
+  .trace-node-claim,
+  .trace-node-q-1,
+  .trace-node-q-2,
+  .trace-node-q-3,
+  .trace-node-q-4,
+  .trace-node-source,
+  .claim-trace-lockrail,
+  .claim-trace-lock-claim,
+  .claim-trace-lock-mid,
+  .claim-trace-lock-source {
     animation: none;
-    transform: none;
   }
 
-  .scrollcraft-dots,
-  .scrollcraft-glow,
-  .scrollcraft-glow-side,
+  .claim-trace-line {
+    stroke-dashoffset: 0;
+  }
+
+  .claim-trace-bead,
+  .claim-trace-wipe {
+    display: none;
+  }
+
+  .claim-trace-lockrail {
+    transform: none;
+    opacity: 1;
+  }
+
+  .claim-trace-lock-source {
+    color: #d7f5d7;
+    background: rgba(61, 107, 61, 0.55);
+    border-color: rgba(158, 212, 158, 0.7);
+  }
+
+  .claim-trace-wipe::after {
+    display: none;
+  }
+
+  .trace-node-source {
+    background: rgba(20, 32, 20, 0.98);
+    box-shadow: inset 3px 0 0 #8fbf8f;
+  }
+
   .hero-card-back {
     transform: none;
-    will-change: auto;
   }
 
   .scroll-reveal,
