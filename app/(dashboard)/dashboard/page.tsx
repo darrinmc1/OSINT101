@@ -78,8 +78,10 @@ export default function DashboardPage() {
           <div className="flex-1">
             <p className="text-sm font-bold text-white mb-0.5">You&apos;re on the Free Plan</p>
             <p className="text-xs text-slate-300">
-              <span className="text-emerald-400 font-semibold">Free:</span> 3 modules, basic badges &nbsp;·&nbsp;
-              <span className="text-violet-300 font-semibold">Premium:</span> All modules, advanced certifications, priority support
+              <span className="text-emerald-400 font-semibold">Free:</span>{" "}
+              {Object.values(learningModules).filter((mod) => mod.level === "Beginner").length} beginner modules, basic badges
+              &nbsp;·&nbsp;
+              <span className="text-violet-300 font-semibold">Premium:</span> Intermediate and Advanced modules when billing is live
             </p>
           </div>
           <Link
@@ -230,17 +232,21 @@ export default function DashboardPage() {
             <Award className="h-5 w-5 text-amber-400" />
             <h2 className="text-lg font-bold text-white">Rank Progress</h2>
           </div>
-          <span className="text-sm font-bold text-amber-400">{badge.label}</span>
+          <span className="text-sm font-bold text-amber-400">{badge.name}</span>
         </div>
         <div className="space-y-2">
           <div className="flex justify-between text-xs text-slate-400">
             <span>{mockUser.xp} XP</span>
-            <span>{progress.next} XP to next rank</span>
+            <span>
+              {badge.isMaxTier
+                ? "Max rank"
+                : `${siteConfig.badges.xpPerTier[badge.tier + 1] - mockUser.xp} XP to next rank`}
+            </span>
           </div>
           <div className="h-2 rounded-full bg-white/10 overflow-hidden">
             <div
               className="h-full rounded-full bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-700"
-              style={{ width: `${progress.percent}%` }}
+              style={{ width: `${progress}%` }}
             />
           </div>
         </div>
