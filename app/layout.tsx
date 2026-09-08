@@ -1,63 +1,70 @@
 import type { Metadata } from "next"
-import { Inter, Outfit } from "next/font/google"
-import { ClerkProvider } from "@clerk/nextjs"
+import { Inter } from "next/font/google"
 import "./globals.css"
-import Analytics from "./components/Analytics"
-import { siteConfig } from "@/lib/site-config"
-import { FeedbackWidget } from "@/components/feedback-widget"
-import { WaitlistPopup } from "@/components/waitlist-popup"
-import { hasClerkPublishableKey } from "@/lib/clerk"
-import { NetworkFooter } from "@/components/network-footer"
-import { SELF_URL } from "@/lib/network"
+import { JsonLd, organizationSchema, websiteSchema } from "@/components/json-ld"
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-})
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-})
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SELF_URL),
-  alternates: { canonical: "/" },
-  robots: { index: true, follow: true },
+  metadataBase: new URL("https://osinttraining.com"),
   title: {
-    default: `${siteConfig.name} - ${siteConfig.tagline}`,
-    template: `%s | ${siteConfig.name}`,
+    default: "OSINT Training | Professional Open Source Intelligence Courses",
+    template: "%s | OSINT Training"
   },
-  description: siteConfig.description,
+  description: "Master OSINT techniques with professional training courses. Learn open source intelligence gathering, digital investigations, and cyber research skills.",
   keywords: [
-    "OSINT",
-    "open source intelligence",
     "OSINT training",
-    "OSINT course",
-    "investigation techniques",
-    "geolocation OSINT",
-    "intelligence analysis",
+    "open source intelligence",
+    "OSINT courses",
+    "digital investigation",
+    "cyber intelligence",
+    "OSINT certification",
+    "intelligence gathering",
+    "online investigation training"
   ],
-  authors: [{ name: siteConfig.name }],
+  authors: [{ name: "OSINT Training" }],
+  creator: "OSINT Training",
+  publisher: "OSINT Training",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1
+    }
+  },
   openGraph: {
-    title: siteConfig.name,
-    description: siteConfig.description,
     type: "website",
     locale: "en_US",
-    url: SELF_URL,
-    siteName: siteConfig.name,
-    images: ["/opengraph-image"],
+    url: "https://osinttraining.com",
+    siteName: "OSINT Training",
+    title: "OSINT Training | Professional Open Source Intelligence Courses",
+    description: "Master OSINT techniques with professional training courses. Learn open source intelligence gathering, digital investigations, and cyber research skills.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "OSINT Training - Professional Intelligence Courses"
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: ["/opengraph-image"],
+    title: "OSINT Training | Professional Open Source Intelligence Courses",
+    description: "Master OSINT techniques with professional training courses.",
+    images: ["/og-image.png"],
+    creator: "@osinttraining"
   },
-  icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml", sizes: "any" }],
-    shortcut: "/favicon.svg",
+  alternates: {
+    canonical: "https://osinttraining.com"
   },
+  verification: {
+    google: "your-google-verification-code"
+  }
 }
 
 export default function RootLayout({
@@ -65,30 +72,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // Preview / CI often lack Clerk env vars. Middleware already skips auth when
-  // keys are missing; ClerkProvider must do the same or static prerender fails.
-  const body = (
-    <html lang="en" className="dark">
-      <body
-        className={`${inter.variable} ${outfit.variable} font-sans antialiased ${siteConfig.theme.bgClass} ${siteConfig.theme.textClass}`}
-      >
-        {children}
-        <footer className="border-t border-white/10 bg-slate-900/80 mt-16">
-          <div className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-slate-400">
-            <NetworkFooter />
-            <p className="mt-3">&copy; {new Date().getFullYear()} OSINT Training</p>
-          </div>
-        </footer>
-        <FeedbackWidget />
-        <WaitlistPopup />
-        <Analytics />
-      </body>
+  return (
+    <html lang="en">
+      <head>
+        <JsonLd data={organizationSchema} />
+        <JsonLd data={websiteSchema} />
+      </head>
+      <body className={inter.className}>{children}</body>
     </html>
   )
-
-  if (!hasClerkPublishableKey()) {
-    return body
-  }
-
-  return <ClerkProvider>{body}</ClerkProvider>
 }
