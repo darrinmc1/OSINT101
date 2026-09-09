@@ -1,6 +1,7 @@
 "use client"
 
 import { siteConfig, getBadgeDisplay, getTierProgress } from "@/lib/site-config"
+import { CHECKOUT, checkoutHref, checkoutLabel } from "@/lib/payments"
 import { learningModules } from "@/data/modules"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
@@ -86,11 +87,11 @@ export default function DashboardPage() {
             </p>
           </div>
           <Link
-            href="/pricing"
+            href={checkoutHref(CHECKOUT.premium)}
             className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 transition-all"
           >
             <Star className="h-4 w-4" />
-            Upgrade to Premium
+            {checkoutLabel("Upgrade to Premium")}
           </Link>
         </div>
       )}
@@ -190,8 +191,8 @@ export default function DashboardPage() {
           <h2 className="text-lg font-bold text-white">Earned Badges</h2>
           <span className="text-xs text-slate-500">
             {mockUser.plan === "free" ? (
-              <Link href="/pricing" className="text-violet-400 hover:text-violet-300 font-semibold transition-colors flex items-center gap-1">
-                <Lock className="h-3 w-3" /> Unlock advanced badges with Premium
+              <Link href={checkoutHref(CHECKOUT.premium)} className="text-violet-400 hover:text-violet-300 font-semibold transition-colors flex items-center gap-1">
+                <Lock className="h-3 w-3" /> {checkoutLabel("Unlock advanced badges with Premium")}
               </Link>
             ) : (
               <span className="text-emerald-400 font-semibold">All badges unlocked</span>
@@ -213,13 +214,13 @@ export default function DashboardPage() {
           ))}
           {mockUser.plan === "free" && (
             <Link
-              href="/pricing"
+              href={checkoutHref(CHECKOUT.premium)}
               className="rounded-2xl border border-violet-500/30 bg-violet-500/10 backdrop-blur-xl p-5 flex items-center gap-4 hover:border-violet-500/50 hover:bg-violet-500/20 transition-all group"
             >
               <span className="text-3xl">🏆</span>
               <div>
                 <p className="text-sm font-bold text-white group-hover:text-violet-300 transition-colors">Advanced Badges</p>
-                <p className="text-xs text-violet-400 mt-0.5">Upgrade to unlock</p>
+                <p className="text-xs text-violet-400 mt-0.5">{checkoutLabel("Upgrade to unlock")}</p>
               </div>
             </Link>
           )}

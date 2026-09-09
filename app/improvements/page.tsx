@@ -18,6 +18,9 @@ export default function ImprovementsPage() {
             <strong className="text-cyan-600"> $5/month rate forever</strong>.
           </p>
           <div className="flex items-center justify-center gap-4">
+            <Link href="/#waitlist" className="inline-flex items-center gap-2 rounded-lg bg-cyan-600 px-6 py-3 text-sm font-semibold text-white hover:bg-cyan-500">
+              Join the waitlist
+            </Link>
             <Link href="/" className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">
               <ArrowLeft className="h-4 w-4" /> Back to Home
             </Link>
