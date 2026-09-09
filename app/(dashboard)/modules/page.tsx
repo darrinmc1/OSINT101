@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowRight, BookOpen, Clock, Lock, Star } from "lucide-react"
 import { learningModules } from "@/data/modules"
+import { CHECKOUT, checkoutHref, checkoutLabel } from "@/lib/payments"
 
 const levelAccent: Record<string, string> = {
   Beginner: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
@@ -43,11 +44,11 @@ export default function ModulesIndexPage() {
           </div>
         </div>
         <Link
-          href="/pricing"
+          href={checkoutHref(CHECKOUT.premium)}
           className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 transition-all"
         >
           <Star className="h-4 w-4" />
-          Upgrade to Premium
+          {checkoutLabel("Upgrade to Premium")}
         </Link>
       </div>
 
@@ -100,7 +101,9 @@ export default function ModulesIndexPage() {
       {premiumModules.length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-widest text-violet-400">Premium — Upgrade to unlock</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-violet-400">
+              Premium — {checkoutLabel("Upgrade to unlock")}
+            </span>
             <div className="flex-1 h-px bg-violet-500/20" />
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -113,10 +116,10 @@ export default function ModulesIndexPage() {
                   <Lock className="h-7 w-7 text-violet-400" />
                   <p className="text-sm font-bold text-white">Premium Module</p>
                   <Link
-                    href="/pricing"
+                    href={checkoutHref(CHECKOUT.premium)}
                     className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 transition-all"
                   >
-                    <Star className="h-3.5 w-3.5" /> Unlock with Premium
+                    <Star className="h-3.5 w-3.5" /> {checkoutLabel("Unlock with Premium")}
                   </Link>
                 </div>
                 <div className="flex items-center justify-between mb-4">

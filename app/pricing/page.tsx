@@ -1,5 +1,12 @@
 import Link from "next/link"
 import { Check, X, Zap, Shield, Star } from "lucide-react"
+import { EmailCapture } from "@/components/email-capture"
+import {
+  CHECKOUT,
+  PAYMENTS_ENABLED,
+  checkoutHref,
+  checkoutLabel,
+} from "@/lib/payments"
 
 const tiers = [
   {
@@ -9,6 +16,7 @@ const tiers = [
     description: "Perfect for getting started with OSINT fundamentals.",
     cta: "Get Started Free",
     ctaHref: "/sign-up",
+    paid: false,
     highlight: false,
     badge: null,
     icon: Shield,
@@ -36,7 +44,9 @@ const tiers = [
     period: "per month",
     description: "Unlock the full OSINT training experience and all premium content.",
     cta: "Upgrade to Pro",
-    ctaHref: "/sign-up?plan=pro",
+    // Parked Buy path — restored when NEXT_PUBLIC_PAYMENTS_ENABLED=true
+    ctaHref: CHECKOUT.pro,
+    paid: true,
     highlight: true,
     badge: "Most Popular",
     icon: Zap,
@@ -101,7 +111,9 @@ export default function PricingPage() {
             Invest in your OSINT skills
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto">
-            Start free and level up when you&apos;re ready. No hidden fees, cancel anytime.
+            {PAYMENTS_ENABLED
+              ? "Start free and level up when you\u2019re ready. No hidden fees, cancel anytime."
+              : "Start free. Card checkout is not live \u2014 join the waitlist for founding pricing."}
           </p>
         </div>
 
@@ -144,14 +156,14 @@ export default function PricingPage() {
                 </div>
 
                 <Link
-                  href={tier.ctaHref}
+                  href={tier.paid ? checkoutHref(tier.ctaHref) : tier.ctaHref}
                   className={`w-full text-center py-3 rounded-xl font-bold transition-all ${
                     tier.highlight
                       ? "bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 text-white shadow-lg shadow-indigo-500/25"
                       : "bg-white/10 hover:bg-white/15 text-white border border-white/10"
                   }`}
                 >
-                  {tier.cta}
+                  {tier.paid ? checkoutLabel(tier.cta) : tier.cta}
                 </Link>
 
                 {/* Badge Unlocks */}
@@ -266,6 +278,20 @@ export default function PricingPage() {
             </Link>
           </div>
         </div>
+
+        {!PAYMENTS_ENABLED && (
+          <section id="waitlist" className="max-w-3xl mx-auto">
+            <EmailCapture
+              variant="hero"
+              theme="cyan"
+              heading="Join the founding waitlist"
+              subheading="Card checkout is not live yet. Leave your email and we will tell you when Pro billing opens."
+              buttonLabel="Join the waitlist"
+              source="pricing-waitlist"
+              showName
+            />
+          </section>
+        )}
 
       </div>
     </main>
