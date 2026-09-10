@@ -1,62 +1,31 @@
 import type { Metadata } from "next"
-import { Inter, Outfit } from "next/font/google"
-import { ClerkProvider } from "@clerk/nextjs"
+import { Inter } from "next/font/google"
 import "./globals.css"
-import Analytics from "./components/Analytics"
-import { siteConfig } from "@/lib/site-config"
-import { FeedbackWidget } from "@/components/feedback-widget"
-import { WaitlistPopup } from "@/components/waitlist-popup"
-import { hasClerkPublishableKey } from "@/lib/clerk"
-import { NetworkFooter } from "@/components/network-footer"
-import { SELF_URL } from "@/lib/network"
+import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/json-ld"
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-})
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-})
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SELF_URL),
-  alternates: { canonical: "/" },
-  robots: { index: true, follow: true },
   title: {
-    default: `${siteConfig.name} - ${siteConfig.tagline}`,
-    template: `%s | ${siteConfig.name}`,
+    default: "AI Workforce Training",
+    template: "%s | AI Workforce Training",
   },
-  description: siteConfig.description,
-  keywords: [
-    "OSINT",
-    "open source intelligence",
-    "OSINT training",
-    "OSINT course",
-    "investigation techniques",
-    "geolocation OSINT",
-    "intelligence analysis",
-  ],
-  authors: [{ name: siteConfig.name }],
+  description:
+    "Professional AI and machine learning training programs for individuals and enterprises. Upskill your workforce with cutting-edge AI courses.",
+  metadataBase: new URL("https://aiworkforcetraining.com"),
   openGraph: {
-    title: siteConfig.name,
-    description: siteConfig.description,
     type: "website",
     locale: "en_US",
-    url: SELF_URL,
-    siteName: siteConfig.name,
-    images: ["/opengraph-image"],
+    url: "https://aiworkforcetraining.com",
+    siteName: "AI Workforce Training",
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: ["/opengraph-image"],
+    site: "@aiworkforcetraining",
   },
-  icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml", sizes: "any" }],
-    shortcut: "/favicon.svg",
+  robots: {
+    index: true,
+    follow: true,
   },
 }
 
@@ -65,30 +34,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // Preview / CI often lack Clerk env vars. Middleware already skips auth when
-  // keys are missing; ClerkProvider must do the same or static prerender fails.
-  const body = (
-    <html lang="en" className="dark">
-      <body
-        className={`${inter.variable} ${outfit.variable} font-sans antialiased ${siteConfig.theme.bgClass} ${siteConfig.theme.textClass}`}
-      >
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        <OrganizationJsonLd />
+        <WebSiteJsonLd />
         {children}
-        <footer className="border-t border-white/10 bg-slate-900/80 mt-16">
-          <div className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-slate-400">
-            <NetworkFooter />
-            <p className="mt-3">&copy; {new Date().getFullYear()} OSINT Training</p>
-          </div>
-        </footer>
-        <FeedbackWidget />
-        <WaitlistPopup />
-        <Analytics />
       </body>
     </html>
   )
-
-  if (!hasClerkPublishableKey()) {
-    return body
-  }
-
-  return <ClerkProvider>{body}</ClerkProvider>
 }
