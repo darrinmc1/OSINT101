@@ -72,7 +72,7 @@ export default function PricingPage() {
         <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-white/10 bg-white/5 p-6 text-center">
           <h2 className="text-xl font-bold">Want to see the moat first?</h2>
           <p className="mt-2 text-sm text-slate-400">Try the Case File Planner and build a structured investigation plan instead of only reading another OSINT article.</p>
-          <Link href="/tools/case-file" className="mt-5 inline-flex rounded-xl bg-indigo-500 px-5 py-3 font-bold text-white hover:bg-indigo-400">
+          <Link href="/case-file" className="mt-5 inline-flex rounded-xl bg-indigo-500 px-5 py-3 font-bold text-white hover:bg-indigo-400">
             Open Case File Planner
           </Link>
         </div>
