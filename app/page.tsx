@@ -1,217 +1,263 @@
 import Link from "next/link"
-import { siteConfig } from "@/lib/site-config"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
+import { ArrowRight, Shield, BookOpen, Award, Zap, Star, Lock, ChevronRight, Trophy, Target, Flame } from "lucide-react"
 import { EmailCapture } from "@/components/email-capture"
-import { learningModules } from "@/data/modules"
-import WhatsNew from "@/components/whats-new"
-import {
-  ArrowRight,
-  BookOpen,
-  Clock,
-  GraduationCap,
-  Search,
-  Shield,
-  FolderOpen,
-} from "lucide-react"
 
-const levelAccent: Record<string, string> = {
-  Beginner: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
-  Intermediate: "text-indigo-400 bg-indigo-500/10 border-indigo-500/20",
-  Advanced: "text-violet-400 bg-violet-500/10 border-violet-500/20",
-}
+const badgeProgression = [
+  {
+    id: 1,
+    name: "Novice",
+    icon: Shield,
+    color: "from-slate-400 to-slate-500",
+    borderColor: "border-slate-400",
+    textColor: "text-slate-400",
+    xp: 0,
+    unlocked: true,
+    skills: ["Basic Prompting", "AI Awareness"]
+  },
+  {
+    id: 2,
+    name: "Practitioner",
+    icon: BookOpen,
+    color: "from-emerald-400 to-emerald-600",
+    borderColor: "border-emerald-400",
+    textColor: "text-emerald-400",
+    xp: 500,
+    unlocked: true,
+    skills: ["Chain-of-Thought", "Few-Shot Learning"]
+  },
+  {
+    id: 3,
+    name: "Engineer",
+    icon: Zap,
+    color: "from-blue-400 to-blue-600",
+    borderColor: "border-blue-400",
+    textColor: "text-blue-400",
+    xp: 1500,
+    unlocked: false,
+    skills: ["RAG Systems", "Fine-tuning"]
+  },
+  {
+    id: 4,
+    name: "Architect",
+    icon: Star,
+    color: "from-purple-400 to-purple-600",
+    borderColor: "border-purple-400",
+    textColor: "text-purple-400",
+    xp: 3500,
+    unlocked: false,
+    skills: ["Multi-Agent", "LLMOps"]
+  },
+  {
+    id: 5,
+    name: "Master",
+    icon: Trophy,
+    color: "from-amber-400 to-orange-500",
+    borderColor: "border-amber-400",
+    textColor: "text-amber-400",
+    xp: 7500,
+    unlocked: false,
+    skills: ["Research", "Innovation"]
+  }
+]
+
+const featuredBadges = [
+  { name: "First Prompt", icon: "🎯", rarity: "Common", color: "bg-slate-700" },
+  { name: "Speed Learner", icon: "⚡", rarity: "Rare", color: "bg-blue-900" },
+  { name: "Streak Master", icon: "🔥", rarity: "Epic", color: "bg-purple-900" },
+  { name: "AI Pioneer", icon: "🏆", rarity: "Legendary", color: "bg-amber-900" },
+]
 
 export default function HomePage() {
-  const modules = Object.values(learningModules)
-
   return (
-    <>
-      <Header />
-      <main className="min-h-screen pt-16 bg-slate-950 text-slate-50">
-        {/* ============================================================
-            HERO SECTION
-            ============================================================ */}
-        <section className="relative hero-gradient hero-glow overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/hero-osint101.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
-          <div className="grid-pattern absolute inset-0" />
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-36 text-center">
-            <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-2 mb-8">
-              <span className="text-lg">{siteConfig.theme.emoji}</span>
-              <span className="text-sm font-semibold text-indigo-300 tracking-wide uppercase">
-                Free OSINT Training &amp; Investigation Tools
-              </span>
+    <div className="min-h-screen bg-slate-950 text-white">
+      {/* Navigation */}
+      <nav className="border-b border-slate-800 px-6 py-4">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-lg flex items-center justify-center">
+              <Zap className="w-4 h-4 text-white" />
             </div>
-
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold font-display leading-tight mb-6">
-              <span className="text-white">{siteConfig.copy.heroTitle}</span>
-            </h1>
-
-            <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-              {siteConfig.copy.heroSubtitle}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/case-file"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-300 hover:scale-105 text-lg"
-              >
-                {siteConfig.copy.ctaButton}
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-              <Link
-                href="/modules"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-slate-300 border-2 border-white/10 hover:border-white/20 hover:text-white active:scale-[0.96] transition-transform hover:bg-white/5 transition-all duration-300 text-lg"
-              >
-                Browse Lessons
-              </Link>
-            </div>
-
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
-              <div className="flex items-center gap-2">
-                <Search className="h-4 w-4 text-indigo-400" />
-                <span>Practical tradecraft</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-violet-400" />
-                <span>Ethics first</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <GraduationCap className="h-4 w-4 text-indigo-300" />
-                <span>5-tier badge system</span>
-              </div>
-            </div>
+            <span className="font-bold text-lg">PromptCraft</span>
           </div>
-        </section>
-      <WhatsNew />
-
-        <section className="py-16 md:py-20 border-t border-white/5">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/15 via-violet-500/5 to-transparent p-8 md:p-12">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-indigo-300 mb-3">
-                One job · not a chatbot
-              </p>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white mb-3">
-                Paste a target. Get a case file.
-              </h2>
-              <p className="text-slate-400 mb-6 max-w-2xl">
-                The archive stays the archive. This layer turns a collection question into a cited investigation plan using the OSINT 101 method — intelligence cycle, OPSEC, and real module links. Foundations are free.
-              </p>
-              <Link
-                href="/case-file"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 transition-all"
-              >
-                Open the Case File Planner
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
+          <div className="flex items-center gap-4">
+            <Link href="/lessons" className="text-slate-400 hover:text-white text-sm transition-colors">Lessons</Link>
+            <Link href="/dashboard" className="text-slate-400 hover:text-white text-sm transition-colors">Dashboard</Link>
+            <Link href="/login" className="bg-emerald-500 hover:bg-emerald-400 text-white text-sm px-4 py-2 rounded-lg transition-colors">Get Started</Link>
           </div>
-        </section>
+        </div>
+      </nav>
 
-        {/* ============================================================
-            LEARNING MODULES SECTION
-            ============================================================ */}
-        <section className="py-20 md:py-28 border-t border-white/5">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-2 mb-4">
-                <span className="text-sm font-semibold text-indigo-300 tracking-wide uppercase">
-                  Training Tracks
+      {/* Hero Section */}
+      <section className="px-6 pt-16 pb-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Copy */}
+            <div>
+              <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-1.5 mb-6">
+                <Flame className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="text-emerald-400 text-xs font-medium">Gamified AI Learning</span>
+              </div>
+              <h1 className="text-4xl lg:text-5xl font-bold leading-tight mb-6">
+                Master AI Prompting
+                <span className="block bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
+                  Level by Level
                 </span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white">
-                Learning Modules
-              </h2>
-              <p className="text-slate-400 mt-3 max-w-lg mx-auto">
-                Structured modules that teach you how to actually think like an
-                analyst &mdash; not just how to Google with attitude.
+              </h1>
+              <p className="text-slate-400 text-lg mb-8 leading-relaxed">
+                Earn badges, climb skill trees, and track your progression from Novice to AI Master. 
+                Structured lessons with real XP rewards keep you motivated every step of the way.
               </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {modules.map((mod) => (
+              <div className="flex flex-col sm:flex-row gap-3 mb-8">
                 <Link
-                  key={mod.id}
-                  href={`/modules/${mod.id}`}
-                  className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/40 active:scale-[0.96] transition-transform hover:bg-white/[0.07]"
+                  href="/login"
+                  className="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-6 py-3 rounded-xl transition-colors"
                 >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 flex items-center justify-center">
-                      <BookOpen className="h-6 w-6 text-indigo-300" />
-                    </div>
-                    <span
-                      className={`text-xs font-semibold border rounded-full px-3 py-1 ${
-                        levelAccent[mod.level] ?? levelAccent.Beginner
-                      }`}
-                    >
-                      {mod.level}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors">
-                    {mod.title}
-                  </h3>
-                  <p className="text-sm text-slate-400 leading-relaxed mb-4">
-                    {mod.description}
-                  </p>
-                  <div className="flex items-center gap-4 text-xs text-slate-500 pt-4 border-t border-white/5">
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-3.5 w-3.5" />
-                      {mod.estimatedTime}
-                    </div>
-                    <div className="ml-auto flex items-center gap-1 text-indigo-300 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-                      Open module <ArrowRight className="h-3.5 w-3.5" />
-                    </div>
-                  </div>
+                  Start Your Journey
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================================
-            RESOURCES SECTION
-            ============================================================ */}
-        <section className="py-20 md:py-28 border-t border-white/5">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-indigo-500/10 via-violet-500/5 to-transparent p-10 md:p-14 text-center">
-              <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-indigo-500/15 mb-6">
-                <FolderOpen className="h-7 w-7 text-indigo-300" />
+                <Link
+                  href="/lessons"
+                  className="inline-flex items-center justify-center gap-2 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white font-medium px-6 py-3 rounded-xl transition-colors"
+                >
+                  Browse Lessons
+                </Link>
               </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white mb-4">
-                The Asset Library
-              </h2>
-              <p className="text-slate-400 mb-8 max-w-xl mx-auto">
-                Checklists, cheatsheets, search operator references, and
-                templates &mdash; everything you need to run a clean
-                investigation.
-              </p>
-              <Link
-                href="/resources"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 shadow-lg shadow-indigo-500/25 transition-all duration-300 hover:scale-105"
-              >
-                Browse Resources
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              {/* Social proof */}
+              <div className="flex items-center gap-6 text-sm text-slate-500">
+                <div className="flex items-center gap-1.5">
+                  <Trophy className="w-4 h-4 text-amber-400" />
+                  <span>2,400+ badges earned</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Target className="w-4 h-4 text-emerald-400" />
+                  <span>48 skill lessons</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Badge Progression Visual */}
+            <div className="relative">
+              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Your Skill Path</p>
+                    <h3 className="font-semibold text-white">AI Prompting Mastery</h3>
+                  </div>
+                  <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-lg px-3 py-1.5">
+                    <span className="text-emerald-400 text-xs font-bold">750 XP</span>
+                  </div>
+                </div>
+
+                {/* Progress Bar */}
+                <div className="mb-6">
+                  <div className="flex justify-between text-xs text-slate-500 mb-2">
+                    <span>Practitioner → Engineer</span>
+                    <span>750 / 1,500 XP</span>
+                  </div>
+                  <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full transition-all"
+                      style={{ width: "50%" }}
+                    />
+                  </div>
+                </div>
+
+                {/* Badge Progression Tree */}
+                <div className="flex items-center justify-between mb-6">
+                  {badgeProgression.map((badge, index) => {
+                    const Icon = badge.icon
+                    return (
+                      <div key={badge.id} className="flex items-center">
+                        <div className="flex flex-col items-center gap-1.5">
+                          <div
+                            className={`relative w-12 h-12 rounded-xl border-2 flex items-center justify-center transition-all ${
+                              badge.unlocked
+                                ? `${badge.borderColor} bg-gradient-to-br ${badge.color} shadow-lg`
+                                : "border-slate-700 bg-slate-800"
+                            }`}
+                          >
+                            {badge.unlocked ? (
+                              <Icon className="w-5 h-5 text-white" />
+                            ) : (
+                              <Lock className="w-4 h-4 text-slate-600" />
+                            )}
+                            {badge.id === 2 && (
+                              <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-400 rounded-full border-2 border-slate-900" />
+                            )}
+                          </div>
+                          <span className={`text-xs font-medium ${
+                            badge.unlocked ? badge.textColor : "text-slate-600"
+                          }`}>
+                            {badge.name}
+                          </span>
+                        </div>
+                        {index < badgeProgression.length - 1 && (
+                          <div className={`w-6 h-0.5 mx-1 mb-5 ${
+                            badgeProgression[index + 1].unlocked ? "bg-emerald-500" : "bg-slate-700"
+                          }`} />
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+
+                {/* Featured Badges */}
+                <div>
+                  <p className="text-xs text-slate-500 uppercase tracking-wider mb-3">Achievement Badges</p>
+                  <div className="grid grid-cols-4 gap-2">
+                    {featuredBadges.map((badge) => (
+                      <div
+                        key={badge.name}
+                        className={`${badge.color} border border-slate-700 rounded-xl p-2.5 flex flex-col items-center gap-1.5 hover:scale-105 transition-transform cursor-default`}
+                      >
+                        <span className="text-xl">{badge.icon}</span>
+                        <span className="text-xs text-slate-300 text-center leading-tight font-medium">{badge.name}</span>
+                        <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${
+                          badge.rarity === "Legendary" ? "bg-amber-500/20 text-amber-400" :
+                          badge.rarity === "Epic" ? "bg-purple-500/20 text-purple-400" :
+                          badge.rarity === "Rare" ? "bg-blue-500/20 text-blue-400" :
+                          "bg-slate-600/50 text-slate-400"
+                        }`}>
+                          {badge.rarity}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Current streak */}
+                <div className="mt-4 flex items-center gap-3 bg-slate-800/50 rounded-xl p-3">
+                  <div className="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                    <Flame className="w-4 h-4 text-orange-400" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-xs text-slate-400">Current Streak</p>
+                    <p className="text-sm font-semibold text-white">7 days 🔥</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs text-slate-500">Next reward</p>
+                    <p className="text-xs text-emerald-400 font-medium">+50 XP</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating accent */}
+              <div className="absolute -top-3 -right-3 w-16 h-16 bg-gradient-to-br from-emerald-400/20 to-blue-500/20 rounded-full blur-xl" />
+              <div className="absolute -bottom-3 -left-3 w-20 h-20 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-xl" />
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ============================================================
-            EMAIL CAPTURE SECTION
-            ============================================================ */}
-        <section className="py-20 md:py-28 border-t border-white/5">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <EmailCapture
-              variant="hero"
-              theme="cyan"
-              heading={siteConfig.copy.emailCaptureHeading}
-              subheading={siteConfig.copy.emailCaptureSubheading}
-              source="homepage-hero"
-              showName
-            />
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </>
+      {/* Email Capture */}
+      <section className="px-6 py-16">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-2xl font-bold mb-3">Ready to earn your first badge?</h2>
+          <p className="text-slate-400 mb-8">Join thousands of learners leveling up their AI skills daily.</p>
+          <EmailCapture />
+        </div>
+      </section>
+    </div>
   )
 }
