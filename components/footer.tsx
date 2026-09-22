@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { MerchantDisclosure } from "@/components/merchant-disclosure"
 import { clusterFor, SELF_URL } from "@/lib/network"
 import { siteConfig } from "@/lib/site-config"
 
@@ -105,6 +106,7 @@ export function Footer() {
               </Link>
             </div>
           </div>
+          <MerchantDisclosure className="mt-4 text-center text-xs text-slate-500 leading-relaxed max-w-3xl mx-auto" />
         </div>
       </div>
     </footer>
