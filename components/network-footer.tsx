@@ -1,3 +1,4 @@
+import { MerchantDisclosure } from "@/components/merchant-disclosure"
 import { clusterFor, HUB, SELF_URL } from "@/lib/network"
 
 export function NetworkFooter({ max = 5 }: { max?: number }) {
@@ -19,6 +20,7 @@ export function NetworkFooter({ max = 5 }: { max?: number }) {
           </li>
         ))}
       </ul>
+      <MerchantDisclosure className="mt-3 text-xs text-slate-500 leading-relaxed max-w-2xl mx-auto" />
     </div>
   )
 }

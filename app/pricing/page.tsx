@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Check, Shield, FileSearch, BookOpen } from "lucide-react"
+import { MerchantDisclosure } from "@/components/merchant-disclosure"
 
 const availableNow = [
   "Core OSINT learning modules",
@@ -68,6 +69,8 @@ export default function PricingPage() {
             </Link>
           </section>
         </div>
+
+        <MerchantDisclosure className="mx-auto mt-8 max-w-2xl text-center text-xs text-slate-500 leading-relaxed" />
 
         <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-white/10 bg-white/5 p-6 text-center">
           <h2 className="text-xl font-bold">Want to see the moat first?</h2>
