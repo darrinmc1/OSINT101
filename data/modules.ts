@@ -146,7 +146,7 @@ export const learningModules: Record<string, LearningModule> =
       }
     ]
   },
-  "resources":   "resources": {
+  "resources": {
     "id": "resources",
     "title": "OSINT Resources Hub",
     "description": "A comprehensive guide to essential Open Source Intelligence (OSINT) resources, tools, and guides, categorized for efficient access and effective use in investigations.",
