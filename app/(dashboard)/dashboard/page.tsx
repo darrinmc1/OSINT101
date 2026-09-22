@@ -58,7 +58,11 @@ const earnedBadges = [
 
 export default function DashboardPage() {
   const badge = getBadgeDisplay(siteConfig, mockUser.xp)
-  const progress = getTierProgress(siteConfig, mockUser.xp)
+  const progressPercent = getTierProgress(siteConfig, mockUser.xp)
+  const nextXp =
+    badge.isMaxTier
+      ? mockUser.xp
+      : siteConfig.badges.xpPerTier[badge.tier + 1]
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
@@ -230,17 +234,19 @@ export default function DashboardPage() {
             <Award className="h-5 w-5 text-amber-400" />
             <h2 className="text-lg font-bold text-white">Rank Progress</h2>
           </div>
-          <span className="text-sm font-bold text-amber-400">{badge.label}</span>
+          <span className="text-sm font-bold text-amber-400">{badge.name}</span>
         </div>
         <div className="space-y-2">
           <div className="flex justify-between text-xs text-slate-400">
             <span>{mockUser.xp} XP</span>
-            <span>{progress.next} XP to next rank</span>
+            <span>
+              {badge.isMaxTier ? "Max rank" : `${nextXp} XP to next rank`}
+            </span>
           </div>
           <div className="h-2 rounded-full bg-white/10 overflow-hidden">
             <div
               className="h-full rounded-full bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-700"
-              style={{ width: `${progress.percent}%` }}
+              style={{ width: `${progressPercent}%` }}
             />
           </div>
         </div>
