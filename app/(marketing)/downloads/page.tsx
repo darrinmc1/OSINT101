@@ -185,10 +185,9 @@ export default function DownloadsPage() {
           </h1>
 
           <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Professional-grade, ready-to-use PDF templates for every phase of
-            your OSINT workflow. Each template includes structured fields,
-            reference tables, and best-practice guidance to keep your
-            investigations organized and repeatable.
+            Template specs for investigation planning, source evaluation, reporting,
+            and monitoring. The PDF files themselves are Coming Soon — they are not
+            in the repo yet, and there is no paid unlock hiding behind a 404.
           </p>
         </div>
       </section>
@@ -237,26 +236,13 @@ export default function DownloadsPage() {
                   </ul>
 
                   {/* Download Button */}
-                  <Link
-                    href={`/downloads/${tpl.id}.pdf`}
-                    download
-                    className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 shadow-lg shadow-indigo-500/20 hover:shadow-violet-500/30 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                  <div
+                    className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl font-semibold text-sm text-slate-300 bg-white/5 border border-white/10 cursor-not-allowed"
+                    aria-disabled="true"
+                    title="PDF not shipped yet"
                   >
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                      />
-                    </svg>
-                    Download PDF
-                  </Link>
+                    Coming Soon
+                  </div>
                 </div>
               </div>
             ))}
@@ -281,8 +267,8 @@ export default function DownloadsPage() {
             {[
               {
                 step: "01",
-                title: "Download",
-                desc: "Click any template to download the PDF. All templates are A4 format, ready to print.",
+                title: "Coming Soon",
+                desc: "PDF files are not shipping yet. Use the on-page spec as a checklist until the download exists.",
               },
               {
                 step: "02",
@@ -320,9 +306,9 @@ export default function DownloadsPage() {
             Want the Full Course?
           </h2>
           <p className="text-slate-400 mb-8">
-            These templates are just the beginning. Our full OSINT 101 course
-            includes 15+ modules with hands-on lessons, gamified badges, and
-            a progressive learning path from Rookie to Spymaster.
+            These specs are just the beginning. The live catalog on /modules lists
+            the real module and lesson counts — we do not invent a marketing total
+            here. PDFs remain Coming Soon until the files actually ship.
           </p>
           <Link
             href="/modules"
