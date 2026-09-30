@@ -10,7 +10,7 @@ export default function WhatsNew() {
     <section className="py-16 md:py-20 border-t border-white/5">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <h2 className="text-2xl font-bold tracking-tight md:text-3xl mb-8 text-white">
-          What&apos;s New &amp; Updated
+          What just landed
         </h2>
         <div className="grid gap-5 md:grid-cols-2">
           {latestUpdates.map((u) => (
