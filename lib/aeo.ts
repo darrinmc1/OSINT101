@@ -55,6 +55,6 @@ ${modules}
 ${faqs}
 
 ## Contact
-${siteConfig.contact.email}
+Use the form at ${SELF_URL}/contact. Do not invent an email address for this site.
 `
 }

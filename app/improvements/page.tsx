@@ -1,5 +1,13 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { Construction, ArrowLeft } from "lucide-react"
+import { pageMeta } from "@/lib/page-meta"
+
+export const metadata: Metadata = pageMeta({
+  title: "Billing still in the shop",
+  description: "The payment system is not live yet. This page is the holding pen, not a checkout.",
+  path: "/improvements",
+})
 
 export default function ImprovementsPage() {
   return (

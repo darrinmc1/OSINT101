@@ -45,7 +45,7 @@ export interface SiteConfig {
     standard: { monthly: number; yearly: number }
     premium: { monthly: number; yearly: number }
   }
-  contact: { email: string; github: string }
+  contact: { github: string }
 }
 
 export const siteConfig: SiteConfig = {
@@ -92,8 +92,8 @@ export const siteConfig: SiteConfig = {
       { label: "Dashboard", href: "/dashboard", icon: "LayoutDashboard" },
       { label: "Case File", href: "/case-file", icon: "FolderOpen" },
       { label: "Lessons", href: "/modules", icon: "BookOpen" },
-      { label: "Badges", href: "/badges", icon: "Award" },
-      { label: "Progress", href: "/progress", icon: "TrendingUp" },
+      { label: "Badges", href: "/dashboard", icon: "Award" },
+      { label: "Progress", href: "/dashboard", icon: "TrendingUp" },
     ],
   },
 
@@ -114,8 +114,7 @@ export const siteConfig: SiteConfig = {
   },
 
   contact: {
-    email: "darrinmc1@yahoo.com",
-    github: "darrinmc1",
+    github: "https://github.com/darrinmc1",
   },
 } as const;
 

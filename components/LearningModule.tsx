@@ -23,11 +23,11 @@ const moduleResourceMap: Record<string, string[]> = {
 const moduleLinkMap: Record<string, { label: string; to: string }[]> = {
   'osint-fundamentals': [
     { label: 'SEARCH OPERATORS GUIDE', to: '/resources/search-operators' },
-    { label: 'COMMUNITY COMMS', to: '/community' },
+    { label: 'COMMUNITY COMMS', to: '/modules/community' },
   ],
   'kali-tools': [
     { label: 'KALI QUICK REFERENCE', to: '/resources/kali-cheatsheet' },
-    { label: 'ASSET REQUEST TERMINAL', to: '/requests' },
+    { label: 'ASSET REQUEST TERMINAL', to: '/contact' },
   ],
   default: [
     { label: 'LEGAL AND ETHICAL GUIDELINES', to: '/resources/legal-guidelines' },
@@ -94,7 +94,7 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                 <div className="mb-1 flex items-center space-x-2">
                   <span className="font-mono text-sm uppercase tracking-[0.3em] text-intel-green/60">MODULE_DEPLOYED // {module.id.toUpperCase()}</span>
                 </div>
-                <h2 className="font-mono text-3xl font-bold tracking-tight text-white">{module.title.toUpperCase()}</h2>
+                <h1 className="font-mono text-3xl font-bold tracking-tight text-white">{module.title.toUpperCase()}</h1>
                 <p className="mt-2 max-w-2xl leading-relaxed text-gray-400">{module.description}</p>
               </div>
             </div>

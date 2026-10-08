@@ -223,10 +223,10 @@ const ResourcesPage = () => {
           </p>
           <div className="flex flex-col justify-center gap-6 sm:flex-row">
             <Button asChild className="h-12 rounded-none bg-intel-green px-10 font-mono font-bold text-black shadow-[0_0_15px_rgba(34,197,94,0.3)] active:scale-[0.96] transition-transform hover:bg-intel-green/80">
-              <Link href="/requests">REQUEST_INTEL</Link>
+              <Link href="/contact">REQUEST_INTEL</Link>
             </Button>
             <Button asChild variant="outline" className="h-12 rounded-none border-intel-blue px-10 font-mono font-bold text-intel-blue active:scale-[0.96] transition-transform hover:bg-intel-blue/10">
-              <Link href="/contribute">UPLINK_DATA</Link>
+              <Link href="/contact">UPLINK_DATA</Link>
             </Button>
           </div>
         </div>

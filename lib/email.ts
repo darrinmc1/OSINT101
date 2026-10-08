@@ -11,7 +11,7 @@ const apiKey = process.env.RESEND_API_KEY;
 const FROM = process.env.RESEND_FROM ?? "noreply@example.com";
 const REPLY_TO = process.env.RESEND_REPLY_TO ?? undefined;
 const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME ?? "Our site";
-const NOTIFY = process.env.NOTIFY_EMAIL; // e.g. darrinmc1@yahoo.com
+const NOTIFY = process.env.NOTIFY_EMAIL;
 
 const resend = apiKey ? new Resend(apiKey) : null;
 

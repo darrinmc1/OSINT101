@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 import MarkdownContent from '@/components/MarkdownContent'
 
 type ContentPageProps = {
@@ -31,7 +31,7 @@ const ContentPage = ({ title, eyebrow, description, body, backTo = '/', backLabe
       <Card className="tactical-panel overflow-hidden">
         <CardHeader className="border-b border-intel-green/10 bg-intel-green/[0.02] p-8">
           <div className="text-sm font-mono uppercase tracking-[0.3em] text-intel-green/60">{eyebrow}</div>
-          <CardTitle className="mt-3 text-4xl font-mono tracking-tight text-white">{title}</CardTitle>
+          <h1 className="mt-3 text-4xl font-mono tracking-tight text-white">{title}</h1>
           <CardDescription className="max-w-3xl pt-2 font-sans text-base leading-7 text-gray-400">
             {description}
           </CardDescription>

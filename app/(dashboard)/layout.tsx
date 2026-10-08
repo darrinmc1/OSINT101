@@ -2,7 +2,9 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useUser } from "@clerk/nextjs"
 import { siteConfig } from "@/lib/site-config"
+import { hasClerkPublishableKey } from "@/lib/clerk"
 import { cn } from "@/lib/utils"
 import {
   LayoutDashboard,
@@ -18,6 +20,8 @@ import {
 } from "lucide-react"
 import { useState } from "react"
 
+const GATED_NAV = new Set(["Dashboard", "Badges", "Progress"])
+
 const iconMap: Record<string, React.ElementType> = {
   LayoutDashboard,
   BookOpen,
@@ -28,6 +32,66 @@ const iconMap: Record<string, React.ElementType> = {
   FolderOpen,
 }
 
+function DashboardNav({
+  pathname,
+  onNavigate,
+  showGated,
+}: {
+  pathname: string
+  onNavigate: () => void
+  showGated: boolean
+}) {
+  const links = siteConfig.nav.dashboard.filter(
+    (link) => showGated || !GATED_NAV.has(link.label)
+  )
+
+  return (
+    <>
+      {links.map((link) => {
+        const Icon = iconMap[link.icon] || LayoutDashboard
+        const isActive =
+          link.href === "/dashboard"
+            ? pathname === "/dashboard" && link.label === "Dashboard"
+            : pathname === link.href
+
+        return (
+          <Link
+            key={link.label}
+            href={link.href}
+            onClick={onNavigate}
+            className={cn(
+              "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
+              isActive
+                ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
+                : "text-slate-400 hover:text-white active:scale-[0.96] transition-transform hover:bg-white/5"
+            )}
+          >
+            <Icon className="h-4 w-4 flex-shrink-0" />
+            {link.label}
+          </Link>
+        )
+      })}
+    </>
+  )
+}
+
+function GatedDashboardNav({
+  pathname,
+  onNavigate,
+}: {
+  pathname: string
+  onNavigate: () => void
+}) {
+  const { isSignedIn, isLoaded } = useUser()
+  return (
+    <DashboardNav
+      pathname={pathname}
+      onNavigate={onNavigate}
+      showGated={Boolean(isLoaded && isSignedIn)}
+    />
+  )
+}
+
 export default function DashboardLayout({
   children,
 }: {
@@ -35,6 +99,7 @@ export default function DashboardLayout({
 }) {
   const pathname = usePathname()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const clerkEnabled = hasClerkPublishableKey()
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -72,27 +137,18 @@ export default function DashboardLayout({
 
           {/* Navigation */}
           <nav className="flex-1 px-3 py-4 space-y-1">
-            {siteConfig.nav.dashboard.map((link) => {
-              const Icon = iconMap[link.icon] || LayoutDashboard
-              const isActive = pathname === link.href
-
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setSidebarOpen(false)}
-                  className={cn(
-                    "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
-                    isActive
-                      ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
-                      : "text-slate-400 hover:text-white active:scale-[0.96] transition-transform hover:bg-white/5"
-                  )}
-                >
-                  <Icon className="h-4 w-4 flex-shrink-0" />
-                  {link.label}
-                </Link>
-              )
-            })}
+            {clerkEnabled ? (
+              <GatedDashboardNav
+                pathname={pathname}
+                onNavigate={() => setSidebarOpen(false)}
+              />
+            ) : (
+              <DashboardNav
+                pathname={pathname}
+                onNavigate={() => setSidebarOpen(false)}
+                showGated={false}
+              />
+            )}
           </nav>
 
           {/* Bottom section */}
