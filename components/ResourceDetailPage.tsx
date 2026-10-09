@@ -49,7 +49,7 @@ const ResourceDetailPage = () => {
               {resource.size}
             </Badge>
           </div>
-          <CardTitle className="mt-4 text-4xl font-mono tracking-tight text-white">{resource.title}</CardTitle>
+          <h1 className="mt-4 text-4xl font-mono tracking-tight text-white">{resource.title}</h1>
           <CardDescription className="max-w-3xl pt-2 font-sans text-base leading-7 text-gray-400">
             {resource.description}
           </CardDescription>
@@ -64,7 +64,7 @@ const ResourceDetailPage = () => {
           <MarkdownContent content={resource.body} />
           <div className="border-t border-intel-green/10 pt-6">
             <Button asChild className="rounded-none bg-intel-green font-mono font-bold text-black active:scale-[0.96] transition-transform hover:bg-intel-green/80">
-              <Link href="/requests">Request a related asset</Link>
+              <Link href="/contact">Request a related asset</Link>
             </Button>
           </div>
         </CardContent>

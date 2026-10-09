@@ -21,7 +21,6 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SELF_URL),
-  alternates: { canonical: "/" },
   robots: { index: true, follow: true },
   title: {
     default: `${siteConfig.name} - ${siteConfig.tagline}`,
@@ -39,19 +38,14 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: siteConfig.name }],
   openGraph: {
-    title: siteConfig.name,
-    description: siteConfig.description,
     type: "website",
     locale: "en_US",
-    url: SELF_URL,
     siteName: siteConfig.name,
-    images: ["/opengraph-image"],
+    images: ["/images/og-osint101.svg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: ["/opengraph-image"],
+    images: ["/images/og-osint101.svg"],
   },
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml", sizes: "any" }],

@@ -1,6 +1,14 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight, BookOpen, Clock } from "lucide-react"
 import { learningModules } from "@/data/modules"
+import { pageMeta } from "@/lib/page-meta"
+
+export const metadata: Metadata = pageMeta({
+  title: "Learning Modules",
+  description: "Structured OSINT 101 training tracks, from the intelligence cycle through specialist collection techniques.",
+  path: "/modules",
+})
 
 const levelAccent: Record<string, string> = {
   Beginner: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",

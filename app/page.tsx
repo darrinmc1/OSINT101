@@ -1,5 +1,14 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { siteConfig } from "@/lib/site-config"
+import { pageMeta } from "@/lib/page-meta"
+
+export const metadata: Metadata = pageMeta({
+  title: `${siteConfig.name} - ${siteConfig.tagline}`,
+  description: siteConfig.description,
+  path: "/",
+  absolute: true,
+})
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { EmailCapture } from "@/components/email-capture"
