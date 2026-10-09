@@ -33,8 +33,8 @@ export const ALL_UPDATES: SiteUpdate[] = [
   },
   {
     "id": "pricing-updated-2026-08-20",
-    "title": "Accurate Pricing for OSINT Training",
-    "description": "Refreshed: Accurate Pricing for OSINT Training",
+    "title": "Foundations curriculum",
+    "description": "Refreshed: Foundations curriculum",
     "date": "2026-08-20",
     "kind": "updated",
     "href": "/learn/pricing"

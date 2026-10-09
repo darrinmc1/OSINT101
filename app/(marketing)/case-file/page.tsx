@@ -43,12 +43,6 @@ const appJsonLd = {
   url: `${SELF_URL}/case-file`,
   applicationCategory: "EducationalApplication",
   operatingSystem: "Web",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "USD",
-    description: "Foundations (Beginner modules) are free. Advanced techniques require sign-in / Analyst plan.",
-  },
   featureList: [
     "Paste a collection target or investigation question",
     "Case-file plan using the intelligence cycle",
