@@ -2619,3 +2619,35 @@ export const learningPaths: Array<{ id: string; title: string; description: stri
 export const ALL_MODULES = Object.values(learningModules)
 export const MODULE_MAP = learningModules
 export function getModuleById(id: string) { return learningModules[id] ?? null }
+
+/** Near-duplicate of llms-txt. Data stays so an old URL still resolves. */
+export const HIDDEN_LISTING_IDS = new Set(["llm"])
+
+const FLAGSHIP_MODULE_IDS = [
+  "osint-fundamentals",
+  "kali-tools",
+  "digital-forensics",
+  "geolocation-osint",
+] as const
+
+function isQuickBriefing(mod: Pick<LearningModule, "estimatedTime">) {
+  return /^\d+\s*min$/i.test(mod.estimatedTime.trim())
+}
+
+export function listPublicModules() {
+  const visible = Object.values(learningModules).filter(
+    (mod) => !HIDDEN_LISTING_IDS.has(mod.id)
+  )
+  const byId = new Map(visible.map((mod) => [mod.id, mod]))
+  const flagship = FLAGSHIP_MODULE_IDS.flatMap((id) => {
+    const mod = byId.get(id)
+    return mod ? [mod] : []
+  })
+  const flagshipIds = new Set<string>(FLAGSHIP_MODULE_IDS)
+  const briefings = visible.filter((mod) => isQuickBriefing(mod))
+  const briefingIds = new Set(briefings.map((mod) => mod.id))
+  const rest = visible.filter(
+    (mod) => !flagshipIds.has(mod.id) && !briefingIds.has(mod.id)
+  )
+  return { tracks: [...flagship, ...rest], briefings }
+}

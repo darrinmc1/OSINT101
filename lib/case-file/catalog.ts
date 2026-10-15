@@ -1,4 +1,4 @@
-import { learningModules, type LearningModule } from "@/data/modules"
+import { HIDDEN_LISTING_IDS, learningModules, type LearningModule } from "@/data/modules"
 import type { CatalogModule, CatalogSection, Citation, ModuleLevel } from "./types"
 
 function stripMarkdown(md: string): string {
@@ -33,7 +33,9 @@ let cached: CatalogModule[] | null = null
 
 export function getModuleCatalog(): CatalogModule[] {
   if (cached) return cached
-  cached = Object.values(learningModules).map(toCatalog)
+  cached = Object.values(learningModules)
+    .filter((mod) => !HIDDEN_LISTING_IDS.has(mod.id))
+    .map(toCatalog)
   return cached
 }
 

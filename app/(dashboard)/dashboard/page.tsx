@@ -1,7 +1,7 @@
 "use client"
 
 import { siteConfig, getBadgeDisplay, getTierProgress } from "@/lib/site-config"
-import { learningModules } from "@/data/modules"
+import { listPublicModules } from "@/data/modules"
 import { cn } from "@/lib/utils"
 import {
   BookOpen,
@@ -24,8 +24,8 @@ const mockUser = {
 const moduleEmojis = ["\u{1F50D}", "\u{1F5A5}", "\u{1F9D1}"]
 const moduleProgress = [100, 65, 30]
 
-const recentLessons = Object.values(learningModules)
-  .slice(0, 3)
+const recentLessons = listPublicModules()
+  .tracks.slice(0, 3)
   .map((mod, i) => ({
     id: mod.id,
     title: mod.title,

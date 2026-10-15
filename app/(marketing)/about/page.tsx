@@ -148,16 +148,10 @@ export default function AboutPage() {
           <h2 className="text-3xl font-extrabold font-display text-white mb-4">
             Get in Touch
           </h2>
-          <p className="text-slate-400 mb-8">
+          <p className="text-slate-400">
             Questions, ideas, or just want to say beep boop? We&apos;d love to
             hear from you.
           </p>
-          <a
-            href={`mailto:${siteConfig.contact.email}`}
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-lg shadow-cyan-500/25 transition-all duration-300 hover:scale-105"
-          >
-            <span>Send Us a Message</span>
-          </a>
         </div>
       </section>
     </div>
