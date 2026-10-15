@@ -47,14 +47,6 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href={`mailto:${siteConfig.contact.email}`}
-                  className="text-sm text-slate-400 hover:text-cyan-400 transition-colors"
-                >
-                  Email Us
-                </a>
-              </li>
-              <li>
-                <a
                   href={siteConfig.contact.github}
                   target="_blank"
                   rel="noopener noreferrer"

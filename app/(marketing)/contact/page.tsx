@@ -1,4 +1,5 @@
 import ContentPage from "@/components/ContentPage"
+import { ContactForm } from "@/components/ContactForm"
 import { sitePages } from "@/data/siteContent"
 
 export default function ContactPage() {
@@ -8,6 +9,8 @@ export default function ContactPage() {
       eyebrow={sitePages.contact.eyebrow}
       description={sitePages.contact.description}
       body={sitePages.contact.body}
-    />
+    >
+      <ContactForm />
+    </ContentPage>
   )
 }

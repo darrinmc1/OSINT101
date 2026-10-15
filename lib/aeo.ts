@@ -53,8 +53,5 @@ ${modules}
 
 ## FAQs
 ${faqs}
-
-## Contact
-${siteConfig.contact.email}
 `
 }

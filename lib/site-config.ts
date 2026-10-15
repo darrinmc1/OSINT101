@@ -45,7 +45,7 @@ export interface SiteConfig {
     standard: { monthly: number; yearly: number }
     premium: { monthly: number; yearly: number }
   }
-  contact: { email: string; github: string }
+  contact: { github: string }
 }
 
 export const siteConfig: SiteConfig = {
@@ -114,8 +114,7 @@ export const siteConfig: SiteConfig = {
   },
 
   contact: {
-    email: "darrinmc1@yahoo.com",
-    github: "darrinmc1",
+    github: "https://github.com/darrinmc1",
   },
 } as const;
 

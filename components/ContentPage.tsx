@@ -1,5 +1,6 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -14,9 +15,10 @@ type ContentPageProps = {
   backTo?: string
   backLabel?: string
   cta?: { to: string; label: string }
+  children?: ReactNode
 }
 
-const ContentPage = ({ title, eyebrow, description, body, backTo = '/', backLabel = 'Return to base', cta }: ContentPageProps) => {
+const ContentPage = ({ title, eyebrow, description, body, backTo = '/', backLabel = 'Return to base', cta, children }: ContentPageProps) => {
   return (
     <div className="mx-auto max-w-5xl p-6 animate-in fade-in duration-700">
       <div className="mb-6">
@@ -38,6 +40,7 @@ const ContentPage = ({ title, eyebrow, description, body, backTo = '/', backLabe
         </CardHeader>
         <CardContent className="space-y-8 p-8">
           <MarkdownContent content={body} />
+          {children}
 
           {cta ? (
             <div className="border-t border-intel-green/10 pt-6">

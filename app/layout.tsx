@@ -6,7 +6,6 @@ import { siteConfig } from "@/lib/site-config"
 import { FeedbackWidget } from "@/components/feedback-widget"
 import { WaitlistPopup } from "@/components/waitlist-popup"
 import { hasClerkPublishableKey } from "@/lib/clerk"
-import { NetworkFooter } from "@/components/network-footer"
 import { SELF_URL } from "@/lib/network"
 
 const inter = Inter({
@@ -72,12 +71,6 @@ export default function RootLayout({
         className={`${inter.variable} ${outfit.variable} font-sans antialiased ${siteConfig.theme.bgClass} ${siteConfig.theme.textClass}`}
       >
         {children}
-        <footer className="border-t border-white/10 bg-slate-900/80 mt-16">
-          <div className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-slate-400">
-            <NetworkFooter />
-            <p className="mt-3">&copy; {new Date().getFullYear()} OSINT Training</p>
-          </div>
-        </footer>
         <FeedbackWidget />
         <WaitlistPopup />
       </body>
