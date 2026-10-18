@@ -1,5 +1,5 @@
 import type Stripe from "stripe"
-import { launchOfferDiscount } from "@/lib/launch-offer"
+import { isExpiredLaunchDiscountError, launchOfferDiscount } from "@/lib/launch-offer"
 import {
   CHECKOUT_CURRENCY,
   STATEMENT_DESCRIPTOR_SUFFIX,
@@ -106,27 +106,38 @@ export async function createCheckoutSession(args: {
 
   const discount = launchOfferDiscount()
 
+  const params: Stripe.Checkout.SessionCreateParams = {
+    mode: "subscription",
+    currency: CHECKOUT_CURRENCY,
+    line_items: [{ price: price.id, quantity: 1 }],
+    success_url: `${args.origin}/dashboard?purchased=${encodeURIComponent(args.offer.entitlementId)}`,
+    cancel_url: `${args.origin}/pricing`,
+    client_reference_id: args.userId,
+    metadata,
+    subscription_data: {
+      description: args.offer.statementDescription,
+      metadata,
+    },
+  }
+
   let session: Stripe.Checkout.Session
   try {
-    session = await stripe.checkout.sessions.create({
-      mode: "subscription",
-      currency: CHECKOUT_CURRENCY,
-      line_items: [{ price: price.id, quantity: 1 }],
-      success_url: `${args.origin}/dashboard?purchased=${encodeURIComponent(args.offer.entitlementId)}`,
-      cancel_url: `${args.origin}/pricing`,
-      client_reference_id: args.userId,
-      metadata,
-      subscription_data: {
-        description: args.offer.statementDescription,
-        metadata,
-      },
-      // discounts and allow_promotion_codes cannot be set together.
-      // The launch coupon is attached here while the offer date is open.
-      ...(discount ? { discounts: [discount] } : {}),
-    })
+    session = await createSession(params, discount)
   } catch (err) {
-    console.error("[checkout] session create failed", err)
-    return { error: "Checkout unavailable", status: 502 }
+    // The date gate and Stripe redeem_by can disagree. An expired coupon must
+    // not block checkout: retry once at the list price. Do not log the id.
+    if (discount && isExpiredLaunchDiscountError(err)) {
+      console.error("[checkout] launch coupon expired; retrying at list price")
+      try {
+        session = await createSession(params, null)
+      } catch (retryErr) {
+        console.error("[checkout] session create failed", stripeErrorBrief(retryErr))
+        return { error: "Checkout unavailable", status: 502 }
+      }
+    } else {
+      console.error("[checkout] session create failed", discount ? stripeErrorBrief(err) : err)
+      return { error: "Checkout unavailable", status: 502 }
+    }
   }
 
   if (!session.url) {
@@ -134,4 +145,32 @@ export async function createCheckoutSession(args: {
   }
 
   return { url: session.url }
+}
+
+async function createSession(
+  params: Stripe.Checkout.SessionCreateParams,
+  discount: ReturnType<typeof launchOfferDiscount>,
+): Promise<Stripe.Checkout.Session> {
+  if (!stripe) throw new Error("Stripe not configured")
+  return stripe.checkout.sessions.create({
+    ...params,
+    // discounts and allow_promotion_codes cannot be set together.
+    // The launch coupon is attached only while the shared offer check is open.
+    ...(discount ? { discounts: [discount] } : {}),
+  })
+}
+
+/** Code and type only, so a Stripe message cannot print the coupon id. */
+function stripeErrorBrief(err: unknown): { type?: string; code?: string } {
+  if (!err || typeof err !== "object") return {}
+  const record = err as { type?: unknown; code?: unknown; raw?: { code?: unknown } }
+  return {
+    type: typeof record.type === "string" ? record.type : undefined,
+    code:
+      typeof record.code === "string"
+        ? record.code
+        : typeof record.raw?.code === "string"
+          ? record.raw.code
+          : undefined,
+  }
 }

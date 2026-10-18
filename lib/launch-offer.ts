@@ -3,9 +3,11 @@
  * 50% off the first billing period only. The Stripe coupon itself must be
  * created with duration "once" — this module never creates Stripe objects.
  *
- * LAUNCH_OFFER_ENDS is an ISO date (YYYY-MM-DD). The offer is active through
- * the end of that UTC date, then the label hides and checkout stops attaching
- * the coupon. Default end date: 2026-12-18.
+ * LAUNCH_OFFER_ENDS is an ISO date (YYYY-MM-DD). The offer stays active
+ * through 23:59:59 on that calendar day in Australia/Brisbane (UTC+10, no
+ * daylight saving). Default end instant: 2026-12-18T23:59:59+10:00.
+ * The label and the Checkout discount both call isLaunchOfferActive, so the
+ * copy and the coupon stop at the same moment.
  *
  * STRIPE_LAUNCH_COUPON_ID is a coupon id, or a promotion code id (promo_…).
  * Stripe cannot change redeem_by after creation, so extending the offer means
@@ -13,6 +15,9 @@
  */
 
 export const DEFAULT_LAUNCH_OFFER_ENDS = "2026-12-18"
+
+/** Australia/Brisbane is UTC+10 year-round (no daylight saving). */
+const BRISBANE_OFFSET = "+10:00"
 
 const MONTHS = [
   "Jan",
@@ -44,10 +49,16 @@ export function launchOfferEndsOn(): string {
   return raw
 }
 
-/** Inclusive of the end date. Compared as UTC calendar dates. */
+/** 23:59:59 on the end date in Australia/Brisbane. Inclusive. */
+export function launchOfferEndsAt(): Date {
+  return new Date(`${launchOfferEndsOn()}T23:59:59${BRISBANE_OFFSET}`)
+}
+
+/**
+ * Inclusive through launchOfferEndsAt. Copy and checkout both use this.
+ */
 export function isLaunchOfferActive(now = new Date()): boolean {
-  const today = now.toISOString().slice(0, 10)
-  return today <= launchOfferEndsOn()
+  return now.getTime() <= launchOfferEndsAt().getTime()
 }
 
 /**
@@ -69,8 +80,8 @@ export type LaunchOfferDiscount =
 /**
  * Server-side Checkout discount while the offer is active and an id is set.
  * A value starting with promo_ is a promotion code id. Anything else is a coupon id.
- * Returns null after the end date, or when the env id is unset — checkout then
- * runs at the list price.
+ * Returns null after the Brisbane end instant, or when the env id is unset —
+ * checkout then runs at the list price.
  */
 export function launchOfferDiscount(now = new Date()): LaunchOfferDiscount | null {
   if (!isLaunchOfferActive(now)) return null
@@ -78,4 +89,29 @@ export function launchOfferDiscount(now = new Date()): LaunchOfferDiscount | nul
   if (!id) return null
   if (id.startsWith("promo_")) return { promotion_code: id }
   return { coupon: id }
+}
+
+/**
+ * True when Stripe rejected the attached launch coupon or promotion code
+ * because it has expired. Other failures (missing id, amount mismatch) are
+ * not treated as expiry.
+ */
+export function isExpiredLaunchDiscountError(err: unknown): boolean {
+  if (!err || typeof err !== "object") return false
+  const record = err as {
+    code?: unknown
+    message?: unknown
+    raw?: { code?: unknown; message?: unknown }
+  }
+  const codes = [record.code, record.raw?.code].filter((code): code is string => typeof code === "string")
+  if (codes.some((code) => code === "coupon_expired" || code === "promotion_code_expired")) {
+    return true
+  }
+  const messages = [record.message, record.raw?.message].filter(
+    (message): message is string => typeof message === "string",
+  )
+  return messages.some((message) => {
+    const text = message.toLowerCase()
+    return text.includes("expired") && (text.includes("coupon") || text.includes("promotion"))
+  })
 }
