@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { renderLlmTxt } from "@/lib/aeo"
 
-export const dynamic = "force-static"
+export const dynamic = "force-dynamic"
 
 export function GET() {
   return new NextResponse(renderLlmTxt(), {

@@ -1,5 +1,7 @@
 import { siteConfig } from "@/lib/site-config"
 import { SELF_URL } from "@/lib/network"
+import { launchOfferLabel } from "@/lib/launch-offer"
+import { REFUND_POLICY } from "@/lib/refund-policy"
 
 export type PlanId = "free" | "founding" | "analyst"
 
@@ -28,8 +30,8 @@ export const pricingPlans: PricingPlan[] = [
     priceMonthly: 0,
     priceYearly: 0,
     priceLabel: "$0",
-    period: "forever",
-    description: "Foundations training and a Case File plan grounded in Beginner modules. No credit card.",
+    period: "",
+    description: "Beginner modules and a Case File plan grounded in those lessons. No credit card.",
     features: [
       "All Beginner modules",
       "Case File Planner — foundations",
@@ -49,12 +51,11 @@ export const pricingPlans: PricingPlan[] = [
     priceYearly: siteConfig.pricing.founder.yearly,
     priceLabel: `$${siteConfig.pricing.founder.monthly}`,
     period: "/month",
-    description: "Lock in founding pricing while billing is finishing. Early subscribers keep the rate.",
+    description: "Founding membership at $5/mo or $48/yr. Beginner training, plus a note when new modules are added.",
     features: [
       "Everything in Free",
-      "Founding rate locked when billing launches",
-      "Priority on new modules",
-      "30-day refund guarantee (when billing is live)",
+      "Note when new modules are added",
+      "$5/mo or $48/yr",
     ],
     cta: "Join the founding list",
     href: "/improvements",
@@ -68,13 +69,12 @@ export const pricingPlans: PricingPlan[] = [
     priceYearly: siteConfig.pricing.premium.yearly,
     priceLabel: `$${siteConfig.pricing.premium.monthly}`,
     period: "/month",
-    description: "Advanced Case File techniques plus the rest of the archive when billing is live.",
+    description: "Analyst membership at $19/mo or $180/yr. Intermediate and advanced lessons, plus advanced Case File techniques.",
     features: [
       "Everything in Founding",
-      "Case File Planner — advanced techniques",
-      "Intermediate and Advanced module methods",
-      "People, SOCMINT, GEOINT, recon, crypto, forensics",
-      "Sign-in unlocks advanced plans on this MVP",
+      "Case File Planner advanced techniques",
+      "Intermediate and advanced modules",
+      "People, SOCMINT, GEOINT, recon, crypto, and forensics lessons",
     ],
     cta: "See Analyst access",
     href: "/case-file",
@@ -92,7 +92,9 @@ export function pricingJson() {
     currency: PRICING_CURRENCY,
     dateModified: PRICING_UPDATED,
     billingNote:
-      "Card billing is not live yet. Founding members join the waitlist. This MVP soft-gates advanced Case File techniques behind existing sign-in.",
+      "Card checkout stays closed unless payments are enabled. Prices are USD: Founding $5/mo or $48/yr, Analyst $19/mo or $180/yr.",
+    refundPolicy: REFUND_POLICY,
+    launchOffer: launchOfferLabel(),
     itemListElement: pricingPlans.map((plan, index) => ({
       "@type": "Offer",
       position: index + 1,
@@ -101,7 +103,7 @@ export function pricingJson() {
       url: `${SELF_URL}${plan.href}`,
       price: plan.priceMonthly,
       priceCurrency: PRICING_CURRENCY,
-      pricePeriod: plan.id === "free" ? "forever" : "month",
+      pricePeriod: plan.id === "free" ? "none" : "month",
       priceYearly: plan.priceYearly,
       description: plan.description,
       category: "Subscription",

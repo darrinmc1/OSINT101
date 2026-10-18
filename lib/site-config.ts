@@ -109,6 +109,7 @@ export const siteConfig: SiteConfig = {
 
   pricing: {
     founder: { monthly: 5, yearly: 48 },
+    // Not a Checkout product. Do not render or sell this tier.
     standard: { monthly: 9, yearly: 90 },
     premium: { monthly: 19, yearly: 180 },
   },
