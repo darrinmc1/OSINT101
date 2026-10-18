@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createCaseFile, isCaseFileRefusal } from "@/lib/case-file"
 
+export const maxDuration = 30
+
 const rateLimit = new Map<string, { count: number; reset: number }>()
 const WINDOW_MS = 60_000
 const MAX_PER_WINDOW = 8

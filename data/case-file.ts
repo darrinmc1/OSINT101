@@ -38,7 +38,7 @@ export const CASE_FILE_FAQS = [
   {
     question: "Does it need an AI key?",
     answer:
-      "No. If an AI Gateway or OpenAI key is configured, the plan is drafted with AI and then grounded in the module catalog. If no key is present, you still get a full catalog-based case file with the same citations.",
+      "No. If an OpenRouter key is configured, the plan is drafted with AI and then grounded in the module catalog. If no key is present, you still get a full catalog-based case file with the same citations.",
   },
   {
     question: "Will it hack, scrape, or investigate a real target for me?",
