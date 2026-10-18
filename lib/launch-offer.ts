@@ -1,3 +1,5 @@
+import { publicStripeEnabled } from "@/lib/offers"
+
 /**
  * Limited launch offer for waitlist members and new buyers.
  * 50% off the first billing period only. The Stripe coupon itself must be
@@ -62,11 +64,15 @@ export function isLaunchOfferActive(now = new Date()): boolean {
 }
 
 /**
- * Visible label, or null once the offer has ended.
+ * Visible label, or null unless payments are switched on
+ * (NEXT_PUBLIC_STRIPE_ENABLED is "true") AND the offer has not ended, so the
+ * 50% offer is never advertised while checkout is closed. Feeds the waitlist
+ * popup (/api/launch-offer), /improvements, /pricing, llms.txt and pricing JSON-LD.
+ * Checkout uses launchOfferDiscount, not this.
  * The default date renders "Launch offer: 50% off until 18 Dec".
  */
 export function launchOfferLabel(now = new Date()): string | null {
-  if (!isLaunchOfferActive(now)) return null
+  if (!publicStripeEnabled() || !isLaunchOfferActive(now)) return null
   const [year, month, day] = launchOfferEndsOn().split("-").map(Number)
   const monthName = MONTHS[month - 1]
   const when = year === 2026 ? `${day} ${monthName}` : `${day} ${monthName} ${year}`
