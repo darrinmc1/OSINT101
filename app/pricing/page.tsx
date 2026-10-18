@@ -12,6 +12,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { SELF_URL } from "@/lib/network"
+import { BuyButton } from "@/components/buy-button"
+import { launchOfferLabel } from "@/lib/launch-offer"
+import { publicStripeEnabled, type CheckoutSku } from "@/lib/offers"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -34,7 +37,18 @@ const pricingFaqs = [
   },
 ]
 
+const BUY_SKUS: Partial<Record<string, { monthly: CheckoutSku; yearly: CheckoutSku }>> = {
+  founding: { monthly: "founding_m", yearly: "founding_y" },
+  analyst: { monthly: "analyst_m", yearly: "analyst_y" },
+}
+
 export default function PricingPage() {
+  // Build-time flag. Off (default): the page renders exactly as before.
+  // On: paid cards show BuyButtons instead of their CTA link. Every offer is
+  // available: false, so they stay "Coming soon" with no checkout.
+  const stripeOn = publicStripeEnabled()
+  const offerLabel = stripeOn ? launchOfferLabel() : null
+
   return (
     <>
       <Header />
@@ -83,6 +97,12 @@ export default function PricingPage() {
                 <p className="text-xs font-semibold uppercase tracking-wider text-indigo-300 mb-4">
                   Case File: {plan.caseFileAccess}
                 </p>
+                {stripeOn && BUY_SKUS[plan.id] ? (
+                  <div className="mb-8 space-y-4">
+                    <BuyButton sku={BUY_SKUS[plan.id]!.monthly} launchOfferLabel={offerLabel} />
+                    <BuyButton sku={BUY_SKUS[plan.id]!.yearly} launchOfferLabel={offerLabel} showWaitlist={false} />
+                  </div>
+                ) : (
                 <Link
                   href={plan.href}
                   className={`flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold transition-colors mb-8 ${
@@ -93,6 +113,7 @@ export default function PricingPage() {
                 >
                   {plan.cta} <ArrowRight className="h-4 w-4" />
                 </Link>
+                )}
                 <ul className="space-y-3">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-3 text-sm text-slate-300">
