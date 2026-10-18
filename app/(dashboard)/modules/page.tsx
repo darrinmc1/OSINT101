@@ -37,8 +37,8 @@ export default function ModulesIndexPage() {
           <div className="flex items-start gap-3">
             <span className="mt-0.5 h-6 w-6 rounded-full bg-violet-500/20 flex items-center justify-center text-violet-400 text-xs font-bold shrink-0">★</span>
             <div>
-              <p className="text-sm font-bold text-white">Premium Plan</p>
-              <p className="text-xs text-slate-400 mt-0.5">All modules · Advanced certifications · Priority support</p>
+              <p className="text-sm font-bold text-white">Analyst</p>
+              <p className="text-xs text-slate-400 mt-0.5">Intermediate and advanced modules</p>
             </div>
           </div>
         </div>
@@ -47,7 +47,7 @@ export default function ModulesIndexPage() {
           className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 transition-all"
         >
           <Star className="h-4 w-4" />
-          Upgrade to Premium
+          See pricing
         </Link>
       </div>
 
@@ -100,7 +100,7 @@ export default function ModulesIndexPage() {
       {premiumModules.length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-widest text-violet-400">Premium — Upgrade to unlock</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-violet-400">Analyst — see pricing</span>
             <div className="flex-1 h-px bg-violet-500/20" />
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -111,12 +111,12 @@ export default function ModulesIndexPage() {
               >
                 <div className="absolute inset-0 rounded-2xl bg-slate-900/40 backdrop-blur-sm flex flex-col items-center justify-center gap-3 z-10">
                   <Lock className="h-7 w-7 text-violet-400" />
-                  <p className="text-sm font-bold text-white">Premium Module</p>
+                  <p className="text-sm font-bold text-white">Analyst module</p>
                   <Link
                     href="/pricing"
                     className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 transition-all"
                   >
-                    <Star className="h-3.5 w-3.5" /> Unlock with Premium
+                    <Star className="h-3.5 w-3.5" /> See pricing
                   </Link>
                 </div>
                 <div className="flex items-center justify-between mb-4">

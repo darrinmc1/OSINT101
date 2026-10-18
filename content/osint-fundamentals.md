@@ -16,7 +16,7 @@ Before we dive into tools and techniques, you need to develop the OSINT mindset.
 
 **Patience is a Virtue**: Good OSINT work takes time. You're not going to find everything in five minutes (despite what Hollywood movies suggest). Sometimes you'll spend hours going down rabbit holes that lead nowhere, and that's perfectly normal. Think of it as digital archaeology – you're carefully brushing away layers of information to reveal the truth underneath.
 
-**Documentation is King**: If you don't document your findings, did you really find anything? Keep detailed notes of what you found, where you found it, and when you found it. Screenshots are your best friend. That Twitter post might disappear tomorrow, but your screenshot will live forever.
+**Documentation is King**: If you don't document your findings, did you really find anything? Keep detailed notes of what you found, where you found it, and when you found it. Screenshots are your best friend. That Twitter post might disappear tomorrow, but your screenshot will still be there.
 
 ### The OSINT Process: Your Roadmap to Success
 

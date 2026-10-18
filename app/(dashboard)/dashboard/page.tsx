@@ -58,7 +58,9 @@ const earnedBadges = [
 
 export default function DashboardPage() {
   const badge = getBadgeDisplay(siteConfig, mockUser.xp)
-  const progress = getTierProgress(siteConfig, mockUser.xp)
+  const progressPercent = getTierProgress(siteConfig, mockUser.xp)
+  const nextTier = Math.min(badge.tier + 1, 4) as 0 | 1 | 2 | 3 | 4
+  const nextXp = badge.isMaxTier ? mockUser.xp : siteConfig.badges.xpPerTier[nextTier]
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
@@ -79,7 +81,7 @@ export default function DashboardPage() {
             <p className="text-sm font-bold text-white mb-0.5">You&apos;re on the Free Plan</p>
             <p className="text-xs text-slate-300">
               <span className="text-emerald-400 font-semibold">Free:</span> 3 modules, basic badges &nbsp;·&nbsp;
-              <span className="text-violet-300 font-semibold">Premium:</span> All modules, advanced certifications, priority support
+              <span className="text-violet-300 font-semibold">Analyst:</span> Intermediate and advanced modules
             </p>
           </div>
           <Link
@@ -87,7 +89,7 @@ export default function DashboardPage() {
             className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 transition-all"
           >
             <Star className="h-4 w-4" />
-            Upgrade to Premium
+            See pricing
           </Link>
         </div>
       )}
@@ -188,7 +190,7 @@ export default function DashboardPage() {
           <span className="text-xs text-slate-500">
             {mockUser.plan === "free" ? (
               <Link href="/pricing" className="text-violet-400 hover:text-violet-300 font-semibold transition-colors flex items-center gap-1">
-                <Lock className="h-3 w-3" /> Unlock advanced badges with Premium
+                <Lock className="h-3 w-3" /> See Analyst on pricing
               </Link>
             ) : (
               <span className="text-emerald-400 font-semibold">All badges unlocked</span>
@@ -216,7 +218,7 @@ export default function DashboardPage() {
               <span className="text-3xl">🏆</span>
               <div>
                 <p className="text-sm font-bold text-white group-hover:text-violet-300 transition-colors">Advanced Badges</p>
-                <p className="text-xs text-violet-400 mt-0.5">Upgrade to unlock</p>
+                <p className="text-xs text-violet-400 mt-0.5">See pricing</p>
               </div>
             </Link>
           )}
@@ -230,17 +232,17 @@ export default function DashboardPage() {
             <Award className="h-5 w-5 text-amber-400" />
             <h2 className="text-lg font-bold text-white">Rank Progress</h2>
           </div>
-          <span className="text-sm font-bold text-amber-400">{badge.label}</span>
+          <span className="text-sm font-bold text-amber-400">{badge.name}</span>
         </div>
         <div className="space-y-2">
           <div className="flex justify-between text-xs text-slate-400">
             <span>{mockUser.xp} XP</span>
-            <span>{progress.next} XP to next rank</span>
+            <span>{badge.isMaxTier ? "Max rank" : `${nextXp} XP to next rank`}</span>
           </div>
           <div className="h-2 rounded-full bg-white/10 overflow-hidden">
             <div
               className="h-full rounded-full bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-700"
-              style={{ width: `${progress.percent}%` }}
+              style={{ width: `${progressPercent}%` }}
             />
           </div>
         </div>

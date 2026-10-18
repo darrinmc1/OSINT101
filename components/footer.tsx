@@ -1,8 +1,11 @@
 import Link from "next/link"
+import { MerchantDisclosure } from "@/components/merchant-disclosure"
 import { clusterFor, SELF_URL } from "@/lib/network"
 import { siteConfig } from "@/lib/site-config"
+import { getSupportEmail } from "@/lib/support-email"
 
 export function Footer() {
+  const supportEmail = getSupportEmail()
   return (
     <footer className="border-t border-white/10 bg-slate-950/80">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
@@ -47,10 +50,10 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href={`mailto:${siteConfig.contact.email}`}
+                  href={`mailto:${supportEmail ?? siteConfig.contact.email}`}
                   className="text-sm text-slate-400 hover:text-cyan-400 transition-colors"
                 >
-                  Email Us
+                  {supportEmail ?? "Email Us"}
                 </a>
               </li>
               <li>
@@ -85,6 +88,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/5">
+          <MerchantDisclosure className="mb-4 text-xs text-slate-500 leading-relaxed" />
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-xs text-slate-500">
               &copy; {new Date().getFullYear()} {siteConfig.name}. All rights

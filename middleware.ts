@@ -66,6 +66,12 @@ if (hasClerkKeys) {
 
 export default async function middleware(request: NextRequest) {
   const url = request.nextUrl.pathname
+
+  // Stripe must reach the webhook with the raw body. Do not run Clerk or the
+  // rate limiter on this path — both have blocked signature verification.
+  if (url === "/api/stripe/webhook") {
+    return NextResponse.next()
+  }
   const userAgent = request.headers.get("user-agent") || ""
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
     || request.headers.get("x-real-ip")
@@ -129,6 +135,6 @@ export default async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Match all routes except _next static files, images, etc.
-    "/((?!_next/static|_next/image|images/|favicon.ico).*)",
+    "/((?!_next/static|_next/image|images/|favicon.ico|api/stripe/webhook).*)",
   ],
 }
