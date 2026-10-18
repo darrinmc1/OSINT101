@@ -1,5 +1,12 @@
+import { SELF_URL } from "@/lib/network"
+import { siteConfig } from "@/lib/site-config"
 import { compactCatalogForPrompt } from "./catalog"
 import type { CaseFilePlan, PlanStep } from "./types"
+
+const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+const DEFAULT_MODEL = "google/gemini-2.5-flash"
+const REQUEST_TIMEOUT_MS = 30_000
+const MAX_TOKENS = 2048
 
 type ChatMessage = { role: "system" | "user"; content: string }
 
@@ -11,28 +18,17 @@ type ChatResponse = {
   choices?: ChatChoice[]
 }
 
-function aiConfig(): { url: string; key: string; model: string } | null {
-  const gateway = process.env.AI_GATEWAY_API_KEY
-  if (gateway) {
-    return {
-      url: process.env.AI_GATEWAY_BASE_URL || "https://ai-gateway.vercel.sh/v1/chat/completions",
-      key: gateway,
-      model: process.env.AI_MODEL || "openai/gpt-4o-mini",
-    }
+function openRouterConfig(): { key: string; model: string } | null {
+  const key = process.env.OPENROUTER_API_KEY?.trim()
+  if (!key) return null
+  return {
+    key,
+    model: process.env.OPENROUTER_MODEL?.trim() || DEFAULT_MODEL,
   }
-  const openai = process.env.OPENAI_API_KEY
-  if (openai) {
-    return {
-      url: "https://api.openai.com/v1/chat/completions",
-      key: openai,
-      model: process.env.AI_MODEL || "gpt-4o-mini",
-    }
-  }
-  return null
 }
 
 export function isAiConfigured(): boolean {
-  return aiConfig() !== null
+  return openRouterConfig() !== null
 }
 
 function extractJsonObject(text: string): Record<string, unknown> | null {
@@ -49,21 +45,25 @@ function extractJsonObject(text: string): Record<string, unknown> | null {
 }
 
 async function complete(messages: ChatMessage[]): Promise<string | null> {
-  const config = aiConfig()
+  const config = openRouterConfig()
   if (!config) return null
   try {
-    const response = await fetch(config.url, {
+    const response = await fetch(OPENROUTER_URL, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${config.key}`,
         "Content-Type": "application/json",
+        "HTTP-Referer": SELF_URL,
+        "X-Title": siteConfig.name,
       },
       body: JSON.stringify({
         model: config.model,
         temperature: 0.3,
+        max_tokens: MAX_TOKENS,
+        reasoning: { effort: "none" },
         messages,
       }),
-      signal: AbortSignal.timeout(12_000),
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     })
     if (!response.ok) {
       console.warn("[case-file] AI HTTP", response.status)
