@@ -4,8 +4,8 @@
  * created with duration "once" — this module never creates Stripe objects.
  *
  * LAUNCH_OFFER_ENDS is an ISO date (YYYY-MM-DD). The offer stays active
- * through 23:59:59 on that calendar day in Australia/Brisbane (UTC+10, no
- * daylight saving). Default end instant: 2026-12-18T23:59:59+10:00.
+ * through 23:59 on that calendar day in Australia/Brisbane (UTC+10, no
+ * daylight saving). Default end instant: 2026-12-18T23:59:00+10:00.
  * The label and the Checkout discount both call isLaunchOfferActive, so the
  * copy and the coupon stop at the same moment.
  *
@@ -49,9 +49,9 @@ export function launchOfferEndsOn(): string {
   return raw
 }
 
-/** 23:59:59 on the end date in Australia/Brisbane. Inclusive. */
+/** 23:59:00 on the end date in Australia/Brisbane. Inclusive. */
 export function launchOfferEndsAt(): Date {
-  return new Date(`${launchOfferEndsOn()}T23:59:59${BRISBANE_OFFSET}`)
+  return new Date(`${launchOfferEndsOn()}T23:59:00${BRISBANE_OFFSET}`)
 }
 
 /**
