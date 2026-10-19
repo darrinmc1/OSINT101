@@ -6,6 +6,7 @@ import { EmailCapture } from "@/components/email-capture"
 import { listPublicModules } from "@/data/modules"
 import { ModuleCardGrid } from "@/components/module-cards"
 import WhatsNew from "@/components/whats-new"
+import { WeeklyLesson } from "@/components/weekly-lesson"
 import {
   ArrowRight,
   GraduationCap,
@@ -76,6 +77,7 @@ export default function HomePage() {
           </div>
         </section>
       <WhatsNew />
+      <WeeklyLesson />
 
         <section className="py-16 md:py-20 border-t border-white/5">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
