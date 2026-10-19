@@ -92,8 +92,8 @@ export const siteConfig: SiteConfig = {
       { label: "Dashboard", href: "/dashboard", icon: "LayoutDashboard" },
       { label: "Case File", href: "/case-file", icon: "FolderOpen" },
       { label: "Lessons", href: "/modules", icon: "BookOpen" },
-      { label: "Badges", href: "/badges", icon: "Award" },
-      { label: "Progress", href: "/progress", icon: "TrendingUp" },
+      { label: "Badges", href: "/dashboard", icon: "Award" },
+      { label: "Progress", href: "/dashboard", icon: "TrendingUp" },
     ],
   },
 

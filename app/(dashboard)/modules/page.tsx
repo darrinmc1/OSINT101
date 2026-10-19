@@ -1,5 +1,13 @@
+import type { Metadata } from "next"
 import { listPublicModules } from "@/data/modules"
 import { ModuleCardGrid } from "@/components/module-cards"
+import { pageMeta } from "@/lib/page-meta"
+
+export const metadata: Metadata = pageMeta({
+  title: "Learning Modules",
+  description: "Structured OSINT 101 training tracks, from the intelligence cycle through specialist collection techniques.",
+  path: "/modules",
+})
 
 export default function ModulesIndexPage() {
   const { tracks, briefings } = listPublicModules()

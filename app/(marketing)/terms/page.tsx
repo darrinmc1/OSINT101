@@ -1,5 +1,13 @@
+import type { Metadata } from "next"
 import ContentPage from "@/components/ContentPage"
 import { sitePages } from "@/data/siteContent"
+import { pageMeta } from "@/lib/page-meta"
+
+export const metadata: Metadata = pageMeta({
+  title: sitePages.terms.title,
+  description: sitePages.terms.description,
+  path: "/terms",
+})
 
 export default function TermsPage() {
   return (

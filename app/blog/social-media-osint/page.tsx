@@ -1,6 +1,14 @@
+import type { Metadata } from "next"
 import Link from 'next/link'
 import { ArrowLeft, Calendar } from 'lucide-react'
 import HumorBreak from "@/components/humor-break"
+import { pageMeta } from "@/lib/page-meta"
+
+export const metadata: Metadata = pageMeta({
+  title: "Social Media OSINT Techniques",
+  description: "Extract intelligence from social platforms without alerting your target.",
+  path: "/blog/social-media-osint",
+})
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
   return (

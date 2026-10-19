@@ -1,6 +1,17 @@
+import type { Metadata } from "next"
 import { SignUp } from "@clerk/nextjs"
 import Link from "next/link"
 import { hasClerkPublishableKey } from "@/lib/clerk"
+import { pageMeta } from "@/lib/page-meta"
+
+export const metadata: Metadata = {
+  ...pageMeta({
+    title: "Sign up",
+    description: "Create an OSINT 101 account.",
+    path: "/sign-up",
+  }),
+  robots: { index: false, follow: false },
+}
 
 export default function SignUpPage() {
   if (!hasClerkPublishableKey()) {

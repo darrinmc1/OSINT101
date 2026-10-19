@@ -5,6 +5,7 @@ import { CASE_FILE_FAQS } from "@/data/case-file"
 import { pricingFaqJsonLd } from "@/lib/pricing"
 import { SELF_URL } from "@/lib/network"
 import { siteConfig } from "@/lib/site-config"
+import { pageMeta } from "@/lib/page-meta"
 import {
   Accordion,
   AccordionContent,
@@ -13,15 +14,25 @@ import {
 } from "@/components/ui/accordion"
 
 export const metadata: Metadata = {
-  title: "Case File Planner",
-  description:
-    "Paste a collection target or investigation question. Get a case-file plan using the OSINT 101 method, citing real modules. Foundations free; advanced techniques gated.",
-  alternates: { canonical: "/case-file" },
+  ...pageMeta({
+    title: "Case File Planner",
+    description:
+      "Paste a collection target or investigation question. Get a case-file plan using the OSINT 101 method, citing real modules. Foundations free; advanced techniques gated.",
+    path: "/case-file",
+  }),
   openGraph: {
     title: "Case File Planner | OSINT 101",
     description:
       "One job: turn an investigation question into a cited OSINT 101 case file. Not a chatbot.",
     url: `${SELF_URL}/case-file`,
+    images: ["/images/og-case-file.svg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Case File Planner | OSINT 101",
+    description:
+      "One job: turn an investigation question into a cited OSINT 101 case file. Not a chatbot.",
+    images: ["/images/og-case-file.svg"],
   },
 }
 
@@ -32,12 +43,6 @@ const appJsonLd = {
   url: `${SELF_URL}/case-file`,
   applicationCategory: "EducationalApplication",
   operatingSystem: "Web",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "USD",
-    description: "Foundations (Beginner modules) are free. Advanced techniques require sign-in / Analyst plan.",
-  },
   featureList: [
     "Paste a collection target or investigation question",
     "Case-file plan using the intelligence cycle",

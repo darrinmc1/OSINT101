@@ -1,10 +1,13 @@
+import Link from "next/link"
 import { siteConfig } from "@/lib/site-config"
 import type { Metadata } from "next"
+import { pageMeta } from "@/lib/page-meta"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "About",
   description: `Learn about ${siteConfig.name} and our mission to make AI education accessible to everyone.`,
-}
+  path: "/about",
+})
 
 export default function AboutPage() {
   return (
@@ -148,10 +151,16 @@ export default function AboutPage() {
           <h2 className="text-3xl font-extrabold font-display text-white mb-4">
             Get in Touch
           </h2>
-          <p className="text-slate-400">
+          <p className="text-slate-400 mb-8">
             Questions, ideas, or just want to say beep boop? We&apos;d love to
             hear from you.
           </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-lg shadow-cyan-500/25 transition-all duration-300 hover:scale-105"
+          >
+            <span>Send Us a Message</span>
+          </Link>
         </div>
       </section>
     </div>

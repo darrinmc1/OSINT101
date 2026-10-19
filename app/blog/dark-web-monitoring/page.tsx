@@ -1,6 +1,14 @@
+import type { Metadata } from "next"
 import Link from 'next/link'
 import { ArrowLeft, Calendar } from 'lucide-react'
 import HumorBreak from "@/components/humor-break"
+import { pageMeta } from "@/lib/page-meta"
+
+export const metadata: Metadata = pageMeta({
+  title: "Dark Web Monitoring for Analysts",
+  description: "What's on the dark web, how to monitor it, and what to do with findings.",
+  path: "/blog/dark-web-monitoring",
+})
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
   return (

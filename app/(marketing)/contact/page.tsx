@@ -1,6 +1,14 @@
+import type { Metadata } from "next"
 import ContentPage from "@/components/ContentPage"
 import { ContactForm } from "@/components/ContactForm"
 import { sitePages } from "@/data/siteContent"
+import { pageMeta } from "@/lib/page-meta"
+
+export const metadata: Metadata = pageMeta({
+  title: sitePages.contact.title,
+  description: sitePages.contact.description,
+  path: "/contact",
+})
 
 export default function ContactPage() {
   return (
