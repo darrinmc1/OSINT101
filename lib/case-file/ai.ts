@@ -1,5 +1,12 @@
+import { SELF_URL } from "@/lib/network"
+import { siteConfig } from "@/lib/site-config"
 import { compactCatalogForPrompt } from "./catalog"
 import type { CaseFilePlan, PlanStep } from "./types"
+
+const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+const DEFAULT_MODEL = "google/gemini-2.5-flash"
+const REQUEST_TIMEOUT_MS = 30_000
+const MAX_TOKENS = 4096
 
 type ChatMessage = { role: "system" | "user"; content: string }
 
@@ -11,59 +18,97 @@ type ChatResponse = {
   choices?: ChatChoice[]
 }
 
-function aiConfig(): { url: string; key: string; model: string } | null {
-  const gateway = process.env.AI_GATEWAY_API_KEY
-  if (gateway) {
-    return {
-      url: process.env.AI_GATEWAY_BASE_URL || "https://ai-gateway.vercel.sh/v1/chat/completions",
-      key: gateway,
-      model: process.env.AI_MODEL || "openai/gpt-4o-mini",
-    }
+function openRouterConfig(): { key: string; model: string } | null {
+  const key = process.env.OPENROUTER_API_KEY?.trim()
+  if (!key) return null
+  return {
+    key,
+    model: process.env.OPENROUTER_MODEL?.trim() || DEFAULT_MODEL,
   }
-  const openai = process.env.OPENAI_API_KEY
-  if (openai) {
-    return {
-      url: "https://api.openai.com/v1/chat/completions",
-      key: openai,
-      model: process.env.AI_MODEL || "gpt-4o-mini",
-    }
-  }
-  return null
 }
 
 export function isAiConfigured(): boolean {
-  return aiConfig() !== null
+  return openRouterConfig() !== null
 }
 
-function extractJsonObject(text: string): Record<string, unknown> | null {
-  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/i)
-  const raw = (fenced?.[1] ?? text).trim()
-  const start = raw.indexOf("{")
-  const end = raw.lastIndexOf("}")
-  if (start < 0 || end <= start) return null
+function stripTrailingCommas(raw: string): string {
+  return raw.replace(/,\s*([}\]])/g, "$1")
+}
+
+/** Close any brackets and strings left open by a reply that was cut off. */
+function closeTruncatedJson(raw: string): string {
+  const stack: string[] = []
+  let inString = false
+  let escaped = false
+  for (const ch of raw) {
+    if (inString) {
+      if (escaped) escaped = false
+      else if (ch === "\\") escaped = true
+      else if (ch === '"') inString = false
+      continue
+    }
+    if (ch === '"') inString = true
+    else if (ch === "{") stack.push("}")
+    else if (ch === "[") stack.push("]")
+    else if ((ch === "}" || ch === "]") && stack.length) stack.pop()
+  }
+  let out = raw
+  if (inString) out += '"'
+  out = out.replace(/,\s*$/, "").replace(/:\s*$/, ": null")
+  return out + stack.reverse().join("")
+}
+
+function tryParse(raw: string): Record<string, unknown> | null {
   try {
-    return JSON.parse(raw.slice(start, end + 1)) as Record<string, unknown>
+    const value = JSON.parse(raw)
+    return value && typeof value === "object" && !Array.isArray(value)
+      ? (value as Record<string, unknown>)
+      : null
   } catch {
     return null
   }
 }
 
+/**
+ * Pull a JSON object out of a model reply: strip code fences, take the
+ * outermost {...}, then try a strict parse, a parse without trailing commas,
+ * and finally a parse that closes a reply cut off mid-object.
+ */
+export function extractJsonObject(text: string): Record<string, unknown> | null {
+  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)(?:```|$)/i)
+  const raw = (fenced?.[1] ?? text).trim()
+  const start = raw.indexOf("{")
+  if (start < 0) return null
+  const end = raw.lastIndexOf("}")
+  const outer = end > start ? raw.slice(start, end + 1) : raw.slice(start)
+  const candidates = [outer, stripTrailingCommas(outer), stripTrailingCommas(closeTruncatedJson(raw.slice(start)))]
+  for (const candidate of candidates) {
+    const parsed = tryParse(candidate)
+    if (parsed) return parsed
+  }
+  return null
+}
+
 async function complete(messages: ChatMessage[]): Promise<string | null> {
-  const config = aiConfig()
+  const config = openRouterConfig()
   if (!config) return null
   try {
-    const response = await fetch(config.url, {
+    const response = await fetch(OPENROUTER_URL, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${config.key}`,
         "Content-Type": "application/json",
+        "HTTP-Referer": SELF_URL,
+        "X-Title": siteConfig.name,
       },
       body: JSON.stringify({
         model: config.model,
         temperature: 0.3,
+        max_tokens: MAX_TOKENS,
+        reasoning: { effort: "none" },
         messages,
       }),
-      signal: AbortSignal.timeout(12_000),
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     })
     if (!response.ok) {
       console.warn("[case-file] AI HTTP", response.status)
@@ -153,7 +198,10 @@ ${compactCatalogForPrompt()}`,
 
   if (!content) return plan
   const parsed = extractJsonObject(content)
-  if (!parsed) return plan
+  if (!parsed) {
+    console.warn("[case-file] AI reply was not parseable JSON", content.length)
+    return plan
+  }
 
   const cycle = parsed.intelligenceCycle as Record<string, unknown> | undefined
 

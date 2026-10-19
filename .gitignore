@@ -29,6 +29,7 @@ yarn-error.log*
 # env files — covers every naming variation
 .env
 .env.*
+!.env.example
 .env.local
 .env*.local
 .local.env

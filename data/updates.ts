@@ -24,14 +24,6 @@ export const ALL_UPDATES: SiteUpdate[] = [
     "href": "/learn/llms-txt"
   },
   {
-    "id": "llm-updated-2026-08-20",
-    "title": "Understanding Large Language Models (LLMs) for OSINT",
-    "description": "Refreshed: Understanding Large Language Models (LLMs) for OSINT",
-    "date": "2026-08-20",
-    "kind": "updated",
-    "href": "/learn/llm"
-  },
-  {
     "id": "pricing-updated-2026-08-20",
     "title": "Foundations curriculum",
     "description": "Refreshed: Foundations curriculum",
