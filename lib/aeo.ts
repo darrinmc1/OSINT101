@@ -12,7 +12,7 @@ export function renderLlmTxt(): string {
   const offers = pricingPlans
     .map(
       (plan) =>
-        `- ${plan.name}: ${plan.priceLabel}${plan.period === "forever" ? " forever" : plan.period} ${PRICING_CURRENCY} — ${plan.description} Case File access: ${plan.caseFileAccess}. CTA: ${SELF_URL}${plan.href}`
+        `- ${plan.name}: ${plan.priceLabel}${plan.period} ${PRICING_CURRENCY} — ${plan.description} Case File access: ${plan.caseFileAccess}. CTA: ${SELF_URL}${plan.href}`
     )
     .join("\n")
 
