@@ -98,7 +98,7 @@ export function WaitlistPopup() {
                             Get 50% off OSINT101
                         </h2>
                         <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "24px", lineHeight: 1.5 }}>
-                            Join the waitlist and lock in founder pricing – 50% off when we launch. Learn to find what's already there.
+                            Join the waitlist and get founder pricing – 50% off when we launch. Learn to find what's already there.
                         </p>
 
                         <form onSubmit={handleSubmit}>
@@ -144,7 +144,7 @@ export function WaitlistPopup() {
                                 {loading ? "Joining..." : "Join the Waitlist – Get 50% Off"}
                             </button>
                             <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "12px", textAlign: "center" }}>
-                                Founder pricing locked in for early subscribers. No spam, unsubscribe anytime.
+                                Founder price for early subscribers while the offer runs. No spam, unsubscribe anytime.
                             </p>
                         </form>
                     </>
