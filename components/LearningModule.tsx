@@ -23,7 +23,7 @@ const moduleResourceMap: Record<string, string[]> = {
 const moduleLinkMap: Record<string, { label: string; to: string }[]> = {
   'osint-fundamentals': [
     { label: 'SEARCH OPERATORS GUIDE', to: '/resources/search-operators' },
-    { label: 'COMMUNITY COMMS', to: '/modules/community' },
+    { label: 'LEGAL AND ETHICAL GUIDELINES', to: '/resources/legal-guidelines' },
   ],
   'kali-tools': [
     { label: 'KALI QUICK REFERENCE', to: '/resources/kali-cheatsheet' },
