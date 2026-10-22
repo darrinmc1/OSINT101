@@ -81,7 +81,7 @@ export const learningModules: Record<string, LearningModule> =
 
 OSINT is not just "Googling with confidence." It is a repeatable process known as the Intelligence Cycle, and the cycle is what keeps a curious afternoon from turning into forty-seven tabs and a shrug. The five stages are not decoration. They are the difference between reducing uncertainty and accumulating bookmarks you will never open again.
 
-Peel Boss would put it this way: if you cannot name the question, you are not investigating. You are browsing with a sense of destiny.
+Put simply: if you cannot name the question, you are not investigating. You are browsing with a sense of destiny.
 
 This section exists because most failed OSINT work fails at the start. People collect first and invent a purpose later. That produces a folder of screenshots and a report that cannot answer the one thing a decision-maker actually asked.
 
@@ -123,7 +123,7 @@ Also keep proportionality. A student exercise about public corporate facts does 
 
 ### Field notes
 
-> Peel Boss would say: a plan is a promise to your future self that you will still remember what the job was after lunch. If the plan cannot survive being read aloud, it is a shopping list.
+> **Rule of thumb:** a plan is a promise to your future self that you will still remember what the job was after lunch. If the plan cannot survive being read aloud, it is a shopping list.
 
 Write the question at the top of the page. Write the stop condition under it. Everything else is how you get from one line to the other without getting lost in a careers page from 2019.
 
@@ -140,7 +140,7 @@ When you draft the investigation plan in the exercise, force the cycle onto the 
 
 An OSINT source is not automatically reliable just because it is public, searchable, or wearing a respectable font. Search engines rank popularity and relevance. They do not certify truth. If you treat the first three results as a jury, you will promote rumors into findings and then look surprised when they collapse.
 
-Peel Boss has a short version: easy to find is not the same as true. That is how gossip gets a citation and sits in a report looking smug.
+The short version: easy to find is not the same as true. That is how gossip gets a citation and sits in a report looking smug.
 
 This section is about judging sources on purpose so your confidence level means something. You will use that judgment every time you rank, cite, or brief.
 
@@ -196,7 +196,7 @@ Be careful with personal data even when it is public. Rank sources for a researc
 
 ### Field notes
 
-> Peel Boss would say: if your ranking paragraph is longer than the sources deserved, you are arguing with yourself. State who published, when, from what vantage, and whether anyone independent agreed. Then stop talking.
+> **Rule of thumb:** if your ranking paragraph is longer than the sources deserved, you are arguing with yourself. State who published, when, from what vantage, and whether anyone independent agreed. Then stop talking.
 
 Keep a simple key in your notes: \`source | date | type | independence | rank\`. It looks dull. It also prevents you from "remembering" that the weakest page was the strongest because it said what you wanted.
 
@@ -213,7 +213,7 @@ Use that method on the three-source exercise. Rank reliability, then explain the
 
 Operational security is the part of OSINT that prevents you from announcing your presence like a foghorn. You are collecting from public sources, not sneaking into anything, but public collection still leaves traces: search history, cookies, logged-in sessions, and a browser that happily tells every site who you usually are.
 
-Peel Boss is unromantic about this. Your research sockpuppet should not somehow be logged into your personal YouTube account. That is less "tradecraft" and more "cry for help."
+Be unromantic about this. Your research sockpuppet should not somehow be logged into your personal YouTube account. That is less "tradecraft" and more "cry for help."
 
 This section is about a boring, repeatable research environment. Boring is the point. Drama is how identities leak.
 
@@ -262,7 +262,7 @@ Stay on public sources. Do not probe networks, hide unauthorized scanning behind
 
 ### Field notes
 
-> Peel Boss would say: the operator who needs to feel invisible usually skipped the checklist. The operator who is actually quieter did the dull steps in the same order as last time.
+> **Rule of thumb:** the operator who needs to feel invisible usually skipped the checklist. The operator who is actually quieter did the dull steps in the same order as last time.
 
 Build the checklist before you feel ready. Boring preparation is shockingly effective, which is very rude to people who prefer drama.
 
@@ -279,7 +279,7 @@ Set up the dedicated profile for the exercise and write down the mistakes you ar
 
 Strong OSINT work is repeatable. That means someone else should be able to follow your steps without consulting a medium. If your only record is "I know I saw it," you have a feeling, not a finding. Feelings do not survive peer review, handoff, or the Monday after a long weekend.
 
-Peel Boss is blunt: if you cannot show the source, the time, and why it mattered, you did not collect intelligence. You collected a vibe with a URL you no longer remember.
+To be blunt: if you cannot show the source, the time, and why it mattered, you did not collect intelligence. You collected a vibe with a URL you no longer remember.
 
 This section is about capturing public-source work so it still exists when the page changes, which it will, usually the afternoon your report is due.
 
@@ -334,7 +334,7 @@ Do not alter captures to make a story tidier. Crop for focus if you must, but ke
 
 ### Field notes
 
-> Peel Boss would say: documentation is how you stay honest after your memory starts editorializing. The log is not for looking busy. It is so you can be wrong in a way someone can check.
+> **Rule of thumb:** documentation is how you stay honest after your memory starts editorializing. The log is not for looking busy. It is so you can be wrong in a way someone can check.
 
 If a finding cannot fill source, timestamp, and why-it-matters, it is not ready for a report. It is a tab you liked.
 
@@ -351,7 +351,7 @@ Build the mini evidence log in the exercise with five findings. Force every row 
 
 Google knows plenty, but it does not read minds, and frankly it should not. Advanced operators, often called dorks, are a way to ask a narrower question of an index that already exists. You are finding material that a search engine has already made public, not unlocking a vault.
 
-Peel Boss treats giant mystery queries as theater. Elegant search beats baroque nonsense every time. A query that looks like a spell and returns garbage is still garbage.
+Giant mystery queries are theater. Elegant search beats baroque nonsense every time. A query that looks like a spell and returns garbage is still garbage.
 
 This section teaches you to build small, explainable searches so you can find public documents on a domain you are allowed to study, and say why each query worked.
 
@@ -406,7 +406,7 @@ Respect robots, rate limits, and terms of the search engine. Repeated automated 
 
 ### Field notes
 
-> Peel Boss would say: a good dork is a sentence you could defend to a librarian. If you would be embarrassed to explain the query, it is probably a stunt.
+> **Rule of thumb:** a good dork is a sentence you could defend to a librarian. If you would be embarrassed to explain the query, it is probably a stunt.
 
 Keep a tiny notebook of combinations that earned their keep. The win is not a secret operator. The win is knowing why the index answered.
 
@@ -423,7 +423,7 @@ Use the operators on the exercise: public PDFs on a sample university domain, th
 
 Collection alone is not analysis. Analysis explains what matters, why it matters, and how sure you are. A folder of captures is inventory. A report is a judgment someone else can use without living inside your brain.
 
-Peel Boss has a standard for this: a report should help a decision-maker decide. If it mainly proves you own a keyboard, more work is required.
+The standard is simple: a report should help a decision-maker decide. If it mainly proves you own a keyboard, more work is required.
 
 This section is the last fundamentals skill because it is where honest work either becomes useful or turns into a data dump with headings.
 
@@ -476,7 +476,7 @@ Keep OPSEC in the product too. Your report does not need your personal browser p
 
 ### Field notes
 
-> Peel Boss would say: if you cannot draw a line between what the page said and what you concluded, you are not analyzing. You are narrating. Narration is for campfires.
+> **Rule of thumb:** if you cannot draw a line between what the page said and what you concluded, you are not analyzing. You are narrating. Narration is for campfires.
 
 Read your draft once looking only for smuggled conclusions. Every adjective is a suspect. "Shadowy," "clearly," and "obviously" are usually where the evidence ran out.
 
@@ -575,7 +575,7 @@ Methodology includes saying no. Public information, stated purpose, proportionat
 
 Calling "look around" an objective. Listing twenty tools and using two. No stop condition. Skipping Prepare because the first search already felt promising. Reporting Explore output as if it were Analyze.
 
-> **Peel Boss:** A stop condition is how adults end meetings. If your investigation cannot end, it is not thorough. It is unemployed.
+> **Rule of thumb:** A stop condition is how adults end meetings. If your investigation cannot end, it is not thorough. It is unemployed.
 
 Close with the exercise: write a one-page investigation plan for researching a company you choose. Include the objective, source list, tools, time budget, and stop condition — the same five, filled in like you intend to follow them.
 
@@ -654,7 +654,7 @@ Climbing the pyramid does not unlock new legal powers. Top-layer "confirmation" 
 
 High confidence after one search. Treating three copies of the same story as three sources. Skipping the middle because operators feel fussy. Calling the bottom layer "OSINT complete."
 
-> **Peel Boss:** The pyramid is a height restriction. If your conclusion needs a hard hat and a blessing, you are still on the ground floor. Say so.
+> **Rule of thumb:** The pyramid is a height restriction. If your conclusion needs a hard hat and a blessing, you are still on the ground floor. Say so.
 
 Close with the exercise: take a research question and map what you would do at each layer of the pyramid. Write one paragraph per layer. If a paragraph is empty, that is the lesson — not a formatting error.
 
@@ -735,7 +735,7 @@ Document what you collected and why, including the legal basis (public source, t
 
 Screenshot with no URL. Notes written the next day from memory. Confidence as a vibe ("pretty sure") instead of a judgement about the source. Filenames that only make sense to the person who was tired. Capturing the search page and not the result. Forgetting that a screenshot without a clock is a postcard.
 
-> **Peel Boss:** If the evidence cannot be named, dated, and handed over, you do not have evidence. You have a story you liked enough to screenshot.
+> **Rule of thumb:** If the evidence cannot be named, dated, and handed over, you do not have evidence. You have a story you liked enough to screenshot.
 
 Close with the exercise: take one finding from a previous exercise and document it properly using the timestamp–source–context–confidence format described above. Add the archive or screenshot. Name the file so it sorts. That packet is the standard from here on.
 
@@ -815,7 +815,7 @@ Public correlation only. You may search what the open web already shows. You may
 
 Assuming Gmail local parts are unique people. Treating \`info@\` as a CEO. Spending a session on a disposable domain. Using a "does this mailbox exist" tool as proof of identity. Checking strangers on HIBP "for practice."
 
-> **Peel Boss:** An email address is a label, not a confession. Parse it, search what is public, and resist the urge to see if the password still works. That urge is how careers end.
+> **Rule of thumb:** An email address is a label, not a confession. Parse it, search what is public, and resist the urge to see if the password still works. That urge is how careers end.
 
 Close with the exercise: take five email addresses from *public* sources and analyse each one: provider, likely type (personal/work), any name clues in the local part, and any domains you can WHOIS. Leave HIBP for addresses you own, in the breach lesson.
 
@@ -901,7 +901,7 @@ Public correlation only. You look at what profiles already show the world. You d
 
 Declaring a match on the handle alone. Treating Namechk "taken" as proof. Ignoring the checklist because the photo "looks close." Using a rare-looking string that is actually a brand. Running Sherlock on a celebrity and calling it an investigation.
 
-> **Peel Boss:** Reuse is a gift. Confirmation is work. If your graph is held together by one spelling and optimism, it is not a graph. It is a wish.
+> **Rule of thumb:** Reuse is a gift. Confirmation is work. If your graph is held together by one spelling and optimism, it is not a graph. It is a wish.
 
 Close with the exercise: pick a username you rarely use (or a colleague's public username) and run it through three different tools or manual searches. Document which platforms returned results and what the profiles revealed — including the checklist ticks and the misses.
 
@@ -977,7 +977,7 @@ When you find one email in a breach, there are often more. Search related *publi
 
 Treating a breach hit as proof of current access. Copying passwords into notes "for analysis." Checking a stranger "to see the UI." Assuming every HIBP hit is a unique incident (stealer logs recycle). Pivoting straight to attacking the same password elsewhere.
 
-> **Peel Boss:** A breach notice is a to-do list for the owner of the inbox. It is not loot. If your pivot requires a login that is not yours, you have left the course and entered a statement of facts.
+> **Rule of thumb:** A breach notice is a to-do list for the owner of the inbox. It is not loot. If your pivot requires a login that is not yours, you have left the course and entered a statement of facts.
 
 Close with the exercise: take a test email address (**yours**) and check it on Have I Been Pwned. Document what breaches it appears in, what data was exposed, and identify at least one pivot point you could investigate further — a public correlation or a defensive action, not a password test.
 
@@ -1055,7 +1055,7 @@ WHOIS, DNS, archives, and public pages only. No unauthorized access to admin pan
 - Following every hostname in a certificate into a login you do not own.
 - Calling a shared name server “the same attacker” because the slide needed a cluster.
 
-> **Peel Boss aside.** A domain record is a form someone filled out, possibly with a lie, possibly with a lawyer. Intel Academy wants the form, the DNS, and a screenshot. It does not want a screenshot of an admin panel you should not have opened. If the 404 mentioned it, you already have the finding.
+> **Aside.** A domain record is a form someone filled out, possibly with a lie, possibly with a lawyer. OSINT101 wants the form, the DNS, and a screenshot. It does not want a screenshot of an admin panel you should not have opened. If the 404 mentioned it, you already have the finding.
 
 Your exercise: research a public website and document all publicly visible registration and technical information. If you encounter an index listing or an admin-shaped path, record it as exposure and leave it alone. The restraint belongs in the write-up.
 
@@ -1133,7 +1133,7 @@ Public content only. No unauthorized access to admin panels, even if they appear
 - Turning a technology fingerprint into a test plan.
 - Browsing an open index until the finding becomes a data breach you caused.
 
-> **Peel Boss aside.** A listing that says “Index of /backup” is a flare, not a welcome mat. Intel Academy grades whether you photographed the flare, not how far you walked down the hall. If you needed a password, you were not invited.
+> **Aside.** A listing that says “Index of /backup” is a flare, not a welcome mat. OSINT101 grades whether you photographed the flare, not how far you walked down the hall. If you needed a password, you were not invited.
 
 Your exercise: analyze a website and document findings about its legitimacy, technology stack, and any suspicious indicators. If you find an admin path or an index listing, write it up as exposure and stop. Curiosity that clicks through is not thoroughness.
 
@@ -1216,7 +1216,7 @@ Public archives and public DNS history only. No unauthorized access to admin pan
 - Blaming the current owner for 2011’s content after a re-registration.
 - Recreating old admin URLs on the live host because the archive made you curious.
 
-> **Peel Boss aside.** The past is a witness with gaps. Intel Academy wants three dated captures and one honest hole. It does not want you logging into a forgotten panel because the archive remembered the path. Memory is not consent.
+> **Aside.** The past is a witness with gaps. OSINT101 wants three dated captures and one honest hole. It does not want you logging into a forgotten panel because the archive remembered the path. Memory is not consent.
 
 Your exercise: check the Wayback Machine for a website and document how its content and purpose have changed over time. Date each shift. If an old snapshot shows an index listing or an admin page, note it as historical exposure and leave that door.
 
@@ -1295,7 +1295,7 @@ Company registers, public filings, and traces firms chose to publish. Competitiv
 
 Researching the brand and missing the entity. Treating a registered office as the factory. Using LinkedIn headcount as audited revenue. Stopping at Crunchbase. Calling a quiet company "shell" without checking whether it is simply small and dull.
 
-> **Peel Boss:** The register is boring on purpose. Boring is where the directors live. Charm is where the marketing team lives. Start with boring.
+> **Rule of thumb:** The register is boring on purpose. Boring is where the directors live. Charm is where the marketing team lives. Start with boring.
 
 Close with the exercise: research a local business online. Find its registration number, registered address, key personnel (CEO, directors), and approximate revenue range. Document all sources. If revenue is not public, say so and show the sources you used to learn that.
 
@@ -1377,7 +1377,7 @@ Digital footprint mapping is passive and public. Competitive intelligence, not e
 
 Calling a Wappalyzer icon a full architecture diagram. Treating every crt.sh name as live. Mapping employees' personal lives. Scanning because "footprint" sounded technical. Forgetting the register company is not the same as the Shopify storefront.
 
-> **Peel Boss:** A certificate log is a diary of what someone asked the internet to trust. It is not a to-do list of hosts to annoy. Read it. Do not rattle the doors.
+> **Rule of thumb:** A certificate log is a diary of what someone asked the internet to trust. It is not a to-do list of hosts to annoy. Read it. Do not rattle the doors.
 
 Close with the exercise: pick a medium-sized business you are familiar with and map its complete digital footprint: domains, social profiles, tech stack, third-party mentions, and employee presence on LinkedIn. Create a one-page summary with confidence ratings.
 
@@ -1466,7 +1466,7 @@ Public filings, contracts, case studies, news. Competitive intelligence, not esp
 
 Treating a shared coworking address as a corporate group. Counting every logo wall as a partnership. Missing old names. Drawing competitors from "I have heard of them." Messaging staff for confirmation. Confusing a vendor's marketing claim with a signed contract.
 
-> **Peel Boss:** A relationship map is only as adult as its worst edge. If you cannot say where an arrow came from, it is decoration. Decoration does not survive questions.
+> **Rule of thumb:** A relationship map is only as adult as its worst edge. If you cannot say where an arrow came from, it is decoration. Decoration does not survive questions.
 
 Close with the exercise: take the company you researched in the previous exercise and identify at least three relationships: ownership, partnership, supplier, or competitor. Create a simple text-based relationship map — nodes, edges, sources, confidence. That map is the brief.
 
@@ -1486,7 +1486,7 @@ Close with the exercise: take the company you researched in the previous exercis
         title: 'The Digital Identity Concept',
         duration: '25 min',
         content: `
-A digital identity is not a soul in the cloud. It is a pile of public traces that may refer to one person — or to three people, a brand intern, and a fan account. Intel Academy’s opening move is disambiguation, not drama. You will build a composite from public sources and keep your hands off anything that looks like doxxing.
+A digital identity is not a soul in the cloud. It is a pile of public traces that may refer to one person — or to three people, a brand intern, and a fan account. OSINT101’s opening move is disambiguation, not drama. You will build a composite from public sources and keep your hands off anything that looks like doxxing.
 
 ### What is a Digital Identity?
 
@@ -1545,7 +1545,7 @@ Doxxing — exposing private contact, home, or family details to shame or to “
 - Quoting “deleted” content without an archive and a date.
 - Building a target package as if the subject were prey.
 
-> **Peel Boss:** The internet contains surplus humans with identical names and identical sunsets. If your composite requires you to squint, un-squint and split the file. Ambiguity is not a personal insult. It is data.
+> **Rule of thumb:** The internet contains surplus humans with identical names and identical sunsets. If your composite requires you to squint, un-squint and split the file. Ambiguity is not a personal insult. It is data.
 
 Your exercise is to pick a public figure and document their digital identity across five platforms. Note what each platform actually reveals — not what you inferred from the header image. If two platforms might be different people, write that down in the same font you use for facts.
 
@@ -1570,7 +1570,7 @@ Work from addresses already public — a site, a press kit, a filing — or from
 
 ### Why this matters
 
-Email is how organizations file humans. It is also how analysts wander into breach dumps. Extract structured meaning and public cross-links without collecting secrets you have no right to hold. If your findings chain depends on someone else’s leaked password, you have left Intel Academy.
+Email is how organizations file humans. It is also how analysts wander into breach dumps. Extract structured meaning and public cross-links without collecting secrets you have no right to hold. If your findings chain depends on someone else’s leaked password, you have left OSINT101.
 
 ### What you will be able to do
 
@@ -1627,7 +1627,7 @@ Public-source email OSINT is fine. Using leaked passwords, buying credential lis
 - Assuming a company format means a specific human exists at that guess.
 - Forgetting role accounts (\`info@\`) are shared.
 
-> **Peel Boss:** An email is a label on a door, not a skeleton key. If your next step is “and then we try the password,” you are no longer in the identity lesson. Intel Academy does not grade that.
+> **Rule of thumb:** An email is a label on a door, not a skeleton key. If your next step is “and then we try the password,” you are no longer in the identity lesson. OSINT101 does not grade that.
 
 Your exercise is to take a known email address — ideally one you own, or a press address a public figure published — and document every *public* platform or page you can associate with it. Write the findings chain. If you cannot associate it without a dump, write “no public association found.” That is a result.
 
@@ -1638,7 +1638,7 @@ Your exercise is to take a known email address — ideally one you own, or a pre
         title: 'Username Correlation',
         duration: '30 min',
         content: `
-Usernames are the internet’s favorite recycling program. People drag \`cyberjake\` from a game in 2011 onto a professional site in 2024 and wonder how both turned up. Correlation is powerful. It is also how you glue two unrelated jakes into one frankenperson. Intel Academy wants matches you can defend.
+Usernames are the internet’s favorite recycling program. People drag \`cyberjake\` from a game in 2011 onto a professional site in 2024 and wonder how both turned up. Correlation is powerful. It is also how you glue two unrelated jakes into one frankenperson. OSINT101 wants matches you can defend.
 
 ### Username as a Cross-Platform Key
 
@@ -1711,7 +1711,7 @@ Public profile correlation is standard OSINT. Creating accounts to scrape non-pu
 - Treating parody and fan accounts as the principal.
 - “Verifying” by sending the person a message.
 
-> **Peel Boss:** Sherlock is a waiter bringing menus. You still have to read the dishes. If you brief “same username, same person” without opening the page, Intel Academy will assume you like being wrong in bulk.
+> **Rule of thumb:** Sherlock is a waiter bringing menus. You still have to read the dishes. If you brief “same username, same person” without opening the page, OSINT101 will assume you like being wrong in bulk.
 
 Your exercise is to pick a username, run it through Sherlock or WhatsMyName, then manually verify the top three matches. Write why each is the same person, a different person, or undecidable. Undecidable is allowed. Lazy merging is not.
 
@@ -1796,7 +1796,7 @@ Public posts are public. Circumventing privacy settings or buying follower lists
 - Assuming two languages means two people — or that two faces do not.
 - Archiving nothing, then arguing with a page that no longer exists.
 
-> **Peel Boss:** LinkedIn is a costume. Instagram is a different costume. If you confuse costume conflict with unmasking, Intel Academy will hand you a quieter hobby. Document the fabric. Do not invent the play.
+> **Rule of thumb:** LinkedIn is a costume. Instagram is a different costume. If you confuse costume conflict with unmasking, OSINT101 will hand you a quieter hobby. Document the fabric. Do not invent the play.
 
 Your exercise is to analyze a LinkedIn profile and an Instagram profile that appear to belong to the same person — a public figure is safest. Document discrepancies and consistencies in a table. If they do not survive disambiguation, document that instead. Being right about “not the same” is analysis.
 
@@ -1879,7 +1879,7 @@ Public records still have use limits: some jurisdictions restrict voter-file use
 - Skipping the date: old records describe old facts.
 - Turning a civil docket into a character essay.
 
-> **Peel Boss:** A county PDF will not congratulate you. It will also not forgive a bad join. If you need the subject to be the person in row three for the story to work, pick a new story. The record is not your intern.
+> **Rule of thumb:** A county PDF will not congratulate you. It will also not forgive a bad join. If you need the subject to be the person in row three for the story to work, pick a new story. The record is not your intern.
 
 Your exercise is to take a fictional persona or a public figure and find what public records exist for them in a state or county you specify. Document the search path and the results — including searches that returned nothing.
 
@@ -1950,7 +1950,7 @@ Disambiguate entities. "Acme LLC" in two counties may be two companies. Never tr
 
 ### Field notes
 
-> Peel Boss would say: if your notes look like you are moving in with the registered agent, you have left intelligence and entered a hobby I will not sign the timesheet for. Write the agent. Cite the register. Close the tab.
+> **Rule of thumb:** if your notes look like you are moving in with the registered agent, you have left intelligence and entered a hobby I will not sign the timesheet for. Write the agent. Cite the register. Close the tab.
 
 Find the registered agent for a sample local business and note the source reliability. Use the official filing. Date it. If you cannot explain why the source is official, it is not official. If you found a home address you did not need, do not put it in the answer. The exercise is a citation, not a biography, and biographies are how people-profiling goes wrong before the second lesson even starts.
 
@@ -1963,7 +1963,7 @@ Find the registered agent for a sample local business and note the source reliab
         content: `
 ## The internet contains many people with the same name and at least half of them are inconvenient
 
-The internet is a crowded room where half the name tags are photocopies. Identity resolution is the work of asking whether two public records describe one person, two people, or a brand that borrowed a face. Disambiguation is the work of surviving the answer "not enough." Intel Academy will take an honest unmerged pair over a tidy wrong one.
+The internet is a crowded room where half the name tags are photocopies. Identity resolution is the work of asking whether two public records describe one person, two people, or a brand that borrowed a face. Disambiguation is the work of surviving the answer "not enough." OSINT101 will take an honest unmerged pair over a tidy wrong one.
 
 This matters because a bad merge is a defamation machine. A timid non-merge is just a question. Common names are a factory for false positives. One identifier is a search key. A cluster is a possible identity. Contradictions are data.
 
@@ -2019,7 +2019,7 @@ Disambiguate before you attach more records. Never treat one handle as one perso
 
 ### Field notes
 
-> Peel Boss would say: if your identity call depends on one handle, you do not have an identity. You have a string. Strings do not pay taxes, hold jobs, or deserve a profile. Put the string back until it brings friends.
+> **Rule of thumb:** if your identity call depends on one handle, you do not have an identity. You have a string. Strings do not pay taxes, hold jobs, or deserve a profile. Put the string back until it brings friends.
 
 Compare two similar public profiles and document whether they likely refer to the same person, including the gaps in your reasoning. Likely is a ranked word. Gaps are mandatory. If you cannot list a gap, you have not disambiguated; you have committed. Commitment is for reports after the evidence shows up, and the evidence has not shown up if you are still staring at two similar smiles and a shared city name.
 
@@ -2091,7 +2091,7 @@ Disambiguate every human node. Two "Sam Patel at Acme" entries may be two Sams. 
 
 ### Field notes
 
-> Peel Boss would say: if your graph needs a villain color, you are not mapping. You are casting. Intel Academy does not produce casting directors. Label the edge or take it off the page.
+> **Rule of thumb:** if your graph needs a villain color, you are not mapping. You are casting. OSINT101 does not produce casting directors. Label the edge or take it off the page.
 
 Build a simple relationship map around a public subject and identify which links are confirmed, probable, or merely adjacent. Simple means a reader can hold it in their head. If you cannot explain an edge without a novel, it is adjacent or it is gone. The exercise is the labels. The pretty diagram is optional, and optional is the correct status for anything that tempts you to over-collect.
 
@@ -2162,7 +2162,7 @@ Never treat one handle as one person when dating a life. If identity is unresolv
 
 ### Field notes
 
-> Peel Boss would say: if your timeline reads like a eulogy, you over-collected. If it reads like a charge sheet, you over-interpreted. Dated rows. Sources. Gaps. That is the whole personality this lesson allows.
+> **Rule of thumb:** if your timeline reads like a eulogy, you over-collected. If it reads like a charge sheet, you over-interpreted. Dated rows. Sources. Gaps. That is the whole personality this lesson allows.
 
 Build a short timeline for a public person from three different source types and mark any unresolved gaps. Different types. Marked gaps. If you used three social posts, you used one type three times and you will redo it. If you filled a hole with a hunch, empty the hole. The exercise is honesty about time, which is rarer than people think and more useful than another adjective about who they "really are."
 
@@ -2175,7 +2175,7 @@ Build a short timeline for a public person from three different source types and
         content: `
 ## Just because you can learn something does not mean you should collect everything
 
-People-focused OSINT is where a competent collector becomes either a professional or a problem. The skill is not finding. The skill is refusing to find what the purpose does not pay for, and then writing what remains so that a reviewer can see your brakes as clearly as your facts. Intel Academy will forgive a thin profile. It will not forgive a thorough one that should never have been assembled.
+People-focused OSINT is where a competent collector becomes either a professional or a problem. The skill is not finding. The skill is refusing to find what the purpose does not pay for, and then writing what remains so that a reviewer can see your brakes as clearly as your facts. OSINT101 will forgive a thin profile. It will not forgive a thorough one that should never have been assembled.
 
 This matters because people recon lands on bodies, families, and reputations. If your process would look like celebrity gossip with better filenames, it is already failing the course. Purpose and proportionality keep you inside OSINT instead of personal surveillance. Reports travel. Caveats must travel with them.
 
@@ -2234,7 +2234,7 @@ You are not the subject's biographer or fan wiki. If a fact is sensitive and not
 
 ### Field notes
 
-> Peel Boss would say: if you would not read this summary aloud to the subject, their counsel, and me in the same room, rewrite it until you would. Courage is not collecting more. Courage is submitting less and still being right.
+> **Rule of thumb:** if you would not read this summary aloud to the subject, their counsel, and me in the same room, rewrite it until you would. Courage is not collecting more. Courage is submitting less and still being right.
 
 Write a short profiling summary that includes findings, confidence, caveats, and one explicit privacy consideration. If the privacy line could be pasted onto any paper in the building, it is not explicit. Name what you did not collect, or what must not be redistributed, or where identity remains unresolved. Neither line is optional.
 
@@ -2319,7 +2319,7 @@ Stay on public data. Do not create sockpuppet friendships, join closed groups un
 - Calling a missing friends list “OPSEC” when it is simply a default privacy setting.
 - Outsourcing the first look to a scraper and then being unable to cite what you actually saw.
 
-> **Peel Boss aside.** Platforms are not escape rooms. A locked list is not a puzzle for ambitious people. It is the part of the map labeled “you do not go here.” Intel Academy grades the inventory, not the trespass.
+> **Aside.** Platforms are not escape rooms. A locked list is not a puzzle for ambitious people. It is the part of the map labeled “you do not go here.” OSINT101 grades the inventory, not the trespass.
 
 Your exercise: document the publicly visible information available from each major social platform about a public figure. If a field is blank because it is private, write “not publicly visible” and move on. That sentence is still intelligence.
 
@@ -2386,7 +2386,7 @@ Collect public pages. Do not friend-request into a private graph, impersonate th
 - Using your personal account and then wondering why the graph looks familiar.
 - Treating an aggregator checklist as a completed investigation.
 
-> **Peel Boss aside.** A username is a label on a jar. It is not a confession that every jar with that label contains the same person. Intel Academy will accept a short map with three verified overlaps. It will not accept a constellation of maybes you connected because the font matched.
+> **Aside.** A username is a label on a jar. It is not a confession that every jar with that label contains the same person. OSINT101 will accept a short map with three verified overlaps. It will not accept a constellation of maybes you connected because the font matched.
 
 Your exercise: take one username and map it across five platforms, noting verification steps for each match. For every hit, write what overlapped, what conflicted, and the confidence you can actually defend.
 
@@ -2462,7 +2462,7 @@ Public posts and public imagery only. No harassment of people in the frame. No p
 - Geolocating from one generic beach and a confident feeling.
 - Skipping the subject rung because the location was fun to solve.
 
-> **Peel Boss aside.** A picture that fits the briefing is not a picture that passed. Intel Academy wants the ladder, including the ugly “unknown” on rung three. Convenience is how recycled photos get a second career.
+> **Aside.** A picture that fits the briefing is not a picture that passed. OSINT101 wants the ladder, including the ugly “unknown” on rung three. Convenience is how recycled photos get a second career.
 
 Your exercise: take an image from social media and walk through the full verification process, documenting each finding. Use the ladder in order. If a step fails, say so and stop promoting the claim.
 
@@ -2536,7 +2536,7 @@ Public posts only. No harassment, no baiting, no “research comments” under t
 - Merging two accounts because the tone “felt similar.”
 - Forgetting that community managers, ghostwriters, and ghost emojis exist.
 
-> **Peel Boss aside.** Sentiment is a weather report for a feed, not a medical chart. Intel Academy will take “tone dropped after the public filing” with a table. It will not take “they are spiraling” with a vibe and a highlighter.
+> **Aside.** Sentiment is a weather report for a feed, not a medical chart. OSINT101 will take “tone dropped after the public filing” with a table. It will not take “they are spiraling” with a vibe and a highlighter.
 
 Your exercise: analyze a public figure’s last 30 posts for behavioral patterns and sentiment trends. Code the window, write what changed, and leave motives in the parking lot unless the posts state them.
 
@@ -2613,7 +2613,7 @@ Respect rate limits and platform rules. Manual, ToS-compliant viewing of public 
 
 ### Field notes
 
-> Peel Boss would say: if your notebook says "same energy" under confidence, rewrite it. Energy is not a source. Energy is how interns get a reputation.
+> **Rule of thumb:** if your notebook says "same energy" under confidence, rewrite it. Energy is not a source. Energy is how interns get a reputation.
 
 The exercise is waiting: take a *test* username, trace it across three different social platforms, and rank your confidence for each match. Use the scoring language from this lesson. If you cannot explain a rank without pointing at a public field, the rank is too high. That is the entire point.
 
@@ -2686,7 +2686,7 @@ Disambiguate before you merge. A merged identity in a notebook becomes a merged 
 
 ### Field notes
 
-> Peel Boss would say: if you need a single identifier to make the story work, the story is doing the investigation. Fire the story. Keep the spreadsheet.
+> **Rule of thumb:** if you need a single identifier to make the story work, the story is doing the investigation. Fire the story. Keep the spreadsheet.
 
 Document a confidence model for linking one public profile to another without relying on a single identifier. Use the three tiers. Name the independent signals. Name the contradiction that would collapse the link. If the model only works when you squint, it is not a model. It is a preference, and preferences do not get a seat in the briefing.
 
@@ -2755,7 +2755,7 @@ Do not publish an assessment that invites harassment. Training output stays in t
 
 ### Field notes
 
-> Peel Boss would say: if your assessment has no "cannot conclude" line, you did not finish the analysis. You finished a personality. We already have enough of those.
+> **Rule of thumb:** if your assessment has no "cannot conclude" line, you did not finish the analysis. You finished a personality. We already have enough of those.
 
 Take a public post sequence and produce a short assessment of tone, likely audience, and one thing you still cannot safely conclude. Keep observations and inferences on separate lines. If a reader cannot tell which is which, start over. The exercise is short on purpose. Brevity is how you find out whether you actually knew anything.
 
@@ -2830,7 +2830,7 @@ A summary that names bystanders, minors, or medical details still needs proporti
 
 ### Field notes
 
-> Peel Boss would say: if you cannot point to the post, you do not have a finding. You have autocomplete. Autocomplete does not get a parking pass at Intel Academy.
+> **Rule of thumb:** if you cannot point to the post, you do not have a finding. You have autocomplete. Autocomplete does not get a parking pass at OSINT101.
 
 Use an AI tool to summarize a series of public social media posts, then manually verify every major claim it makes. The table is the work product. A glowing paragraph that "sounds like the account" is not verification. If the model was right, say so and show the URLs. If it was wrong, say so with the same calm. That is the adult supervision the title promised.
 
@@ -2870,7 +2870,7 @@ Telegram has become the platform of choice for:
 - Criminal and hacking forums
 - Activist networks and protest coordination
 
-That list is a map of *public* information environments, not a permission slip. Intel Academy work stays on public channels: the ones anyone can open, subscribe to, and read without impersonation, invitation-hunting, or a story about why you "need" access. Private groups, invite-only rooms, and closed discussion spaces are out of scope. If a channel requires deception to enter, you are no longer doing OSINT. You are doing something this course will not teach.
+That list is a map of *public* information environments, not a permission slip. OSINT101 work stays on public channels: the ones anyone can open, subscribe to, and read without impersonation, invitation-hunting, or a story about why you "need" access. Private groups, invite-only rooms, and closed discussion spaces are out of scope. If a channel requires deception to enter, you are no longer doing OSINT. You are doing something this course will not teach.
 
 Treat each public channel as a source with a purpose. A news channel is not a leak channel. A community digest is not a coordination feed. Write the purpose down before you start counting subscribers, or you will confuse volume with relevance.
 
@@ -2911,7 +2911,7 @@ Public does not mean consequence-free. Do not join private groups by deception. 
 
 Treating a forwarded claim as original. Counting subscribers as proof of quality. Monitoring criminal-themed channels as if that were a license to interact. Saving screenshots with no channel handle, no timestamp, and no note on whether the post was original or forwarded.
 
-> **Peel Boss:** A public channel is a press office that never hired an editor. Read it like a source, not like a friend who happens to shout.
+> **Rule of thumb:** A public channel is a press office that never hired an editor. Read it like a source, not like a friend who happens to shout.
 
 Close this lesson by doing the exercise: find three public Telegram channels in a topic area of interest. Document their purpose, subscriber count, and posting frequency. That log is the input for search and discovery next.
 
@@ -2983,7 +2983,7 @@ Search indexes are not a warrant. Use them to find public channels you are allow
 
 Stopping after the first search box. Keeping a channel because it is large, not because it answers the question. Treating a forward as proof of origin. Recording subscriber count and forgetting posting frequency. Hunting admins as if channel OSINT were people-hunting.
 
-> **Peel Boss:** Discovery is a process you can hand to someone else. If your method is "I have a good feel for Telegram," you have a hobby and a liability.
+> **Rule of thumb:** Discovery is a process you can hand to someone else. If your method is "I have a good feel for Telegram," you have a hobby and a liability.
 
 Close with the exercise: using Lyzem and Telegram search, find five channels related to a specific topic. Document the discovery methodology — tools, queries, rejects, and why the five survived.
 
@@ -3060,7 +3060,7 @@ Your API credentials, your account, public channels you are allowed to read. No 
 
 Using a personal account "just this once." Pasting API hashes into the script body. Pulling history until the library errors, then calling it thorough. Pointing a listener at a private invite. Forgetting to record the channel username so the database is a pile of integers.
 
-> **Peel Boss:** A collector with no rate limit and no stop condition is not ambitious. It is an outage with extra steps, and Telegram will be the one who notices first.
+> **Rule of thumb:** A collector with no rate limit and no stop condition is not ambitious. It is an outage with extra steps, and Telegram will be the one who notices first.
 
 Close by doing the exercise: set up a Telethon script that connects with *your* API credentials and collects the last 50 messages from one public channel you are allowed to read. Save the rows. Save the method note. That is the product.
 
@@ -3143,7 +3143,7 @@ Public imagery, public maps, public posts, EXIF when present in a file you lawfu
 - Converting three geotags into a “pattern of life.”
 - Implying classified-grade collection you did not do.
 
-> **Peel Boss aside.** A map tile is a photograph of a place at a time, not a confession from the planet. Intel Academy will take “Sentinel image, date on the slider, roof unchanged.” It will not take “we hacked a satellite” from someone who found the basemap switch.
+> **Aside.** A map tile is a photograph of a place at a time, not a confession from the planet. OSINT101 will take “Sentinel image, date on the slider, roof unchanged.” It will not take “we hacked a satellite” from someone who found the basemap switch.
 
 Your exercise: document three ways GEOINT could support an investigation in your typical work context. For each, name the public source, the question it answers, and the line you will not cross (including the front lawn).
 
@@ -3211,7 +3211,7 @@ After the workflow, write confidence: high (several independent matches), modera
 
 Beginners search the most famous object and force the rest to fit. Invert that. Search what is expensive to fake: a shop name plus a peak plus road-marking language. Famous monuments are bait.
 
-> **Peel Boss aside.** Recognition is a feeling. Geolocation is a stack of boring matches. Intel Academy will accept “unknown” with a completed checklist. It will not accept “pretty sure it’s Santorini” from someone who liked the white paint.
+> **Aside.** Recognition is a feeling. Geolocation is a stack of boring matches. OSINT101 will accept “unknown” with a completed checklist. It will not accept “pretty sure it’s Santorini” from someone who liked the white paint.
 
 Your exercise: geolocate three images from public sources using only visible indicators, then check your work. Use the workflow in order. If EXIF is present, test it; if it is absent, say so. Do not visit the sites.
 
@@ -3295,7 +3295,7 @@ Public points only. No trespass to “improve” a pin. No implied device tracki
 - Forgetting imagery dates, then arguing about a building that was not there yet.
 - Letting a pretty legend replace a source list.
 
-> **Peel Boss aside.** If the map is prettier than the evidence, the map is lying with taste. Intel Academy wants five sourced pins and a dull legend. It does not want a glow that implies you bought a constellation.
+> **Aside.** If the map is prettier than the evidence, the map is lying with taste. OSINT101 wants five sourced pins and a dull legend. It does not want a glow that implies you bought a constellation.
 
 Your exercise: create a simple map showing five locations related to a public figure and note any patterns you observe. Cite each point. If you do not see a pattern, write that. Absence of a cluster is allowed. Inventing one is not.
 
@@ -3372,7 +3372,7 @@ Visual clues only in this lesson — no metadata hunting yet. Practice on images
 
 Naming a city from one chain store. Ignoring license-plate or script evidence that contradicts the pretty mountain. Treating reverse-search failure as "therefore unique and secret." Continuing from a building to the people who live in it.
 
-> **Peel Boss:** "I recognise that skyline" is a hypothesis. It becomes intelligence when a second clue agrees and you can show both. Until then it is tourism.
+> **Rule of thumb:** "I recognise that skyline" is a hypothesis. It becomes intelligence when a second clue agrees and you can show both. Until then it is tourism.
 
 Close with the exercise: find five photos online with unknown locations. Use visual clues only (no metadata) to determine where each was taken. Prefer public practice images and news photos. Write clues, hypothesis, and confidence — not a dossier on the photographer.
 
@@ -3442,7 +3442,7 @@ Extract EXIF on photos you own or on files that publicly include metadata and th
 
 Reading Instagram saves as if they were camera originals. Trusting GPS without looking at the image. Ignoring the timestamp that wrecks the narrative. Uploading sensitive images to random EXIF websites. Treating device model as identity.
 
-> **Peel Boss:** Metadata is a witness that forgets to mention it was standing in the previous town when it last got a satellite fix. Cross-check it or it will embarrass you in front of a map.
+> **Rule of thumb:** Metadata is a witness that forgets to mention it was standing in the previous town when it last got a satellite fix. Cross-check it or it will embarrass you in front of a map.
 
 Close with the exercise: take a photo with your phone (location enabled) and extract all EXIF data using exiftool or a web viewer. List GPS, time, device, and three fields you did not expect. That file is yours. Keep the habit.
 
@@ -3519,7 +3519,7 @@ Visual clues, public comparison imagery, and EXIF only on photos you own or that
 
 One clue, huge confidence. Using historical Street View from the wrong year. Forcing star alignment on a cloudy night. Skipping the log because the answer "felt obvious." Moving from a solved building to the people inside it.
 
-> **Peel Boss:** Three clues that agree are a location. Three tabs that agree with your first guess are a mood. Write the log so we can tell which one you built.
+> **Rule of thumb:** Three clues that agree are a location. Three tabs that agree with your first guess are a mood. Write the log so we can tell which one you built.
 
 Close with the exercise: pick a photo from Reddit r/whereisthis and attempt to locate it using at least three different clues. Document your methodology in the geolocation log format above. Hand in the path, not just the pin.
 
@@ -3543,7 +3543,7 @@ Close with the exercise: pick a photo from Reddit r/whereisthis and attempt to l
 
 Nmap is the classic multi-tool of infrastructure reconnaissance: it asks a host which ports are listening and, if you ask politely enough, what might be speaking on them. In this course that host is a local lab target you own or a system you are explicitly authorized to test. Not a company that merely looks interesting.
 
-Peel Boss keeps a framed reminder for this lesson. "I launched the loudest scan possible first" is not a methodology. It is a confession.
+Frame this one. "I launched the loudest scan possible first" is not a methodology. It is a confession.
 
 This section exists because nmap is easy to run and easy to misuse. The skill is not memorizing flags. It is choosing a quiet, justified scan, reading the output, and knowing what you still cannot answer.
 
@@ -3599,7 +3599,7 @@ If you are unsure whether a target is authorized, it is not.
 
 ### Field notes
 
-> Peel Boss would say: the quietest useful scan is the one you can explain in one sentence. If your justification is "I wanted to see everything," you wanted a hobby, not a finding.
+> **Rule of thumb:** the quietest useful scan is the one you can explain in one sentence. If your justification is "I wanted to see everything," you wanted a hobby, not a finding.
 
 Put the scope line above the command in your notes. If the scope line is blank, do not press Enter.
 
@@ -3616,7 +3616,7 @@ Run the stealth scan on your local test target for the exercise. Identify open p
 
 Before anyone gets fancy, basic web enumeration already tells you a great deal about structure, technology, and forgotten content. WhatWeb guesses the stack from headers and HTML. Dirb guesses paths from a wordlist and the server's answers. Together they turn "it is a website" into a short list worth noting.
 
-Peel Boss would add that a leftover \`/backup\` folder is not a personality flaw in the tool. It is a reminder that people ship leftovers and then go to lunch.
+Add to that: a leftover \`/backup\` folder is not a personality flaw in the tool. It is a reminder that people ship leftovers and then go to lunch.
 
 This section is about fingerprinting and path enumeration on systems you are allowed to test. The judgment call is which findings are operationally interesting and which are merely untidy.
 
@@ -3676,7 +3676,7 @@ Do not download backup archives from systems that are not yours. Finding that a 
 
 ### Field notes
 
-> Peel Boss would say: the wordlist is a hypothesis generator. The interesting part is which guesses the server bothered to answer. If you cannot sort interesting from untidy, you are still collecting, not enumerating.
+> **Rule of thumb:** the wordlist is a hypothesis generator. The interesting part is which guesses the server bothered to answer. If you cannot sort interesting from untidy, you are still collecting, not enumerating.
 
 Write a two-column note: \`path/tech\` and \`so what\`. If the second column is empty, the first column is a souvenir.
 
@@ -3693,7 +3693,7 @@ For the exercise, fingerprint an authorized site, enumerate likely content paths
 
 Maltego helps you turn disconnected facts into a graph that another analyst can understand at a glance. Entities are the nouns. Transforms are questions you ask about those nouns using public or licensed data sources. The graph is the argument: what is linked, what is missing, and what you have not checked yet.
 
-Peel Boss likes graphs for a petty reason. It is much easier to brief from a graph than from forty-seven screenshots and a haunted spreadsheet.
+Graphs win for a petty reason. It is much easier to brief from a graph than from forty-seven screenshots and a haunted spreadsheet.
 
 This section is about a small, honest infrastructure map around a public domain, not about running every transform until the canvas looks like a firework.
 
@@ -3748,7 +3748,7 @@ This is still OSINT. No exploit transforms, no "just checking if the login works
 
 ### Field notes
 
-> Peel Boss would say: if the graph needs a narrator standing next to it, the graph is unfinished. If the graph cannot survive a narrator leaving the room, you built decoration.
+> **Rule of thumb:** if the graph needs a narrator standing next to it, the graph is unfinished. If the graph cannot survive a narrator leaving the room, you built decoration.
 
 Keep a transform log: what you ran, on which entity, and why you stopped. Restraint is a professional skill. Enthusiasm is free and noisy.
 
@@ -3765,7 +3765,7 @@ Create the Maltego graph for the exercise around a public domain and map the obv
 
 Wireshark lets you inspect conversations between systems and applications in painful, beautiful detail. Each frame is a receipt: who spoke, on which port, with which protocol, and sometimes with a payload that nobody bothered to encrypt. You are not collecting packets for spiritual reasons. You are answering a question about behavior, flow, or evidence.
 
-Peel Boss has watched too many people open a live capture and then sit there like the flood will eventually apologize. Filter aggressively. Label interesting streams. Avoid staring at raw packet floods like they will eventually explain themselves out of shame.
+Too many people open a live capture and then sit there like the flood will eventually apologize. Filter aggressively. Label interesting streams. Avoid staring at raw packet floods like they will eventually explain themselves out of shame.
 
 This section is lab work. You capture traffic you are allowed to see: your own VM, a classroom tap, or a sample \`pcap\` provided for training.
 
@@ -3823,7 +3823,7 @@ If a sample pcap includes credentials or personal data, treat it as teaching mat
 
 ### Field notes
 
-> Peel Boss would say: a filter is how you admit you have a question. An unfiltered live view is how you admit you do not.
+> **Rule of thumb:** a filter is how you admit you have a question. An unfiltered live view is how you admit you do not.
 
 Write the question on a sticky note on the monitor. If the packets cannot answer it, change the experiment, not the story.
 
@@ -3840,7 +3840,7 @@ Capture the small authorized sample for the exercise and explain the services an
 
 Kali becomes genuinely useful when you stop thinking in terms of isolated commands and start thinking in workflows. Nmap, WhatWeb, Dirb, Maltego, and Wireshark are not a personality. They are steps you can order, justify, and file. A tool run without a question is a screensaver that uses sudo.
 
-Peel Boss has seen the beginner bug so often it has a coffee stain. People run five tools, save nothing, and then attempt to reconstruct what happened from terminal scrollback and personal optimism. This is not an evidence strategy.
+The beginner bug is so common it has a coffee stain. People run five tools, save nothing, and then attempt to reconstruct what happened from terminal scrollback and personal optimism. This is not an evidence strategy.
 
 This section is the glue for the module: a repeatable order of operations and a note habit that survives contact with lunch.
 
@@ -3898,7 +3898,7 @@ If a step would touch a live third-party system without written permission, the 
 
 ### Field notes
 
-> Peel Boss would say: the workflow is the product you can hand to the next operator. The commands are just the noise it made on the way. If your notes cannot be followed, you did not operate. You improvised and hoped the hope would file itself.
+> **Rule of thumb:** the workflow is the product you can hand to the next operator. The commands are just the noise it made on the way. If your notes cannot be followed, you did not operate. You improvised and hoped the hope would file itself.
 
 Put the question on line one. Put the stop condition on line two ("when I can name open ports, likely web stack, and one unknown"). Everything after that is optional until those lines are satisfied.
 
@@ -3924,7 +3924,7 @@ Design the repeatable Kali workflow for the exercise: tool order and output hand
 
 Passive reconnaissance is the part of network work that looks like reading. You collect what the internet already published about a name, a domain, or a company, and you do not poke the company's live systems to see if they flinch. That is not cowardice. It is how you stay inside OSINT instead of accidentally running an unauthorized test and calling it curiosity.
 
-This matters because most of what analysts need is already in registries, certificate logs, archives, and public DNS. Touching the target early creates logs, legal problems, and a false sense of progress. Intel Academy will let you get loud later, on lab ranges and written authorizations—not on a sample company you picked because the logo was handy.
+This matters because most of what analysts need is already in registries, certificate logs, archives, and public DNS. Touching the target early creates logs, legal problems, and a false sense of progress. OSINT101 will let you get loud later, on lab ranges and written authorizations—not on a sample company you picked because the logo was handy.
 
 Passive reconnaissance means gathering information without directly touching the target infrastructure. You query public databases, search engines, archives, and published datasets. You do not port-scan their office range. You do not throw a wordlist at their VPN. You do not "just check if the admin panel is up" on a network you do not own.
 
@@ -3976,7 +3976,7 @@ Do not use leaked internal docs you have no right to possess. Do not authenticat
 
 ### Field notes
 
-> Peel Boss would say: if your report's first verb is "we scanned," and nobody signed a scope document, you did not do reconnaissance. You did a favor for their SOC and a problem for ours.
+> **Rule of thumb:** if your report's first verb is "we scanned," and nobody signed a scope document, you did not do reconnaissance. You did a favor for their SOC and a problem for ours.
 
 Perform a passive reconnaissance report on a sample company and identify three likely pivot points for deeper research. Deeper means more public sources or, separately, authorized testing this exercise did not grant. Cite what you queried and when. If a pivot needs a packet to the company's hosts, label it *out of scope for this exercise* and still write why it would matter.
 
@@ -3991,7 +3991,7 @@ Perform a passive reconnaissance report on a sample company and identify three l
 
 DNS is the organization's skeleton as seen from the street. Names tell you how people thought the network should be organized, which vendors they hired, and which forgotten experiment still has a certificate. Enumeration, in this course, means assembling *externally visible* names from public sources and grouping them by likely function. It does not mean attacking a nameserver until it confesses.
 
-This matters because names support defensive prioritization and lawful scoping. They are not a menu. A tidy \`www\` and \`mail\` story is a press site. The interesting structure is \`okta\`, \`vpn\`, \`gitlab\`, and \`legacy-shop-2019\`. Intel Academy can live with an incomplete map. It cannot live with an unauthorized zone transfer.
+This matters because names support defensive prioritization and lawful scoping. They are not a menu. A tidy \`www\` and \`mail\` story is a press site. The interesting structure is \`okta\`, \`vpn\`, \`gitlab\`, and \`legacy-shop-2019\`. OSINT101 can live with an incomplete map. It cannot live with an unauthorized zone transfer.
 
 DNS tells you how a company names systems, separates environments, and occasionally forgets to hide test infrastructure with names like \`staging-old-final2\`. Read names as language. \`sso\` and \`idp\` are identity. \`citrix\` and \`vpn\` are remote access. \`help\` is people processes. Do not assume a name is reachable or important. A name can be a leftover certificate, a parked \`CNAME\`, or a marketing microsite from a product that died. Your grouping is a hypothesis about *function*, not a claim about vulnerability.
 
@@ -4044,7 +4044,7 @@ Do not authenticate to discovered SSO portals with guessed or breached passwords
 
 ### Field notes
 
-> Peel Boss would say: \`staging-old-final2\` is not a personality. It is a filing error that escaped. File it. Do not adopt it.
+> **Rule of thumb:** \`staging-old-final2\` is not a personality. It is a filing error that escaped. File it. Do not adopt it.
 
 Map a target's externally visible subdomains and group them by likely business function. "Target" here is a sample you may lawfully study from public data, not a victim. If you cannot justify a group, use \`unknown\` and say what extra *public* source would help. Completeness is less important than a grouping another analyst could argue with.
 
@@ -4112,7 +4112,7 @@ Do not invent tool exploits or paste attack payloads into the report to look ser
 
 ### Field notes
 
-> Peel Boss would say: if your fingerprint section reads like a shopping list of CVEs, you skipped the part where we asked what the thing *is*. Name the animal before you name the diseases.
+> **Rule of thumb:** if your fingerprint section reads like a shopping list of CVEs, you skipped the part where we asked what the thing *is*. Name the animal before you name the diseases.
 
 Fingerprint a public-facing service and explain which clues are strong, weak, and purely speculative. Use a site you are allowed to study. The grade is the ranking, not the length of the technology laundry. If everything is "strong," you have not understood the reminder, and the reminder was the only part of this lesson that was trying to keep you employed.
 
@@ -4177,7 +4177,7 @@ If the list came from a class dataset, say so. If it came from your earlier *pas
 
 ### Field notes
 
-> Peel Boss would say: if everything is Priority One, you do not have priorities. You have a tantrum with row numbers. Pick fewer hills. Hills are expensive.
+> **Rule of thumb:** if everything is Priority One, you do not have priorities. You have a tantrum with row numbers. Pick fewer hills. Hills are expensive.
 
 Take a list of discovered internet-facing assets and rank them by likely investigative or defensive value. Use the model. Write the reasons. If your top item is "because I could," start the list over. The exercise is judgment. Judgment is the product. The hostnames were only the raw material.
 
@@ -4264,7 +4264,7 @@ Observation for training, journalism, research, and defense. No transactions of 
 - Starting research on hidden services because it sounds advanced.
 - Confusing a leak’s existence with the leak’s accuracy.
 
-> **Peel Boss aside.** Mystery is not a methodology. If the only thing you can say is that a site was hard to type, you have described a user interface, not an intelligence source. Intel Academy prefers a dull surface-web citation to a dramatic one you cannot repeat in daylight.
+> **Aside.** Mystery is not a methodology. If the only thing you can say is that a site was hard to type, you have described a user interface, not an intelligence source. OSINT101 prefers a dull surface-web citation to a dramatic one you cannot repeat in daylight.
 
 Your exercise: document the legitimate use cases for dark web access that apply to your work context. If the honest list is short or empty, write that down. Restraint is a finding.
 
@@ -4345,7 +4345,7 @@ Isolation is for safety and evidence hygiene, not evading law enforcement. Do no
 - Saving every link from a directory as if listing were vetting.
 - Building a lab before you have a question.
 
-> **Peel Boss aside.** A virtual machine is a pair of gloves, not a costume. Intel Academy will sign off on official Tor, a clean snapshot, and three boring official mirrors. It will not sign off on a scavenger hunt that ends at a checkout page.
+> **Aside.** A virtual machine is a pair of gloves, not a costume. OSINT101 will sign off on official Tor, a clean snapshot, and three boring official mirrors. It will not sign off on a scavenger hunt that ends at a checkout page.
 
 Your exercise: set up a safe research environment and document three legitimate dark web resources relevant to OSINT research. Official newsroom or NGO mirrors beat any “interesting” market. If you cannot name three that are legitimate, document the gap and stop.
 
@@ -4412,7 +4412,7 @@ Lawful purpose first. Isolation and official Tor if you access anything. No mark
 - Creating a “research” account that then chats and becomes a peer.
 - Citing a hidden URL with no access date, as if the site will still be there Monday.
 
-> **Peel Boss aside.** If your notes include a price, a vendor, or a cart, you are no longer collecting intelligence. You are window-shopping in a place this academy does not window-shop. Observation is the job. Participation is a career change.
+> **Aside.** If your notes include a price, a vendor, or a cart, you are no longer collecting intelligence. You are window-shopping in a place this academy does not window-shop. Observation is the job. Participation is a career change.
 
 Your exercise: identify and document three dark web sources that could support legitimate OSINT research in your field. Official tip lines and newsroom mirrors count. Markets you would have to buy from do not. For each, write the category, the lawful use, and the line you will not cross.
 
@@ -4489,7 +4489,7 @@ Verification is documentary. It is not purchase, credential stuffing, or a hunt 
 - Publishing dump contents because the verification section felt thin.
 - Letting a dramatic URL outrun a dull official denial or confirmation.
 
-> **Peel Boss aside.** Anyone can say they found something in a dim corner. Intel Academy grades whether the claim still stands when you turn the lights on. If it only works in the dark, it does not work.
+> **Aside.** Anyone can say they found something in a dim corner. OSINT101 grades whether the claim still stands when you turn the lights on. If it only works in the dark, it does not work.
 
 Your exercise: take a dark web source and apply the full verification stack, documenting what you could and could not confirm. Put “I found it on the dark web” at the top, then make sure it is not the last line.
 
@@ -4584,7 +4584,7 @@ You are reading public ledger data. You are not advising anyone on mixing or “
 - Ignoring change outputs and inventing a second counterparty.
 - Using clustering language as if it were a name.
 
-> **Peel Boss:** The ledger is complete about transfers and silent about people. If your notes sound like a true-crime voiceover, you have left Intel Academy. Put the name down. Put the hash back.
+> **Rule of thumb:** The ledger is complete about transfers and silent about people. If your notes sound like a true-crime voiceover, you have left OSINT101. Put the name down. Put the hash back.
 
 Your exercise is to trace a Bitcoin transaction through a public block explorer and document the path from source to destination. Write what moved, when, and between which addresses. Then write the sentence you cannot honestly write yet: who those addresses are. Leave that sentence blank on purpose.
 
@@ -4595,7 +4595,7 @@ Your exercise is to trace a Bitcoin transaction through a public block explorer 
         title: 'Transaction Tracing',
         duration: '70 min',
         content: `
-Tracing is bookkeeping with better graphics. You start at an address, you walk inputs and outputs, and you stop when the public chain stops being useful. Intel Academy does not award points for following funds into fog and announcing you have “lost them,” as if the universe owed you a villain.
+Tracing is bookkeeping with better graphics. You start at an address, you walk inputs and outputs, and you stop when the public chain stops being useful. OSINT101 does not award points for following funds into fog and announcing you have “lost them,” as if the universe owed you a villain.
 
 ### Following the money through the blockchain
 
@@ -4665,7 +4665,7 @@ Public-explorer tracing is lawful OSINT. Teaching evasion is not this course. No
 - Skipping token and internal tabs on Ethereum.
 - Writing “the trail died” when you mean “custodial balance I cannot see.”
 
-> **Peel Boss:** A cluster is a seating chart, not a confession. If you brief a heuristic as a face, Intel Academy will assume you confused analysis with wish fulfillment. Count the outputs again.
+> **Rule of thumb:** A cluster is a seating chart, not a confession. If you brief a heuristic as a face, OSINT101 will assume you confused analysis with wish fulfillment. Count the outputs again.
 
 Your exercise is to trace a real, public cryptocurrency transaction and document the full path, identifying any services or labeled entities you encounter. For each hop, mark observed, labeled, or inferred. If you cannot see through a service, stop and say so. That stop is professional.
 
@@ -4676,7 +4676,7 @@ Your exercise is to trace a real, public cryptocurrency transaction and document
         title: 'Real-World Attribution',
         duration: '65 min',
         content: `
-This is the lesson where people try to turn an address into a human and look surprised when the chain refuses. Attribution is occasionally possible. It is rarely certain. Intel Academy’s standard is that you can explain the method, the gap, and the confidence without a naming ceremony over a QR code.
+This is the lesson where people try to turn an address into a human and look surprised when the chain refuses. Attribution is occasionally possible. It is rarely certain. OSINT101’s standard is that you can explain the method, the gap, and the confidence without a naming ceremony over a QR code.
 
 ### From addresses to people
 
@@ -4750,7 +4750,7 @@ Identifying a private individual must stay inside public records and published s
 - Skipping confidence because the graph looks impressive.
 - Offering any hint about how to avoid attribution.
 
-> **Peel Boss:** Certainty is a luxury good. Most of you cannot afford it. If your memo needs a drumroll before the name, delete the name and keep the drumroll for someone who brought a primary source.
+> **Rule of thumb:** Certainty is a luxury good. Most of you cannot afford it. If your memo needs a drumroll before the name, delete the name and keep the drumroll for someone who brought a primary source.
 
 Your exercise is to document a realistic cryptocurrency attribution scenario: tracing steps, methods, and confidence levels. Invent nothing that looks like evasion advice. If the honest end state is “unknown person, known path to a labeled service,” that is a complete product.
 
@@ -4772,7 +4772,7 @@ Your exercise is to document a realistic cryptocurrency attribution scenario: tr
         content: `
 ## The Chain of Custody
 
-Digital forensics begins before anyone finds a smoking file. It begins when you decide that a piece of media might matter later, to someone who was not in the room and does not love you. Preservation is how you keep that future argument from becoming "we think it used to look like this." Intel Academy will tolerate a boring acquisition. It will not tolerate a clever one that changed the exhibit.
+Digital forensics begins before anyone finds a smoking file. It begins when you decide that a piece of media might matter later, to someone who was not in the room and does not love you. Preservation is how you keep that future argument from becoming "we think it used to look like this." OSINT101 will tolerate a boring acquisition. It will not tolerate a clever one that changed the exhibit.
 
 This matters because if the bits move and you cannot prove they did not, the rest of the analysis is a book report. Hash values and a chain-of-custody log answer where it came from, who touched it, and whether it is the same object. This lesson is lab-only. You image media you own or the instructor issued. You do not wander into a roommate's laptop with a USB and a documentary voice-over.
 
@@ -4822,7 +4822,7 @@ Do not share images outside the lab controls. Do not hide a second copy "for con
 
 ### Field notes
 
-> Peel Boss would say: if the chain of custody is "I kept it on my desk near the good snacks," you do not have custody. You have a snack-adjacent exhibit. Courts are strangely unmoved by trail mix.
+> **Rule of thumb:** if the chain of custody is "I kept it on my desk near the good snacks," you do not have custody. You have a snack-adjacent exhibit. Courts are strangely unmoved by trail mix.
 
 Create a forensic image of a test USB drive, record the acquisition steps, and verify the resulting hash. The image is not the trophy. The log plus matching hashes is the trophy. If verification fails, your report is the failure and the stop, not a shrug and a second undocumented try. That is preservation. Everything after this lesson assumes you did it.
 
@@ -4892,7 +4892,7 @@ Privacy still applies inside a disk image. Collect what the question needs. Out-
 
 ### Field notes
 
-> Peel Boss would say: fast is not the opposite of forensic. Fast-and-undocumented is. If you cannot hand the checklist to the next examiner, you did not triage. You rummaged.
+> **Rule of thumb:** fast is not the opposite of forensic. Fast-and-undocumented is. If you cannot hand the checklist to the next examiner, you did not triage. You rummaged.
 
 Design a triage checklist for a workstation suspected of being used in data exfiltration. Make it runnable on a preserved image. Include the urgent targets, the "do not touch the original" line, and a parking lot for deep work. If it only works when the examiner already knows the answer, it is a hint, not a checklist.
 
@@ -4905,7 +4905,7 @@ Design a triage checklist for a workstation suspected of being used in data exfi
         content: `
 ## Telling the story of what happened
 
-A disk full of artifacts is a junk drawer. A timeline is the same drawer emptied onto a table in the order the clock claims things happened. Reconstruction is how you test stories: the user's story, the ticket's story, and the story you were about to fall in love with. Intel Academy prefers the clock, with all its known failure modes, over a dramatic single file.
+A disk full of artifacts is a junk drawer. A timeline is the same drawer emptied onto a table in the order the clock claims things happened. Reconstruction is how you test stories: the user's story, the ticket's story, and the story you were about to fall in love with. OSINT101 prefers the clock, with all its known failure modes, over a dramatic single file.
 
 This matters because sequence turns "a USB was used" and "a zip appeared" into order—or it fails to, which is equally valuable. Without time, you have a pile of nouns. You will build a short incident timeline from mixed browser, file, and log artifacts on authorized lab material, and identify a gap. Gaps are not failures. Unnamed gaps are.
 
@@ -4961,7 +4961,7 @@ Do not invent parser exploits or anti-forensic "defeat" techniques. If anti-fore
 
 ### Field notes
 
-> Peel Boss would say: if your timeline has no holes, you did not finish. You wallpapered. I can hire wallpaper cheaper than I can hire an examiner.
+> **Rule of thumb:** if your timeline has no holes, you did not finish. You wallpapered. I can hire wallpaper cheaper than I can hire an examiner.
 
 Build a short incident timeline from mixed browser, file, and log artifacts and identify one gap needing more evidence. Mix means at least two families, preferably three. The gap should be specific: "no prefetch for the interval" beats "more research needed." If you cannot point at the rows, you do not have a timeline. You have a synopsis, and synopses are how movies get funded, not how cases get closed.
 
@@ -5030,7 +5030,7 @@ Minimize unrelated personal data in the writeup. You can cite \`Users\\Alex\\Dow
 
 ### Field notes
 
-> Peel Boss would say: if your finding needs a drumroll, delete the drumroll. If it needs a villain, you are writing fanfic on company time. Give me the artifacts, the confidence, and the next boring step.
+> **Rule of thumb:** if your finding needs a drumroll, delete the drumroll. If it needs a villain, you are writing fanfic on company time. Give me the artifacts, the confidence, and the next boring step.
 
 Write a short forensic finding from three related artifacts, including confidence level and recommended next steps. Short means a reader can finish it before their coffee cools and still know what to do. If you cannot fit the four reporting-rule bullets, you do not have a finding yet. You have notes. Notes are how analysis starts. Findings are how it leaves the room without starting a new incident in Legal.
 
@@ -5050,7 +5050,7 @@ Write a short forensic finding from three related artifacts, including confidenc
         title: 'Understanding Breach Data',
         duration: '20 min',
         content: `
-A breach is an organization’s failure that becomes everyone else’s rumor. The useful part for OSINT training is not a pile of other people’s passwords. It is the *public fact that a breach was reported*, what classes of data the reporters say were involved, and whether an address *you control* was listed. Intel Academy will teach you to read that metadata. It will not teach you to collect a dump.
+A breach is an organization’s failure that becomes everyone else’s rumor. The useful part for OSINT training is not a pile of other people’s passwords. It is the *public fact that a breach was reported*, what classes of data the reporters say were involved, and whether an address *you control* was listed. OSINT101 will teach you to read that metadata. It will not teach you to collect a dump.
 
 ### What Breach Data Contains
 
@@ -5113,7 +5113,7 @@ Pivots from here are conceptual: “HIBP says this address appeared in a 2019 fo
 - Assuming “it’s already public” means you may possess and spread the file.
 - Calling dump shopping “collection.”
 
-> **Peel Boss:** Other people’s passwords are not a research library. They are stolen house keys in a box. Intel Academy does not grade how many keys you can fondle. Check your own locks. Write down the incident names.
+> **Rule of thumb:** Other people’s passwords are not a research library. They are stolen house keys in a box. OSINT101 does not grade how many keys you can fondle. Check your own locks. Write down the incident names.
 
 Your exercise is to use Have I Been Pwned to check three email addresses **you own** and document which breaches they appear in. Record names, dates, and data classes. Do not record passwords. If HIBP shows none, document that — a clean bill is still a result, and it is a better one than a folder you should not have.
 
@@ -5184,7 +5184,7 @@ Do not download dumps. Do not distribute them. Do not use others’ leaked passw
 - Writing attacker next-steps instead of owner next-steps.
 - Calling a combo list a dataset because it arrived as CSV.
 
-> **Peel Boss:** A password theme is a story about how someone invents secrets, not a ticket into their life. If your workflow has a step named “extract pairs,” Intel Academy will extract you from the module. Use the prop file. Check your own HIBP.
+> **Rule of thumb:** A password theme is a story about how someone invents secrets, not a ticket into their life. If your workflow has a step named “extract pairs,” OSINT101 will extract you from the module. Use the prop file. Check your own HIBP.
 
 Your exercise is to analyse a known breached credential from a **test or exercise dataset, not a real person’s leak**. What patterns can you describe? What intelligence would you give the *fictional owner*? If you do not have a prop file, invent one obviously fake string (\`TrainingHorse-2018\`) and analyse that. Do not go looking for a real one to make the homework feel authentic.
 
@@ -5195,7 +5195,7 @@ Your exercise is to analyse a known breached credential from a **test or exercis
         title: 'Timeline and Correlation',
         duration: '25 min',
         content: `
-A single breach notice is a point. Several notices on the same mailbox are a timeline — one-off versus reuse habit — without opening a dump. Intel Academy builds that timeline from **publicly reported metadata**: incident names, dates, and data classes. Not from a folder you should not possess.
+A single breach notice is a point. Several notices on the same mailbox are a timeline — one-off versus reuse habit — without opening a dump. OSINT101 builds that timeline from **publicly reported metadata**: incident names, dates, and data classes. Not from a folder you should not possess.
 
 ### Building a Breach Timeline
 
@@ -5261,7 +5261,7 @@ Do not buy or traffic stolen credentials. Do not download dumps to “complete t
 - Putting real password text in a shared classroom doc.
 - Calling a Telegram leak post a “public dataset” and saving the attachment.
 
-> **Peel Boss:** A timeline is a calendar, not a scavenger hunt through stolen mail. If your correlation step requires a dump, you are not correlating. You are collecting contraband and calling it rigor. Intel Academy prefers the boring table — the one you can show a lawyer without changing color.
+> **Rule of thumb:** A timeline is a calendar, not a scavenger hunt through stolen mail. If your correlation step requires a dump, you are not correlating. You are collecting contraband and calling it rigor. OSINT101 prefers the boring table — the one you can show a lawyer without changing color.
 
 Your exercise is to map a timeline for a single authorized subject across multiple incidents. In class, that subject is **you**: use HIBP plus public notices. If you want more rows, ask for the fictional multi-breach sheet — do not shop for a real dump to make the chart look busy. Lawful is the assignment.
 
@@ -5281,7 +5281,7 @@ Your exercise is to map a timeline for a single authorized subject across multip
         title: 'The Intelligence Product Framework',
         duration: '20 min',
         content: `
-Collection that never becomes a product is a hobby with screenshots. A product is a document someone else can use without calling you to interpret your adjectives. Intel Academy treats reporting as part of the investigation, not as a sulky afterthought you write when the coffee is gone.
+Collection that never becomes a product is a hobby with screenshots. A product is a document someone else can use without calling you to interpret your adjectives. OSINT101 treats reporting as part of the investigation, not as a sulky afterthought you write when the coffee is gone.
 
 ### Why Reporting Matters
 
@@ -5344,7 +5344,7 @@ A product can harm by overstating identity, leaking collection methods, or imply
 - Delivering a product nobody asked for because you had leftover screenshots.
 - Forgetting the reader will forward it.
 
-> **Peel Boss:** If your summary requires a guided tour, it is not a summary. Intel Academy grades whether a stranger can find the point without you hovering. Hovering is not a dissemination strategy.
+> **Rule of thumb:** If your summary requires a guided tour, it is not a summary. OSINT101 grades whether a stranger can find the point without you hovering. Hovering is not a dissemination strategy.
 
 Your exercise is to take a finished OSINT investigation — classwork is fine — and rewrite the summary using the Pyramid Principle. One sentence first, including confidence. Then evidence. Then what you do not know. If the rewrite is shorter and less exciting, you are probably doing it correctly.
 
@@ -5355,7 +5355,7 @@ Your exercise is to take a finished OSINT investigation — classwork is fine �
         title: 'Source Citation Standards',
         duration: '25 min',
         content: `
-A finding without a citation is a rumor that learned to use headings. Intel Academy does not need your inner poet. It needs a URL, a date, a capture, and a sentence about why the source is allowed to say that. If that sounds fussy, wait until the page changes and your only exhibit is a memory of being sure.
+A finding without a citation is a rumor that learned to use headings. OSINT101 does not need your inner poet. It needs a URL, a date, a capture, and a sentence about why the source is allowed to say that. If that sounds fussy, wait until the page changes and your only exhibit is a memory of being sure.
 
 ### Why Citations Matter
 
@@ -5432,7 +5432,7 @@ Cite honestly. Do not imply a government origin for a blog. Do not paste full pa
 - Archiving after the argument, when the page has already grown a new paragraph.
 - Treating a commercial database label as an official record.
 
-> **Peel Boss:** If your footnote is “trust me,” Intel Academy already does not. Put the URL down. If you are ashamed of the URL, you are ashamed of the finding. That is useful information. Act on it.
+> **Rule of thumb:** If your footnote is “trust me,” OSINT101 already does not. Put the URL down. If you are ashamed of the URL, you are ashamed of the finding. That is useful information. Act on it.
 
 Your exercise is to take three web sources from a previous OSINT exercise and create proper citations with archives. Each block should stand alone. If an archive fails, say so and keep the screenshot. Failure to archive is a finding about fragility, not a reason to skip the homework.
 
@@ -5443,7 +5443,7 @@ Your exercise is to take three web sources from a previous OSINT exercise and cr
         title: 'Analytical Techniques',
         duration: '30 min',
         content: `
-Intuition is a private instrument. Structured techniques let someone else play the same notes and hear whether the song holds. Intel Academy uses them to slow you down at the exact moment you are most tempted to be impressive. Impressive is optional. Reproducible is not.
+Intuition is a private instrument. Structured techniques let someone else play the same notes and hear whether the song holds. OSINT101 uses them to slow you down at the exact moment you are most tempted to be impressive. Impressive is optional. Reproducible is not.
 
 ### Structured Analytical Techniques
 
@@ -5506,7 +5506,7 @@ Structured techniques are not a way to launder a weak identity claim into “the
 - Skipping the “data are wrong” hypothesis because it is unflattering.
 - Changing the question so your favorite answer still wins.
 
-> **Peel Boss:** Your first theory is not a child. You are allowed to abandon it in public. Intel Academy is more worried about the analyst who never met a coincidence they could not promote. Put three names on the whiteboard. If you cannot, you are not briefed. You are attached.
+> **Rule of thumb:** Your first theory is not a child. You are allowed to abandon it in public. OSINT101 is more worried about the analyst who never met a coincidence they could not promote. Put three names on the whiteboard. If you cannot, you are not briefed. You are attached.
 
 Your exercise is to take a previous investigation finding and run it through ACH with at least three competing hypotheses. Include an against-column that actually hurts your favorite. If the matrix leaves you less certain than you were at the start, put that new confidence in the lead sentence. That is the technique working.
 
@@ -5517,7 +5517,7 @@ Your exercise is to take a previous investigation finding and run it through ACH
         title: 'Audience-Tailored Reporting',
         duration: '25 min',
         content: `
-The same finding can be a decision, a method review, or a discoverable record. If you send all three to everyone, you will bore the executive, starve the analyst, and frighten counsel. Intel Academy’s rule is rude and simple: write for the person who has to do something, then strip or attach until the rest can survive forwarding.
+The same finding can be a decision, a method review, or a discoverable record. If you send all three to everyone, you will bore the executive, starve the analyst, and frighten counsel. OSINT101’s rule is rude and simple: write for the person who has to do something, then strip or attach until the rest can survive forwarding.
 
 ### Know Your Reader
 
@@ -5590,7 +5590,7 @@ Tailoring is not a way to hide uncertainty from leadership. It is a way to hide 
 - Recommendations no one owns.
 - Changing the conclusion to match what each audience “wants.”
 
-> **Peel Boss:** The CEO is not a slow analyst. The lawyer is not a coward. If you write down to them, Intel Academy will assume the only audience you understand is yourself. Say the same true thing three ways. If you cannot, you do not understand the thing yet.
+> **Rule of thumb:** The CEO is not a slow analyst. The lawyer is not a coward. If you write down to them, OSINT101 will assume the only audience you understand is yourself. Say the same true thing three ways. If you cannot, you do not understand the thing yet.
 
 Your exercise is to take one investigation finding and write three versions: one for a CEO, one for a fellow analyst, and one for legal/compliance. The finding and the confidence must match. If one version sounds braver, it is wrong.
 
@@ -5601,7 +5601,7 @@ Your exercise is to take one investigation finding and write three versions: one
         title: 'OPSEC in Reporting',
         duration: '20 min',
         content: `
-A report is a new artifact in the world. It will be copied, forwarded, screenshotted, and found in a slide titled “context.” Intel Academy assumes your product will leave the room. The finding can travel. Your collection plumbing should not.
+A report is a new artifact in the world. It will be copied, forwarded, screenshotted, and found in a slide titled “context.” OSINT101 assumes your product will leave the room. The finding can travel. Your collection plumbing should not.
 
 ### Protecting Sources and Methods
 
@@ -5678,7 +5678,7 @@ Do not leak sources. Do not leak methods that would get a person fired or harmed
 - Over-sanitizing until the finding cannot be checked — that is unaccountability, not OPSEC.
 - Reporting because you spent the hours, not because the requirement was met.
 
-> **Peel Boss:** Your report is not a trophy case for tradecraft. If a stranger can reconstruct your socks from the appendix, Intel Academy will congratulate the stranger. Write the finding. Hide the plumbing.
+> **Rule of thumb:** Your report is not a trophy case for tradecraft. If a stranger can reconstruct your socks from the appendix, OSINT101 will congratulate the stranger. Write the finding. Hide the plumbing.
 
 Your exercise is to review a previous OSINT exercise report and redact or remove anything that could compromise OPSEC or source protection. Produce a clean copy and a short note listing what you removed and why. If you find nothing to remove, you are not looking, or your first report was already unusually adult.
 
