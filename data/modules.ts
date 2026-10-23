@@ -27,49 +27,49 @@ export const learningModules: Record<string, LearningModule> =
   "pricing": {
     "id": "pricing",
     "title": "Foundations curriculum",
-    "description": "What a foundations curriculum covers: sources, search, verification, tools, and reporting.",
+    "description": "What the free beginner track actually covers, and the two things it will not do for you.",
     "level": "Beginner",
     "estimatedTime": "15 min",
     "sections": [
       {
         "title": "Foundations curriculum",
         "duration": "15 min",
-        "content": "## Foundations curriculum\n\nA foundations track is where OSINT study starts. This lesson lists what that curriculum covers, so you can tell a real course of study from a pile of links.\n\n### What the lessons cover\n\n*   **Introduction to OSINT:** Understanding the principles, ethics, and legal considerations of open-source intelligence gathering.\n*   **Information Sources:** Identifying and utilizing various public sources like social media, search engines, public records, and news archives.\n*   **Search Techniques:** Mastering advanced search operators and methodologies for efficient and effective data retrieval.\n*   **Data Analysis and Verification:** Learning to analyze gathered information, assess its credibility, and identify potential biases.\n*   **Tools and Technologies:** Familiarization with common OSINT tools and software that aid in the collection and analysis process.\n*   **Reporting and Documentation:** Developing skills in presenting findings in a clear, concise, and actionable manner.\n\n### Case files\n\nA case file plan applies those foundations: a question, a collection outline, and citations back to the modules. Beginner modules are the starting point. The plan is a study aid. It does not collect anything for you.\n\n### Why the method matters\n\n*   **Credible Knowledge:** Learn from material that is specific and checkable.\n*   **Practical Skills:** Work the exercises instead of skimming the headings.\n*   **A record:** Write down what you used and why you trusted it.\n*   **Limits:** Public data is not automatically yours to use. Law, workplace rules, and the ethics lessons still apply.\n\n### Conclusion\n\nRead the curriculum before you start. Foundations on this site are free."
+        "content": "## Foundations, not a pile of links\n\nA foundations track is the part you read before you start collecting other people's public lives. On this site that means a question, lawful sources, a way to search, a way to judge what you found, and a stop condition. It does not mean a badge, and it does not mean the site will go and fetch the records.\n\n### What the beginner lessons actually cover\n\n*   **The question.** If you cannot say it in one sentence a stranger would understand, you are browsing.\n*   **Public sources.** Pages, filings, and records a member of the public can view without a stolen login.\n*   **Search.** Operators and a written query, not \"I typed the vibe into Google.\"\n*   **Verification.** Who published it, when, and whether anyone independent agreed.\n*   **Notes.** Timestamp, URL, and why you opened the page. Memory is not a source.\n*   **The stop.** A time budget or a sentence that says \"enough for this question.\"\n\nThe long version of that list is OSINT Fundamentals and OSINT Methodology. Email, domain, and company tracks come after you can write the question down.\n\n### What this curriculum will not do\n\nIt will not run the collection for you. The Case File Planner writes a cited plan. You still open the pages.\n\nIt will not turn a private person into a practice target. Use a company, a published story, or an account you own.\n\n### A short test\n\nIf your notes say \"checked socials,\" you checked nothing. Name the platform and the date, or admit you skimmed.\n\n> **Rule of thumb:** foundations are a height restriction. If the conclusion needs a tool you have not learned and a legal theory you have not written down, you are still on the ground floor. Say so.\n\n### Exercise\n\nWrite one investigation question and a stop condition under it. List three public sources you would actually open. If one of them requires a lie or a login you do not have, cross it out."
       }
     ]
   },
   "community": {
     "id": "community",
-    "title": "Community Building and Engagement",
-    "description": "Learn the fundamentals of building and engaging a strong online community around your OSINT efforts or projects. This lesson covers strategies for fostering interaction, managing discussions, and leveraging community feedback.",
+    "title": "Public communities as sources",
+    "description": "Forums, groups, and comment threads are sources. They are also where a rumour gets a standing ovation.",
     "level": "Intermediate",
     "estimatedTime": "15 min",
     "sections": [
       {
-        "title": "Community Building and Engagement",
+        "title": "Public communities as sources",
         "duration": "15 min",
-        "content": "## Building and Engaging Your OSINT Community\n\nIn the realm of Open Source Intelligence (OSINT), information is often fragmented, complex, and requires collaborative effort to fully exploit. Building and engaging a strong online community can be a powerful force multiplier for OSINT practitioners, researchers, and enthusiasts. This lesson delves into the essential strategies for cultivating a vibrant and productive community, whether it's for sharing insights, collaborating on investigations, or seeking help and feedback.\n\n### Why Build an OSINT Community?\n\nAn engaged community offers several key benefits:\n\n*   **Knowledge Sharing:** Members can share unique perspectives, tools, techniques, and findings that an individual might miss.\n*   **Problem Solving:** Complex OSINT challenges can be tackled more effectively with a diverse group of minds.\n*   **Feedback and Validation:** Community members can offer critiques, suggest improvements, and validate findings, enhancing accuracy and reliability.\n*   **Networking and Collaboration:** It fosters connections with like-minded individuals, potentially leading to future collaborations and projects.\n*   **Resource Curation:** The community can help identify, vet, and curate valuable OSINT resources, saving everyone time.\n\n### Establishing Your Community Presence\n\nChoosing the right platform is crucial for community success. Consider where your target audience congregates and what features best suit your goals:\n\n*   **Discord/Slack:** Excellent for real-time chat, voice channels, and organized topic-based discussions. Ideal for active, ongoing conversations.\n*   **Forums (e.g., Discourse, Reddit):** Well-suited for structured, asynchronous discussions, Q&A, and long-form content. Allows for easier archiving and searching of past conversations.\n*   **Social Media Groups (e.g., Facebook, LinkedIn):** Can leverage existing networks but may have less control over platform changes and algorithms.\n*   **Dedicated Websites/Blogs with Comment Sections:** Offers a central hub for content and discussion, though engagement can be slower.\n\nWhen setting up your community space, clearly define its purpose and the types of discussions welcomed. A clear mission statement helps attract the right members and set expectations.\n\n### Cultivating Engagement\n\nOnce established, the key is to foster active participation. This requires consistent effort and strategic facilitation:\n\n*   **Set Clear Guidelines and Expectations:** Establish community rules (a code of conduct) regarding respectful communication, topic relevance, and acceptable content. This is paramount for a healthy environment.\n*   **Lead by Example:** As a community leader or moderator, be active, responsive, and respectful. Share your own insights and ask questions.\n*   **Ask Open-Ended Questions:** Pose questions that encourage thoughtful responses rather than simple yes/no answers. For example, instead of 'Is this tool good?', ask 'What are your experiences using Tool X for social media analysis, and what are its limitations?'.\n*   **Facilitate Discussions:** Gently guide conversations, connect members who might have shared interests, and summarize key points from active threads.\n*   **Encourage Member Contributions:** Actively solicit input, highlight valuable contributions, and give credit where it's due. Feature 'member spotlights' or 'best of the week' posts.\n*   **Provide Value:** Regularly share useful information, tutorials, case studies, or curated lists of resources. This gives members a reason to keep returning.\n*   **Organize Events:** Consider AMAs (Ask Me Anything) with experienced OSINT professionals, virtual workshops, or collaborative challenges.\n\n### Managing Community Challenges\n\nNo community is without its challenges. Proactive management is key:\n\n*   **Moderation:** Implement a clear moderation strategy. Address rule violations promptly and consistently, whether it's spam, off-topic content, or disrespectful behavior. Transparency in moderation decisions can build trust.\n*   **Dealing with Superlatives and Unsubstantiated Claims:** In OSINT, accuracy is critical. Discourage the use of vague, superlative language like 'the best', 'world-class', or 'always works'. Instead, encourage members to back up their statements with evidence, data, or specific examples. When a member makes a broad claim, ask clarifying questions like, 'Can you provide a source for that statistic?' or 'What specific evidence supports that claim?'. Focus on objective analysis rather than subjective opinions.\n*   **Handling Statistics Without Sources:** Similarly, statistics (e.g., '73% of users prefer X', 'This method saves Y hours') must be verifiable. If a member shares a statistic, prompt them to provide the source. If they cannot, encourage them to remove it or state it as an anecdotal observation rather than a hard fact. The goal is to maintain a high standard of evidence-based OSINT practices within the community.\n*   **Conflict Resolution:** Have a process for mediating disputes between members. Encourage respectful disagreement and focus on the facts of the OSINT subject matter.\n*   **Combating Misinformation:** Be vigilant against the spread of misinformation or disinformation. Encourage critical thinking and fact-checking among members.\n\n### Conclusion\n\nBuilding a thriving OSINT community is an ongoing process that requires dedication, clear communication, and a commitment to fostering a collaborative and evidence-based environment. By implementing these strategies, you can create a valuable space for learning, sharing, and advancing the practice of Open Source Intelligence."
+        "content": "## The room is a source. The regulars are not a jury.\n\nThis site does not host a forum. Other people do, in public, and they talk. A group, a subreddit, a comment thread, or a professional post can answer a collection question. It can also repeat one person's guess until it looks like a fact.\n\n### What you may use\n\n*   Posts and comments that are public without you logging into someone else's account.\n*   The author's name as shown, the date, and the URL.\n*   A second source, from somewhere else, before you treat the thread as established.\n\n### What you do not do\n\n*   Join under a pretext, or message members to \"just confirm.\"\n*   Scrape a member list that sits behind a login.\n*   Quote a statistic from the thread unless the thread itself cites a source you can open.\n\nA pub is useful because people talk. They also talk rubbish, and the person who has been there longest often repeats it with the most confidence. Length of membership is not corroboration.\n\n### How to read one thread\n\n1. Write the question the thread is supposed to answer.\n2. Note who spoke, when, and whether they claim to have seen the thing.\n3. Mark anything that is only \"someone said.\"\n4. Look for one independent source outside the thread.\n5. If you cannot find it, the thread stays a lead.\n\n> **Rule of thumb:** three people repeating the same sentence are one source wearing three usernames. Check before you brief it.\n\n### Exercise\n\nPick one public thread on a company or a published event. Write who said the claim, the date, and whether anyone outside that thread agreed. If the answer is no, label it a lead and stop."
       }
     ]
   },
   "resources": {
     "id": "resources",
     "title": "OSINT Resources",
-    "description": "A curated list of essential Open Source Intelligence (OSINT) resources, tools, and platforms to enhance your investigative capabilities.",
+    "description": "What this site actually keeps on the shelf, and how to use an outside tool without adopting it.",
     "level": "Beginner",
     "estimatedTime": "15 min",
     "sections": [
       {
         "title": "OSINT Resources",
         "duration": "15 min",
-        "content": "## Essential OSINT Resources for Investigators\n\nIn the realm of Open Source Intelligence (OSINT), having access to the right resources can be the difference between a successful investigation and a dead end. This guide aims to provide a comprehensive overview of valuable tools, platforms, and methodologies that are crucial for any OSINT practitioner, from beginners to seasoned professionals.\n\n### Understanding OSINT Categories\n\nOSINT resources can be broadly categorized to help navigate the vast landscape of available information. Understanding these categories will help you tailor your approach to specific investigative needs.\n\n1.  **Search Engines & Aggregators:** These are your primary tools for uncovering publicly available information. Beyond standard search engines like Google, specialized aggregators can provide deeper insights.\n2.  **Social Media Intelligence (SOCMINT):** Tools and techniques focused on extracting information from social media platforms.\n3.  **Mapping & Geolocation Tools:** Resources that help in identifying and verifying the geographical location of individuals, events, or objects.\n4.  **Data Breach & Identity Tools:** Platforms that can help identify if personal information has been compromised in data breaches.\n5.  **Image & Video Analysis Tools:** Resources for analyzing visual media, including reverse image search, metadata extraction, and forensic analysis.\n6.  **Specialized Databases & Archives:** Access to public records, government databases, and historical archives.\n\n### Key OSINT Tools and Platforms\n\nNavigating the OSINT landscape requires familiarity with a range of tools. Here are some indispensable resources:\n\n#### Search Engines & Aggregators\n\n*   **Google Dorks:** Advanced search operators that allow you to refine Google searches for specific information. Mastering dorking is fundamental.\n    *   **Example:** `site:twitter.com \"keyword\" filetype:pdf`\n*   **DuckDuckGo:** A privacy-focused search engine that can sometimes yield different results than mainstream engines.\n*   **Bing:** Another major search engine that can uncover information missed by Google.\n*   **Wayback Machine (archive.org):** An invaluable tool for viewing archived versions of websites, crucial for understanding historical context or finding deleted content.\n\n#### Social Media Intelligence (SOCMINT)\n\n*   **TweetDeck/X Pro:** For real-time monitoring and advanced searching on X (formerly Twitter).\n*   **Social Bearing:** Analyzes X (Twitter) accounts, providing insights into engagement, hashtags, and mentions.\n*   **Facebook Search (limited):** While Facebook has restricted its public API, advanced search techniques can still yield results.\n*   **LinkedIn (advanced search):** Essential for professional networking and identifying individuals' career paths and connections.\n\n#### Mapping & Geolocation Tools\n\n*   **Google Maps/Earth:** The foundational tools for visualising locations, street view analysis, and geographical context.\n*   **Wikimapia:** A collaborative mapping project that provides detailed geographical information.\n*   **SunCalc.org:** Helps determine the position of the sun at a specific time and location, useful for verifying timestamps in images or videos.\n*   **TimeandDate.com:** Provides sunrise/sunset times, time zones, and astronomical data, aiding in geolocation.\n\n#### Data Breach & Identity Tools\n\n*   **Have I Been Pwned?:** A crucial resource for checking if email addresses or phone numbers have been compromised in known data breaches.\n*   **IntelTechniques.com (Michael Bazzell):** Offers extensive lists of tools and resources, often categorized for ease of use.\n\n#### Image & Video Analysis Tools\n\n*   **Google Images / TinEye / Yandex Images:** Reverse image search engines to find the origin and other instances of an image.\n*   **ExifTool:** A command-line utility for reading, writing, and editing meta information (EXIF data) in files.\n*   **YouTube DataViewer:** Helps extract metadata from YouTube videos.\n\n#### Specialized Databases & Archives\n\n*   **Public Records Databases:** Varies by country and region, but often includes property records, business registrations, and court documents.\n*   **Internet Archive:** Beyond the Wayback Machine, it hosts books, music, software, and more.\n*   **Wikipedia / Wikidata:** Often a starting point for understanding entities and their connections.\n\n### Developing an OSINT Methodology\n\nHaving a robust methodology is as important as having the right tools. A structured approach ensures efficiency and thoroughness:\n\n1.  **Define the Objective:** Clearly understand what information you are trying to find.\n2.  **Identify Information Sources:** Determine which categories of resources are most likely to contain the needed data.\n3.  **Formulate Search Queries:** Craft effective search terms, leveraging advanced operators and dorks.\n4.  **Execute Searches & Gather Data:** Systematically collect relevant information from identified sources.\n5.  **Verify Information:** Cross-reference findings from multiple sources to ensure accuracy and reliability.\n6.  **Analyze & Synthesize:** Connect the dots between disparate pieces of information to build a coherent picture.\n\n### Ethical Considerations and Best Practices\n\nAlways operate within legal and ethical boundaries. Respect privacy laws and terms of service of platforms. Document your findings meticulously and avoid making assumptions. Continuous learning is key in the ever-evolving field of OSINT."
+        "content": "## The shelf, not a souvenir shop\n\nA resource list that names forty tools and teaches none of them is a catalogue. This page is shorter on purpose.\n\n### On this site\n\n*   **Lessons.** The long tracks are the method. The tool briefings (Sherlock, Holehe, and the rest) are for accounts you own.\n*   **Guides.** The asset library is six on-page notes: checklist, operators, Kali reference, people-profiling workflow, tool categories, and the legal line. They are pages, not multi-megabyte downloads.\n*   **Worksheets.** The PDF templates are blank forms. Fill them in. They are not sample cases.\n\n### Outside, and stable enough to name\n\n*   A normal search engine, with the query written down.\n*   The Wayback Machine, when you need the page as it was.\n*   Have I Been Pwned, for an address you are allowed to check.\n*   A registrar or company register in the jurisdiction you named in the question.\n\nIf a tool is not in a lesson here, learn it from its own documentation and decide whether your question needs it. Installing it to \"have it\" is how the laptop fills up and the notes stay empty.\n\n> **Rule of thumb:** a new tool earns a place when it answers a question your current notes cannot. \"Everyone uses it\" is not that question.\n\n### Exercise\n\nOpen one guide in the asset library and one worksheet PDF. Write the question each one is for. If you cannot tell them apart, you have not read either."
       }
     ]
   },
   'osint-fundamentals': {
     id: 'osint-fundamentals',
     title: 'OSINT Fundamentals',
-    description: 'Learn the basics of Open Source Intelligence gathering. Master the mindset of a digital bloodhound.',
+    description: 'The intelligence cycle, source judgment, and the part where you stop opening tabs and write the question down.',
     level: 'Beginner',
     estimatedTime: '4-6 hours',
     sections: [
@@ -1478,7 +1478,7 @@ Close with the exercise: take the company you researched in the previous exercis
   'digital-identity-analysis': {
     id: 'digital-identity-analysis',
     title: 'Digital Identity Analysis',
-    description: 'Learn how to reconstruct a person\\',
+    description: 'How public traces form a working identity, and how often they belong to three different people.',
     level: 'Intermediate',
     estimatedTime: '3-4 hours',
     sections: [
@@ -1891,7 +1891,7 @@ Your exercise is to take a fictional persona or a public figure and find what pu
   'people-profiling': {
     id: 'people-profiling',
     title: 'People Profiling',
-    description: 'Learn to gather information about individuals ethically. Become a digital detective.',
+    description: 'Public records, disambiguation, and how to stop building a file on the wrong person.',
     level: 'Intermediate',
     estimatedTime: '6-8 hours',
     sections: [
@@ -2246,7 +2246,7 @@ Write a short profiling summary that includes findings, confidence, caveats, and
   'social-media-investigations': {
     id: 'social-media-investigations',
     title: 'Social Media Investigations',
-    description: 'Master the art of analyzing social platforms for intelligence. Handle large volumes without losing your mind.',
+    description: 'Platform structure, usernames, images, and what a posting pattern can and cannot prove.',
     level: 'Intermediate',
     estimatedTime: '5-7 hours',
     sections: [
@@ -3531,7 +3531,7 @@ Close with the exercise: pick a photo from Reddit r/whereisthis and attempt to l
   'kali-tools': {
     id: 'kali-tools',
     title: 'Kali Linux Mastery',
-    description: 'Master the tools of the trade. From nmap to Maltego, become a command-line ninja.',
+    description: 'Nmap, directory checks, Maltego, and Wireshark, with the authorization line written down before the first scan.',
     level: 'Intermediate',
     estimatedTime: '8-10 hours',
     sections: [
@@ -3912,7 +3912,7 @@ Design the repeatable Kali workflow for the exercise: tool order and output hand
   'network-recon': {
     id: 'network-recon',
     title: 'Network Reconnaissance',
-    description: 'Map networks like a digital cartographer. Discover the hidden topology of the internet.',
+    description: 'Map what a network publishes about itself. Passive first. An open port is not an invitation.',
     level: 'Advanced',
     estimatedTime: '8-10 hours',
     sections: [
@@ -4189,7 +4189,7 @@ Take a list of discovered internet-facing assets and rank them by likely investi
   'dark-web-research': {
     id: 'dark-web-research',
     title: 'Dark Web Research',
-    description: 'Learn to safely navigate and research dark web sources. Understand the landscape without becoming a cautionary tale.',
+    description: 'What is actually on onion services, how to read a leak notice, and when to close the laptop.',
     level: 'Advanced',
     estimatedTime: '6-8 hours',
     sections: [
@@ -4762,7 +4762,7 @@ Your exercise is to document a realistic cryptocurrency attribution scenario: tr
   'digital-forensics': {
     id: 'digital-forensics',
     title: 'Digital Forensics',
-    description: 'Investigate digital crime scenes. CSI: Cyber edition, with more coffee.',
+    description: 'Disk, browser, and timeline work for cases you are allowed to touch. A policy or a warrant comes before the coffee.',
     level: 'Advanced',
     estimatedTime: '12-15 hours',
     sections: [

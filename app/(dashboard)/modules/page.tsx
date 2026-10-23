@@ -20,7 +20,7 @@ export default function ModulesIndexPage() {
             Learning Modules
           </h1>
           <p className="text-slate-400 mt-1">
-            Structured training tracks from Rookie to Spymaster.
+            Beginner through advanced. The short briefings sit underneath.
           </p>
         </div>
         <ModuleCardGrid modules={tracks} />

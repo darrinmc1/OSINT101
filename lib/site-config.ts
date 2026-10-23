@@ -51,7 +51,7 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   name: "OSINT 101",
   tagline: "Open-Source Intelligence, Explained",
-  description: "OSINT 101 - Open-Source Intelligence, Explained. Free training with gamified badges and progression.",
+  description: "OSINT 101 teaches public-source investigations: the intelligence cycle, specialist collection, and a case-file planner that cites the lessons.",
   domain: "osint101.com",
 
   theme: {

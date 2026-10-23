@@ -71,6 +71,9 @@ export function Header() {
               </Link>
             ))}
             <div className="pt-4 border-t border-white/10 space-y-2">
+              <div className="px-4 py-2">
+                <HumorToggle />
+              </div>
               <Link
                 href="/sign-in"
                 onClick={() => setMobileMenuOpen(false)}

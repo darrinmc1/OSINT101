@@ -45,9 +45,6 @@ const ResourceDetailPage = () => {
           <div className="flex flex-wrap items-center gap-3">
             <Badge className="rounded-none bg-intel-green text-black">{resource.type}</Badge>
             {resource.featured ? <Badge className="rounded-none bg-intel-blue text-white">FEATURED</Badge> : null}
-            <Badge variant="outline" className="rounded-none border-intel-green/30 text-intel-green/70">
-              {resource.size}
-            </Badge>
           </div>
           <h1 className="mt-4 text-4xl font-mono tracking-tight text-white">{resource.title}</h1>
           <CardDescription className="max-w-3xl pt-2 font-sans text-base leading-7 text-gray-400">

@@ -23,7 +23,7 @@ const moduleResourceMap: Record<string, string[]> = {
 const moduleLinkMap: Record<string, { label: string; to: string }[]> = {
   'osint-fundamentals': [
     { label: 'SEARCH OPERATORS GUIDE', to: '/resources/search-operators' },
-    { label: 'COMMUNITY COMMS', to: '/modules/community' },
+    { label: 'PUBLIC COMMUNITIES', to: '/modules/community' },
   ],
   'kali-tools': [
     { label: 'KALI QUICK REFERENCE', to: '/resources/kali-cheatsheet' },
@@ -49,7 +49,7 @@ type LearningModuleProps = {
   onRequestMoreInfo?: (moduleId: string) => void
 }
 
-const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
+const LearningModule = ({ module }: LearningModuleProps) => {
   const [currentSection, setCurrentSection] = useState<number>(0)
   const [completedSections, setCompletedSections] = useState<Set<number>>(new Set())
 
@@ -121,9 +121,9 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
 
           <div className="mt-8 border-t border-intel-green/10 pt-6">
             <div className="mb-3 flex items-center justify-between font-mono">
-              <span className="text-xs uppercase tracking-widest text-gray-500">SYNC_PROGRESS</span>
+              <span className="text-xs uppercase tracking-widest text-gray-500">THIS_VISIT</span>
               <span className="text-xs text-intel-green">
-                {completedSections.size} / {module.sections?.length || 0} PHASES COMPLETED ({Math.round(calculateProgress())}%)
+                {completedSections.size} / {module.sections?.length || 0} MARKED ({Math.round(calculateProgress())}%)
               </span>
             </div>
             <div className="relative h-2 overflow-hidden border border-intel-green/10 bg-gray-900">
@@ -132,6 +132,9 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                 style={{ width: `${calculateProgress()}%` }}
               ></div>
             </div>
+            <p className="mt-2 font-mono text-[11px] text-gray-500">
+              Ticks last until you refresh. This page does not keep a score.
+            </p>
           </div>
         </div>
       </div>
@@ -184,18 +187,16 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
               <CardTitle className="font-mono text-sm uppercase tracking-[0.2em] text-intel-green/60">OPERATIONAL_DATA</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 p-4">
-              <Button
-                variant="outline"
-                className="h-10 w-full justify-start rounded-none border-intel-green/20 font-mono text-xs text-intel-green active:scale-[0.96] transition-transform hover:bg-intel-green hover:text-black"
-                onClick={() => onRequestMoreInfo?.(module.id)}
-              >
-                <MessageCircle className="mr-3 h-4 w-4" />
-                INITIATE_COMS
+              <Button asChild variant="outline" className="h-10 w-full justify-start rounded-none border-intel-green/20 font-mono text-xs text-intel-green active:scale-[0.96] transition-transform hover:bg-intel-green hover:text-black">
+                <Link href="/contact">
+                  <MessageCircle className="mr-3 h-4 w-4" />
+                  ASK_A_QUESTION
+                </Link>
               </Button>
               <Button asChild variant="outline" className="h-10 w-full justify-start rounded-none border-intel-green/20 font-mono text-xs text-intel-green active:scale-[0.96] transition-transform hover:bg-intel-green hover:text-black">
                 <Link href={`/resources/${resourceLinks[0] || 'osint-checklist'}`}>
                   <Download className="mr-3 h-4 w-4" />
-                  EXTRACT_RESOURCES
+                  READ_A_GUIDE
                 </Link>
               </Button>
             </CardContent>
@@ -258,9 +259,9 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                           <span className="mr-2 animate-pulse text-intel-amber">!</span>
                           WARNING: LIVE TARGETS NOT PERMITTED FOR THIS PHASE. HR ALSO INSISTED WE ADD THAT.
                         </div>
-                        <Button className="mt-6 w-full rounded-none bg-intel-green px-8 font-mono font-bold text-black active:scale-[0.96] transition-transform hover:bg-intel-green/80 md:w-auto" onClick={() => onRequestMoreInfo?.(module.id)}>
-                          LAUNCH_SCENARIO_BRIEF
-                        </Button>
+                        <p className="mt-6 font-mono text-xs text-gray-400">
+                          The exercise is the paragraph above. There is no separate simulator.
+                        </p>
                       </div>
 
                       <div className="rounded-none border border-intel-blue/20 bg-intel-blue/5 p-6">
@@ -269,12 +270,14 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                           <h4 className="font-mono text-sm uppercase tracking-widest text-intel-blue">KNOWLEDGE_VERIFICATION</h4>
                         </div>
                         <div className="space-y-3">
-                          <Button variant="outline" className="h-auto w-full justify-start rounded-none border-intel-blue/20 py-3 text-left font-mono text-xs active:scale-[0.96] transition-transform hover:bg-intel-blue/10">
-                            <span className="mr-3 text-intel-blue">01.</span> CAN YOU EXPLAIN THE PROCESS WITHOUT SUMMONING BUZZWORDS?
-                          </Button>
-                          <Button variant="outline" className="h-auto w-full justify-start rounded-none border-intel-blue/20 py-3 text-left font-mono text-xs active:scale-[0.96] transition-transform hover:bg-intel-blue/10">
-                            <span className="mr-3 text-intel-blue">02.</span> CAN YOU DEFEND THE EVIDENCE LIKE AN ADULT IN A MEETING?
-                          </Button>
+                          <p className="font-mono text-xs text-gray-300">
+                            <span className="mr-3 text-intel-blue">01.</span>
+                            Can you explain the process without the costume words?
+                          </p>
+                          <p className="font-mono text-xs text-gray-300">
+                            <span className="mr-3 text-intel-blue">02.</span>
+                            Can you defend the evidence to someone who was not in the room?
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -284,15 +287,18 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                       <div className="tactical-panel border-intel-green/20">
                         <div className="flex items-center justify-between border-b border-intel-green/10 bg-intel-green/5 p-4">
-                          <span className="font-mono text-xs uppercase tracking-widest text-intel-green">ASSETS_PDF</span>
+                          <span className="font-mono text-xs uppercase tracking-widest text-intel-green">ON_PAGE_GUIDES</span>
                           <Download className="h-4 w-4 text-intel-green/40" />
                         </div>
                         <div className="space-y-2 p-4">
-                          {resourceLinks.map((resourceId) => (
+                          {(resourceLinks.length ? resourceLinks : ["osint-checklist"]).map((resourceId) => (
                             <Button key={resourceId} asChild variant="ghost" size="sm" className="w-full justify-start rounded-none font-mono text-xs active:scale-[0.96] transition-transform hover:bg-intel-green/10">
-                              <Link href={`/resources/${resourceId}`}>[ EXTRACT ] {resourceLabelMap[resourceId] || resourceId.toUpperCase()}</Link>
+                              <Link href={`/resources/${resourceId}`}>[ READ ] {resourceLabelMap[resourceId] || resourceId.toUpperCase()}</Link>
                             </Button>
                           ))}
+                          <Button asChild variant="ghost" size="sm" className="w-full justify-start rounded-none font-mono text-xs active:scale-[0.96] transition-transform hover:bg-intel-green/10">
+                            <Link href="/downloads">[ PDF ] BLANK_WORKSHEETS</Link>
+                          </Button>
                         </div>
                       </div>
 
@@ -315,7 +321,7 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
               </Tabs>
 
               <div className="mt-auto border-t border-intel-green/10 bg-black/40 p-6">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-3">
                   <Button
                     variant="outline"
                     className="rounded-none border-intel-green/30 font-mono text-xs uppercase tracking-widest text-intel-green active:scale-[0.96] transition-transform hover:bg-intel-green/10 disabled:opacity-30"
@@ -329,7 +335,7 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                     {!completedSections.has(currentSection) ? (
                       <Button
                         variant="outline"
-                        className="hidden rounded-none border-intel-green bg-intel-green/10 font-mono text-xs uppercase tracking-widest text-intel-green active:scale-[0.96] transition-transform hover:bg-intel-green hover:text-black sm:flex"
+                        className="rounded-none border-intel-green bg-intel-green/10 font-mono text-xs uppercase tracking-widest text-intel-green active:scale-[0.96] transition-transform hover:bg-intel-green hover:text-black"
                         onClick={() => markSectionComplete(currentSection)}
                       >
                         <CheckCircle className="mr-2 h-4 w-4" />
@@ -338,10 +344,10 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
                     ) : null}
 
                     <Button
+                      asChild
                       className="rounded-none bg-intel-amber px-6 font-mono text-xs font-bold uppercase tracking-widest text-black active:scale-[0.96] transition-transform hover:bg-intel-amber/80"
-                      onClick={() => onRequestMoreInfo?.(module.id)}
                     >
-                      SECURE_HELP
+                      <Link href="/contact">ASK_A_QUESTION</Link>
                     </Button>
                   </div>
 

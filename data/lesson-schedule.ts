@@ -16,7 +16,7 @@ export const lessonSpotlight: LessonSpotlight = {
   latestModuleId: "findme-username-simple",
   latestTitle: "FindMe: The Simple Username CLI (And When to Stop Collecting Tools)",
   latestHref: "/modules/findme-username-simple",
-  nextTitle: "theHarvester",
+  nextTitle: "theHarvester (not written yet)",
   nextBlurb:
-    "Passive email and host collection from search engines and APIs — next up in the backlog.",
+    "Passive email and host collection is next in the writing queue. There is no theHarvester lesson on this site yet.",
 }

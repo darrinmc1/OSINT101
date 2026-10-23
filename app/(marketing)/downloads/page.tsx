@@ -154,7 +154,7 @@ const templates = [
     id: "search-operator-cheatsheet",
     title: "Search Operator Cheatsheet",
     description:
-      "Quick reference for 15+ advanced search operators covering site:, filetype:, intitle:, inurl:, intext:, cache:, daterange: and more. Includes syntax, descriptions, and real examples.",
+      "A short operator sheet: site:, filetype:, intitle:, inurl:, intext:, and date limits. Some older operators in the PDF have been retired by the engines. Test them before you trust them.",
     size: "3.7 KB",
     icon: "🔎",
     features: [
@@ -187,10 +187,9 @@ export default function DownloadsPage() {
           </h1>
 
           <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Professional-grade, ready-to-use PDF templates for every phase of
-            your OSINT workflow. Each template includes structured fields,
-            reference tables, and best-practice guidance to keep your
-            investigations organized and repeatable.
+            Blank PDF worksheets for the plan, the source note, and the
+            report, plus a few specialist sheets. They do not contain a
+            sample investigation. You fill them in.
           </p>
         </div>
       </section>
@@ -322,9 +321,8 @@ export default function DownloadsPage() {
             Want the Full Course?
           </h2>
           <p className="text-slate-400 mb-8">
-            These templates are just the beginning. Our full OSINT 101 course
-            includes 15+ modules with hands-on lessons, gamified badges, and
-            a progressive learning path from Rookie to Spymaster.
+            The worksheets are blank on purpose. The lessons are the method.
+            Start with OSINT Fundamentals if the question is still a mood.
           </p>
           <Link
             href="/modules"

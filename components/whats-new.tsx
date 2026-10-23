@@ -6,7 +6,10 @@ import { latestUpdates } from "@/data/updates"
 import { resolveUpdateHref } from "@/lib/update-links"
 
 export default function WhatsNew() {
-  if (!latestUpdates || latestUpdates.length === 0) return null
+  const updates = (latestUpdates ?? []).filter(
+    (u) => !u.description.trim().toLowerCase().startsWith("refreshed:")
+  )
+  if (updates.length === 0) return null
   return (
     <section className="py-16 md:py-20 border-t border-white/5">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
@@ -14,7 +17,7 @@ export default function WhatsNew() {
           What&apos;s New &amp; Updated
         </h2>
         <div className="grid gap-5 md:grid-cols-2">
-          {latestUpdates.map((u) => {
+          {updates.map((u) => {
             const href = resolveUpdateHref(u.href)
             const card = (
               <>
