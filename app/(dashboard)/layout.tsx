@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useUser } from "@clerk/nextjs"
+import { useUser, UserButton } from "@clerk/nextjs"
 import { siteConfig } from "@/lib/site-config"
 import { hasClerkPublishableKey } from "@/lib/clerk"
 import { cn } from "@/lib/utils"
@@ -15,7 +15,6 @@ import {
   Settings,
   Menu,
   X,
-  LogOut,
   FolderOpen,
 } from "lucide-react"
 import { useState } from "react"
@@ -73,6 +72,36 @@ function DashboardNav({
       })}
     </>
   )
+}
+
+function ClerkAccountCorner() {
+  const { isLoaded, isSignedIn, user } = useUser()
+  if (!isLoaded) return null
+  if (!isSignedIn) {
+    return (
+      <Link href="/sign-in" className="text-sm font-medium text-slate-300 hover:text-white">
+        Sign in
+      </Link>
+    )
+  }
+  const label = user?.firstName || user?.username || "Signed in"
+  return (
+    <div className="flex items-center gap-3">
+      <p className="text-sm font-medium text-white hidden sm:block">{label}</p>
+      <UserButton afterSignOutUrl="/" />
+    </div>
+  )
+}
+
+function AccountCorner() {
+  if (!hasClerkPublishableKey()) {
+    return (
+      <Link href="/sign-in" className="text-sm font-medium text-slate-300 hover:text-white">
+        Sign in
+      </Link>
+    )
+  }
+  return <ClerkAccountCorner />
 }
 
 function GatedDashboardNav({
@@ -151,12 +180,13 @@ export default function DashboardLayout({
             )}
           </nav>
 
-          {/* Bottom section */}
           <div className="px-3 py-4 border-t border-white/10">
-            <button className="flex w-full items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white active:scale-[0.96] transition-transform hover:bg-white/5 transition-all">
-              <LogOut className="h-4 w-4" />
-              Sign Out
-            </button>
+            <Link
+              href="/"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5"
+            >
+              Back to the site
+            </Link>
           </div>
         </div>
       </aside>
@@ -174,19 +204,7 @@ export default function DashboardLayout({
 
           <div className="flex-1" />
 
-          {/* User area */}
-          <div className="flex items-center gap-3">
-            <div className="text-right hidden sm:block">
-              <p className="text-sm font-medium text-white">AI Learner</p>
-              <p className="text-xs text-slate-500">
-                {siteConfig.badges.tierEmojis[0]}{" "}
-                {siteConfig.badges.tierNames[0]}
-              </p>
-            </div>
-            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center text-sm font-bold text-white">
-              A
-            </div>
-          </div>
+          <AccountCorner />
         </header>
 
         {/* Page content */}

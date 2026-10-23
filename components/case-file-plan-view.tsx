@@ -134,7 +134,7 @@ export function CaseFilePlanView({ plan }: { plan: CaseFilePlan }) {
             <div className="flex items-start gap-3 mb-4">
               <Lock className="h-5 w-5 text-violet-300 mt-0.5" />
               <div>
-                <p className="font-bold text-white">Sign in to unlock advanced collection lanes</p>
+                <p className="font-bold text-white">Sign in for the advanced collection lanes</p>
                 <p className="text-sm text-slate-400 mt-1">
                   Intermediate and Advanced module methods (people profiling, SOCMINT, GEOINT, recon, dark web, crypto, forensics) sit behind existing auth on this MVP.
                 </p>

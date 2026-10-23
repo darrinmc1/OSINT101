@@ -39,69 +39,70 @@ export const humorTheme: HumorTheme = {
 export const humorBank: Record<string, HumorItem[]> = {
   general: [
     {
-      setup: "I did some OSINT on my own social media.",
-      punchline: "Apparently I'm a foodie who posts blurry photos of traffic. The analysts were confused too.",
+      setup: "The investigation started with a clear question.",
+      punchline: "It ended with the same question. That is how you know the notes worked.",
     },
     {
-      setup: "My open-source investigation started with one public post.",
-      punchline: "It ended three hours later with 40 browser tabs and no memory of how I got there.",
+      setup: "A public profile is a statement.",
+      punchline: "It is not a witness. Witnesses can be wrong. Profiles do not take follow-up questions.",
     },
     {
-      setup: "OSINT: because your target posts their location, their dog's name, and their favorite coffee shop.",
+      setup: "Forty tabs is not a method.",
+      punchline: "It is a queue. If you cannot say what the next tab is for, close it.",
     },
     {
-      setup: "I checked someone's LinkedIn for a background check.",
-      punchline: "They have 2 endorsements and one of them is from themselves. Certified.",
+      setup: "The interesting part is rarely the first result.",
+      punchline: "The interesting part is the date on the third result, which nobody read.",
     },
   ],
   "google dorking": [
     {
-      setup: "Google dorking is just search with intent.",
-      punchline: "It's also the fastest way to find a PDF someone forgot to protect.",
+      setup: "Operators are punctuation with a grudge.",
+      punchline: "site: and filetype: still beat a new extension named after a predator.",
     },
     {
-      setup: "I found a public directory listing.",
-      punchline: "It had a file called 'FINAL_FINAL_v2_ACTUALLY_DONE.xlsx'. Relatable.",
+      setup: "I searched a domain I actually own.",
+      punchline: "The file was called final_v7 and last touched in 2019. Of course it was.",
     },
     {
-      setup: "The best OSINT tool is Google with better operators.",
-      punchline: "That and knowing the target's default password is probably 'password1'.",
+      setup: "A directory listing is not a trophy.",
+      punchline: "It is a note that says: record the URL, then decide whether you were supposed to see it.",
     },
     {
-      setup: "I dorked my own site to see what's exposed.",
-      punchline: "The answer: everything I forgot about in 2016. Time capsule achieved.",
+      setup: "The query worked.",
+      punchline: "Write down the query. Future you will not remember the punctuation that made it work.",
     },
   ],
   "social media": [
     {
-      setup: "Your social media tells investigators everything.",
-      punchline: "It tells me your favorite show, your gym schedule, and the name of your first pet. Security question solved.",
+      setup: "Posting time is a clue.",
+      punchline: "It is a clue about a clock, not a personality. Leave the diagnosis to someone with a reason.",
     },
     {
-      setup: "I analyzed a profile's posting times.",
-      punchline: "Turns out they're a night owl with a coffee problem. The profile didn't confirm it, but the 2am memes did.",
+      setup: "The caption said it was a quiet weekend.",
+      punchline: "The skyline said a postcode. Believe the buildings, then check the year.",
     },
     {
-      setup: "The target posted a 'quiet weekend in' photo.",
-      punchline: "The GPS metadata said otherwise. The metadata is always talking.",
+      setup: "Three posts do not make a pattern.",
+      punchline: "They make a lead. A pattern needs more than your mood and a timestamp.",
     },
     {
-      setup: "I found someone's email from a forum post from 2009.",
-      punchline: "They still use it. Their password is still their dog's name. Some things never change.",
+      setup: "The bio and the company register disagreed.",
+      punchline: "That is the finding. Do not pick the one you like and call it corroborated.",
     },
   ],
   "dark web": [
     {
-      setup: "I went looking for dark web monitoring tools.",
-      punchline: "The tools are fine. The marketing copy is very dramatic. 'YOUR DATA IS FOR SALE' — yes, thank you, that's why I'm here.",
+      setup: "Most of what gets called the dark web is a market stall with worse lighting.",
+      punchline: "Read it if the question requires it. Do not buy anything to prove you were there.",
     },
     {
-      setup: "The dark web is 99% scams and 1% genuine curiosity.",
-      punchline: "The genuine curiosity is why I'm here. The scams are why I'm leaving.",
+      setup: "A leak blog is a noticeboard.",
+      punchline: "You will not take the notice down. You might see it before the person who needed to. That is the job.",
     },
     {
-      setup: "Monitoring the dark web for your brand is like watching for graffiti.",
-      punchline: "You're not stopping it, but you'll know about it first. That's the job.",
+      setup: "The dramatic headline is doing marketing.",
+      punchline: "The useful line is the date, the victim name as published, and whether you can check it elsewhere.",
     },
   ],
 }
