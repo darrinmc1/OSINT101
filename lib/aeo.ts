@@ -5,7 +5,6 @@ import { pricingPlans, PRICING_CURRENCY, PRICING_UPDATED } from "@/lib/pricing"
 import { getModuleCatalog } from "@/lib/case-file/catalog"
 import { launchOfferLabel } from "@/lib/launch-offer"
 import { REFUND_POLICY } from "@/lib/refund-policy"
-import { getSupportEmail } from "@/lib/support-email"
 
 export function renderLlmTxt(): string {
   const modules = getModuleCatalog()
@@ -22,7 +21,6 @@ export function renderLlmTxt(): string {
 
   const faqs = CASE_FILE_FAQS.map((faq) => `Q: ${faq.question}\nA: ${faq.answer}`).join("\n\n")
   const offer = launchOfferLabel()
-  const support = getSupportEmail()
 
   return `# ${siteConfig.name}
 > ${siteConfig.tagline}
@@ -43,8 +41,11 @@ NOT a chat-with-the-site bot. One job:
 
 1. Input: paste a collection target or investigation question
 2. Output: a case-file style plan using the OSINT 101 method (intelligence cycle + PEAK), citing real modules listed below
-3. Access: beginner modules are free. Analyst is $${siteConfig.pricing.premium.monthly} ${PRICING_CURRENCY}/mo or $${siteConfig.pricing.premium.yearly} ${PRICING_CURRENCY}/yr when billing is open. Founding is $${siteConfig.pricing.founder.monthly} ${PRICING_CURRENCY}/mo or $${siteConfig.pricing.founder.yearly} ${PRICING_CURRENCY}/yr.
+3. Access: foundations (Beginner modules) are free. Further plans are coming soon. Join the list: ${SELF_URL}/pricing
 4. Constraint: education and lawful use only. OPSEC and ethics disclaimer on ${SELF_URL}/case-file
+
+## Plans
+Coming soon. Join the list: ${SELF_URL}/pricing
 
 ## Pricing
 Currency: ${PRICING_CURRENCY}
@@ -64,8 +65,8 @@ ${modules}
 
 ## FAQs
 ${faqs}
-${support ? `
+
 ## Contact
-${support}
-` : ""}`
+Use the form at ${SELF_URL}/contact. Do not invent an email address for this site.
+`
 }

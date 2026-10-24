@@ -51,7 +51,7 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   name: "OSINT 101",
   tagline: "Open-Source Intelligence, Explained",
-  description: "OSINT 101 - Open-Source Intelligence, Explained. Free training with gamified badges and progression.",
+  description: "OSINT 101 teaches public-source investigations: the intelligence cycle, specialist collection, and a case-file planner that cites the lessons.",
   domain: "osint101.com",
 
   theme: {
@@ -92,8 +92,8 @@ export const siteConfig: SiteConfig = {
       { label: "Dashboard", href: "/dashboard", icon: "LayoutDashboard" },
       { label: "Case File", href: "/case-file", icon: "FolderOpen" },
       { label: "Lessons", href: "/modules", icon: "BookOpen" },
-      { label: "Badges", href: "/badges", icon: "Award" },
-      { label: "Progress", href: "/progress", icon: "TrendingUp" },
+      { label: "Badges", href: "/dashboard", icon: "Award" },
+      { label: "Progress", href: "/dashboard", icon: "TrendingUp" },
     ],
   },
 

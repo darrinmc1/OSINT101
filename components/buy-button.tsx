@@ -1,11 +1,11 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { HoneypotField } from "@/components/HoneypotField"
 import { MerchantDisclosure } from "@/components/merchant-disclosure"
 import { RefundPolicyNote } from "@/components/refund-policy-note"
 import { CHECKOUT_OFFERS, offerIsPurchasable, type CheckoutSku } from "@/lib/offers"
-import { getSupportEmail } from "@/lib/support-email"
 
 /**
  * Buy stays a disabled "Coming soon: $…" control, and never calls
@@ -25,7 +25,6 @@ export function BuyButton({
   showWaitlist?: boolean
 }) {
   const offer = CHECKOUT_OFFERS[sku]
-  const supportEmail = getSupportEmail()
   const onSale = offerIsPurchasable(offer)
 
   return (
@@ -51,14 +50,13 @@ export function BuyButton({
       <MerchantDisclosure />
       <RefundPolicyNote />
 
-      {supportEmail ? (
-        <p className="mt-2 text-xs text-slate-500">
-          Questions about a purchase?{" "}
-          <a href={`mailto:${supportEmail}`} className="text-slate-300 hover:text-white">
-            {supportEmail}
-          </a>
-        </p>
-      ) : null}
+      <p className="mt-2 text-xs text-slate-500">
+        Questions about a purchase?{" "}
+        <Link href="/contact" className="text-slate-300 hover:text-white">
+          Use the contact form
+        </Link>
+        .
+      </p>
 
       {!onSale && showWaitlist ? <WaitlistNote sku={sku} /> : null}
     </div>

@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { sendAdminNotification } from "@/lib/email";
 
-const SITE_KEY = process.env.SITE_KEY ?? "unknown";
+const SITE_KEY = process.env.SITE_KEY ?? "osint101";
 const VALID_CATEGORIES = ["Bug", "Suggestion", "Content Request", "Other"];
 
 const rateLimit = new Map<string, { count: number; reset: number }>();

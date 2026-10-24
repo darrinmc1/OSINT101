@@ -1,16 +1,23 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { siteConfig } from "@/lib/site-config"
+import { pageMeta } from "@/lib/page-meta"
+
+export const metadata: Metadata = pageMeta({
+  title: `${siteConfig.name} - ${siteConfig.tagline}`,
+  description: siteConfig.description,
+  path: "/",
+  absolute: true,
+})
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { EmailCapture } from "@/components/email-capture"
 import { listPublicModules } from "@/data/modules"
 import { ModuleCardGrid } from "@/components/module-cards"
 import WhatsNew from "@/components/whats-new"
+import { WeeklyLesson } from "@/components/weekly-lesson"
 import {
   ArrowRight,
-  GraduationCap,
-  Search,
-  Shield,
   FolderOpen,
 } from "lucide-react"
 
@@ -31,7 +38,7 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-2 mb-8">
               <span className="text-lg">{siteConfig.theme.emoji}</span>
               <span className="text-sm font-semibold text-indigo-300 tracking-wide uppercase">
-                Free OSINT Training &amp; Investigation Tools
+                Free lessons and a case-file planner
               </span>
             </div>
 
@@ -59,23 +66,14 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
-              <div className="flex items-center gap-2">
-                <Search className="h-4 w-4 text-indigo-400" />
-                <span>Practical tradecraft</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-violet-400" />
-                <span>Ethics first</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <GraduationCap className="h-4 w-4 text-indigo-300" />
-                <span>5-tier badge system</span>
-              </div>
-            </div>
+            <p className="mt-12 text-sm text-slate-500 max-w-xl mx-auto">
+              Lessons are readable without an account. The planner cites them.
+              It does not collect the records for you.
+            </p>
           </div>
         </section>
       <WhatsNew />
+      <WeeklyLesson />
 
         <section className="py-16 md:py-20 border-t border-white/5">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -87,7 +85,7 @@ export default function HomePage() {
                 Paste a target. Get a case file.
               </h2>
               <p className="text-slate-400 mb-6 max-w-2xl">
-                The archive stays the archive. This layer turns a collection question into a cited investigation plan using the OSINT 101 method — intelligence cycle, OPSEC, and real module links. Foundations are free.
+                The archive stays the archive. This layer turns a collection question into a cited investigation plan: intelligence cycle, OPSEC, and links to real modules. Foundations are free.
               </p>
               <Link
                 href="/case-file"
@@ -115,8 +113,8 @@ export default function HomePage() {
                 Learning Modules
               </h2>
               <p className="text-slate-400 mt-3 max-w-lg mx-auto">
-                Structured modules that teach you how to actually think like an
-                analyst &mdash; not just how to Google with attitude.
+                Nineteen longer tracks, then the short briefings. Each one
+                states the question, the method, and where to stop.
               </p>
             </div>
 
@@ -151,9 +149,8 @@ export default function HomePage() {
                 The Asset Library
               </h2>
               <p className="text-slate-400 mb-8 max-w-xl mx-auto">
-                Checklists, cheatsheets, search operator references, and
-                templates &mdash; everything you need to run a clean
-                investigation.
+                Checklists, operator notes, and blank templates for a clean
+                investigation. The worksheets are empty on purpose.
               </p>
               <Link
                 href="/resources"

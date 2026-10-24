@@ -31,10 +31,19 @@ const isPublicRoute = createRouteMatcher([
   "/modules(.*)",
   "/resources(.*)",
   "/blog(.*)",
+  "/downloads(.*)",
   "/about",
   "/contact",
   "/pricing",
+  "/improvements",
+  "/buy",
+  "/checkout",
+  "/upgrade",
+  "/plans",
   "/case-file",
+  "/case-file/opengraph-image(.*)",
+  "/opengraph-image(.*)",
+  "/twitter-image(.*)",
   "/llm.txt",
   "/llms.txt",
   "/pricing.json",
@@ -64,6 +73,8 @@ if (hasClerkKeys) {
   }
 }
 
+const COMING_SOON_PATHS = new Set(["/buy", "/checkout", "/upgrade", "/plans"])
+
 export default async function middleware(request: NextRequest) {
   const url = request.nextUrl.pathname
 
@@ -71,6 +82,13 @@ export default async function middleware(request: NextRequest) {
   // rate limiter on this path — both have blocked signature verification.
   if (url === "/api/stripe/webhook") {
     return NextResponse.next()
+  }
+  const pathOnly = url.length > 1 ? url.replace(/\/$/, "") : url
+  if (COMING_SOON_PATHS.has(pathOnly)) {
+    const dest = request.nextUrl.clone()
+    dest.pathname = "/pricing"
+    dest.search = ""
+    return NextResponse.redirect(dest, 307)
   }
   const userAgent = request.headers.get("user-agent") || ""
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()

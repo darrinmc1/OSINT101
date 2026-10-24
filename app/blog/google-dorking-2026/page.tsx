@@ -1,6 +1,14 @@
+import type { Metadata } from "next"
 import Link from 'next/link'
 import { ArrowLeft, Calendar } from 'lucide-react'
 import HumorBreak from "@/components/humor-break"
+import { pageMeta } from "@/lib/page-meta"
+
+export const metadata: Metadata = pageMeta({
+  title: "Google Dorking for Investigators",
+  description: "Advanced search operators to find information hiding in plain sight.",
+  path: "/blog/google-dorking-2026",
+})
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
   return (

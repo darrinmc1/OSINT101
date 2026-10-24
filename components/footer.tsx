@@ -2,16 +2,14 @@ import Link from "next/link"
 import { MerchantDisclosure } from "@/components/merchant-disclosure"
 import { clusterFor, SELF_URL } from "@/lib/network"
 import { siteConfig } from "@/lib/site-config"
-import { getSupportEmail } from "@/lib/support-email"
 
 export function Footer() {
-  const supportEmail = getSupportEmail()
   return (
     <footer className="border-t border-white/10 bg-slate-950/80">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
-          <div className="md:col-span-2">
+          <div>
             <Link href="/" className="flex items-center gap-2 mb-4">
               <span className="text-2xl">{siteConfig.theme.emoji}</span>
               <span className="font-display text-lg font-bold gradient-text-cyan">
@@ -48,16 +46,22 @@ export function Footer() {
               Connect
             </h4>
             <ul className="space-y-2">
-              {supportEmail ? (
-                <li>
-                  <a
-                    href={`mailto:${supportEmail}`}
-                    className="text-sm text-slate-400 hover:text-cyan-400 transition-colors"
-                  >
-                    {supportEmail}
-                  </a>
-                </li>
-              ) : null}
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-sm text-slate-400 hover:text-cyan-400 transition-colors"
+                >
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/downloads"
+                  className="text-sm text-slate-400 hover:text-cyan-400 transition-colors"
+                >
+                  Worksheets
+                </Link>
+              </li>
               <li>
                 <a
                   href={siteConfig.contact.github}

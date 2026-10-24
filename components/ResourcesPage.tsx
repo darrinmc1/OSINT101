@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
-import { Download, FileText, CheckSquare, Terminal, Users, Search, Calendar, Filter, Activity, Database, Radar } from 'lucide-react'
+import { FileText, CheckSquare, Terminal, Users, Search, Calendar, Filter, Activity, Database, Radar } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -76,7 +76,6 @@ const ResourcesPage = () => {
               <CardTitle className="text-lg font-mono text-white transition-colors group-hover:text-intel-green">{resource.title.toUpperCase()}</CardTitle>
               <div className="mt-2 flex items-center space-x-2">
                 <Badge variant="outline" className="rounded-none border-intel-green/30 font-mono text-xs">{resource.type}</Badge>
-                <Badge variant="secondary" className="rounded-none border border-gray-800 bg-gray-900 font-mono text-xs">{resource.size}</Badge>
                 {featured ? <Badge className="rounded-none bg-intel-green font-mono text-xs text-black">FEATURED</Badge> : null}
               </div>
             </div>
@@ -101,8 +100,8 @@ const ResourcesPage = () => {
           </div>
           <Button asChild className="h-9 rounded-none bg-intel-green px-6 font-mono text-xs font-bold text-black active:scale-[0.96] transition-transform hover:bg-intel-green/80">
             <Link href={`/resources/${resource.id}`}>
-              <Download className="mr-2 h-4 w-4" />
-              EXTRACT
+              <FileText className="mr-2 h-4 w-4" />
+              READ
             </Link>
           </Button>
         </div>
@@ -120,9 +119,7 @@ const ResourcesPage = () => {
             INTEL <span className="glow-green text-intel-green">ASSET LIBRARY</span>
           </h1>
           <p className="mx-auto max-w-3xl font-mono text-lg uppercase tracking-wide leading-relaxed text-gray-400">
-            Your arsenal of OSINT tools, checklists, and guides.
-            All intelligence gathered, reviewed, and occasionally mocked by seasoned analysts.
-            Download with purpose, not just because the button looks cool.
+            Six on-page guides: a checklist, operators, a Kali note, a people-profiling workflow, tool categories, and the legal line. Read them. They are not files.
           </p>
         </div>
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-intel-green/30 to-transparent"></div>
@@ -218,15 +215,11 @@ const ResourcesPage = () => {
           <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-intel-green/50 to-transparent"></div>
           <h3 className="mb-4 font-mono text-3xl font-bold uppercase tracking-widest text-white">ASSET_REQUEST_TERMINAL</h3>
           <p className="mx-auto mb-10 max-w-2xl font-mono text-sm tracking-widest text-gray-400">
-            OUR REPOSITORY GROWS EVERY HOUR. IF YOU CANNOT FIND THE INTEL YOU NEED, ASK FOR IT DIRECTLY.
-            THAT IS FAR MORE EFFICIENT THAN STARE-WARS WITH THE SEARCH BOX.
+            If a guide is missing, ask for the question it should answer. A subject line of "make it cool" will be filed under weather.
           </p>
           <div className="flex flex-col justify-center gap-6 sm:flex-row">
             <Button asChild className="h-12 rounded-none bg-intel-green px-10 font-mono font-bold text-black shadow-[0_0_15px_rgba(34,197,94,0.3)] active:scale-[0.96] transition-transform hover:bg-intel-green/80">
-              <Link href="/requests">REQUEST_INTEL</Link>
-            </Button>
-            <Button asChild variant="outline" className="h-12 rounded-none border-intel-blue px-10 font-mono font-bold text-intel-blue active:scale-[0.96] transition-transform hover:bg-intel-blue/10">
-              <Link href="/contribute">UPLINK_DATA</Link>
+              <Link href="/contact">Request a guide</Link>
             </Button>
           </div>
         </div>

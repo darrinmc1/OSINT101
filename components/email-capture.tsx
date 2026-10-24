@@ -63,6 +63,8 @@ interface EmailCaptureProps {
   subheading?: string
   source?: string
   showName?: boolean
+  /** Plain "Coming soon — join the list" block. No jokes, badges, or plan language. */
+  neutral?: boolean
 }
 
 export function EmailCapture({
@@ -73,6 +75,7 @@ export function EmailCapture({
   subheading,
   source = "website",
   showName = false,
+  neutral = false,
 }: EmailCaptureProps) {
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
@@ -103,12 +106,57 @@ export function EmailCapture({
         setName("")
       } else {
         setStatus("error")
-        setMessage(data.error || "Something went sideways. Try again.")
+        setMessage(
+          data.error ||
+            (neutral ? "Something went wrong. Try again." : "Something went sideways. Try again.")
+        )
       }
     } catch {
       setStatus("error")
-      setMessage("Lost the trail. Check your connection and try again.")
+      setMessage(
+        neutral
+          ? "Check your connection and try again."
+          : "Lost the trail. Check your connection and try again."
+      )
     }
+  }
+
+  if (neutral) {
+    return (
+      <section className="mx-auto max-w-md px-4 py-20 text-center">
+        <h1 className="text-3xl font-semibold tracking-tight text-white">Coming soon</h1>
+        <p className="mt-3 text-slate-400">Join the list.</p>
+        {status === "success" ? (
+          <p className="mt-8 text-white">You&apos;re on the list.</p>
+        ) : (
+          <form onSubmit={handleSubmit} className="mt-8 space-y-3">
+            <label htmlFor="coming-soon-email" className="sr-only">
+              Email
+            </label>
+            <input
+              id="coming-soon-email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@email.com"
+              required
+              autoComplete="email"
+              className="w-full rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/40"
+            />
+            <button
+              type="submit"
+              disabled={status === "loading"}
+              className="w-full rounded-lg bg-indigo-600 px-4 py-3 text-sm font-semibold text-white hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {status === "loading" ? "Joining..." : "Join the list"}
+            </button>
+            {status === "error" && (
+              <p className="text-sm text-red-400">{message}</p>
+            )}
+          </form>
+        )}
+      </section>
+    )
   }
 
   // Success state

@@ -22,7 +22,7 @@ export const resourceLibrary = [
     description: 'A field checklist for when your browser has 47 tabs open and your dignity has left the building.',
     category: 'checklists',
     type: 'Guide',
-    size: '2.1 MB',
+    size: '',
     lastUpdated: '2026-04-14',
     tags: ['investigation', 'methodology', 'systematic'],
     featured: true,
@@ -85,7 +85,7 @@ Good OSINT is not dramatic keyboard mashing under neon lights. It is boring, str
     description: 'A fast reference for common Kali workflows, because nobody remembers every flag and pretending otherwise is exhausting.',
     category: 'cheatsheets',
     type: 'Guide',
-    size: '1.8 MB',
+    size: '',
     lastUpdated: '2026-04-14',
     tags: ['kali', 'commands', 'reference'],
     featured: true,
@@ -139,7 +139,7 @@ The right command is rarely the longest command. Start small, confirm assumption
     description: 'A structured workflow for ethical subject research, with fewer trench-coat fantasies and more documentation.',
     category: 'templates',
     type: 'Template',
-    size: '3.2 MB',
+    size: '',
     lastUpdated: '2026-04-14',
     tags: ['profiling', 'investigation', 'template'],
     featured: true,
@@ -198,7 +198,7 @@ People-focused investigations need tighter legal and ethical controls than gener
     description: 'A searchable reference for search operators, because "I typed the whole question into Google" can only take you so far.',
     category: 'guides',
     type: 'Guide',
-    size: '1.5 MB',
+    size: '',
     lastUpdated: '2026-04-14',
     tags: ['search', 'google', 'operators'],
     body: `
@@ -250,7 +250,7 @@ Build queries iteratively. Start broad, inspect the noise, then tighten. If your
     description: 'A curated collection of tool categories and use cases so you can stop discovering the same five tools on every blog post.',
     category: 'lists',
     type: 'Index',
-    size: '0.8 MB',
+    size: '',
     lastUpdated: '2026-04-14',
     tags: ['tools', 'comprehensive', 'links'],
     body: `
@@ -297,7 +297,7 @@ Owning 200 tools and understanding 3 of them is how people end up screenshotting
     description: 'A practical guide to staying lawful, proportional, and considerably less likely to create a meeting with Legal.',
     category: 'guides',
     type: 'Policy',
-    size: '2.7 MB',
+    size: '',
     lastUpdated: '2026-04-14',
     tags: ['legal', 'ethics', 'compliance'],
     body: `
@@ -378,12 +378,16 @@ We collect as little as possible, keep it for as short as practical, and avoid b
 
 ### In plain English
 
-- Demo login state is stored locally in your browser so refresh does not immediately erase your existence.
-- We do not need your life story to let you read a checklist.
-- Operational analytics should be minimal, transparent, and boring in the best possible way.
-- Sensitive user data should not be collected until there is a real backend and a real retention policy.
+- Lessons are readable without an account.
+- If you sign in, that account is Clerk's. This site does not publish an email address.
+- The contact form and the mailing list only keep what you submit: a name, an email, and the message.
+- Do not paste a dossier on a private person into either box.
 
-If a future feature needs more data, it should earn that right the old-fashioned way: documentation, justification, and someone from compliance sighing deeply.
+If a feature needs more than that, the page that asks for it should say so.
+
+### Governing law
+
+Queensland, Australia. The contact form is the only way to raise a privacy question. No email address is published.
     `,
   },
   terms: {
@@ -403,6 +407,14 @@ Use the platform lawfully, ethically, and within the scope of authorization. If 
 - Content may change as tools, practices, and standards evolve.
 
 The short version: act like a professional, not like the villain in a bargain-bin cyber thriller.
+
+### Governing law
+
+Queensland, Australia.
+
+### Contact
+
+The form on the contact page is the only way in. No email address is published.
     `,
   },
   contact: {
