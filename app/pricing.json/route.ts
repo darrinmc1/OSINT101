@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server"
+import { siteConfig } from "@/lib/site-config"
 
 export function GET() {
-  return new NextResponse(null, {
-    status: 307,
-    headers: { Location: "/pricing" },
+  return NextResponse.json({
+    name: siteConfig.name,
+    note: "All content is free while we finish setting up.",
   })
 }

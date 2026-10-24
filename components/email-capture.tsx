@@ -174,12 +174,6 @@ export function EmailCapture({
           On the list. Case opened.
         </h3>
         <p className={`${colors.textMuted} text-lg`}>{message}</p>
-        <div className="mt-4 inline-flex items-center gap-2 bg-cyan-500/10 rounded-full px-4 py-2 border border-cyan-500/30">
-          <span className="text-sm font-semibold text-cyan-400">
-            Founding Member Status: Verified
-          </span>
-          <span>{siteConfig.badges.tierEmojis[4]}</span>
-        </div>
       </div>
     )
   }
@@ -191,15 +185,8 @@ export function EmailCapture({
         className={`${colors.bgGradient} rounded-2xl ${colors.border} border-2 p-8 md:p-12 glass-card`}
       >
         <div className="relative z-10 max-w-2xl mx-auto text-center">
-          <div
-            className={`inline-flex items-center gap-2 ${colors.badgeBg} border backdrop-blur-sm rounded-full px-4 py-2 mb-6`}
-          >
-            <span className="text-lg">{siteConfig.theme.emoji}</span>
-            <span
-              className={`text-sm font-semibold ${colors.badgeText} tracking-wide uppercase`}
-            >
-              Founding Member
-            </span>
+          <div className="text-3xl mb-6" aria-hidden="true">
+            {siteConfig.theme.emoji}
           </div>
 
           <h2
@@ -285,11 +272,6 @@ export function EmailCapture({
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
             <span className="text-2xl">{siteConfig.theme.emoji}</span>
-            <span
-              className={`text-xs font-bold ${colors.badgeText} ${colors.badgeBg} border rounded-full px-3 py-1 uppercase tracking-wide`}
-            >
-              Founding Member
-            </span>
           </div>
           <h3
             className={`text-xl md:text-2xl font-extrabold ${colors.text} mb-1 font-display`}
@@ -318,7 +300,7 @@ export function EmailCapture({
             disabled={status === "loading"}
             className={`${colors.primary} ${colors.primaryHover} text-white font-bold px-6 py-3 rounded-xl shadow-lg shadow-cyan-500/25 transition-all duration-300 hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap text-sm`}
           >
-            {status === "loading" ? "Cross-referencing..." : "Join Free"}
+            {status === "loading" ? "Cross-referencing..." : "Join the list"}
           </button>
         </form>
       </div>

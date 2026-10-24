@@ -9,7 +9,6 @@ const PUBLIC_SLUGS: Record<string, string> = {
   contact: "/contact",
   resources: "/resources",
   modules: "/modules",
-  pricing: "/pricing",
   blog: "/blog",
   downloads: "/downloads",
   privacy: "/privacy",

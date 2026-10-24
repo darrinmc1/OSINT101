@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Lock, BookOpen, Shield } from "lucide-react"
+import { BookOpen, Shield } from "lucide-react"
 import type { CaseFilePlan, PlanStep } from "@/lib/case-file/types"
 
 const phaseLabel: Record<PlanStep["phase"], string> = {
@@ -113,7 +113,7 @@ export function CaseFilePlanView({ plan }: { plan: CaseFilePlan }) {
       </section>
 
       <section className="space-y-4">
-        <h3 className="text-xl font-bold text-white">Foundations (free)</h3>
+        <h3 className="text-xl font-bold text-white">Foundations</h3>
         {plan.foundations.map((item) => (
           <StepCard key={item.id} step={item} />
         ))}
@@ -121,50 +121,12 @@ export function CaseFilePlanView({ plan }: { plan: CaseFilePlan }) {
 
       <section className="space-y-4">
         <h3 className="text-xl font-bold text-white">Advanced techniques</h3>
-        {plan.advancedUnlocked ? (
-          plan.advanced.length ? (
-            plan.advanced.map((item) => <StepCard key={item.id} step={item} />)
-          ) : (
-            <p className="text-sm text-slate-400">
-              This question is covered by foundation modules. Advanced lanes were not required.
-            </p>
-          )
+        {plan.advanced.length ? (
+          plan.advanced.map((item) => <StepCard key={item.id} step={item} />)
         ) : (
-          <div className="rounded-2xl border border-violet-500/30 bg-violet-500/10 p-6">
-            <div className="flex items-start gap-3 mb-4">
-              <Lock className="h-5 w-5 text-violet-300 mt-0.5" />
-              <div>
-                <p className="font-bold text-white">Sign in for the advanced collection lanes</p>
-                <p className="text-sm text-slate-400 mt-1">
-                  Intermediate and Advanced module methods (people profiling, SOCMINT, GEOINT, recon, dark web, crypto, forensics) sit behind existing auth on this MVP.
-                </p>
-              </div>
-            </div>
-            <ul className="grid sm:grid-cols-2 gap-2 mb-5">
-              {plan.advancedTeasers.map((mod) => (
-                <li key={mod.moduleId}>
-                  <Link
-                    href={mod.href}
-                    className="flex items-center justify-between rounded-lg border border-white/10 bg-slate-950/40 px-3 py-2 text-sm text-slate-300 hover:border-violet-400/40"
-                  >
-                    <span>{mod.moduleTitle}</span>
-                    <span className="text-[10px] uppercase tracking-wider text-violet-300">{mod.level}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/sign-in"
-                className="inline-flex items-center rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600 px-4 py-2 text-sm font-bold text-white"
-              >
-                Sign in
-              </Link>
-              <Link href="/pricing" className="inline-flex items-center rounded-xl border border-white/15 px-4 py-2 text-sm font-semibold text-slate-200">
-                Join the list
-              </Link>
-            </div>
-          </div>
+          <p className="text-sm text-slate-400">
+            This question is covered by foundation modules. Advanced lanes were not required.
+          </p>
         )}
       </section>
 
