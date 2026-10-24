@@ -73,14 +73,21 @@ if (hasClerkKeys) {
   }
 }
 
-const COMING_SOON_PATHS = new Set(["/buy", "/checkout", "/upgrade", "/plans"])
+const COMING_SOON_PATHS = new Set([
+  "/buy",
+  "/checkout",
+  "/upgrade",
+  "/plans",
+  "/pricing",
+  "/refunds",
+])
 
 export default async function middleware(request: NextRequest) {
   const url = request.nextUrl.pathname
   const pathOnly = url.length > 1 ? url.replace(/\/$/, "") : url
   if (COMING_SOON_PATHS.has(pathOnly)) {
     const dest = request.nextUrl.clone()
-    dest.pathname = "/pricing"
+    dest.pathname = "/"
     dest.search = ""
     return NextResponse.redirect(dest, 307)
   }

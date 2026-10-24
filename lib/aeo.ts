@@ -26,11 +26,8 @@ NOT a chat-with-the-site bot. One job:
 
 1. Input: paste a collection target or investigation question
 2. Output: a case-file style plan using the OSINT 101 method (intelligence cycle + PEAK), citing real modules listed below
-3. Access: foundations (Beginner modules) are free. Further plans are coming soon. Join the list: ${SELF_URL}/pricing
+3. Access: the lessons and the Case File Planner are open. All content is free while we finish setting up.
 4. Constraint: education and lawful use only. OPSEC and ethics disclaimer on ${SELF_URL}/case-file
-
-## Plans
-Coming soon. Join the list: ${SELF_URL}/pricing
 
 ## Modules (cite these, do not invent)
 ${modules}

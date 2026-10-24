@@ -85,7 +85,7 @@ export default function HomePage() {
                 Paste a target. Get a case file.
               </h2>
               <p className="text-slate-400 mb-6 max-w-2xl">
-                The archive stays the archive. This layer turns a collection question into a cited investigation plan: intelligence cycle, OPSEC, and links to real modules. Foundations are free.
+                The archive stays the archive. This layer turns a collection question into a cited investigation plan: intelligence cycle, OPSEC, and links to real modules.
               </p>
               <Link
                 href="/case-file"

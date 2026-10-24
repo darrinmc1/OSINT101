@@ -45,7 +45,7 @@ export const ALL_UPDATES: SiteUpdate[] = [
     id: "case-file-planner",
     title: "Case File Planner",
     description:
-      "Paste a collection question and get a cited plan. It does not collect anything for you. Foundations are free to read.",
+      "Paste a collection question and get a cited plan. It does not collect anything for you.",
     date: "2026-08-13",
     kind: "new",
     href: "/case-file",

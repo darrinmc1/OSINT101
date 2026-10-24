@@ -85,7 +85,6 @@ export const siteConfig: SiteConfig = {
     marketing: [
       { label: "Case File", href: "/case-file" },
       { label: "Lessons", href: "/modules" },
-      { label: "Pricing", href: "/pricing" },
       { label: "About", href: "/about" },
     ],
     dashboard: [
@@ -103,7 +102,7 @@ export const siteConfig: SiteConfig = {
     ctaButton: "Open the Case File",
     ctaSecondary: "Browse Lessons",
     emailCaptureHeading: "Get the Case Files",
-    emailCaptureSubheading: "New lessons, occasional tradecraft notes. Founding members read the dossier first.",
+    emailCaptureSubheading: "New lessons, occasional tradecraft notes.",
     feedbackPlaceholder: "What did you find? Be specific - vague reports get filed under 'cold case'.",
   },
 

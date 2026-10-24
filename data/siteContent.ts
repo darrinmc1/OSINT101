@@ -384,6 +384,10 @@ We collect as little as possible, keep it for as short as practical, and avoid b
 - Do not paste a dossier on a private person into either box.
 
 If a feature needs more than that, the page that asks for it should say so.
+
+### Governing law
+
+Queensland, Australia. The contact form is the only way to raise a privacy question. No email address is published.
     `,
   },
   terms: {
@@ -403,6 +407,14 @@ Use the platform lawfully, ethically, and within the scope of authorization. If 
 - Content may change as tools, practices, and standards evolve.
 
 The short version: act like a professional, not like the villain in a bargain-bin cyber thriller.
+
+### Governing law
+
+Queensland, Australia.
+
+### Contact
+
+The form on the contact page is the only way in. No email address is published.
     `,
   },
   contact: {
