@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { MerchantDisclosure } from "@/components/merchant-disclosure"
 import { clusterFor, SELF_URL } from "@/lib/network"
 import { siteConfig } from "@/lib/site-config"
 
@@ -93,6 +94,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/5">
+          <MerchantDisclosure className="mb-4 text-xs text-slate-500 leading-relaxed" />
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-xs text-slate-500">
               &copy; {new Date().getFullYear()} {siteConfig.name}. All rights

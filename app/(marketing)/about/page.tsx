@@ -71,8 +71,9 @@ export default function AboutPage() {
                   to keep going.
                 </p>
                 <p>
-                  You can read the lessons without an account. The planner
-                  includes the advanced lanes.
+                  You can read the lessons without an account. Sign-in is
+                  for the advanced lanes in the planner, not for permission
+                  to open a page.
                 </p>
                 <p>
                   There is no forum on this site, and there is no score that
