@@ -13,10 +13,10 @@ export type LessonSpotlight = {
 
 /** Manual spotlight — bump when merging a new Consensus/backlog lesson. */
 export const lessonSpotlight: LessonSpotlight = {
-  latestModuleId: "findme-username-simple",
-  latestTitle: "FindMe: The Simple Username CLI (And When to Stop Collecting Tools)",
-  latestHref: "/modules/findme-username-simple",
-  nextTitle: "theHarvester (not written yet)",
+  latestModuleId: "theharvester-email-hosts",
+  latestTitle: "theHarvester: Collect Public Emails and Hosts, Then Sort the Noise",
+  latestHref: "/modules/theharvester-email-hosts",
+  nextTitle: "HIBP (API) (not written yet)",
   nextBlurb:
-    "Passive email and host collection is next in the writing queue. There is no theHarvester lesson on this site yet.",
+    "Breach exposure checks on an email you own are next in the writing queue. There is no HIBP lesson on this site yet.",
 }
