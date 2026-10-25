@@ -3,8 +3,8 @@
 // content + exercises, rather than a single content blob.
 //
 // Contents: 19 core training modules (bodies thickened 4 Sep), 12 Consensus-OSINT
-// tool lessons, and 3 short ancillary lessons. Count Object.keys(learningModules)
-// rather than hard-coding a total.
+// tool lessons, weekly backlog lessons (theHarvester onward), and 3 short
+// ancillary lessons. Count Object.keys(learningModules) rather than hard-coding a total.
 
 export interface ModuleSection {
   title: string
@@ -7347,6 +7347,193 @@ Prefer the minimum set. For most learners who finish this track, that set looks 
 5. Something like one primary (Maigret or Sherlock) plus one web/dataset check (WhatsMyName) and optional binary (GoSearch); exact set is yours, but "all twelve forever" is not the goal.
         `,
         exercise: "Run FindMe on your test persona. Diff against Sherlock or Maigret. Write five sentences: unique confirmed hits (count), unique false positives (count), whether you will keep FindMe installed, which username tool is now your primary, and one tool you will uninstall or ignore.",
+      }
+    ],
+  },
+
+  "theharvester-email-hosts": {
+    id: "theharvester-email-hosts",
+    title: "theHarvester: Collect Public Emails and Hosts, Then Sort the Noise",
+    description: "A passive theHarvester run on a domain you control: which sources need keys, which results are stale, and which flags this lesson leaves off.",
+    level: "Beginner",
+    estimatedTime: "40 min",
+    sections: [
+      {
+        title: "What theHarvester does",
+        duration: "10 min",
+        content: `
+### Other people's indexes, one domain, a pile of strings
+
+theHarvester takes a domain and asks public sources what they already know about it. Search engines, certificate transparency logs, passive DNS datasets, code hosts, and a long list of other providers. It then files what comes back under a few headings: hostnames, email addresses, IP addresses, URLs, ASNs, people, and breach names, plus whatever structured evidence an optional action attached. The current README on github.com/laramies/theHarvester is the description that counts. This paragraph is a briefing, and briefings go stale.
+
+The job in this lesson is the early, quiet pass. You want a list of addresses and hostnames that public sources already associate with a domain you control, and you want each line labelled with where it came from and whether that source actually finished. You are sorting a pile. You are not proving that a mailbox receives mail, that a hostname still resolves, or that a name on a page is an employee.
+
+The project splits network behaviour into three classes. P0 queries a provider or a dataset and does not send traffic at the target. Search, certificate logs, code search, and passive DNS sit here. P1 asks DNS about names or addresses: resolution, brute force, recursive lookup, reverse lookup. P2 contacts the target: HTTP, TLS, screenshots, takeover checks, virtual hosts, ports, API paths. P0, P1, and P2 describe what the traffic does. They are not a confidence score. \`-b all\` runs the catalogued P0 sources. P1 and P2 run only when you select them. This lesson does not select them.
+
+Passive still has an audience. The provider receives the domain string. It may log the query. It has quotas and terms. "I never touched the server" is true of a P0 run and incomplete as a description of who else was involved. The project's own responsible-use note says this in plainer words than most blog posts manage. Select the providers the question needs. A key you happen to own is not permission to query every source that will accept it.
+
+Sources divide, roughly, into three practical buckets, and the README's discovery-sources table is the bucket list. Some run with no API key. When this lesson was checked, that no-key P0 set included \`crtsh\` and \`certspotter\` (hostnames from certificate logs), \`waybackarchive\` and \`commoncrawl\` (hostnames from web archives), \`duckduckgo\` and \`yahoo\` (hostnames and emails), \`otx\`, \`urlscan\`, \`gitlab\`, \`rapiddns\`, and others. Some run only with a key in \`api-keys.yaml\`: \`hunter\`, \`virustotal\`, \`github-code\`, \`censys\`, \`brave\`, \`securityTrails\`, and a lot of the table. A few are marked optional, meaning they can run without a key: \`hackertarget\`, \`mojeek\`, \`windvane\` were in that column at the same check. If a name above is missing from your \`theHarvester -h\`, the help text is right and this paragraph is old. Do not memorise the table. Read it on the day.
+
+A keyed source with no key is skipped. The configuration guide says so, using the verified-domain HIBP source as the example and then noting that other unavailable keyed sources are skipped the same way. A skip means you did not ask. It does not mean the provider holds nothing, and it does not mean the domain has no mail.
+
+You can also select by capability instead of by name: \`subdomains\`, \`emails\`, \`ips\`, \`asns\`, \`urls\`, \`people\`, \`breaches\`. Those selectors are a union. They choose which sources run. They do not throw away other result types those sources happen to return. \`-b emails\` is "sources that can contribute emails", which includes sources that will skip without a key. A thin email list after that command is often a key problem wearing an empty-looking coat.
+
+Noise and signal are a labelling problem. A hostname from a certificate log is a historical string with a source attached. An email from a search engine is a string some indexed page contained. A role address such as \`security@\` or \`info@\` is a mailbox shape, often a shared one. A person string, if a source actually returns one, is a name a page published, which is a long way from "works here now". The signal is the row you can cite: value, type, source, and that source's outcome. Everything else is a lead you have not earned.
+
+theHarvester is GPL-2.0 only. Running it for this exercise is ordinary use. If you later ship a modified copy, the licence text in the repository is the obligation, not a vibe about "open source". Christian Martorella wrote the tool. The README names the current maintainers. You do not need their biographies to run a query.
+
+Flags and source names move between releases. Kali's package in particular can lag the repository. Before you repeat a command from this page, from a cheatsheet, or from a video, run \`theHarvester -h\` and skim the project README. Where they disagree with this lesson, they win.
+
+> A long list feels like progress. The useful artefact is the short list where every row has a source and an outcome you can say out loud.
+        `,
+      },
+      {
+        title: "Walkthrough",
+        duration: "12 min",
+        content: `
+### A domain you operate, two certificate logs, then stop adding toys
+
+Use a domain you own or control. A personal domain, a club site you administer, a hostname you registered for a lab. The commands below keep \`example.com\` because that is the placeholder in the upstream quick start, and because \`example.com\` is the reserved documentation name. It is syntax. Replace it before you press enter. A company you do not work for is not a stand-in, and neither is a university or a stranger's project. If you control no domain, do not borrow one. Install the tool, read \`-h\` and the README source table, and write the exercise from that reading. Passive providers still receive whatever string you type. The quick start says to replace the placeholder only with a target inside your scope.
+
+One sentence before install: "I am comparing public-source strings to a domain I operate, and I am leaving every active flag off."
+
+Two install lanes are documented. Pick one.
+
+Kali packages the tool:
+
+\`\`\`bash
+sudo apt update
+sudo apt install theharvester
+theHarvester -h
+\`\`\`
+
+Packaged help and the GitHub README often disagree, because distribution packages lag. Update Kali, check the version, and treat the help text you just printed as the tool you have.
+
+A source checkout, as the installation guide reads today, wants Python 3.14 and \`uv\`. The repo's \`.python-version\` lets \`uv\` select that interpreter. Install \`uv\` from its own documentation if the command is missing. If the Python line in the guide has moved, the guide wins.
+
+\`\`\`bash
+git clone https://github.com/laramies/theHarvester.git
+cd theHarvester
+uv sync
+uv run theHarvester -h
+\`\`\`
+
+There is no root \`theHarvester.py\` launcher. The supported console commands are \`theHarvester\` and \`harvestview\`. This lesson uses the first. \`harvestview\` is a local browser UI. It stays on loopback, wants its own API key, and can launch screenshot and DNS brute-force runs from saved names. Leave it closed.
+
+Read \`-h\` once, looking for the domain flag (README examples use \`-d\`), the source flag (those examples use \`-b\`), and anything that adds DNS work or touches the target. The responsible-use page currently names \`-r\` / \`--dns-resolve\`, \`-n\` / \`--dns-lookup\`, \`-c\` / \`--dns-brute\`, \`--dns-recursive-depth\`, \`-t\` / \`--take-over\`, \`-a\` / \`--api-scan\`, \`--screenshot\`, \`--vhost\`, \`-s\` / \`--shodan\`, and \`--routeviews\`. Spellings drift. If the help text says the option queries DNS or contacts the host, it stays off the command line today. Leave \`-p\` off as well. A proxy does not make the query anonymous and does not widen your authority. The configuration guide says both.
+
+On a source checkout, after you substitute your domain, the README's first command is:
+
+\`\`\`bash
+uv run theHarvester -d example.com -b crtsh,certspotter
+\`\`\`
+
+On Kali, drop \`uv run\` when \`-h\` showed a bare \`theHarvester\`. Those two sources are P0, need no key, and return hostnames from certificate logs. An empty result can mean the providers found nothing. The quick start is clear that emptiness does not, by itself, prove the run failed. Read the outcome. \`completed\` with zero findings is a finished question. \`failed\`, \`partial\`, or \`rate-limited\` is a different sentence. Write the stop reason next to it.
+
+A second command adds keyless sources which the README table, at the time of writing, listed as able to return emails as well as hostnames. Confirm each name still appears in your \`-h\`:
+
+\`\`\`bash
+uv run theHarvester -d example.com -b crtsh,certspotter,duckduckgo,yahoo,waybackarchive -f report
+\`\`\`
+
+\`-f report\` writes \`report.jsonl\`, \`report.json\`, and \`report.xml\`. JSONL carries provenance. The first line summarises evidence status, per-source outcomes, and counts. Later lines are findings: type, value, sources. JSON and XML group results by type and drop that lifecycle detail. Open the JSONL if you want the column this lesson is about. Completed runs also land in \`~/.local/share/theHarvester/stash.sqlite\`. That database remembers every domain you typed. Keep it, and the report files, out of git.
+
+Three discovery sources run at once by default. \`-j\` or \`--source-workers\` changes the width. Every selected source still runs either way. Leave the default. \`--limit\` / \`-l\` caps results per source. The README uses \`0\` to remove the local cap and notes that provider quotas remain. You do not need the cap removed. The short \`-b\` list is the limit. \`--no-hosts\` drops hostname results. Hostnames are half of today's question, so leave it off.
+
+The README shows \`jq\` filters for the JSONL. Two are enough to see the shape:
+
+\`\`\`bash
+jq -r 'select(.type == "email") | .value' report.jsonl
+jq -r 'select(.type == "hostname") | .value' report.jsonl
+\`\`\`
+
+Make a five-column table: value, type, sources, outcome, claim. Using the project's own example strings, the claims you are allowed to write look like this:
+
+- \`api.example.com\`, hostname, \`crtsh\`, completed. A certificate log returned this name. Whether it resolves today was not tested.
+- \`security@example.com\`, email, \`yahoo\`, completed. A search source returned this string. Whether any mailbox accepts it was not tested.
+- no value, \`hunter\`, skipped. No key was configured. That provider was not asked.
+
+Open a hostname in a browser only when it sits on the domain you operate. You are checking your own site against the list. Do not follow an email into Holehe, Mailcat, a password reset, or an SMTP conversation. Those tools have their own lessons and their own off switches. A interesting string is not a promotion.
+
+On first use the tool writes \`~/.theHarvester/api-keys.yaml\`. It also reads \`/etc/theHarvester/\` and \`/usr/local/etc/theHarvester/\` when those copies exist. If you fill a provider, fill only one you mean to query, run \`chmod 600\` on the file, and do not commit it. Some providers want two fields. The current guide's Censys example wants a token and an organisation id. This exercise is finished with zero keys. A key you add later is a new source and a new set of terms, which earns a new row in the table. It does not earn \`-b all\`.
+
+\`-b all\` runs every catalogued P0 source. The quick start says to start small: that one flag contacts many services, spends quotas, and makes a failure harder to attribute. Use a named list until you can point at a row and say which source produced it.
+
+If an email shows up that you did not publish and cannot place, mark it unverified and stop. Stale pages, scraped signatures, and other people's addresses all look the same in a results file. You have a string. You do not have a new person to research.
+
+> Substitute your domain, run the small command once, and read the outcomes. Adding a source is a decision you can explain. Adding every source is how the table turns into weather.
+        `,
+      },
+      {
+        title: "Limits and false positives",
+        duration: "8 min",
+        content: `
+### Stale names, silent keys, and mailboxes that belong to a role
+
+Certificate logs and web archives keep names after the host is gone. \`crtsh\`, \`certspotter\`, and \`waybackarchive\` are useful because they remember. They are awkward for the same reason. A hostname in today's output can be a certificate from years ago, a staging name nobody renewed, or a typo that was logged once and then copied by every other dataset. Compare the list to DNS you already know for a domain you operate. A name you do not recognise is a lead with a date problem, not a new server. The project ships \`harvest-report hostname-changes\` to compare saved runs, and its own documentation refuses a lazy reading: a name that is no longer reported is absent from comparable saved evidence. That absence does not prove the hostname stopped existing or stopped resolving. One run cannot prove it either. This lesson does not add a DNS brute force or a port scan to "settle" the question.
+
+Rate limits are an outcome, not a hint. The source status \`rate-limited\` means the provider stopped answering. It does not lean toward "exists" or "does not". The JSMON note in the README is the concrete case: HTTP 403 (plan quota) or 429 (rate limit) stops that collection without a retry, and pages already retained stay retained. Do not generalise those two status codes to every source. Do generalise the habit. Read \`stop_reason\` on a partial source, keep what was kept, and stop for the day. Routing the same query through a proxy to squeeze the rest out is how a training run becomes an argument with someone else's acceptable-use policy.
+
+A keyed source with an empty \`api-keys.yaml\` is skipped. You will see this the moment you add \`hunter\`, \`virustotal\`, \`github-code\`, \`censys\`, or \`brave\` without filling the file, and you will see it in bulk if you run \`-b emails\` or \`-b all\` on a stock install. The email-capable half of the table is full of required keys. A keyless run can look like "this domain publishes no addresses" when the truthful sentence is "the sources that might have held addresses were never asked". Optional-key sources (\`hackertarget\`, \`mojeek\`, \`windvane\` on the table this lesson was checked against) can run without a key and still return a thin sample. A free-tier response is a sample of what that plan returns, not the whole dataset. Write "sample", or write nothing ambitious.
+
+Role addresses and catch-all domains wreck the sentence "we found the staff". \`security@\`, \`info@\`, \`admin@\`, \`postmaster@\`, \`webmaster@\`, and \`noreply@\` are mailboxes a domain publishes so that strangers have somewhere to write. They are often shared, often unmonitored, and often copied into every template on the internet. A catch-all domain accepts mail for local-parts that were never created. Nothing in this lesson's P0 command asks a mail server whether the address accepts mail. Do not add that test. An address the tool collected is a string a provider already had. If you cannot say whether the domain is catch-all, you cannot say whether a local-part like \`pip.tadwell\` is a person who reads mail there. Grade it as a string.
+
+Search sources add a second kind of junk. A page that mentions your domain in passing, a PDF that used it as an example, a forum signature from 2014, a partner's footer. \`duckduckgo\` and \`yahoo\` returning an email means the string occurred somewhere they indexed, associated with the query. It does not mean the address is current, personal, or even yours. Hostnames that are really a CDN, a parked page, or \`www\` versus the bare domain need the same patience. The responsible-use note makes the scope point: \`www.example.test\` and \`example.test\` are different targets unless the engagement names both. An IP address in the output is an address some source linked to the name. Shared hosting and content-delivery networks put many unrelated sites on one address. This lesson does not scan that address, and it does not treat it as "their box".
+
+
+The keyless \`haveibeenpwned\` source returns breach names from the public catalogue. It does not return a mailbox list, and it does not return dump contents. \`hibpverified\` is the keyed source for a domain you have verified on a paid HIBP account, and without that key it is skipped like the other keyed sources. What a breach entry means is a later lesson. Do not download a dump to decorate this table.
+
+A few sources look like ordinary names and are not P0. On the table this lesson was checked against, \`shodan\`, \`shodanInternetDB\`, \`pentesttools\`, and \`subdomainfinderc99\` sit in P1, and \`criminalip\` sits in P2. The Activity column is the filter. If the row is not P0, it does not go in today's \`-b\` list.
+
+Older write-ups still show \`-b google\`, \`-b bing\`, or a LinkedIn source. The discovery table in the README this lesson was checked against did not list those names. It did list \`baidu\`, \`duckduckgo\`, \`yahoo\`, and a key-required \`brave\`. Baidu, per the installation guide, will use a Playwright Chromium build when one is installed, and otherwise falls back to HTTP. This lesson does not install a browser, and it does not turn on \`--screenshot\`. If your \`-h\` has grown a \`google\` source again, or lost \`yahoo\`, follow \`-h\`. A cheatsheet that cannot name its theHarvester version is a souvenir.
+
+\`completed\` with zero rows, \`skipped\`, \`partial\`, and \`failed\` are four different facts. A cancelled or failed run can still retain evidence collected before it stopped. Read the summary line in the JSONL before you brief anyone, including yourself. Volume is its own false positive. A long hostname list feels like a map, and part of any long list is history. The map is the table with the outcome column filled in.
+
+> The dangerous result is the confident one. Empty, skipped, and rate-limited are allowed to stay boring.
+        `,
+      },
+      {
+        title: "Ethics and legal limits",
+        duration: "6 min",
+        content: `
+### If you store it, the Privacy Act has already sat down
+
+An email address or a name that identifies a person is personal information under the Privacy Act 1988 (Cth). A role address can still identify someone once you clip it to a human in your notes. Hostnames are often just infrastructure. The moment the notes put a person's name next to a hostname, you are holding personal information about that person, including when the guess is wrong. Collecting that, for anything that counts as a business, brings in the Australian Privacy Principles.
+
+APP 3 is the purpose test. Collection has to be reasonably necessary for a specific job. On a domain you operate, for a lesson about reading source outcomes, the collection is the lesson, and it ends when the table is done. On a client domain, "the tool was installed" is not the purpose. Write the question the engagement actually asked. APP 6 is what happens the week after. A host list gathered to check scope is not a prospecting list, and a training JSONL is not a contact file for a different matter. APP 8 is the cross-border rule, and it is the easy one to forget because the command felt local. The queries went to search engines, certificate databases, and other people's APIs, most of them overseas. Those providers received the domain. Say that in the method note. APP 10 is accuracy. A stale certificate name, a skipped \`hunter\`, and a role address filed as "employee email" are three ways to put a wrong fact where someone will act on it. APP 11 is storage. \`stash.sqlite\`, the JSONL, and a screenshot directory you were told not to create are the holdings. Keep them off git, off a world-readable laptop share, and out of a ticket system that half the company can search.
+
+Search engines and APIs have terms on top of the Act. The README links each source to the provider for a reason: quotas, plans, and acceptable use live there, and they change. A modest P0 run, a few keyless sources, one domain you control, is the training case. A script that runs \`-b all\` across every domain in a spreadsheet is a product, and it needs someone to read those terms before it runs on Monday. This page will not pretend the terms are uniform. They are not. A provider key is a contract with that provider. It is not a warrant, and the responsible-use note says not to treat a key, a bug-bounty programme, or a publicly reachable host as blanket permission.
+
+Scope is a written list. The project's rule is the right size for this course: targets you own, or targets you have explicit permission to assess. A useful permission names the target, the techniques, the time window, how data is handled, and what third parties are out of bounds. Passive collection is still collection. P1 and P2 are a further decision, made in writing, for a named host. DNS brute force, reverse lookup, takeover checks, API path scans, and screenshots are documented in the tool, and they are outside this lesson on purpose. Turning them on because the README's later example looked short is how a passive exercise becomes unauthorised access territory. The Criminal Code (Cth) Part 10.7 and the Queensland Criminal Code s 408E are the provisions a lawyer will open before this is client work that touches systems. This course does not give that advice. It gives you a command line with those flags absent.
+
+Publishing is a separate act from collecting. A notebook about your own domain is coursework. A post that attaches real people's addresses to a domain, to embarrass them or to "share the method", can be a serious invasion of privacy under the statutory tort in force in Australia since 2025, and the Criminal Code (Cth) offences about releasing personal data over a carriage service in a menacing or harassing way do not contain a research exemption. Keep the exercise in the exercise.
+
+If you do this for a fee in Queensland, the Security Providers Act 1993 still applies. A passive flag is a poor theory of why a licence would be optional. Sensitive information is unlikely to fall out of a certificate log, and then someone infers it anyway from a local-part or a subdomain (\`health\`, \`union\`, a clinic's hostname). APP 3.3 is unimpressed by inferences you were not asked to make. Leave them out.
+
+Holehe, if you use it at all in this course, stays \`holehe -NP\` and stays on an address you own. Numint stays \`--offline\`. An address theHarvester printed does not relax either rule.
+
+> Authorisation names the domain and the technique. A P0 list you can explain is the technique this lesson allows.
+        `,
+      },
+      {
+        title: "Quiz",
+        duration: "4 min",
+        content: `
+1. What does a P0 source do with the target, and who still sees the domain string?
+2. \`hunter\` is skipped because \`api-keys.yaml\` has no key. What are you allowed to conclude?
+3. Why can \`crtsh\` list a hostname that does not exist on the domain today?
+4. Name two flags this lesson leaves off, and where you check the current spelling.
+5. You file staff addresses from a run on a client's domain. Which Australian Privacy Principles does that storage trip, and why do the providers' terms still matter?
+
+**Answers**
+
+1. It queries a third-party dataset or search service and does not send traffic at the target. The provider still receives the domain, and may log it under its own terms.
+2. That Hunter was not asked. You may not conclude that Hunter has no data, or that the domain has no mailboxes.
+3. Certificate transparency keeps historical names. A listed hostname can be retired, a one-off typo, or a name that never resolved in the window you care about. The row is a lead with a source, not a live check.
+4. Any two of the active options documented upstream, such as \`-c\` / \`--dns-brute\`, \`-r\` / \`--dns-resolve\`, \`-n\` / \`--dns-lookup\`, \`-t\` / \`--take-over\`, \`-a\` / \`--api-scan\`, or \`--screenshot\`. Confirm the spellings with \`theHarvester -h\` and the project README.
+5. APP 3 (the collection has to be necessary for a stated purpose), APP 6 (use stays inside that purpose), APP 8 (the queries went to overseas providers), APP 10 (stale and skipped rows are not accurate records), and APP 11 (you now have to secure the file). Provider terms can forbid the automated query even when the privacy analysis is in order.
+        `,
+        exercise: "On a domain you own or control, run one P0 theHarvester command using only sources that your installed `-h` and the current README list as needing no API key. Save the run with `-f` if `-h` still offers it. Build the five-column table from the walkthrough (value, type, sources, outcome, claim). Write five sentences: how many email-shaped strings you kept, how many you set aside as role addresses, stale names, or not yours, one source that was skipped or rate-limited and what that status means, which active flags you saw on `-h` and left off, and why you would refuse `-b all` on a domain you do not control. If you control no domain, do not borrow one. Read `theHarvester -h` and the README source table, write the command with `example.com` only as the placeholder, and answer the same five sentences from that reading.",
       }
     ],
   }

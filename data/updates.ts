@@ -15,6 +15,15 @@ export interface SiteUpdate {
 
 export const ALL_UPDATES: SiteUpdate[] = [
   {
+    id: "theharvester-lesson-2026-10-25",
+    title: "theHarvester: public emails and hosts",
+    description:
+      "A passive run on a domain you control. A keyed source with no key is a skip. Active DNS and scanning flags stay off.",
+    date: "2026-10-25",
+    kind: "new",
+    href: "/modules/theharvester-email-hosts",
+  },
+  {
     id: "core-modules-2026-10-22",
     title: "Core tracks, written out",
     description:
