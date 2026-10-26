@@ -73,21 +73,20 @@ if (hasClerkKeys) {
   }
 }
 
-const COMING_SOON_PATHS = new Set([
-  "/buy",
-  "/checkout",
-  "/upgrade",
-  "/plans",
-  "/pricing",
-  "/refunds",
-])
+const COMING_SOON_PATHS = new Set(["/buy", "/checkout", "/upgrade", "/plans"])
 
 export default async function middleware(request: NextRequest) {
   const url = request.nextUrl.pathname
+
+  // Stripe must reach the webhook with the raw body. Do not run Clerk or the
+  // rate limiter on this path — both have blocked signature verification.
+  if (url === "/api/stripe/webhook") {
+    return NextResponse.next()
+  }
   const pathOnly = url.length > 1 ? url.replace(/\/$/, "") : url
   if (COMING_SOON_PATHS.has(pathOnly)) {
     const dest = request.nextUrl.clone()
-    dest.pathname = "/"
+    dest.pathname = "/pricing"
     dest.search = ""
     return NextResponse.redirect(dest, 307)
   }
@@ -154,6 +153,6 @@ export default async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Match all routes except _next static files, images, etc.
-    "/((?!_next/static|_next/image|images/|favicon.ico).*)",
+    "/((?!_next/static|_next/image|images/|favicon.ico|api/stripe/webhook).*)",
   ],
 }

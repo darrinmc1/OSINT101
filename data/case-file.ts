@@ -31,9 +31,9 @@ export const CASE_FILE_FAQS = [
       "The planner is educational. You must only apply it to lawful, authorized work. Public data is not automatically fair game. Follow local law, workplace rules, and the ethics modules before collecting anything.",
   },
   {
-    question: "Which lessons are open?",
+    question: "What is free vs advanced?",
     answer:
-      "All content is free while we finish setting up. Beginner, intermediate, and advanced lessons are open, and the case-file plan includes the advanced lanes.",
+      "Foundations — Beginner modules such as OSINT Fundamentals, methodology, domain investigations, email/username intelligence, and company research — are free. Intermediate and Advanced techniques (people profiling, SOCMINT, GEOINT, network recon, dark web, crypto, forensics) are gated behind sign-in on this MVP.",
   },
   {
     question: "Does it need an AI key?",

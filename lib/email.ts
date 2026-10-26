@@ -8,7 +8,7 @@
 import { Resend } from "resend";
 
 const apiKey = process.env.RESEND_API_KEY;
-const FROM = process.env.RESEND_FROM ?? "noreply@example.com";
+const FROM = process.env.RESEND_FROM?.trim() || "";
 const REPLY_TO = process.env.RESEND_REPLY_TO ?? undefined;
 const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME ?? "Our site";
 const NOTIFY = process.env.NOTIFY_EMAIL;
@@ -22,8 +22,8 @@ async function send(
   subject: string,
   html: string
 ): Promise<SendResult> {
-  if (!resend) {
-    console.warn("[email] RESEND_API_KEY not set - skipping send");
+  if (!resend || !FROM) {
+    console.warn("[email] RESEND_API_KEY or RESEND_FROM not set - skipping send");
     return { ok: false, reason: "resend_not_configured" };
   }
   const { error } = await resend.emails.send({
@@ -56,14 +56,16 @@ export async function sendWelcome(args: { email: string; name?: string }) {
 }
 
 export async function sendAdminNotification(args: {
-  kind: "subscribe" | "feedback";
+  kind: "subscribe" | "feedback" | "purchase";
   payload: Record<string, unknown>;
 }) {
   if (!NOTIFY) return { ok: false as const, reason: "notify_email_not_set" };
   const subject =
     args.kind === "subscribe"
       ? `[${SITE_NAME}] New subscriber`
-      : `[${SITE_NAME}] New feedback`;
+      : args.kind === "purchase"
+        ? `[${SITE_NAME}] New purchase`
+        : `[${SITE_NAME}] New feedback`;
   const rows = Object.entries(args.payload)
     .map(
       ([k, v]) =>
