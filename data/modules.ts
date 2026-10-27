@@ -3,8 +3,11 @@
 // content + exercises, rather than a single content blob.
 //
 // Contents: 19 core training modules (bodies thickened 4 Sep), 12 Consensus-OSINT
-// tool lessons, weekly backlog lessons (theHarvester onward), and 3 short
+// tool lessons, weekly backlog lessons (theHarvester onward), five defensive
+// cyber lessons (27 Oct 2026, see defensive-lessons.ts), and 3 short
 // ancillary lessons. Count Object.keys(learningModules) rather than hard-coding a total.
+
+import { defensiveCyberLessons } from "./defensive-lessons"
 
 export interface ModuleSection {
   title: string
@@ -7536,8 +7539,9 @@ Holehe, if you use it at all in this course, stays \`holehe -NP\` and stays on a
         exercise: "On a domain you own or control, run one P0 theHarvester command using only sources that your installed `-h` and the current README list as needing no API key. Save the run with `-f` if `-h` still offers it. Build the five-column table from the walkthrough (value, type, sources, outcome, claim). Write five sentences: how many email-shaped strings you kept, how many you set aside as role addresses, stale names, or not yours, one source that was skipped or rate-limited and what that status means, which active flags you saw on `-h` and left off, and why you would refuse `-b all` on a domain you do not control. If you control no domain, do not borrow one. Read `theHarvester -h` and the README source table, write the command with `example.com` only as the placeholder, and answer the same five sentences from that reading.",
       }
     ],
-  }
+  },
 
+  ...defensiveCyberLessons,
 }
 
 // =============================================================================
@@ -7584,6 +7588,18 @@ export const learningPaths: Array<{ id: string; title: string; description: stri
     title: "Analyst Track",
     description: "Master-class techniques: network recon, dark web, crypto investigations, and advanced geolocation.",
     modules: ["kali-tools", "social-media", "network-recon", "digital-forensics", "dark-web-research", "cryptocurrency-investigations", "geolocation-osint"],
+  },
+  {
+    id: "defensive-cyber-track",
+    title: "Defensive Cyber OSINT",
+    description: "Email headers, lookalike domains on a brand you may monitor, certificate logs, threat-actor profiles from public sources, and how to share the result.",
+    modules: [
+      "read-email-headers",
+      "lookalike-domains-dnstwist",
+      "certificate-transparency-osint",
+      "threat-actor-profile-osint",
+      "sharing-threat-intel",
+    ],
   },
 ]
 

@@ -15,6 +15,15 @@ export interface SiteUpdate {
 
 export const ALL_UPDATES: SiteUpdate[] = [
   {
+    id: "defensive-cyber-lessons-2026-10-27",
+    title: "Five defensive OSINT lessons",
+    description:
+      "Email headers, lookalike domains, certificate logs, threat-actor profiles, and STIX sharing. Own or authorised domains only.",
+    date: "2026-10-27",
+    kind: "new",
+    href: "/modules/read-email-headers",
+  },
+  {
     id: "theharvester-lesson-2026-10-25",
     title: "theHarvester: public emails and hosts",
     description:

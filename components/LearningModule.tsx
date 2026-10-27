@@ -18,6 +18,11 @@ const moduleResourceMap: Record<string, string[]> = {
   'social-media': ['search-operators', 'osint-tools-list'],
   'network-recon': ['osint-tools-list', 'legal-guidelines'],
   'digital-forensics': ['legal-guidelines', 'osint-checklist'],
+  'read-email-headers': ['legal-guidelines', 'osint-checklist'],
+  'lookalike-domains-dnstwist': ['legal-guidelines', 'osint-checklist'],
+  'certificate-transparency-osint': ['legal-guidelines', 'osint-checklist'],
+  'threat-actor-profile-osint': ['legal-guidelines', 'osint-checklist'],
+  'sharing-threat-intel': ['legal-guidelines', 'osint-checklist'],
 }
 
 const moduleLinkMap: Record<string, { label: string; to: string }[]> = {
@@ -28,6 +33,26 @@ const moduleLinkMap: Record<string, { label: string; to: string }[]> = {
   'kali-tools': [
     { label: 'KALI QUICK REFERENCE', to: '/resources/kali-cheatsheet' },
     { label: 'ASSET REQUEST TERMINAL', to: '/contact' },
+  ],
+  'read-email-headers': [
+    { label: 'LOOKALIKE DOMAINS', to: '/modules/lookalike-domains-dnstwist' },
+    { label: 'LEGAL AND ETHICAL GUIDELINES', to: '/resources/legal-guidelines' },
+  ],
+  'lookalike-domains-dnstwist': [
+    { label: 'CERTIFICATE TRANSPARENCY', to: '/modules/certificate-transparency-osint' },
+    { label: 'LEGAL AND ETHICAL GUIDELINES', to: '/resources/legal-guidelines' },
+  ],
+  'certificate-transparency-osint': [
+    { label: 'LOOKALIKE DOMAINS', to: '/modules/lookalike-domains-dnstwist' },
+    { label: 'LEGAL AND ETHICAL GUIDELINES', to: '/resources/legal-guidelines' },
+  ],
+  'threat-actor-profile-osint': [
+    { label: 'SHARING INTEL', to: '/modules/sharing-threat-intel' },
+    { label: 'LEGAL AND ETHICAL GUIDELINES', to: '/resources/legal-guidelines' },
+  ],
+  'sharing-threat-intel': [
+    { label: 'THREAT ACTOR PROFILE', to: '/modules/threat-actor-profile-osint' },
+    { label: 'LOOKALIKE DOMAINS', to: '/modules/lookalike-domains-dnstwist' },
   ],
   default: [
     { label: 'LEGAL AND ETHICAL GUIDELINES', to: '/resources/legal-guidelines' },

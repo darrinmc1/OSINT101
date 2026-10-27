@@ -13,9 +13,9 @@ export type LessonSpotlight = {
 
 /** Manual spotlight — bump when merging a new Consensus/backlog lesson. */
 export const lessonSpotlight: LessonSpotlight = {
-  latestModuleId: "theharvester-email-hosts",
-  latestTitle: "theHarvester: Collect Public Emails and Hosts, Then Sort the Noise",
-  latestHref: "/modules/theharvester-email-hosts",
+  latestModuleId: "read-email-headers",
+  latestTitle: "Reading Email Headers Like a Detective",
+  latestHref: "/modules/read-email-headers",
   nextTitle: "HIBP (API) (not written yet)",
   nextBlurb:
     "Breach exposure checks on an email you own are next in the writing queue. There is no HIBP lesson on this site yet.",
