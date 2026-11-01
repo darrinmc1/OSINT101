@@ -7541,6 +7541,187 @@ Holehe, if you use it at all in this course, stays \`holehe -NP\` and stays on a
     ],
   },
 
+  "hibp-breach-exposure": {
+    id: "hibp-breach-exposure",
+    title: "HIBP: Check an Address You Control and Record the Breach Entry",
+    description: "Check an email you control against Have I Been Pwned and record what the breach entry says. The website search and the password range API are free. Searching an address through the API wants a key.",
+    level: "Beginner",
+    estimatedTime: "40 min",
+    sections: [
+      {
+        title: "What HIBP does",
+        duration: "10 min",
+        content: `
+### The job is a breach entry for an address you control
+
+Someone drops a breach logo into the work chat and writes "so are we hacked?" The useful reply is smaller than the logo. You take an email address you control, or a test address Have I Been Pwned publishes for integrators, you ask what HIBP has filed against it, and you write down what that entry is. A sighting in a dataset. A name, a pair of dates, a list of data classes, and a row of flags. The password is not in that row, and the row is not a live session.
+
+Have I Been Pwned is the site at haveibeenpwned.com, run by Superlative Enterprises Pty Ltd out of Queensland. The homepage, when this lesson was checked, offered an email box and described itself as a check for whether an address has been exposed in a data breach. That browser search is free. The terms call the free services the website email search and anything else on the site that does not require payment. Notify-me sits on that side of the counter. The page at haveibeenpwned.com/NotifyMe is headed as free breach notifications: you enter an address, you open the verification mail, and later you hear if that address shows up in a breach HIBP loads afterwards. The FAQ says every notification goes to the address being watched, so you cannot subscribe a stranger and you cannot subscribe an inbox you have lost. The same FAQ says the mail comes from noreply@haveibeenpwned.com. If it never arrives, their experience is that the destination server bounced it. Check the junk folder, then stop inventing a second path.
+
+The API is the other counter, and it is where a cheatsheet goes stale. Version 3 is served under https://haveibeenpwned.com/api/v3. The page that explains it is https://haveibeenpwned.com/API/v3. There is no local \`--help\`. The help text is that page, the FAQ, the terms, the subscription page, and the HTTP body you just received. This lesson was read against those pages. The terms copy showed a last-updated date of 27 October 2026. If a badge, a path, or a sentence has moved, the page wins and this lesson loses. A write-up that cannot name the day it was read is a souvenir.
+
+Four jobs need no paid key, on the pages and the calls this lesson checked.
+
+The browser search, above. One address at a time. The FAQ is explicit that the public search returns the result for a single address or username you typed, and that a list of everyone's addresses is not a feature.
+
+Notify-me, also above. The service stores the address, the date you subscribed, and a verification token, because otherwise it cannot write to you later. That is a collection. On your own inbox, for the purpose of being told, it is a collection you can explain.
+
+Pwned Passwords. Hundreds of millions of password strings, stored as SHA-1 and as NTLM hashes of the UTF-8 password, with a count of how often each has been seen, and with no email address beside them. The range API is \`GET https://api.pwnedpasswords.com/range/\` plus the first five characters of the hash. No API key. The API docs and the support article both say there is no rate limit, and no attribution requirement, though they will take a credit if you offer one. k-anonymity here means HIBP sees a five-character prefix and you compare the suffix locally. The docs also allow \`?mode=ntlm\` and an \`Add-Padding: true\` header. Padded rows, they say, carry a count of 0 and can be discarded. "Pwned Passwords support" on a paid plan is the docs' name for help integrating this API. The API itself is the free one. This lesson does not print a price. The subscription page does, and the number moves.
+
+The breach catalogue. The terms name four unauthenticated paths: \`/breaches\`, \`/breach/{name}\`, \`/latestbreach\`, and \`/dataclasses\`. When this lesson was checked, the latest-breach call, \`GET /breach/Adobe\`, and the data-class call each returned HTTP 200 with a user agent and no key. The subscription page's free line includes a "breach monitoring API" next to browser search, email notifications, and Pwned Passwords. That phrase lines up with the catalogue calls. It does not mean "search any inbox by API."
+
+The calls that search HIBP by email address or by domain want a key in the \`hibp-api-key\` header. The docs say the key is 32 hexadecimal characters. Missing it, on the email route, returned HTTP 401 and a body that said the key was missing.
+
+\`GET /breachedaccount/{email}\` is marked Core, Pro, and High RPM. The default body is breach names only. \`?truncateResponse=false\` returns the full model. \`GET /pasteaccount/{email}\` carries the same paid badges. \`GET /breacheddomain/{domain}\` is marked Core and Pro, and only after you have verified that you control the domain. The docs say an unverified domain is HTTP 403. Stealer-log routes are marked Pro or higher, and they too want a verified domain. The email k-anonymity route, \`GET /breachedaccount/range/\` plus the first six characters of the SHA-1 of the address, is marked Pro and High RPM. Six characters, not five. It is a different API from the password range, it is not free, and the terms tell you to throw away every suffix that is not the address you asked about.
+
+The subscription page, read for this lesson, also puts "monitor domains with up to 10 breached addresses" on the free line, and it says you prove control before a domain is searchable. A small domain you administer is a dashboard question for the day you read that page. It is not a mailbox list you collect in class. The API path that returns every alias is the paid, key-gated one.
+
+The docs publish a test key of 32 zeros, and they say it can query addresses on \`hibp-integration-tests.com\`. That key is a prop. It is not a free pass at the rest of the internet, and it is not a key you found in a gist and pasted into a product.
+
+A breach, in the API docs' own line, is an instance of a system having been compromised and the data disclosed. The FAQ then spends most of its length on the cases that sentence does not cover: unverified, fabricated, spam lists, malware collections, stealer logs, pastes, and incidents with no password in them at all. "Pwned", the FAQ notes, is a gamer spelling of "owned". It can stay in the logo. The sentence you file is plainer.
+
+> The artefact is the breach name, the two dates, the data classes, and the flags. A password value is not part of the artefact.
+        `,
+      },
+      {
+        title: "Walkthrough",
+        duration: "12 min",
+        content: `
+### The test desk first, then your own inbox if you want it on the record
+
+Two addresses are allowed, and then the exercise is over. The first is a made-up alias on the domain HIBP documents for integration tests. This walkthrough uses \`account-exists@hibp-integration-tests.com\`, plus four neighbours from the same table, and then stops. The second is an email address you control: yours, or a mailbox you created for the day and can open. A colleague, a client, a name from a theHarvester file, and "the address in the logo screenshot" are outside the set. So is a domain you do not administer.
+
+Nothing to install. A browser, or curl. If you use curl, send a user agent that names the exercise. The acceptable-use list treats a missing agent, and an agent that pretends to be some other client, as abuse. An empty agent, when checked, returned HTTP 403 and the sentence "API request must include a user agent". Curl ships its own agent if you forget the header, which is how a sloppy command still returns 200 and teaches you the wrong lesson. Put the header in.
+
+The test key below is the one the API docs print: 32 zeros. It belongs on the test domain. Encode the \`@\` as \`%40\`. The docs say the address is trimmed, is not case-sensitive, and should be encoded.
+
+\`\`\`bash
+curl -sS -D - -H "user-agent: osint101-hibp-exercise" -H "hibp-api-key: 00000000000000000000000000000000" "https://haveibeenpwned.com/api/v3/breachedaccount/account-exists%40hibp-integration-tests.com?truncateResponse=false"
+\`\`\`
+
+\`-D -\` prints the status line before the JSON. When this lesson ran that command, the status was 200 and the body was one breach object. \`Name\` was Adobe. \`Title\` was Adobe. \`BreachDate\` was 2013-10-04. \`IsVerified\` was true. \`IsFabricated\`, \`IsSpamList\`, \`IsMalware\`, \`IsStealerLog\`, \`IsSensitive\`, and \`IsRetired\` were false. \`DataClasses\` listed email addresses, password hints, passwords, and usernames. No field held a password, a hash, or a secret. \`DisclosureUrl\` was present and null. The model table in the docs does not promise that key. The same page says attributes can be added without a version bump. Write the keys you received. If Adobe is no longer what that alias returns, your JSON is the result and this paragraph is old.
+
+Drop \`truncateResponse=false\` and the docs say you get names only. A name is enough to fetch the catalogue copy, which needs no key:
+
+\`\`\`bash
+curl -sS -D - -H "user-agent: osint101-hibp-exercise" "https://haveibeenpwned.com/api/v3/breach/Adobe"
+\`\`\`
+
+You are checking that the name resolves to HIBP's description. You are not collecting a second opinion from a forum.
+
+Four more test aliases, one call each, then stop. Use the same header pair. \`multiple-breaches@hibp-integration-tests.com\` is documented as three breaches. A name-only call returned Adobe, Stratfor, and Gawker. \`spam-list-only@hibp-integration-tests.com\`, with the full model, came back as OnlinerSpambot with \`IsSpamList\` true, and the data classes still included "Passwords". \`unverified-breach@hibp-integration-tests.com\` came back as AntiPublic with \`IsVerified\` false. \`not-active-breach@hibp-integration-tests.com\` returned HTTP 404 and an empty body. The test table says that alias has an inactive breach the API does not return. The 404 is the finding.
+
+Leave the other routes alone. The paste route, the stealer-log route, and the six-character email range each rejected this test key with HTTP 401 and a body that called the key invalid. Domain search of \`example.com\` with the same key was refused the same way. The docs describe HTTP 403 for an unverified domain once you are holding a real key. You do not need to manufacture that 403, and you do not call \`/breacheddomain/\` on a domain you have not verified. The test table on the API page lists further aliases, including opt-out and sensitive ones. Read the table. Do not go fishing through it for a more exciting JSON.
+
+Your own address, if you want it in the notes, goes in the website. Open https://haveibeenpwned.com/ and search the inbox you control. The FAQ documents a deep link of the form \`/account/\` plus the address. Either way the full address is sent to HIBP. That is what the form is. Do it once. Copy the breach names, the data classes, and any flag the page actually shows. If you are signed in, the FAQ says sensitive breaches for that verified mailbox can appear under the dashboard. Write down whether you were signed in. The public API omits sensitive and retired breaches, so the website, the dashboard, and a raw API call are allowed to disagree. Disagreement is a fact about which door you used.
+
+Do not put a real inbox on \`/breachedaccount/\` unless the key is yours and the purpose is still this exercise. A key copied from a blog is the terms' ban on passing keys around, wearing a tutorial's clothes.
+
+The password half is optional and it is not an email check. Use the prefix the docs already print, so you are not hashing a secret you care about. The body is long. Keep it in a temp file and delete it.
+
+\`\`\`bash
+curl -sS -D - -o /tmp/hibp-range.txt -H "user-agent: osint101-hibp-exercise" "https://api.pwnedpasswords.com/range/21BD1"
+rm -f /tmp/hibp-range.txt
+\`\`\`
+
+When checked, that prefix returned HTTP 200 and lines shaped as \`SUFFIX:count\`. The docs call about 800 suffixes typical, and they say the count moves with the prefix and with time. Do not write the line count into the note as a property of the corpus. If you must see a negative result, hash a nonsense string you have never used as a password, send the first five hex characters only, and look for the rest of the hash on your own machine. A missing suffix means that string was not among the suffixes returned. A hit means the string has been seen, with a count, and the FAQ is clear that HIBP does not store whose it was. A password you actually use does not belong in the command, in the shell history, or next to an email address in the note. The docs warn that checking on every keystroke can leak the candidate to anyone who can see the request pattern. Wait until the string is finished. Padding is a header you add only after you have read what a zero count means.
+
+Notify-me, if you want the ongoing mail, is the form on the notify page. One address. The one whose inbox you can open.
+
+> Run the test alias until the flags are dull. Use the website once, on an inbox you control, if you want a personal row. Stop when the note has a status code.
+        `,
+      },
+      {
+        title: "Limits and false positives",
+        duration: "8 min",
+        content: `
+### A sighting in a dataset, filed under a name
+
+A breach entry means the address appeared in a dataset HIBP loaded under that breach name. The FAQ's storage note is the same idea from the other end: the table holds the address or username and the list of sites it appeared against. That is the whole record. The rest of a scared paragraph is plot you added in the chat.
+
+Your password is a separate question. The FAQ states that when email addresses from a breach are loaded, the corresponding passwords are not loaded with them. \`DataClasses\` containing "Passwords" means the collection, as a collection, included that class. The Adobe object fetched for this lesson carried that class and still had no password field. Pwned Passwords is the other service. A hit there is a string that has been seen, with a count, joined to nobody. Running both searches does not hand HIBP a credential pair. Their FAQ says the address travels over TLS, the password travels as a prefix of a hash, and a later compromise of an account is a coincidence. You can believe the mechanics without adopting the comfort. Keep the secret out of the note anyway.
+
+The account is not "currently compromised" because the row exists. The FAQ says the record stays after you change the password. Appearance is a historical fact. A changed password does not edit it. Nothing in the model is a session, a cookie, or a mailbox that still accepts the old secret.
+
+Signing up is not proved either. The FAQ lists other ways an address lands in a breach for a site you do not remember: another service acquired the data, the service rebranded, or someone else enrolled the address. A local-part that looks like a person is still a string until something else says so.
+
+The named site was not necessarily hacked. Read the flags before the logo does the talking.
+
+Unverified, in the FAQ, means legitimate data can be present and legitimacy beyond reasonable doubt was not shown. HIBP loads those because the personal information is real even when the story is shaky. The test alias \`unverified-breach@hibp-integration-tests.com\` returned \`IsVerified\` false. The Adobe object returned true. The one-line description of that boolean in the model table is easy to misread against the FAQ. Prefer the FAQ's paragraph, then the value in the JSON you hold, and write which one you followed.
+
+Fabricated, in the FAQ, means it is highly unlikely the data came from the named site. The set is often aggregated from somewhere else, or invented, and then sold under a confident title. Real addresses are still in it. The flag is the correction. People file the title and skip the flag, which is how a collage becomes "their database was stolen."
+
+A spam list is not a security compromise. The FAQ's account is that the data was gathered to send targeted spam, often by asking people for details against a promised reward, and that the personal information is still worth telling them about. \`spam-list-only\` returned a breach with \`IsSpamList\` true whose classes included "Passwords". The class label did not turn the row into a hack of a website, and it still did not include a password.
+
+Malware, in the FAQ, marks data taken by a campaign against people's machines rather than by a compromise of the named service. The risk they describe is a device that may have been infected. That is a different brief from "the company was breached." A stealer log is the narrower case: malware that recorded a site, an email, and a password at login. The API docs say no stealer-log endpoint returns the password, and that those routes want a Pro-or-higher key plus a domain you have verified. A stealer flag on the breach model is a label you can quote. It is not a file of logins.
+
+Sensitive breaches are withheld from the public search and from the public API because membership itself can harm someone. The FAQ says the way to see them for an address is to sign in, which proves you receive mail there, and then look at your own dashboard. Retired breaches are removed. The FAQ explained the idea and named examples. Both the count and the names move. If you need either, read the FAQ that day. Opt-out removes an address from what the public calls return. The test table documents aliases that come back empty for that reason. An empty result after someone has opted out is not a newly clean history.
+
+\`BreachDate\` is a date with no time, and the docs say it is often wrong because breaches surface late. Use it as a guide. \`AddedDate\` is when HIBP loaded the set. The two clocks answer two questions. \`ModifiedDate\` moves when the record or the loaded data changes. \`PwnCount\` is addresses loaded into HIBP, and the docs say it usually sits below the number in the press because of duplicates and bad rows. The description is HTML, HIBP's summary, sometimes with links. Quote it as theirs.
+
+A 404 is a family of silences. Not in the searchable set. Opted out. Retired. Sensitive, on a public call. Inactive, which is the point of the \`not-active-breach\` alias. Never loaded, because the FAQ's other line is that HIBP holds a small subset of what has gone wrong on the internet, and that plenty of breaches are never disclosed at all. Absence of evidence is not evidence of absence. Their sentence. A clear page is still a result. The result is about this service's current window.
+
+A paste is not a breach. The FAQ says an address in a paste does not, by itself, mean the account was compromised, and that you should read the paste if it is still there. Pastes are transient. HIBP keeps the source, the id, the title, the date, and a count of addresses it extracted. It does not keep the paste body, and it cannot show you a paste the source has already deleted. If the page is gone, the metadata is the record. A search for a mirror, a repost, or "the full dump" is a different activity, and it is the one this lesson refuses.
+
+Usernames collide. The FAQ says a hit on a username that is not an email address is often a different person who picked the same handle, and that uniqueness is a weak comfort once billions of people have chosen names. This exercise uses an email for that reason. Plus-addressing, \`you+shop@example.com\`, is not how HIBP matches. The FAQ says so, gives a figure for how rare those addresses are in the data, and points at a suggestion rather than a feature. Read the figure there. Do not strip the tag and file the result against the tagged mailbox.
+
+Status codes are part of the result, not a vibe. 200 with a body is a hit in the set that call searches. 404 is the empty case above. 401 is a key problem: missing, malformed, or not valid for that route. The test key's 200 on one alias and its 401 on the paste route are both correct. 403 includes the missing user agent, and, in the docs, a resource the subscription may not touch. 429 is the rate limit. The docs say the breach, paste, and stealer routes are limited per key, that the body names the wait, and that \`retry-after\` carries the seconds. They also say domain search has no formal limit and can still return 429 if you poll it for sport, and that the password range has no rate limit. A loop is still a bad idea. The catalogue is cached on purpose so you can look at \`/latestbreach\` before you ask a heavier question.
+
+> The logo is a prompt to open the flags. The finding is the flag you can point at.
+        `,
+      },
+      {
+        title: "Ethics and legal limits",
+        duration: "6 min",
+        content: `
+### The address names a person, so the Privacy Act sits with the JSON
+
+An email address is personal information under the Privacy Act 1988 (Cth) when it is about an identifiable individual, and the breach list clipped to it is the same information. A role address joins that category the moment the notes attach it to a human. HIBP's terms use the Act's definition, and they place the Spam Act 2003 (Cth) in the same "Privacy Laws" line. The operator is Australian. The terms this lesson read are governed by the law of Queensland. None of that appoints HIBP as your privacy officer. It means you do not get to treat the JSON as weather.
+
+APP 3 is the purpose test. The purpose here is specific: learn what a breach entry says, using an address you control or an alias HIBP published for tests. The collection ends when the exercise is written. "The site was open" is not a purpose, and a staff list is not a lesson. APP 6 is the week after. A training file does not become a prospect list, a HR note, or a pitch without a new necessity test. HIBP's terms already forbid the pitch in their own words. You do not query addresses or domains in a way that disadvantages people or amounts to solicitation, and you do not query addresses that were not handed to you by the person who uses them. Purchased lists, scraped lists, and third-party lists are the examples they give. Following up with someone who asked you to check an address, where you told them you would, is the exception they wrote down. APP 10 is the logo in the chat. An unverified flag filed as a confirmed theft, a spam list filed as a hack, a \`BreachDate\` filed as a precise clock, and a 404 filed as a clean history are four ways to hand someone a fact they will act on. APP 11 is the curl output, the screenshot, and the shell history. Keep them out of git, off a shared drive, and out of a ticket the whole company can search.
+
+A direct search sends the full address to HIBP. Say that in the method note. The paid email k-anonymity route is the one that sends a prefix instead, and only on the plans the API page marks for it. The terms require you to discard every other suffix immediately and to keep no copy. The free password range is a prefix of a hash, which is why the secret stays on your machine. Whether any of those requests is a cross-border disclosure under APP 8 depends on where the service handles them on the day. This lesson will not guess from an old hosting paragraph. If you are an APP entity, read HIBP's current privacy policy at haveibeenpwned.com/Privacy and answer APP 8 from that, not from a memory of which cloud they used.
+
+Sensitive breaches are withheld because being found in them can itself cause harm. Looking them up for a person who did not ask is the opposite of the reason the flag exists. If a data class, or the nature of the site, would let you infer sensitive information in the Act's sense, you were not asked to make that inference. APP 3.3 is unimpressed by cleverness. Leave it out of the note.
+
+Publishing is a second act. A notebook about your own address is coursework. A post that pins a real person's address to a breach, to shame them or to show the method, can be a serious invasion of privacy under the statutory tort in force in Australia since 2025. The Criminal Code (Cth) offences about releasing personal data over a carriage service in a menacing or harassing way do not contain a research exemption. The exercise stays in the exercise.
+
+Paid investigating in Queensland still meets the Security Providers Act 1993. A browser box is a poor theory of why a licence would be optional. HIBP's terms add their own condition: your use of the service has to be lawful, and you are the one who must hold whatever licence the work requires.
+
+The API page's acceptable-use list is the house rules, and it is worth reading in their words before you script anything. The short version, which you should check against the page, is: do not query in order to harm people who are in the breaches, do not try to knock the service over, do not route around the controls, do not hide the client, do not pretend the data came from somewhere else, do not skip attribution, do not automate an API the page does not document, and do not drag the name through a stunt. Breach and paste data shown to anyone but yourself wants a visible credit under Creative Commons Attribution 4.0, with a link to haveibeenpwned.com. The password API is the carve-out: no attribution duty. The terms also forbid standing up a second breach-search service. A class project that re-hosts the catalogue is that project.
+
+Dumps are the hard line. You do not download a breach dump, buy one, trade one, or accept "the file" so the chart looks busier. The API docs' abuse paragraph jokes that walking the API one address at a time is a slow way to build a pile of addresses. The joke is not a bibliography. A dump is other people's personal information in bulk, often with secrets attached. The Privacy Act is the first statute a lawyer will open. Part 10.7 of the Criminal Code (Cth) is what they open if the facts turn to unauthorised access or to passing data on to harass. This page is not that advice. The instruction is shorter than the advice. The Pwned Passwords documentation does describe a downloader for the hash corpus: hashes and counts, no email addresses. That object is not a breach dump. This exercise still does not use the downloader. One range request, or none, is the password half.
+
+Attribution does not license a use the terms forbid. A credit line on a solicitation email is still a solicitation email.
+
+Holehe, if you use it in this course at all, stays \`holehe -NP\` and stays on an address you own. A breach name is not a reason to ask a pile of sites whether the address is registered, and it is not a reason to try a password anywhere.
+
+> The authority for this lesson is an inbox you can open, or HIBP's published test alias. A file of other people's rows is a different job.
+        `,
+      },
+      {
+        title: "Quiz",
+        duration: "4 min",
+        content: `
+1. The website shows your address in a breach whose data classes include "Passwords". What are you allowed to say about your password, and about the account today?
+2. \`not-active-breach@hibp-integration-tests.com\` returns HTTP 404. Why is a 404 on a real inbox a weak "all clear"?
+3. Which of these needs no API key: the Pwned Passwords range API, \`GET /breachedaccount/{email}\` for a normal inbox, or the six-character email k-anonymity route? Where do you re-check the split?
+4. \`IsSpamList\` is true, and "Passwords" is one of the data classes. What kind of incident is that, and what did the response still not give you?
+5. You save breach JSON for a client's staff, then email them an offer of "breach insurance" based on the hits. Which HIBP rule and which Australian Privacy Principles does that trip?
+
+**Answers**
+
+1. You may say the address appeared in a dataset whose classes include passwords. You may not say your password was returned, because the address search does not return one, and the FAQ says passwords are not loaded next to addresses. You may not say the account is compromised now. The record survives a password change.
+2. 404 means this call returned no breach. The docs define that test alias as one with an inactive breach the API omits. On a real address, sensitive, retired, opted-out, and never-loaded breaches are other kinds of silence. The FAQ's line is that absence of evidence is not evidence of absence. Write which door you used: public site, signed-in dashboard, or API.
+3. The Pwned Passwords range API is documented as free, uses a five-character prefix on api.pwnedpasswords.com, and returned HTTP 200 with no key when this lesson checked the sample prefix \`21BD1\`. Direct email search wants a key: a missing key returned 401, and the all-zero test key works only in the way the docs describe for \`hibp-integration-tests.com\`. Email k-anonymity is marked Pro and High RPM, uses six characters, and the test key was rejected. Re-check haveibeenpwned.com/API/v3, the subscription page, and the terms. The free line and the badges move. There is no \`--help\` to settle it.
+4. The FAQ treats a spam list as personal data collected for spam, not as a compromise of the named system. "Passwords" is a class label on that dataset. The response still does not include a password, and the flag means you do not brief it as a hack of a website.
+5. The terms forbid querying addresses to solicit, and they forbid querying addresses the person did not submit, including scraped or third-party lists. APP 3 is the purpose you did not have when you collected a sales list. APP 6 is the new use. APP 10 is the accuracy problem in treating a breach row as a customer-quality score. APP 11 is the staff file you now have to secure. A Creative Commons credit would still be required if you showed the breach data, and the credit would not make the pitch lawful.
+        `,
+        exercise: "Check one address only: either an inbox you control, on the Have I Been Pwned website, or account-exists@hibp-integration-tests.com with the documented 32-zero test key and a user agent, as in the walkthrough. If you do both, say which result each door produced. Write five sentences: which address and which door, the status or on-screen result and the breach names you are willing to keep, one data class and the sentence you will not write about a password, one flag and what it changes about the claim, and which calls you left unused (domain search, stealer logs, someone else's address, a breach dump) and why. Delete any range-API temp file. Do not download, buy, or pass on a dump. If you will not put your own address in the website, the test alias is the whole exercise.",
+      }
+    ],
+  },
+
   ...defensiveCyberLessons,
 }
 

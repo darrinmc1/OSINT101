@@ -13,10 +13,10 @@ export type LessonSpotlight = {
 
 /** Manual spotlight — bump when merging a new Consensus/backlog lesson. */
 export const lessonSpotlight: LessonSpotlight = {
-  latestModuleId: "read-email-headers",
-  latestTitle: "Reading Email Headers Like a Detective",
-  latestHref: "/modules/read-email-headers",
-  nextTitle: "HIBP (API) (not written yet)",
+  latestModuleId: "hibp-breach-exposure",
+  latestTitle: "HIBP: Check an Address You Control and Record the Breach Entry",
+  latestHref: "/modules/hibp-breach-exposure",
+  nextTitle: "Amass (passive only) (not written yet)",
   nextBlurb:
-    "Breach exposure checks on an email you own are next in the writing queue. There is no HIBP lesson on this site yet.",
+    "Attack-surface enumeration with -passive is next in the writing queue. Active modes stay out of scope. There is no Amass lesson on this site yet.",
 }
