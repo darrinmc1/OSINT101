@@ -21,7 +21,7 @@ Ordered best-first for future weekly lessons. No dates or volume promises — th
 | Order | Tool | What the lesson would teach | Status |
 |---|---|---|---|
 | 1 | theHarvester | Passive email/host/name collection via search engines and APIs; API keys; noise vs signal | done |
-| 2 | HIBP (API) | Breach exposure checks on your own email; what a breach entry is and is not; no dump downloading | todo |
+| 2 | HIBP (API) | Breach exposure checks on your own email; what a breach entry is and is not; no dump downloading | done (`hibp-breach-exposure`) |
 | 3 | crt.sh / CT logs | Certificate transparency for domains and email-shaped SANs; pivoting from org to subdomain | done (`certificate-transparency-osint`) |
 | 4 | Amass (passive only) | Attack-surface enum with `-passive`; when active modes are out of scope | todo |
 | 5 | subfinder | ProjectDiscovery passive subdomain discovery; chaining into dnsx carefully | todo |
@@ -52,6 +52,6 @@ Ordered best-first for future weekly lessons. No dates or volume promises — th
 
 Sherlock, Maigret, WhatsMyName, User Scanner, GoSearch, Aliens Eye, Linkook, Holehe (`-NP` only), Socialscan, Mailcat, Numint (`--offline` only), FindMe — status `done`.
 
-Weekly backlog shipped after the 12: theHarvester — status `done`.
+Weekly backlog shipped after the 12: theHarvester — status `done`. HIBP (API) — status `done` (`hibp-breach-exposure`).
 
 Defensive lessons shipped 27 Oct 2026 (not tool-queue items): `read-email-headers`, `lookalike-domains-dnstwist`, `certificate-transparency-osint`, `threat-actor-profile-osint`, `sharing-threat-intel`.
