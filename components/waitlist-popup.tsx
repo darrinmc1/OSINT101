@@ -13,6 +13,21 @@ export function WaitlistPopup() {
     const [honeypot, setHoneypot] = useState("")
     const [submitted, setSubmitted] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [offerLabel, setOfferLabel] = useState<string | null>(null)
+
+    useEffect(() => {
+        let cancelled = false
+        fetch("/api/launch-offer")
+            .then((res) => (res.ok ? res.json() : null))
+            .then((data: { active?: boolean; label?: string | null } | null) => {
+                if (cancelled || !data?.active || typeof data.label !== "string") return
+                setOfferLabel(data.label)
+            })
+            .catch(() => {})
+        return () => {
+            cancelled = true
+        }
+    }, [])
 
     useEffect(() => {
         const lastSeen = localStorage.getItem(POPUP_STORAGE_KEY)
@@ -95,10 +110,12 @@ export function WaitlistPopup() {
                     <>
                         <div style={{ marginBottom: "8px", fontSize: "28px" }}>🔍</div>
                         <h2 style={{ color: "#fff", fontSize: "22px", fontWeight: 700, marginBottom: "8px" }}>
-                            Join the list
+                            {offerLabel ?? "Join the OSINT101 waitlist"}
                         </h2>
                         <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "24px", lineHeight: 1.5 }}>
-                            New lessons and tradecraft notes. Learn to find what&apos;s already there.
+                            {offerLabel
+                                ? "Waitlist members and new buyers get 50% off the first billing period. Join the list and we'll email you when checkout opens."
+                                : "We'll email you when checkout opens. Learn to find what's already there."}
                         </p>
 
                         <form onSubmit={handleSubmit}>
@@ -141,10 +158,10 @@ export function WaitlistPopup() {
                                     opacity: loading ? 0.7 : 1,
                                 }}
                             >
-                                {loading ? "Joining..." : "Join the list"}
+                                {loading ? "Joining..." : "Join the waitlist"}
                             </button>
                             <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "12px", textAlign: "center" }}>
-                                No spam. Unsubscribe anytime.
+                                No spam, unsubscribe anytime.
                             </p>
                         </form>
                     </>
@@ -155,7 +172,9 @@ export function WaitlistPopup() {
                             On the list. Case opened.
                         </p>
                         <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "20px" }}>
-                            You&apos;re on the list.
+                            {offerLabel
+                                ? "We'll email you when checkout opens. The launch price is applied at checkout while the offer is open."
+                                : "We'll email you when checkout opens."}
                         </p>
                         <button
                             onClick={handleClose}

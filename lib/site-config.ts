@@ -85,6 +85,7 @@ export const siteConfig: SiteConfig = {
     marketing: [
       { label: "Case File", href: "/case-file" },
       { label: "Lessons", href: "/modules" },
+      { label: "Pricing", href: "/pricing" },
       { label: "About", href: "/about" },
     ],
     dashboard: [
@@ -102,12 +103,13 @@ export const siteConfig: SiteConfig = {
     ctaButton: "Open the Case File",
     ctaSecondary: "Browse Lessons",
     emailCaptureHeading: "Get the Case Files",
-    emailCaptureSubheading: "New lessons, occasional tradecraft notes.",
+    emailCaptureSubheading: "New lessons, occasional tradecraft notes. Founding members read the dossier first.",
     feedbackPlaceholder: "What did you find? Be specific - vague reports get filed under 'cold case'.",
   },
 
   pricing: {
     founder: { monthly: 5, yearly: 48 },
+    // Not a Checkout product. Do not render or sell this tier.
     standard: { monthly: 9, yearly: 90 },
     premium: { monthly: 19, yearly: 180 },
   },

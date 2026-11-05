@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import ContentPage from "@/components/ContentPage"
 import { sitePages } from "@/data/siteContent"
+import { REFUND_POLICY } from "@/lib/refund-policy"
 import { pageMeta } from "@/lib/page-meta"
 
 export const metadata: Metadata = pageMeta({
@@ -15,7 +16,12 @@ export default function TermsPage() {
       title={sitePages.terms.title}
       eyebrow={sitePages.terms.eyebrow}
       description={sitePages.terms.description}
-      body={sitePages.terms.body}
+      body={`${sitePages.terms.body}
+
+### Payments and refunds
+
+${REFUND_POLICY}
+`}
     />
   )
 }

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   ...pageMeta({
     title: "Case File Planner",
     description:
-      "Paste a collection target or investigation question. Get a case-file plan using the OSINT 101 method, citing real modules.",
+      "Paste a collection target or investigation question. Get a case-file plan using the OSINT 101 method, citing real modules. Foundations free; advanced techniques gated.",
     path: "/case-file",
   }),
   openGraph: {
@@ -66,7 +66,7 @@ export default function CaseFilePage() {
             Case File Planner
           </h1>
           <p className="text-lg text-slate-400 max-w-2xl">
-            Paste a collection target or investigation question. Get a case-file style plan that uses the OSINT 101 method and cites real modules from the archive.
+            Paste a collection target or investigation question. Get a case-file style plan that uses the OSINT 101 method and cites real modules from the archive. Foundations are free. Advanced techniques require sign-in.
           </p>
         </div>
       </section>
