@@ -13,10 +13,10 @@ export type LessonSpotlight = {
 
 /** Manual spotlight — bump when merging a new Consensus/backlog lesson. */
 export const lessonSpotlight: LessonSpotlight = {
-  latestModuleId: "hibp-breach-exposure",
-  latestTitle: "HIBP: Check an Address You Control and Record the Breach Entry",
-  latestHref: "/modules/hibp-breach-exposure",
-  nextTitle: "Amass (passive only) (not written yet)",
+  latestModuleId: "amass-passive-enum",
+  latestTitle: "Amass: Collect Published Names for a Domain You Operate, and Leave Active Mode Off",
+  latestHref: "/modules/amass-passive-enum",
+  nextTitle: "subfinder (not written yet)",
   nextBlurb:
-    "Attack-surface enumeration with -passive is next in the writing queue. Active modes stay out of scope. There is no Amass lesson on this site yet.",
+    "ProjectDiscovery passive subdomain discovery is next in the writing queue. Chaining those names into dnsx stays a separate decision. There is no subfinder lesson on this site yet.",
 }

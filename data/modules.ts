@@ -7722,6 +7722,184 @@ Holehe, if you use it in this course at all, stays \`holehe -NP\` and stays on a
     ],
   },
 
+
+  "amass-passive-enum": {
+    id: "amass-passive-enum",
+    title: "Amass: Collect Published Names for a Domain You Operate, and Leave Active Mode Off",
+    description: "A passive Amass pass on a domain you operate: which builds still honour -passive, which v5 default still talks to DNS, and which flags this lesson leaves off.",
+    level: "Intermediate",
+    estimatedTime: "40 min",
+    sections: [
+      {
+        title: "What Amass does",
+        duration: "10 min",
+        content: `
+### Names other datasets already hold
+
+The job is a list of names that public datasets already associate with a domain you operate, each name still wearing the source that returned it. You stop when you can say which mode the binary actually ran. You do not need a longer list to finish.
+
+OWASP Amass is the project that does the wider job. The v5 README describes it as network mapping of attack surfaces and external asset discovery, using open source information gathering and active reconnaissance. Both halves are in the sentence on purpose. This lesson is the information-gathering half. Zone transfers, brute force, name alterations, NSEC walking, and crawling the hosts are the other half, and they stay off the command line.
+
+The licence is Apache-2.0. The v5 README checked for this lesson names Jeff Foley and the years 2017–2026. Running the tool for the exercise is ordinary use. A modified copy you ship later is the LICENSE file's problem, not a feeling about open source. You do not need the maintainer's biography to read a name list.
+
+Two generations of the tool use the word passive, and they do not mean the same traffic.
+
+The user guide on the repository's older \`master\` branch is the one a lot of packages and a lot of blogs still match. It describes three modes for \`amass enum\`. With neither flag, it seeds from data sources and uses DNS to validate what came back and to keep looking inside the domains you named. Active does that and then reaches the assets: TLS certificates, DNS zone transfers, NSEC walking, and web crawling. The guide's active example is \`amass enum -active -d example.com -p 80,443,8080\`. Passive, in the same section, "will only obtain information from data sources and blindly accept it." The command it prints is \`amass enum --passive -d example.com\`. The flag table calls \`-passive\` "a purely passive mode of execution." That sentence is the mode this lesson will run, and only when \`amass enum -h\` on your machine still describes the flag that way.
+
+The v5.1.3 tag, published 25 October 2026, rewrote the help text and left a lot of the DNS in place. In \`internal/enum/cli.go\` at that tag, \`-passive\` is documented as "Deprecated since passive is the default setting." \`-active\` is "Attempt zone transfers and certificate name grabs." \`OverrideConfig\` in the same file sets \`Passive\` to false when \`-active\` is on. It never sets \`Passive\` to true when you pass \`-passive\`. The DNS plugin does not read the \`Passive\` field. \`dnsIP.query\` calls \`PerformQuery\` for addresses with no Active check. \`dnsSubs.query\` looks up NS and MX, and once the NS lookup succeeds it queries every SRV label from \`NamesByTier(Tier3)\`. The comment in \`srv.go\` calls tier 3 opt-in. The call passes tier 3 anyway. The list includes ordinary mail and directory names and also \`_kpasswd\` and \`_kerberos\`. Those are DNS questions about service labels. They are not a password reset. They are also not a passive dataset read. Reverse lookups in \`dns/reverse.go\` are not behind the Active flag either. Active changes the width of an address sweep: the constants on the DNS plugin in that tag are 25, then 100, then 250 when Active is set. HTTP probe plugins return immediately when Active is false, and the CLI refuses \`-p\` unless Active is set, with the line "Ports can only be scanned in the active mode."
+
+So a default \`amass enum -d example.com\` on v5.1.3 is not the user guide's "blindly accept" mode. Passing the deprecated flag does not turn the DNS off, because the flag is not applied. If your \`-h\` and this paragraph disagree, \`-h\` wins, and so does \`amass -version\`. A cheatsheet that cannot name its build is a souvenir.
+
+Subcommands moved in the same generation. v5.1.3 \`amass -h\` lists \`assoc\`, \`engine\`, \`enum\`, \`subs\`, \`track\`, and \`viz\`. There is no \`intel\` and no \`db\` in that list. \`enum\` collects. \`subs\` reads what was stored. If your help text still has \`intel\`, you are on an older build. Leave \`intel\` for another day. The user guide's \`intel -whois\` example is reverse WHOIS, which is a different question about organisations, and it is not this exercise.
+
+Data sources move too. \`amass enum -list\` prints the names the binary you installed actually has. The \`datasources.yaml\` shipped in the v5.1.3 tree leaves the credentialed sources commented out, including Chaos, SecurityTrails, VirusTotal, Shodan, and Hunter. A commented block is a source you did not ask. Uncommenting one means you have read that provider's terms and you meant to spend the key. crt.sh, in that tag, is compiled in. \`crtsh.query\` requests \`https://crt.sh/?CN=\` plus the name plus \`&output=json&exclude=expired\`. No API key is set in that function. Asterisk labels are stripped before the name is stored. Wayback, RapidDNS, DuckDuckGo, and Bing are compiled in beside it, in \`engine/plugins/load.go\`. Compiled in is not the same as "answered." A timeout, a block, or an empty body is an outcome. It is not evidence that the domain has no names.
+
+One mislabel is worth catching before you brief it. In that tag, \`NewCrtsh\` sets \`Name()\` to \`crt.sh\` and sets \`Source.Name\` to the string \`HackerTarget\`. If a row cites HackerTarget and you never configured HackerTarget, check the build before you count two providers.
+
+What you keep is a database, not a vibe. The asset-database docs say that with no database configured, Amass creates a local SQLite file in its configuration directory. \`OutputDirectory\` joins \`os.UserConfigDir()\` with \`amass\`. On a normal Linux desktop that is \`~/.config/amass\`. The older user guide lists the same place, plus \`$XDG_CONFIG_HOME/amass\` and \`/etc/amass\`, and the Windows and macOS equivalents. The database remembers every domain you typed. It stays out of git.
+
+> The useful line is a name, the source, and the mode your help text says you ran. Volume is how a passive exercise starts sounding like a map.
+        `,
+      },
+      {
+        title: "Walkthrough",
+        duration: "12 min",
+        content: `
+### Your domain, the help text, then one command
+
+Use a domain you own or administer. A personal domain, a club site you run, a name you registered for a lab. The commands below keep \`example.com\` because that is the placeholder in the user guide. It is syntax. Replace it before you press enter. \`example.com\` and \`example.org\` are reserved documentation names. They are not a suggestion to run the getting-started page's \`enum -d owasp.org\`, and they are not a suggestion to run the Docker Compose line this lesson found on the docs site, \`enum -active -d example.org\`. A company you do not work for is not a stand-in. If you operate no domain, do not borrow one. Install the tool, read \`-h\`, and write the exercise from that reading.
+
+One sentence before install: "I am collecting names public sources already have for a domain I operate, and I am leaving active, brute, and alteration flags off."
+
+Three install lanes are documented. Pick one, then trust the binary you got.
+
+The getting-started page, read for this lesson, shows a source install of:
+
+\`\`\`bash
+CGO_ENABLED=0 go install -v github.com/owasp-amass/amass/v5/cmd/amass@main
+\`\`\`
+
+\`@main\` moves. The GitHub release checked the same day was v5.1.3, published 25 October 2026. If you want the help text to stay still, install that release rather than the branch tip. If the docs page has changed the module path, the page wins.
+
+The same page shows Homebrew:
+
+\`\`\`bash
+brew tap owasp-amass/homebrew-amass
+brew install amass
+\`\`\`
+
+And Docker: \`docker pull owaspamass/amass:latest\`, then a tag command that still said \`5.0.0\` in the section this lesson read. Those two numbers do not have to match the GitHub release. \`amass -version\` inside the image is the number you write down. The documented \`docker run\` mounts the config directory and then runs \`enum -d owasp.org\`. Change the domain. Do not copy the target. Kali and other distro packages often lag. \`apt show amass\` tells you what the archive built. The help text tells you what it does.
+
+Whatever you installed:
+
+\`\`\`bash
+amass -version
+amass -h
+amass enum -h
+\`\`\`
+
+Read \`enum -h\` for four things. Does \`-passive\` still mean a data-source mode, or does the line say it is deprecated? Is \`-active\` described as zone transfers, certificate grabs, or both? Are \`-brute\`, \`-alts\`, \`-w\`, and \`-aw\` present? Does \`-o\` still belong to \`enum\`, or has output moved to \`amass subs -h\`? v5.1.3 puts \`-o\` on \`subs\`, described there as the path for terminal output, and puts \`-names\` on \`subs\` as "Print Just Discovered Names." The older user guide puts \`-o\` and \`-ip\` on \`enum\`. Spellings drift. The help text in front of you is the command you have.
+
+Then open the config the tool will actually load. The older guide's search order on Linux is \`$XDG_CONFIG_HOME/amass/config.yaml\`, \`$HOME/.config/amass/config.yaml\`, and \`/etc/amass/config.yaml\`. A \`-dir\` flag moves the search to that directory's \`config.yaml\`. You are looking for an older \`mode: active\`, a v5 \`active: true\` under \`options\`, and \`bruteforce\` or \`alterations\` set to \`enabled: true\`. The \`resources/config.yaml\` in the v5.1.3 tree ships brute and alterations \`enabled: false\` and does not set \`active\`. The configuration page on the docs site, read for this lesson, showed a sample with \`active: true\`. A sample is not your file. If your file turns any of those on, turn them off for this exercise or stop. A flag you omitted does not beat a config line you left behind.
+
+\`amass enum -list\` is the source menu. Copy names from that list if you narrow with \`-include\`. Do not invent \`crtsh\` versus \`crt.sh\`. The user guide's example is \`-include crtsh\`. The v5 plugin's \`Name()\` is \`crt.sh\`. The string that matches \`-list\` is the string you are allowed to type.
+
+On a build whose \`enum -h\` still describes \`-passive\` as a purely passive or data-source mode, the run is the user guide's command, with your domain substituted and with no second mode flag:
+
+\`\`\`bash
+amass enum -passive -d example.com
+\`\`\`
+
+If that same help text still lists \`-o\` on \`enum\`, you may add \`-o amass-names.txt\`. If it lists \`-oA\`, that prefix is the one the user guide describes for naming the output files. Do not add \`-active\`, \`-brute\`, \`-alts\`, \`-w\`, \`-aw\`, \`-awm\`, \`-wm\`, \`-p\`, \`-addr\`, \`-asn\`, \`-cidr\`, \`-r\`, or \`-iface\`. A resolver list does not make the query more passive. An interface flag does not widen your authority. \`-nf\` feeds names you already have back into the enumeration. Leave it off. You came to see what the sources return, not to prime the graph.
+
+On a build whose help text says \`-passive\` is deprecated, do not pretend the flag still selects the user guide's mode. This lesson does not run that default against a domain you do not operate. The v5.1.3 default still talks to DNS, including the SRV labels and reverse lookups described above. If the domain is yours and you have decided that traffic is acceptable for a lab you control, the command is \`amass enum -d\` and your domain, with the same flags left off. Say in the notes that you accepted DNS. If you will not accept it, do not run \`enum\`. Reading \`-h\` is the exercise.
+
+v5 starts a local engine when \`enum\` cannot find one. The default URL in the \`-engine\` flag is \`http://127.0.0.1:4000\`. \`main\` waits up to a minute for that process to answer, then exits with a failure to start. That failure is about your machine. It is not a finding about the domain. Leave \`-engine\` empty. Do not point it at a host you do not run.
+
+When the run finishes, make a four-column table: name, source, what the source is (certificate log, archive, scrape, DNS), and the claim you are willing to write. A certificate-log row supports "this name appeared in a certificate record the plugin asked for." It does not support "this host is up." A scrape row supports "a search or a page returned this string." It does not support "this is an employee asset." If your build stored a graph instead of a text file, \`amass subs -names\` is the v5.1.3 way to print the names, and \`-h\` on \`subs\` confirms the flag. In that tag, \`subs -ip\` fills addresses from \`NamesToAddrs\`, which reads stored DNS edges in the database. It is not a fresh resolution. The resolution, if any, already happened during \`enum\`. Leave \`-ip\` off unless you want those stored addresses in the note, and say where they came from.
+
+Open a name in a browser only when it sits on the domain you operate and you already know the site. You are checking your own list against your own site. Do not follow a name into a port scan, a screenshot tool, a zone walk, or a password-reset form. A name is not a promotion.
+
+The output directory and the SQLite file are the holdings. Keep them next to the notes, not in a repository.
+
+> Substitute your domain, run the one command your help text allows, and stop. Adding a flag is a decision you can explain. Adding \`-active\` is how the lesson ends.
+        `,
+      },
+      {
+        title: "Limits and false positives",
+        duration: "8 min",
+        content: `
+### Stale certificates, quiet sources, and names that were never yours
+
+A certificate name outlives the host. crt.sh in the v5.1.3 plugin asks for JSON and sets \`exclude=expired\`, so that particular URL is not a full history of dead certificates. A certificate that is still inside the window can still name a host you retired, a staging label, a wildcard, or a platform customer who happened to share a certificate product with you. \`RemoveAsteriskLabel\` strips a leading star before the name is stored. \`*.example.com\` becoming \`example.com\`, or a wildcard label collapsing into a name you do not operate, is a string operation. It is not a confirmation. The row is a lead with a source. Comparing it to DNS you already know, on a domain you operate, is allowed. Adding a brute-force wordlist to "settle" the unknown names is the thing this lesson refused.
+
+Archives and search scrapes add a second kind of junk. Wayback, DuckDuckGo, and Bing, where those plugins are in your build, return strings that occurred near the query. A partner footer, a documentation sample, a 2014 forum signature, and your real \`www\` host all look like names in a graph. Co-occurrence is the finding. Currency is a separate check, and the check is not a scan of someone else's site.
+
+Empty is a result. A source that times out, returns a block, or comes back with no names did not lean toward "exists" or "does not." The v5 crt.sh function returns nil on a request error and on a JSON error. Both look like silence from the outside. Write "no rows from this source," and write the reason if the log has one. \`enum -log\` is in both the user guide and the v5.1.3 flags if you want that file. Do not re-run the same query through a different resolver all afternoon to squeeze a richer list out of a provider that already declined. That is an argument with someone else's acceptable-use policy.
+
+A keyed source you left commented out was not asked. The datasources file is explicit about this shape: a name, a TTL, a credential block, most of them commented. Turning on \`-include\` for a name that has no key does not conjure the dataset. A free tier, if you later enable one, is a sample of what that plan returns. Write "sample" or write nothing ambitious. Hunter, VirusTotal, and SecurityTrails are not "no mail" and "no hosts" when the block above them is still a comment.
+
+DNS, on a build that still does it, has its own false confidence. A name that resolves answered a resolver. Shared hosting and content-delivery networks put many unrelated sites on one address. An address in the output is not "their box," and this lesson does not scan it. An SRV miss is silence about that label. It is not "this organisation has no directory" and not "this domain has no mail." The tier comment that calls tier 3 opt-in will mislead you if you brief from the comment and the binary called \`NamesByTier(Tier3)\`.
+
+The source string can be wrong even when the name is real. The v5.1.3 \`NewCrtsh\` bug is the concrete case: plugin name \`crt.sh\`, source string \`HackerTarget\`. Quote the label you saw, and quote the build. Do not upgrade a copy-paste error into a second intelligence source.
+
+Wildcard DNS and alteration flags manufacture the other kind of false positive. \`-alts\` turns on altered names. \`-brute\` is the wordlist path. The alterations plugin in v5.1.3 returns immediately unless both \`BruteForcing\` and \`Alterations\` are set, so the two switches are a pair in that tag. The shipped config leaves both disabled. GitHub issue 1122, against v5.1.1 and \`develop\`, reports that \`-brute\` and the brute wordlist are parsed and that the engine does not use the wordlist the way a v4 user would expect. That bug is not a reason to try the flag. A guessed name that then resolves, on a wildcard domain, looks like infrastructure. You built the guess. You do not get to brief it as discovered.
+
+Older write-ups still show \`amass enum -active\` as the normal first command, often against a domain the author does not administer, often with a wordlist. The user guide you read may still print that active example, because it is documenting the flag. Documentation is not permission. If your \`-h\` has dropped a flag this page names, or grown one, follow \`-h\`.
+
+\`assoc\`, \`track\`, and \`viz\` read or draw what you already stored. They are not a second collection. They also are not required to finish the table. A picture of a graph feels like analysis. The analysis is the claim column.
+
+> The dangerous result is the confident one. Empty, mislabelled, and stale are allowed to stay boring.
+        `,
+      },
+      {
+        title: "Ethics and legal limits",
+        duration: "6 min",
+        content: `
+### If the notes name a person, the Privacy Act has sat down
+
+A hostname is often just infrastructure. It becomes personal information under the Privacy Act 1988 (Cth) when the notes tie it to an identifiable person, including when the tie is wrong. A certificate name like \`jane.example.com\`, a scrape that returned an email-shaped string, or a WHOIS contact the whois plugin stored, are the usual ways a name list turns into a record about someone. Collecting that, for anything that counts as a business, brings in the Australian Privacy Principles.
+
+APP 3 is the purpose test. On a domain you operate, for a lesson about reading source and mode, the collection is the lesson and it ends when the table is done. On a client domain, "Amass was installed" is not the purpose. Write the question the engagement asked. APP 6 is the week after. A name list gathered to check your own zone is not a prospecting file, and a training database is not a contact list for a different matter. APP 8 is the cross-border rule, and it is easy to miss because the binary felt local. The queries went to certificate logs, archives, search pages, WHOIS and RDAP services, and, on a build that resolves, to whatever resolvers the tool used. Those providers received the domain. Say that in the method note. APP 10 is accuracy. A stale certificate name filed as a live server, a HackerTarget label filed as a second source, and an SRV guess filed as "they run Kerberos" are three ways to put a wrong fact where someone will act on it. APP 11 is storage. The SQLite file, the \`-o\` text, and the log are the holdings. Keep them off git, off a world-readable share, and out of a ticket system half the company can search.
+
+The providers have terms on top of the Act. crt.sh, the archives, and the search engines each publish their own. A modest run, one domain you operate, the sources your \`-list\` already has without a key you pasted from a gist, is the training case. A script that walks every domain in a spreadsheet is a product, and someone has to read those terms before it runs on Monday. This page will not pretend the terms are uniform. A provider key is a contract with that provider. It is not a warrant, and a bug-bounty page is not a blanket authorisation to brute the names you found.
+
+Scope is a written list: domains you own, or domains you have explicit permission to assess. A useful permission names the domain, the techniques, the time window, how the data is handled, and which third parties are out of bounds. Passive collection is still collection. \`-active\` is a further decision. The help text, on v5.1.3, says that flag attempts zone transfers and certificate name grabs. The older user guide adds NSEC walking and web crawling, and its example adds ports. Those are documented in the tool. They are outside this lesson on purpose. Turning them on because a tutorial's first command looked short is how a name-list exercise becomes unauthorised-access territory. The Criminal Code (Cth) Part 10.7 and the Queensland Criminal Code s 408E are the provisions a lawyer will open before this is client work that touches systems. This course does not give that advice. It gives you a command line with those flags absent.
+
+Publishing is a separate act. A notebook about your own domain is coursework. A post that attaches real people's names, addresses, or contact records to a domain, to embarrass them or to show the method, can be a serious invasion of privacy under the statutory tort in force in Australia since 2025. The Criminal Code (Cth) offences about releasing personal data over a carriage service in a menacing or harassing way do not contain a research exemption. The exercise stays in the exercise.
+
+If you do this for a fee in Queensland, the Security Providers Act 1993 still applies. A \`-passive\` flag is a poor theory of why a licence would be optional. Sensitive information is unlikely to fall out of a certificate log, and then someone infers it from a label (\`health\`, \`union\`, a clinic's hostname, a person's name in a certificate). APP 3.3 is unimpressed by inferences you were not asked to make. Leave them out.
+
+WHOIS and RDAP, which the v5 plugin list includes, send the domain to a registry or a registration-data service. That is a third party, not a connection to the website. It is still a disclosure, and the contact object on the way back can be personal information. Reverse WHOIS via \`intel -whois\`, on a build that still has \`intel\`, widens the question to other domains linked to a contact. That is a different purpose. It is not this table.
+
+Holehe, if you use it in this course at all, stays \`holehe -NP\` and stays on an address you own. A hostname Amass printed does not relax that, and it does not authorise a password reset "to see if the mailbox exists."
+
+> Authorisation names the domain and the technique. A data-source list you can explain is the technique this lesson allows.
+        `,
+      },
+      {
+        title: "Quiz",
+        duration: "4 min",
+        content: `
+1. Your \`amass enum -h\` says \`-passive\` is deprecated. On the v5.1.3 tag, what does the flag actually change, and what does a default \`enum\` still send?
+2. The older user guide says passive mode only takes data-source information and blindly accepts it. What are you allowed to say about a name in that output?
+3. Why is \`-active\` outside this lesson? Use the help text, and name one further gate the v5.1.3 code puts on Active.
+4. A certificate plugin returns a hostname you do not recognise on a domain you operate. What is the row, and what will you not do next?
+5. You save the name list from a client's domains and later use it to prospect. Which Australian Privacy Principles does that trip, and why do the sources' terms still matter?
+
+**Answers**
+
+1. In that tag, \`OverrideConfig\` does not set \`Passive\` true when \`-passive\` is passed. It sets \`Passive\` false only when \`-active\` is set. A default \`enum\` still runs the DNS plugin: address queries, NS and MX, the SRV labels from \`NamesByTier(Tier3)\`, and reverse lookups that are not behind Active. That is not the user guide's passive mode. Re-check with \`amass -version\` and \`amass enum -h\`. If they disagree with this answer, they win.
+2. You may say a data source returned the string, and you name the source. You may not say the name resolves, that a mailbox exists, or that the organisation currently operates the host. The point of that mode is that the tool did not check.
+3. The v5.1.3 help text says \`-active\` attempts zone transfers and certificate name grabs. The same tag refuses \`-p\` unless Active is set, and the HTTP probe plugins return without probing when Active is false. The older user guide also puts NSEC walking and web crawling in that mode. A zone transfer against a nameserver you do not operate is not the exercise.
+4. A certificate record contained the name. It can be current, leftover, a wildcard with the star removed, or someone else's name on a shared product. You do not scan it, browse it if it is not your site, or feed it to a brute-force flag to see. If the source label says HackerTarget and you did not configure that source, check the v5.1.3 \`NewCrtsh\` mislabel before you cite a second provider.
+5. APP 3 is the purpose you did not have when the list became a sales file. APP 6 is the new use. APP 8 is the queries that already went to other people's services. APP 10 is a stale or mislabelled name filed as a live asset. APP 11 is the database you now have to secure. A provider's terms can forbid the automated query even when the privacy analysis is tidy. The credit line, if a source asked for one, does not make the new use lawful.
+        `,
+        exercise: 'On a domain you own or administer, run one Amass enum command only. If `amass enum -h` still describes `-passive` as a data-source or purely passive mode, use `amass enum -passive -d` and that domain, and do not add `-active`, `-brute`, `-alts`, `-w`, `-aw`, or `-p`. If `-h` says `-passive` is deprecated, do not run the default enum unless you operate the domain and you accept that this build still queries DNS, including service-name lookups. If you will not accept that traffic, do not run it. If you operate no domain, do not borrow one. Read `amass enum -h` and the user guide, write the command with `example.com` only as a placeholder you do not execute, and answer from that reading. Write five sentences: the version and whether `-h` called `-passive` deprecated, how many names you kept, how many you set aside as stale, wildcard, mislabelled, or not yours, one source that returned nothing or was skipped and what that means, and which active or brute flags you saw and left off. Keep the output file and the Amass database out of git.',
+      }
+    ],
+  },
+
   ...defensiveCyberLessons,
 }
 
