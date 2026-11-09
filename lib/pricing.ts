@@ -1,85 +1,89 @@
 import { siteConfig } from "@/lib/site-config"
 import { SELF_URL } from "@/lib/network"
 
-export type PlanId = "free" | "founding" | "analyst"
+export type PlanId = "free" | "field_pack" | "full_library"
 
 export interface PricingPlan {
   id: PlanId
   name: string
-  priceMonthly: number
-  priceYearly: number
+  price: number
   priceLabel: string
-  period: string
+  billingLabel: string
   description: string
   features: string[]
   cta: string
   href: string
   highlighted: boolean
-  caseFileAccess: "foundations" | "advanced"
+  availability: "InStock" | "PreOrder"
 }
 
-export const PRICING_CURRENCY = "USD"
-export const PRICING_UPDATED = "2026-08-13"
+export const PRICING_CURRENCY = "AUD"
+export const PRICING_UPDATED = "2026-11-09"
+export const PAYMENTS_LIVE = false
+
+export const BILLING_NOTE =
+  "Card billing and checkout are not live. Paid packs are coming soon — join the list. When billing opens, card payments will be charged by TTPN Pty Ltd. Nothing is charged today. Signing in does not purchase or unlock a pack."
+
+const PAID_CTA = "Coming soon / join the list"
 
 export const pricingPlans: PricingPlan[] = [
   {
     id: "free",
     name: "Free",
-    priceMonthly: 0,
-    priceYearly: 0,
-    priceLabel: "$0",
-    period: "forever",
-    description: "Foundations training and a Case File plan grounded in Beginner modules. No credit card.",
+    price: 0,
+    priceLabel: "A$0",
+    billingLabel: "no charge",
+    description:
+      "Available now. Three beginner modules, the education-only Case File Planner, two PDFs, and two briefings.",
     features: [
-      "All Beginner modules",
-      "Case File Planner — foundations",
-      "Intelligence cycle + OPSEC checklist",
-      "Citations to real OSINT 101 lessons",
-      "Community access",
+      "Modules: OSINT Fundamentals; OSINT Methodology & Structured Workflow; Email & Username Intelligence",
+      "Case File Planner (education-only)",
+      "PDFs: Investigation Plan Template; Source Evaluation Template",
+      "Briefings: Sherlock; Reading Email Headers",
     ],
-    cta: "Open a Case File",
-    href: "/case-file",
+    cta: "Start the free modules",
+    href: "/modules/osint-fundamentals",
     highlighted: false,
-    caseFileAccess: "foundations",
+    availability: "InStock",
   },
   {
-    id: "founding",
-    name: "Founding",
-    priceMonthly: siteConfig.pricing.founder.monthly,
-    priceYearly: siteConfig.pricing.founder.yearly,
-    priceLabel: `$${siteConfig.pricing.founder.monthly}`,
-    period: "/month",
-    description: "Lock in founding pricing while billing is finishing. Early subscribers keep the rate.",
+    id: "field_pack",
+    name: "Field Pack",
+    price: 15,
+    priceLabel: "A$15",
+    billingLabel: "one-off",
+    description:
+      "Planned one-off for the intermediate tracks, four worksheets, and three HTML guides. Checkout is not live.",
     features: [
-      "Everything in Free",
-      "Founding rate locked when billing launches",
-      "Priority on new modules",
-      "30-day refund guarantee (when billing is live)",
+      "Modules: Domain and Website Investigations; Company & Organisational Intelligence; Digital Identity Analysis; People Profiling",
+      "Modules: Social Media Investigations; Telegram OSINT; Breach Data Analysis; OSINT Reporting",
+      "PDFs: Username Tracker; Social Media Investigation Sheet; Search Operator Cheatsheet; OSINT Operations Checklist",
+      "Guides: OSINT Investigation Checklist; Advanced Search Operators; People Profiling Workflow",
     ],
-    cta: "Join the founding list",
-    href: "/improvements",
+    cta: PAID_CTA,
+    href: "/pricing#join",
+    highlighted: false,
+    availability: "PreOrder",
+  },
+  {
+    id: "full_library",
+    name: "Full Library",
+    price: 39,
+    priceLabel: "A$39",
+    billingLabel: "one-off",
+    description:
+      "Planned one-off for the Field Pack list plus the rest of the archive on the site today. Checkout is not live.",
+    features: [
+      "Includes the Field Pack modules, PDFs, and guides",
+      "Remaining modules: Kali Linux Mastery; Digital Forensics; Geolocation; GEOINT; Network Recon; Dark Web Research; Cryptocurrency Investigations; Social Media Intelligence",
+      "Remaining briefings: Holehe; Maigret; theHarvester; dnstwist; crt.sh; STIX/TAXII",
+      "Remaining PDFs: OSINT Report Template; Digital Footprint Tracker; Dark Web Monitor Log; Geolocation Analysis Sheet",
+      "Remaining guides: Kali cheatsheet; Tools master list; Legal/ethical guidelines",
+    ],
+    cta: PAID_CTA,
+    href: "/pricing#join",
     highlighted: true,
-    caseFileAccess: "foundations",
-  },
-  {
-    id: "analyst",
-    name: "Analyst",
-    priceMonthly: siteConfig.pricing.premium.monthly,
-    priceYearly: siteConfig.pricing.premium.yearly,
-    priceLabel: `$${siteConfig.pricing.premium.monthly}`,
-    period: "/month",
-    description: "Advanced Case File techniques plus the rest of the archive when billing is live.",
-    features: [
-      "Everything in Founding",
-      "Case File Planner — advanced techniques",
-      "Intermediate and Advanced module methods",
-      "People, SOCMINT, GEOINT, recon, crypto, forensics",
-      "Sign-in unlocks advanced plans on this MVP",
-    ],
-    cta: "See Analyst access",
-    href: "/case-file",
-    highlighted: false,
-    caseFileAccess: "advanced",
+    availability: "PreOrder",
   },
 ]
 
@@ -91,23 +95,23 @@ export function pricingJson() {
     url: `${SELF_URL}/pricing`,
     currency: PRICING_CURRENCY,
     dateModified: PRICING_UPDATED,
-    billingNote:
-      "Card billing is not live yet. Founding members join the waitlist. This MVP soft-gates advanced Case File techniques behind existing sign-in.",
+    paymentsLive: PAYMENTS_LIVE,
+    merchantOfRecord: "TTPN Pty Ltd",
+    billingNote: BILLING_NOTE,
     itemListElement: pricingPlans.map((plan, index) => ({
       "@type": "Offer",
       position: index + 1,
       name: plan.name,
       sku: plan.id,
       url: `${SELF_URL}${plan.href}`,
-      price: plan.priceMonthly,
+      price: plan.price,
       priceCurrency: PRICING_CURRENCY,
-      pricePeriod: plan.id === "free" ? "forever" : "month",
-      priceYearly: plan.priceYearly,
+      priceLabel: plan.priceLabel,
+      billing: plan.billingLabel,
       description: plan.description,
-      category: "Subscription",
-      availability: plan.id === "free" ? "https://schema.org/InStock" : "https://schema.org/PreOrder",
+      category: plan.id === "free" ? "Free" : "OneOff",
+      availability: `https://schema.org/${plan.availability}`,
       includes: plan.features,
-      caseFileAccess: plan.caseFileAccess,
     })),
   }
 }

@@ -4,7 +4,7 @@ import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "Downloads",
-  description: `Free OSINT 101 downloadable templates and resources for open-source intelligence investigations.`,
+  description: `OSINT 101 worksheets. The free offer includes the Investigation Plan Template and the Source Evaluation Template. Other PDFs are listed on the planned Field Pack and Full Library. Files stay downloadable while checkout is closed.`,
 }
 
 const templates = [
@@ -174,7 +174,7 @@ export default function DownloadsPage() {
           <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-2 mb-8">
             <span className="text-lg">📄</span>
             <span className="text-sm font-semibold text-indigo-400 tracking-wide uppercase">
-              Free Resources
+              Worksheets
             </span>
           </div>
 
@@ -185,10 +185,10 @@ export default function DownloadsPage() {
           </h1>
 
           <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Professional-grade, ready-to-use PDF templates for every phase of
-            your OSINT workflow. Each template includes structured fields,
-            reference tables, and best-practice guidance to keep your
-            investigations organized and repeatable.
+            Ready-to-use PDF worksheets. The free offer includes the Investigation
+            Plan Template and the Source Evaluation Template. The other sheets are
+            listed on Field Pack (A$15) and Full Library (A$39). Checkout is not
+            live, so the files stay downloadable and are not behind a sign-in gate.
           </p>
         </div>
       </section>

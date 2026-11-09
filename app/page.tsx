@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { siteConfig } from "@/lib/site-config"
+import { pricingPlans } from "@/lib/pricing"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { EmailCapture } from "@/components/email-capture"
@@ -38,7 +39,7 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-2 mb-8">
               <span className="text-lg">{siteConfig.theme.emoji}</span>
               <span className="text-sm font-semibold text-indigo-300 tracking-wide uppercase">
-                Free OSINT Training &amp; Investigation Tools
+                OSINT training &amp; investigation tools
               </span>
             </div>
 
@@ -94,7 +95,7 @@ export default function HomePage() {
                 Paste a target. Get a case file.
               </h2>
               <p className="text-slate-400 mb-6 max-w-2xl">
-                The archive stays the archive. This layer turns a collection question into a cited investigation plan using the OSINT 101 method — intelligence cycle, OPSEC, and real module links. Foundations are free.
+                The archive stays the archive. This layer turns a collection question into a cited investigation plan using the OSINT 101 method — intelligence cycle, OPSEC, and real module links. The education-only planner is part of the free offer.
               </p>
               <Link
                 href="/case-file"
@@ -191,6 +192,39 @@ export default function HomePage() {
                 Browse Resources
                 <ArrowRight className="h-4 w-4" />
               </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 md:py-20 border-t border-white/5">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-indigo-300 mb-3">
+                AUD · checkout not live
+              </p>
+              <h2 className="text-3xl md:text-4xl font-extrabold font-display text-white">
+                Free, Field Pack, Full Library
+              </h2>
+              <p className="text-slate-400 mt-3 max-w-2xl mx-auto">
+                Free is available now. The two paid packs are planned one-offs. Nothing is charged today.
+              </p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {pricingPlans.map((plan) => (
+                <div key={plan.id} className="rounded-2xl border border-white/10 bg-white/5 p-5">
+                  <p className="text-sm font-semibold text-indigo-300">{plan.name}</p>
+                  <p className="mt-2 text-3xl font-extrabold text-white">
+                    {plan.priceLabel}
+                    <span className="ml-2 text-sm font-semibold text-slate-400">{plan.billingLabel}</span>
+                  </p>
+                  <Link
+                    href={plan.id === "free" ? "/pricing" : "/pricing#join"}
+                    className="mt-4 inline-flex text-sm font-bold text-indigo-300 hover:text-indigo-200"
+                  >
+                    {plan.id === "free" ? "See what’s included" : "Coming soon / join the list"}
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
         </section>
