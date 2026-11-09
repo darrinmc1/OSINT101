@@ -11,13 +11,14 @@ export default function ImprovementsPage() {
               <Construction className="h-12 w-12 text-cyan-600" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold tracking-tight mb-3">We&apos;re Building Something Better</h1>
+          <h1 className="text-3xl font-bold tracking-tight mb-3">Checkout isn&apos;t live yet</h1>
           <p className="text-slate-600 max-w-lg mx-auto mb-8 text-lg">
-            The payment system isn&apos;t live yet — we&apos;re putting the finishing touches on 
-            our subscription platform. When it launches, early adopters lock in the 
-            <strong className="text-cyan-600"> $5/month rate forever</strong>.
+            Card billing is not open. The planned offers are Free (A$0), Field Pack (A$15 one-off), and Full Library (A$39 one-off). Nothing is charged on this page.
           </p>
           <div className="flex items-center justify-center gap-4">
+            <Link href="/pricing#join" className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800">
+              Coming soon / join the list
+            </Link>
             <Link href="/" className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">
               <ArrowLeft className="h-4 w-4" /> Back to Home
             </Link>

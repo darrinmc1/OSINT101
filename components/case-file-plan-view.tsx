@@ -134,9 +134,9 @@ export function CaseFilePlanView({ plan }: { plan: CaseFilePlan }) {
             <div className="flex items-start gap-3 mb-4">
               <Lock className="h-5 w-5 text-violet-300 mt-0.5" />
               <div>
-                <p className="font-bold text-white">Sign in to unlock advanced collection lanes</p>
+                <p className="font-bold text-white">More collection lanes are on the planned packs</p>
                 <p className="text-sm text-slate-400 mt-1">
-                  Intermediate and Advanced module methods (people profiling, SOCMINT, GEOINT, recon, dark web, crypto, forensics) sit behind existing auth on this MVP. Analyst access is listed on the pricing page.
+                  Intermediate and advanced methods are listed on Field Pack and Full Library. Checkout is not live, and signing in does not purchase a pack. The linked module pages stay readable.
                 </p>
               </div>
             </div>
@@ -155,13 +155,13 @@ export function CaseFilePlanView({ plan }: { plan: CaseFilePlan }) {
             </ul>
             <div className="flex flex-wrap gap-3">
               <Link
-                href="/sign-in"
+                href="/pricing#join"
                 className="inline-flex items-center rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600 px-4 py-2 text-sm font-bold text-white"
               >
-                Sign in
+                Coming soon / join the list
               </Link>
               <Link href="/pricing" className="inline-flex items-center rounded-xl border border-white/15 px-4 py-2 text-sm font-semibold text-slate-200">
-                Parseable pricing
+                See the AUD offers
               </Link>
             </div>
           </div>

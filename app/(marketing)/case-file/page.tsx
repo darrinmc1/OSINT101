@@ -15,7 +15,7 @@ import {
 export const metadata: Metadata = {
   title: "Case File Planner",
   description:
-    "Paste a collection target or investigation question. Get a case-file plan using the OSINT 101 method, citing real modules. Foundations free; advanced techniques gated.",
+    "Paste a collection target or investigation question. Get a case-file plan using the OSINT 101 method, citing real modules. The planner is education-only and part of the free offer.",
   alternates: { canonical: "/case-file" },
   openGraph: {
     title: "Case File Planner | OSINT 101",
@@ -35,8 +35,9 @@ const appJsonLd = {
   offers: {
     "@type": "Offer",
     price: "0",
-    priceCurrency: "USD",
-    description: "Foundations (Beginner modules) are free. Advanced techniques require sign-in / Analyst plan.",
+    priceCurrency: "AUD",
+    description:
+      "The Case File Planner is education-only and included in the free offer (A$0). Paid packs are not on sale. Signing in does not purchase a pack.",
   },
   featureList: [
     "Paste a collection target or investigation question",
@@ -61,7 +62,7 @@ export default function CaseFilePage() {
             Case File Planner
           </h1>
           <p className="text-lg text-slate-400 max-w-2xl">
-            Paste a collection target or investigation question. Get a case-file style plan that uses the OSINT 101 method and cites real modules from the archive. Foundations are free. Advanced techniques unlock with sign-in.
+            Paste a collection target or investigation question. Get a case-file style plan that uses the OSINT 101 method and cites real modules from the archive. The planner is education-only and part of the free offer. Checkout is not live.
           </p>
         </div>
       </section>

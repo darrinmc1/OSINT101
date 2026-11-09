@@ -95,10 +95,10 @@ export function WaitlistPopup() {
                     <>
                         <div style={{ marginBottom: "8px", fontSize: "28px" }}>🔍</div>
                         <h2 style={{ color: "#fff", fontSize: "22px", fontWeight: 700, marginBottom: "8px" }}>
-                            Get 50% off OSINT101
+                            Coming soon / join the list
                         </h2>
                         <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "24px", lineHeight: 1.5 }}>
-                            Join the waitlist and lock in founder pricing – 50% off when we launch. Learn to find what's already there.
+                            Checkout is not live. Join the list and we&apos;ll say when Field Pack (A$15) and Full Library (A$39) can be bought. Nothing is charged today.
                         </p>
 
                         <form onSubmit={handleSubmit}>
@@ -141,10 +141,10 @@ export function WaitlistPopup() {
                                     opacity: loading ? 0.7 : 1,
                                 }}
                             >
-                                {loading ? "Joining..." : "Join the Waitlist – Get 50% Off"}
+                                {loading ? "Joining..." : "Coming soon / join the list"}
                             </button>
                             <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "12px", textAlign: "center" }}>
-                                Founder pricing locked in for early subscribers. No spam, unsubscribe anytime.
+                                No payment on this form. No spam, unsubscribe anytime.
                             </p>
                         </form>
                     </>
@@ -155,7 +155,7 @@ export function WaitlistPopup() {
                             On the list. Case opened.
                         </p>
                         <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "20px" }}>
-                            We'll email your 50% discount code the day we launch.
+                            We&apos;ll email you when checkout opens. Nothing is charged today.
                         </p>
                         <button
                             onClick={handleClose}

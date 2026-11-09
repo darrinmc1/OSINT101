@@ -1,81 +1,101 @@
+import type { Metadata } from "next"
 import Link from "next/link"
-import { Check, Shield, FileSearch, BookOpen } from "lucide-react"
+import { Check, Shield } from "lucide-react"
+import { EmailCapture } from "@/components/email-capture"
+import { BILLING_NOTE, pricingPlans } from "@/lib/pricing"
 
-const availableNow = [
-  "Core OSINT learning modules",
-  "Case File Planner with limited free use",
-  "Resource library, blog and practical guides",
-  "XP and badge progression",
-  "No paid checkout required",
-]
-
-const inDevelopment = [
-  "Expanded Case File Planner access",
-  "Additional advanced modules and exercises",
-  "More downloadable investigation helpers",
-  "Certificates and expanded progression features",
-  "Paid access only after billing is live and tested",
-]
+export const metadata: Metadata = {
+  title: "Pricing",
+  description:
+    "Free A$0, Field Pack A$15 one-off, and Full Library A$39 one-off. Checkout is not live. Paid packs are coming soon — join the list.",
+  alternates: { canonical: "/pricing" },
+}
 
 export default function PricingPage() {
   return (
     <main className="min-h-screen bg-[#0a0f1e] text-white">
-      <div className="mx-auto max-w-5xl px-4 py-20">
+      <div className="mx-auto max-w-6xl px-4 py-20">
         <div className="mx-auto max-w-3xl text-center">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1.5 text-sm font-semibold text-indigo-300">
-            <Shield className="h-4 w-4" /> Early access
+            <Shield className="h-4 w-4" /> AUD · checkout not live
           </div>
-          <h1 className="text-4xl font-extrabold md:text-5xl">Learn OSINT free while we finish the paid layer.</h1>
+          <h1 className="text-4xl font-extrabold md:text-5xl">Free, Field Pack, or the Full Library.</h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg text-slate-400">
-            Checkout is not live yet, so OSINT101 is not publishing a paid price or a “most popular” plan. Use the working training and tools now, then join early access if you want to know when expanded access is ready.
+            Three offers, in Australian dollars. Free is available now. Field Pack (A$15) and Full Library (A$39) are planned one-offs. Paid buttons stay on the list until billing opens.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-8 md:grid-cols-2">
-          <section className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-7">
-            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-300">
-              <BookOpen className="h-5 w-5" />
-            </div>
-            <p className="text-xs font-bold uppercase tracking-widest text-emerald-300">Available now</p>
-            <h2 className="mt-2 text-2xl font-bold">Training and practical tools</h2>
-            <ul className="mt-6 space-y-3">
-              {availableNow.map((item) => (
-                <li key={item} className="flex items-start gap-2 text-sm text-slate-300">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /> {item}
-                </li>
-              ))}
-            </ul>
-            <Link href="/modules" className="mt-8 inline-flex w-full items-center justify-center rounded-xl bg-emerald-500 px-5 py-3 font-bold text-slate-950 hover:bg-emerald-400">
-              Browse modules
-            </Link>
-          </section>
-
-          <section className="rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-7">
-            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-300">
-              <FileSearch className="h-5 w-5" />
-            </div>
-            <p className="text-xs font-bold uppercase tracking-widest text-indigo-300">In development</p>
-            <h2 className="mt-2 text-2xl font-bold">Expanded investigation workspace</h2>
-            <ul className="mt-6 space-y-3">
-              {inDevelopment.map((item) => (
-                <li key={item} className="flex items-start gap-2 text-sm text-slate-300">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-indigo-400" /> {item}
-                </li>
-              ))}
-            </ul>
-            <Link href="/sign-up" className="mt-8 inline-flex w-full items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 font-bold text-white hover:bg-white/10">
-              Join early access
-            </Link>
-          </section>
+        <div className="mt-14 grid gap-6 lg:grid-cols-3">
+          {pricingPlans.map((plan) => {
+            const paid = plan.id !== "free"
+            return (
+              <section
+                key={plan.id}
+                className={`flex flex-col rounded-2xl border p-7 ${
+                  plan.highlighted
+                    ? "border-indigo-400/40 bg-indigo-500/10"
+                    : "border-white/10 bg-white/5"
+                }`}
+              >
+                <p className="text-xs font-bold uppercase tracking-widest text-indigo-300">
+                  {paid ? "Coming soon" : "Available now"}
+                </p>
+                <h2 className="mt-2 text-2xl font-bold">{plan.name}</h2>
+                <p className="mt-4 text-4xl font-extrabold tracking-tight">
+                  {plan.priceLabel}
+                  <span className="ml-2 text-base font-semibold text-slate-400">{plan.billingLabel}</span>
+                </p>
+                <p className="mt-4 text-sm leading-relaxed text-slate-400">{plan.description}</p>
+                <ul className="mt-6 space-y-3">
+                  {plan.features.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm text-slate-300">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                {paid ? (
+                  <a
+                    href="#join"
+                    className="mt-8 inline-flex w-full items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-center font-bold text-white hover:bg-white/10"
+                  >
+                    {plan.cta}
+                  </a>
+                ) : (
+                  <Link
+                    href={plan.href}
+                    className="mt-8 inline-flex w-full items-center justify-center rounded-xl bg-emerald-500 px-5 py-3 text-center font-bold text-slate-950 hover:bg-emerald-400"
+                  >
+                    {plan.cta}
+                  </Link>
+                )}
+              </section>
+            )
+          })}
         </div>
 
-        <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-white/10 bg-white/5 p-6 text-center">
-          <h2 className="text-xl font-bold">Want to see the moat first?</h2>
-          <p className="mt-2 text-sm text-slate-400">Try the Case File Planner and build a structured investigation plan instead of only reading another OSINT article.</p>
-          <Link href="/case-file" className="mt-5 inline-flex rounded-xl bg-indigo-500 px-5 py-3 font-bold text-white hover:bg-indigo-400">
-            Open Case File Planner
-          </Link>
-        </div>
+        <section id="join" className="mx-auto mt-14 max-w-3xl rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8">
+          <h2 className="text-2xl font-bold">Coming soon / join the list</h2>
+          <p className="mt-3 text-sm leading-relaxed text-slate-400">{BILLING_NOTE}</p>
+          <p className="mt-3 text-sm text-slate-500">
+            Lessons, worksheets, and the Case File Planner stay readable while checkout is closed. Signing in does not purchase a pack.
+          </p>
+          <div className="mt-6">
+            <EmailCapture
+              source="pricing-waitlist"
+              heading="Join the list"
+              subheading="We'll tell you when Field Pack and Full Library can be bought. No payment is taken here."
+              buttonLabel="Coming soon / join the list"
+            />
+          </div>
+          <p className="mt-6 text-center text-sm text-slate-400">
+            Want the free planner first?{" "}
+            <Link href="/case-file" className="font-semibold text-indigo-300 hover:text-indigo-200">
+              Open the Case File Planner
+            </Link>
+            .
+          </p>
+        </section>
       </div>
     </main>
   )

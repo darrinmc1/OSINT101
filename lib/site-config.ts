@@ -40,18 +40,14 @@ export interface SiteConfig {
     emailCaptureSubheading: string
     feedbackPlaceholder: string
   }
-  pricing: {
-    founder: { monthly: number; yearly: number }
-    standard: { monthly: number; yearly: number }
-    premium: { monthly: number; yearly: number }
-  }
   contact: { email: string; github: string }
 }
 
 export const siteConfig: SiteConfig = {
   name: "OSINT 101",
   tagline: "Open-Source Intelligence, Explained",
-  description: "OSINT 101 - Open-Source Intelligence, Explained. Free training with gamified badges and progression.",
+  description:
+    "OSINT 101 — open-source intelligence, explained. Free is three beginner modules, the Case File Planner, two PDFs, and two briefings. Field Pack (A$15) and Full Library (A$39) are planned one-offs. Checkout is not live.",
   domain: "osint101.com",
 
   theme: {
@@ -103,14 +99,9 @@ export const siteConfig: SiteConfig = {
     ctaButton: "Open the Case File",
     ctaSecondary: "Browse Lessons",
     emailCaptureHeading: "Get the Case Files",
-    emailCaptureSubheading: "New lessons, occasional tradecraft notes. Founding members read the dossier first.",
+    emailCaptureSubheading:
+      "New lessons and occasional tradecraft notes. Checkout is not live — join the list. Nothing is charged today.",
     feedbackPlaceholder: "What did you find? Be specific - vague reports get filed under 'cold case'.",
-  },
-
-  pricing: {
-    founder: { monthly: 5, yearly: 48 },
-    standard: { monthly: 9, yearly: 90 },
-    premium: { monthly: 19, yearly: 180 },
   },
 
   contact: {
