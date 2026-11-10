@@ -4,6 +4,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { sendAdminNotification } from "@/lib/email";
+import { notifyFeedbackWebhook } from "@/lib/feedback-webhook";
 
 const SITE_KEY = process.env.SITE_KEY ?? "osint101";
 const VALID_CATEGORIES = ["Bug", "Suggestion", "Content Request", "Other"];
@@ -81,7 +82,11 @@ export async function POST(req: NextRequest) {
         status: "new",
       });
     if (error) console.error("[feedback] supabase error", error);
-    else dbWrote = true;
+    else {
+      dbWrote = true;
+      // Instant n8n kick. Failures stay inside the helper and do not change this response.
+      await notifyFeedbackWebhook();
+    }
   }
 
   // 2. Notify admin
