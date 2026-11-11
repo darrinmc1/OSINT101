@@ -3,34 +3,6 @@
 import { useEffect, useState } from "react"
 import { humorBank, humorTheme, type HumorItem } from "@/lib/humor"
 
-const STORAGE_KEY = "humor-enabled"
-const TOGGLE_EVENT = "humor:toggle"
-
-export function humorEnabled(): boolean {
-  if (typeof window === "undefined") return true
-  const v = window.localStorage.getItem(STORAGE_KEY)
-  return v === null ? true : v === "true"
-}
-
-export function setHumorEnabled(enabled: boolean) {
-  window.localStorage.setItem(STORAGE_KEY, String(enabled))
-  window.dispatchEvent(new CustomEvent(TOGGLE_EVENT, { detail: enabled }))
-}
-
-// Reads the shared toggle state. Rendering nothing until mounted avoids
-// hydration mismatches — the default (ON) renders the same markup server
-// and client side for the first paint.
-export function useHumorEnabled(): boolean | null {
-  const [enabled, setEnabled] = useState<boolean | null>(null)
-  useEffect(() => {
-    setEnabled(humorEnabled())
-    const handler = (e: Event) => setEnabled((e as CustomEvent<boolean>).detail)
-    window.addEventListener(TOGGLE_EVENT, handler)
-    return () => window.removeEventListener(TOGGLE_EVENT, handler)
-  }, [])
-  return enabled
-}
-
 function pickForTag(tag: string, seen: string[]): HumorItem | undefined {
   const pool = humorBank[tag] ?? humorBank.general ?? []
   const fresh = pool.filter((_, i) => !seen.includes(`${tag}:${i}`))
@@ -48,25 +20,22 @@ function rememberPicked(id: string) {
 }
 
 export default function HumorBreak({ tag = "general" }: { tag?: string }) {
-  const enabled = useHumorEnabled()
   const [item, setItem] = useState<HumorItem | null>(null)
   const [pickedId, setPickedId] = useState<string | null>(null)
 
-  // Pick an item lazily once we're mounted (client only).
+  // Pick after mount so the random joke does not mismatch server markup.
+  // Jokes always render — there is no humour on/off setting.
   useEffect(() => {
-    if (enabled === null || enabled === false) return
     const pool = humorBank[tag] ?? humorBank.general ?? []
     if (pool.length === 0) return
-    // Prefer an item the visitor hasn't already seen on this browser.
     const seen = readPicked()
     let picked = pickForTag(tag, seen)
     if (!picked) picked = pool[Math.floor(Math.random() * pool.length)]
     setPickedId(`${tag}:${pool.indexOf(picked)}`)
     setItem(picked)
     rememberPicked(`${tag}:${pool.indexOf(picked)}`)
-  }, [enabled, tag])
+  }, [tag])
 
-  if (enabled === null || enabled === false) return null
   if (!item) return null
 
   const shuffle = () => {
