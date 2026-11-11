@@ -15,7 +15,6 @@ export interface HumorTheme {
   eyebrowColor: string
   label?: string
   punchColor: string
-  buttonBg: string
   footerNote?: string
   shuffleLabel?: string
 }
@@ -31,7 +30,6 @@ export const humorTheme: HumorTheme = {
   eyebrowColor: "text-cyan-700",
   label: "Deep dive break",
   punchColor: "text-cyan-800",
-  buttonBg: "bg-cyan-600",
   footerNote: "Even investigators close the laptop sometimes",
   shuffleLabel: "Another one",
 }
