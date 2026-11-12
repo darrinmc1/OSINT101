@@ -14,6 +14,8 @@ import { Footer } from "@/components/footer"
 import { EmailCapture } from "@/components/email-capture"
 import { listPublicModules } from "@/data/modules"
 import { ModuleCardGrid } from "@/components/module-cards"
+import { CollapsibleModuleGrid } from "@/components/collapsible-module-grid"
+import { StartHerePath } from "@/components/start-here-path"
 import WhatsNew from "@/components/whats-new"
 import { WeeklyLesson } from "@/components/weekly-lesson"
 import {
@@ -74,6 +76,7 @@ export default function HomePage() {
         </section>
       <WhatsNew />
       <WeeklyLesson />
+      <StartHerePath />
 
         <section className="py-16 md:py-20 border-t border-white/5">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -113,12 +116,13 @@ export default function HomePage() {
                 Learning Modules
               </h2>
               <p className="text-slate-400 mt-3 max-w-lg mx-auto">
-                Nineteen longer tracks, then the short briefings. Each one
-                states the question, the method, and where to stop.
+                Nineteen longer tracks in all, including the 5 in Start Here
+                above. Each one states the question, the method, and where to
+                stop.
               </p>
             </div>
 
-            <ModuleCardGrid modules={tracks} />
+            <CollapsibleModuleGrid modules={tracks} initialCount={6} />
           </div>
         </section>
 

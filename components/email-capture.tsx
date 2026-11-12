@@ -245,7 +245,7 @@ export function EmailCapture({
                     Cross-referencing...
                   </span>
                 ) : (
-                  siteConfig.copy.ctaButton
+                  "Join the List"
                 )}
               </button>
             </div>

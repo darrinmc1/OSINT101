@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { lessonSpotlight } from "@/data/lesson-schedule"
+import { NotifyNextLesson } from "@/components/notify-next-lesson"
 
 export function WeeklyLesson() {
   const { latestTitle, latestHref, nextTitle, nextBlurb } = lessonSpotlight
@@ -34,7 +35,8 @@ export function WeeklyLesson() {
                 Next up
               </p>
               <p className="text-white font-semibold mb-2 leading-snug">{nextTitle}</p>
-              <p className="text-sm text-slate-400 leading-relaxed">{nextBlurb}</p>
+              <p className="text-sm text-slate-400 leading-relaxed mb-4">{nextBlurb}</p>
+              <NotifyNextLesson lessonTitle={nextTitle} />
             </div>
           </div>
         </div>
