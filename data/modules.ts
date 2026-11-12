@@ -2249,7 +2249,7 @@ Write a short profiling summary that includes findings, confidence, caveats, and
   'social-media-investigations': {
     id: 'social-media-investigations',
     title: 'Social Media Investigations',
-    description: 'Platform structure, usernames, images, and what a posting pattern can and cannot prove.',
+    description: 'Platform structure, usernames, images, and what a posting pattern can and cannot prove. The intermediate track — start here, then Social Media Intelligence goes deeper on reading behavior and intent.',
     level: 'Intermediate',
     estimatedTime: '5-7 hours',
     sections: [
@@ -2551,7 +2551,7 @@ Your exercise: analyze a public figure’s last 30 posts for behavioral patterns
   'social-media': {
     id: 'social-media',
     title: 'Social Media Intelligence',
-    description: 'Uncover insights from social platforms. Learn to read between the posts and tweets.',
+    description: 'Reading behavior, timing and intent across platforms without turning a hunch into a finding. The advanced track — built on Social Media Investigations, not a repeat of it.',
     level: 'Advanced',
     estimatedTime: '6-8 hours',
     sections: [
@@ -3075,7 +3075,7 @@ Close by doing the exercise: set up a Telethon script that connects with *your* 
   'geospatial-intelligence': {
     id: 'geospatial-intelligence',
     title: 'Geospatial Intelligence (GEOINT)',
-    description: 'Learn to analyze geographic data for investigations. Connect locations to patterns and patterns to people.',
+    description: 'Testing location claims against public maps, satellite imagery and geotags. The broader GEOINT track — Geolocation and Imagery OSINT goes narrower, on photos specifically.',
     level: 'Intermediate',
     estimatedTime: '5-6 hours',
     sections: [
@@ -3310,7 +3310,7 @@ Your exercise: create a simple map showing five locations related to a public fi
   'geolocation-osint': {
     id: 'geolocation-osint',
     title: 'Geolocation and Imagery OSINT',
-    description: 'Master the techniques of determining locations from photos, videos, and descriptive information. From EXIF data to visual clues, learn to pinpoint locations with precision.',
+    description: 'Reading a photo for place — landscape, infrastructure, language and light — and writing a location hypothesis with a confidence note, not a pin you’re sure of. The narrower companion to Geospatial Intelligence.',
     level: 'Advanced',
     estimatedTime: '3-4 hours',
     sections: [
@@ -7979,6 +7979,15 @@ const FLAGSHIP_MODULE_IDS = [
 function isQuickBriefing(mod: Pick<LearningModule, "estimatedTime">) {
   return /^\d+\s*min$/i.test(mod.estimatedTime.trim())
 }
+
+/** The 5 real Beginner-level tracks, in the order a new visitor should take them. */
+export const START_HERE_MODULE_IDS = [
+  "osint-fundamentals",
+  "osint-methodology",
+  "email-osint",
+  "domain-investigations",
+  "business-osint",
+] as const
 
 export function listPublicModules() {
   const visible = Object.values(learningModules).filter(
