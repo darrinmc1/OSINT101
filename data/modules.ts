@@ -7900,6 +7900,162 @@ Holehe, if you use it in this course at all, stays \`holehe -NP\` and stays on a
     ],
   },
 
+  "subfinder-passive-enum": {
+    id: "subfinder-passive-enum",
+    title: "subfinder: Collect Published Subdomains for a Domain You Operate",
+    description: "A passive subfinder pass on a domain you operate: which sources need keys, what a published name is not, and how a later dnsx lookup stays polite and in scope.",
+    level: "Intermediate",
+    estimatedTime: "40 min",
+    sections: [
+      {
+        title: "What subfinder does",
+        duration: "10 min",
+        content: `
+### Names a passive source has already published
+
+The job is a list of subdomains that passive sources already associate with a domain you operate. Each name stays attached to the dataset that returned it. You stop when the note can say which binary ran, which flags stayed off, and which names you are willing to repeat. A longer list is not the finish line.
+
+ProjectDiscovery subfinder is the tool. The README at tag v2.17.0, published 8 October 2026, calls it a subdomain discovery tool that returns valid subdomains for websites using passive online sources, and says it is built for passive subdomain enumeration. The same README's feature list also advertises resolution and wildcard-elimination modules. Both sentences are in the file on purpose. This lesson is the passive half. Resolution is a second question, asked later, and only of names that sit on a domain you operate.
+
+"Valid", in that README sentence, is the tool's word. With the active flag off, a name in the output is a string a source returned. It is not proof the name resolves, that a website answers, or that you are allowed to treat the host as yours. The v2.17.0 help text is where the second half of the tool shows itself. \`-nW\` and \`-active\` are documented there as "display active subdomains only." \`-t\` is "number of concurrent goroutines for resolving (-active only)" with a default of 10. \`-oI\` and \`-ip\` are "include host IP in output (-active only)." Those flags are how a passive binary starts talking to DNS. This lesson leaves them off, so the published list and any later lookup stay in separate notes.
+
+The licence file at that tag is MIT, copyright 2021 ProjectDiscovery, Inc. Running the binary for this exercise is ordinary use of the tool. A modified copy you ship later has to keep the copyright and permission notice. The README also points at DISCLAIMER.md. That file, at the same tag, says the tool is for research or internal work, and that a commercial use has to agree to the terms of the services it leverages. The disclaimer names Bufferover, CommonCrawl, certspotter, crt.name, dnsdumpster, Google Transparency, Alienvault, and Subdomain Center. That is a list of parties whose terms the project told you to read. It is not the full source catalogue, and it is not a finding about your domain.
+
+The running page on the ProjectDiscovery docs, read for this lesson, shows a banner along the lines of "Use with caution. You are responsible for your actions" and "By using subfinder, you also agree to the terms of the APIs used." The sample on that page was labelled v2.4.9 and was aimed at a real company's domain. The banner is the part worth keeping. The domain in the sample is not. Do not copy a target out of upstream documentation. If your banner reads differently, quote the one your binary printed.
+
+Flags move. The v2.17.0 README prints a help block and then tells you to run \`subfinder -h\`. Where this lesson and your help text disagree, \`-h\` wins, and so does \`subfinder -version\`. A cheatsheet that cannot name its build is a souvenir. The release notes for v2.17.0 added the passive sources crtname and subdomaincenter, added \`-match-regex\` and \`-filter-regex\`, and fixed a bug that dropped names reported with uppercase letters or a trailing dot. An older binary can therefore omit a real string for a boring parsing reason. Write the version down before you brief the gap.
+
+\`@latest\` moves as well. The README's install line is \`go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest\`, and it says that line wants Go 1.26. The install page, read the same day, says the tool wants the latest Go and does not pin 1.26. If those two pages still disagree when you install, the page in front of you wins. The release this lesson checked is v2.17.0. If the module has moved past that tag, your \`-version\` output is the number in the note.
+
+> The useful line is a name, the source that published it, and the version that printed it. Volume is how a passive exercise starts sounding like a map of the company.
+        `,
+      },
+      {
+        title: "Walkthrough",
+        duration: "12 min",
+        content: `
+### Your domain, the help text, then one passive command
+
+Use a domain you own or administer. A personal domain, a club site you run, a name you registered for a lab. The commands below keep \`example.com\` because that is the placeholder in the v2.17.0 README's regex example, and because \`example.com\` is a reserved documentation name. It is syntax. Replace it before you press enter. A company you do not work for is not a stand-in. Upstream pages that demonstrate the tool against a bug-bounty program's domain are documenting a flag, not handing you that program's scope. If you operate no domain, do not borrow one. Install the tool, read \`-h\`, and write the exercise from that reading.
+
+One sentence before install: "I am collecting names passive sources already have for a domain I operate, and I am leaving active resolution off."
+
+The install page and the v2.17.0 README agree on three lanes: the \`go install\` line above, \`brew install subfinder\` (the install page says macOS or Linux), and \`docker pull projectdiscovery/subfinder:latest\`. Release binaries are on the GitHub releases page for the tag you intend to run. The install page also shows a clone that \`cd\`s into \`subfinder/v2/cmd/subfinder\`. The v2.17.0 tree has \`cmd\` at the repository root, and the module path in \`go install\` is still \`.../subfinder/v2/cmd/subfinder\`. If the clone instructions and the tree disagree, the tree wins. \`subfinder -version\` after a build is the check. A distro package often lags the release. The version it prints is the one you have, not the one a blog assumed.
+
+Whatever you installed:
+
+\`\`\`bash
+subfinder -version
+subfinder -h
+subfinder -ls
+\`\`\`
+
+Read \`-h\` for six things. Is \`-d\` still the domain flag? Do \`-oJ\` or \`-json\`, \`-cs\`, and \`-o\` still mean JSONL, "include sources", and an output file? Is \`-active\` / \`-nW\` still "display active subdomains only," with the resolving threads limited to that mode? Does \`-all\` still mean every source, and does the help text still call it slow? Is \`-dL\` a file of many domains? Do \`-rl\` and \`-rls\` still describe HTTP rate limits toward the passive sources? The v2.17.0 help text says yes to each of those. Your binary may have renamed one. Spellings drift.
+
+The install page says subfinder runs without keys, and then lists services that need a key before they will work: BeVigil, BinaryEdge, BufferOver, C99, Censys, CertSpotter, Chaos, Chinaz, DNSDB, Fofa, FullHunt, GitHub, Intelx, PassiveTotal, Profundis, quake, Robtex, SecurityTrails, Shodan, ThreatBook, VirusTotal, WhoisXML API, ZoomEye API, dnsrepo, Hunter, Facebook, and BuiltWith. That sentence was true of the page this lesson read. \`subfinder -ls\` is the catalogue in the binary you actually have. The same page says the first run creates \`$HOME/.config/subfinder/provider-config.yaml\`. The v2.17.0 help text instead prints the default as \`$CONFIG/subfinder/provider-config.yaml\`, overridable with \`-pc\` or with \`SUBFINDER_PROVIDER_CONFIG\`. If those paths differ, the file that exists on your disk is the one that matters. Leave it empty for this exercise. The sample YAML on the install page is full of key-shaped strings. They are not yours. A key you did not mint is a key you do not paste, including when a documentation example is sitting there looking official. Do not commit the file.
+
+On a build whose \`-h\` still matches the flags named above, the passive run is one domain, JSONL, sources included, and no resolution flag:
+
+\`\`\`bash
+subfinder -d example.com -json -cs -o subfinder.jsonl
+\`\`\`
+
+If your help text spells the JSON switch \`-oJ\` and does not accept \`-json\`, use the spelling it prints. The v2.17.0 block lists both on one line. Do not add \`-active\`, \`-nW\`, \`-all\`, \`-dL\`, \`-recursive\`, \`-ip\`, \`-oI\`, \`-r\`, or \`-rL\`. \`-all\` is the help text's "use all sources" switch, and that help text calls it slow. \`-dL\` is how a spreadsheet of other people's domains becomes the input. \`-recursive\` restricts you to sources that will walk names below the apex. Leave it off until you want that narrower question. A resolver list does not make the collection more passive. \`-rl\` and \`-rls\`, if you set them, are you deciding how hard to press the passive sources. The v2.17.0 help shows the \`-rls\` shape with a sample such as \`hackertarget=10/s\`. That sample is a format. It is not a provider's published allowance. This exercise does not need the flag. \`-timeout\` defaults to 30 seconds and \`-max-time\` to 10 minutes in that same help block. A run that stops on the clock is a partial list. Write "stopped by the time limit." Do not raise the clock to lean on a source that already declined.
+
+\`-match-regex\` and \`-filter-regex\` are in the v2.17.0 README, and the release notes name them as new in that version. They drop lines before you have read them. Leave them off for the first file. If you add one later, copy the pattern into the note and say which names it removed.
+
+Open the JSONL and write the keys that are actually in it. This lesson will not tell you the field names. They move. With \`-cs\` on, the help text says sources are included. If a line has no source, the source column of your table says "not recorded," which is a fact about the output, not a fact about the domain.
+
+Build a four-column table: name, source if you have it, what kind of source you believe that is (certificate log, archive, passive DNS, something else), and the claim you are willing to write. "This source returned the string" is a claim. "This host is up" is a different claim, and you have not earned it yet.
+
+Then edit a second file, \`names-in-scope.txt\`, containing only names that are the domain you operate or a subdomain of it. A passive source can hand you a partner, a documentation sample, a content-delivery hostname, or a typo. Those strings do not become in-scope because they arrived in the same file. If the in-scope file is longer than you are willing to write about, cut it to a short sample before any lookup. A few dozen names is a lesson. A few thousand is a conversation with someone else's resolver that you have not justified.
+
+dnsx is optional, and it is a different tool. ProjectDiscovery describes it as a DNS toolkit. The README on the repository's main branch, read for this lesson, says the default query is an A record, and the notes say the default resolvers are Google, Cloudflare, and Quad9. The help block in that README gives \`-t\` a default of 100 threads and \`-rl\` a default of \`-1\`, described as rate limiting disabled. The GitHub release checked the same day was v1.3.1, 31 August 2026. \`dnsx -version\` and \`dnsx -h\` outrank this paragraph. The same README says DNS resolution and DNS brute force cannot be used together, and it demonstrates wordlists, zone transfer (\`-axfr\`), a \`-recon\` mode that includes a zone transfer, and PTR walks of other people's address space. Those demonstrations are not this exercise.
+
+If you operate the domain, you have already dropped out-of-scope names, and \`dnsx -h\` still has \`-l\`, \`-o\`, \`-t\`, and \`-rl\` with the meanings above, the lookup this lesson allows is an A query with the rate cap written down:
+
+\`\`\`bash
+dnsx -l names-in-scope.txt -o dnsx-a.txt -t 5 -rl 5
+\`\`\`
+
+Five threads and five queries a second are this lesson's cap, chosen so you can explain the traffic. They are not a number the dnsx README recommends. The README's own default is the hundred threads with the limiter off, which is too eager for a class exercise. Do not add \`-w\`, \`-d\`, \`-axfr\`, \`-recon\`, \`-ptr\`, or a second record type. Do not pipe \`subfinder\` into \`dnsx\`, and do not pipe either into an HTTP prober. The subfinder running page shows a pipe into httpx aimed at a real company's domain. An HTTP probe checks whether a server answers. That is a further technique, and it is outside this lesson. Look at the name file first. A pipe is how the filter gets skipped while you are still reading the banner.
+
+Open a name in a browser only when it sits on the domain you operate and you already know the site. You are checking your own list against your own site. You do not submit a form, a login, or a password reset, including on a hostname that looks like mail. A name is not an invitation.
+
+Both output files, and the provider config, stay out of git.
+
+> Substitute your domain, run the one passive command your help text allows, and stop. A dnsx line is a second decision, with a rate you can say out loud. Adding \`-active\` is how the two questions get mashed into one file.
+        `,
+      },
+      {
+        title: "Limits and false positives",
+        duration: "8 min",
+        content: `
+### Stale strings, quiet sources, and addresses that are not a machine of your own
+
+A certificate name outlives the host. Certificate logs, archives, and passive DNS are why subfinder can answer without talking to your nameserver. They are also why the answer can be years late. A name from a log can be a host you retired, a staging label, a wildcard, a platform customer who shared a certificate product with you, or a string that merely occurred near your domain in a crawl. The row is a lead with a source. Comparing it with DNS you are willing to do, on a domain you operate, is the optional second step above. Adding a wordlist to "settle" the unknown names is the brute-force path the dnsx README documents with \`-d\` and \`-w\`, and it is the path this lesson refuses.
+
+Empty is a result. A source with no key, a source that times out, and a source that has nothing on file all look like silence from the outside. The install page's key list is the reason a lot of that silence is uninteresting. CertSpotter, SecurityTrails, Chaos, VirusTotal, Shodan, and the rest of that list were marked as needing a key when the page was read. An empty provider file means those sources were not really asked. Write "no key, not asked" or "asked and returned nothing," and do not let the two sentences become one. \`-all\` does not conjure a dataset you have not subscribed to. It asks more endpoints. A timeout at the \`-timeout\` in your help text is a property of that request. It is not evidence the domain has no names. Do not re-run the same query through a different proxy all afternoon to squeeze a richer list out of a provider that already declined. That is an argument with someone else's acceptable-use policy.
+
+\`-active\` changes the question and then hides the work. The v2.17.0 help text says it displays active subdomains only, and that the resolver threads exist for that mode. Names that do not answer disappear. Stale names you would have wanted to see as stale are gone, and so are names that are real and currently unresolvable. What remains feels cleaner. Cleaner is not truer. Keep the passive file. If you also have a dnsx file, the difference between them is the finding: published, and separately, answered an A query or did not.
+
+An A answer is still a small fact. The resolver returned an address. Shared hosting and content-delivery networks put many unrelated names on one address. An address in \`dnsx-a.txt\` is not "their box," and this lesson does not scan it. A miss from the resolvers the README names (Google, Cloudflare, Quad9, unless you passed \`-r\`) is silence from those resolvers. Another resolver, or a record type you did not query, can disagree. The README says an A query is the default. You did not ask for MX, TXT, or a zone transfer. Do not brief an A miss as "this organisation has no mail."
+
+Wildcard DNS manufactures the other kind of false confidence. Many names resolving to the same address can be a wildcard. dnsx documents \`-auto-wildcard\` and a manual \`-wd\` filter. They were in the README this lesson read, and v1.3.0's notes describe \`-auto-wildcard\` as detecting wildcard roots. Confirm the spelling with \`dnsx -h\`. A filter is a guess about which addresses look synthetic. A name it removes can still be a host you operate. Write "wildcard filter removed it." Do not write "it does not exist."
+
+The string itself can be dirty even when the organisation is right. v2.17.0's notes say older builds dropped uppercase names and names with a trailing dot. If you are on a build from before that fix, a short list can be a parser. Quote \`-version\` before you quote the absence. A regex you passed to \`-filter-regex\` is a second parser, and it is one you introduced. Take it out of the command before you describe the list as what the sources returned.
+
+Old write-ups still show \`subfinder -d\` against a domain the author does not administer, often piped straight into an HTTP prober, often with \`-all\`. The official running page still demonstrates that shape. Documentation is not permission. If your \`-h\` has dropped a flag this page names, or grown one, follow \`-h\`.
+
+> The dangerous result is the confident one. Empty, stale, and shared are allowed to stay boring.
+        `,
+      },
+      {
+        title: "Ethics and legal limits",
+        duration: "6 min",
+        content: `
+### If the notes name a person, the Privacy Act has sat down
+
+A hostname is often just infrastructure. It becomes personal information under the Privacy Act 1988 (Cth) when the notes tie it to an identifiable person, including when the tie is wrong. A certificate name like a staff member's name, a source that returned an email-shaped string, or a label such as \`health\` or \`payroll\` on a domain you can connect to a human, are the usual ways a name list turns into a record about someone. Collecting that, for anything that counts as a business, brings in the Australian Privacy Principles.
+
+APP 3 is the purpose test. On a domain you operate, for a lesson about reading a passive source and keeping resolution separate, the collection is the lesson and it ends when the table is done. On a client domain, "subfinder was installed" is not the purpose. Write the question the engagement asked. APP 6 is the week after. A name list gathered to check your own zone is not a prospecting file, and a training JSONL is not a contact list for a different matter. APP 8 is the cross-border rule, and it is easy to miss because the binary felt local. The passive queries went to whatever sources your build asked. The v2.17.0 disclaimer names several of them, and the install page names the keyed ones. If you ran dnsx, the names in the in-scope file were sent to the resolvers you used. The README's default, when this lesson was checked, was Google, Cloudflare, and Quad9. Say that in the method note. APP 10 is accuracy. A stale certificate name filed as a live server, a silent keyed source filed as "no such host," and an A record on a content-delivery address filed as "their machine" are three ways to put a wrong fact where someone will act on it. APP 11 is storage. The JSONL, the dnsx output, and the provider-config file are the holdings. Keep them off git, off a world-readable share, and out of a ticket system half the company can search. If you later put a real key in the provider file, the install page says a service can have more than one. That is not a reason to leave the file readable by everyone else on the machine. Keep it to your user.
+
+The sources have terms on top of the Act. The disclaimer is explicit that using the tool means agreeing to the terms of the services it calls, and that a commercial offering has to be able to say so. Certificate sources, AlienVault, and Common Crawl, which the disclaimer and the help text name among others, do not share one acceptable-use policy. A modest run, one domain you operate, no key you pasted from a gist or from the sample YAML, is the training case. A \`-dL\` file of every domain in a spreadsheet is a product, and someone has to read those terms before it runs on Monday. A provider key is a contract with that provider. It is not a warrant, and a bug-bounty page is not a blanket authorisation to resolve, brute, or probe the names you found. The README's own marketing line about speed and stealth for penetration testers and bug-bounty hunters is the project's description of who else uses the binary. It is not your scope.
+
+Scope is a written list: domains you own, or domains a written permission covers. A useful permission names the domain, the techniques, the time window, how the data is handled, and which third parties are out of bounds. Passive collection is still collection. \`-active\`, a dnsx brute-force wordlist, \`-axfr\`, and an HTTP probe are further decisions. They are documented in the tools. They are outside this lesson on purpose. Turning them on because a tutorial's first pipeline looked short is how a name-list exercise becomes unauthorised-access territory. The Criminal Code (Cth) Part 10.7 and the Queensland Criminal Code s 408E are the provisions a lawyer will open before this is client work that touches systems. This course does not give that advice. It gives you a command line with those flags absent. A polite A lookup of names already in your zone, at a rate you can explain, is the only DNS this page allows, and only after you have decided the traffic is acceptable.
+
+Publishing is a separate act. A notebook about your own domain is coursework. A post that attaches real people's names, addresses, or contact records to a hostname, to embarrass them or to show the method, can be a serious invasion of privacy under the statutory tort in force in Australia since 2025. The Criminal Code (Cth) offences about releasing personal data over a carriage service in a menacing or harassing way do not contain a research exemption. The exercise stays in the exercise.
+
+If you do this for a fee in Queensland, the Security Providers Act 1993 still applies. A passive flag is a poor theory of why a licence would be optional. Sensitive information is unlikely to fall out of a hostname list, and then someone infers it from a label. APP 3.3 is unimpressed by inferences you were not asked to make. Leave them out.
+
+Holehe, if you use it in this course at all, stays \`holehe -NP\` and stays on an address you own. A hostname subfinder printed does not relax that, and it does not authorise a password reset "to see if the mailbox exists." You do not type an address into a reset form on a domain you do not administer. You do not do it on your own domain either, not for this exercise. Existence of a mail name is not the question you wrote down.
+
+> Authorisation names the domain and the technique. A passive list you can explain is the technique this lesson allows. A rate-capped A lookup of the in-scope names is the only optional second technique.
+        `,
+      },
+      {
+        title: "Quiz",
+        duration: "4 min",
+        content: `
+1. Your \`subfinder -h\` still describes \`-active\` as displaying active subdomains only. What may you say about a name from a run that did not pass \`-active\`, and what does adding the flag change?
+2. The provider file is empty, and a source the install page listed as needing a key returns nothing. What are you allowed to conclude about the domain?
+3. Why does this lesson refuse to pipe subfinder straight into dnsx, and why is \`dnsx -t 5 -rl 5\` not the same claim as the README's default?
+4. One published name does not resolve. Another resolves to an address shared by a content-delivery network. What is each row, and what will you not do next?
+5. You save the JSONL from a client's domains, paste a key out of the documentation sample into \`provider-config.yaml\`, and later email the hostnames as a prospecting list. Which Australian Privacy Principles does the new use trip, and what is wrong with the key?
+
+**Answers**
+
+1. You may say a passive source returned the string, and you name the source if the output recorded one. You may not say the name resolves or that a site answers. On the v2.17.0 help text, \`-active\` turns on resolution and then keeps only names that answer, using the \`-t\` threads that the same text limits to that mode. The passive file and the "active" file are different questions. Re-check with \`subfinder -version\` and \`subfinder -h\`. If they disagree with this answer, they win.
+2. You may say that source was not in a position to answer, because the install page said it needs a key and you did not provide one. You may not say the domain has no such name. A timeout and a genuine empty dataset are two other silences. Write which one you actually saw. \`-all\` does not fill in a missing key.
+3. A pipe resolves every string the passive run printed, including names outside the domain you operate, and it skips the table. The dnsx README read for this lesson defaults to 100 threads and a disabled rate limit (\`-rl -1\`). Five and five are this lesson's cap so the A queries stay explainable. They are not upstream's recommendation. \`-w\`, \`-axfr\`, \`-recon\`, and \`-ptr\` stay off because they are different techniques, including a zone transfer and a walk of other people's addresses.
+4. The first row is a published string that did not receive an A answer from the resolvers you asked. It can be stale, unresolvable today, or a filter artefact. The second row is an A answer on a shared address, which does not identify a machine of yours and does not show that an HTTP service is up. You do not scan either name, brute-force a wordlist at them, submit a password reset, or brief the address as the organisation's own hardware.
+5. APP 3 is the purpose you did not have when the list became a sales file. APP 6 is the new use. APP 8 is the queries that already went to passive sources and, if you resolved, to the resolvers. APP 10 is a stale or shared name filed as a live asset. APP 11 is the JSONL and the provider file you now have to secure. The sample key is not your credential. Pasting it uses someone else's access, or a string the docs invented, and either way it is not a key the provider issued to you. A credit line, if a source asked for one, does not make the new use lawful.
+        `,
+        exercise: "On a domain you own or administer, run one passive subfinder command only. If `subfinder -h` still has `-d`, a JSON flag, `-cs`, and `-o`, use those, pass the domain you operate, and do not add `-active`, `-nW`, `-all`, `-dL`, `-recursive`, or an IP flag. Read the JSONL and keep a second file of names that are actually under that domain. If you then run dnsx, run it only on that second file, only if `dnsx -h` still shows `-l`, `-t`, and `-rl`, and only at a rate you can explain (this lesson uses `-t 5 -rl 5` when those flags still mean threads and queries per second). Do not add `-w`, `-axfr`, `-recon`, `-ptr`, or a pipe into an HTTP prober. If you operate no domain, do not borrow one. Read `subfinder -h` and `dnsx -h`, write both commands with `example.com` only as a placeholder you do not execute, and answer from that reading. Write five sentences: the subfinder version and whether `-h` still calls `-active` a resolve-and-display switch, how many names you kept and how many you set aside as out of scope, stale, or wildcard, one source that returned nothing or was skipped because it needs a key, whether you ran the dnsx step and at what rate, and which active, brute, and zone-transfer flags you saw and left off. Keep the output files and the provider config out of git.",
+      }
+    ],
+  },
+
   ...defensiveCyberLessons,
 }
 
