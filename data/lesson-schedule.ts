@@ -13,10 +13,10 @@ export type LessonSpotlight = {
 
 /** Manual spotlight — bump when merging a new Consensus/backlog lesson. */
 export const lessonSpotlight: LessonSpotlight = {
-  latestModuleId: "amass-passive-enum",
-  latestTitle: "Amass: Collect Published Names for a Domain You Operate, and Leave Active Mode Off",
-  latestHref: "/modules/amass-passive-enum",
-  nextTitle: "subfinder (not written yet)",
+  latestModuleId: "subfinder-passive-enum",
+  latestTitle: "subfinder: Collect Published Subdomains for a Domain You Operate",
+  latestHref: "/modules/subfinder-passive-enum",
+  nextTitle: "ExifTool (not written yet)",
   nextBlurb:
-    "ProjectDiscovery passive subdomain discovery is next in the writing queue. Chaining those names into dnsx stays a separate decision. There is no subfinder lesson on this site yet.",
+    "Reading metadata on files you already have is next in the writing queue. Geolocation ethics, and whether you strip a tag or keep it, stay in that lesson. There is no ExifTool lesson on this site yet.",
 }
