@@ -105,8 +105,8 @@ export const siteConfig: SiteConfig = {
   },
 
   contact: {
-    email: "darrinmc1@yahoo.com",
-    github: "darrinmc1",
+    email: "hello@osint101.com",
+    github: "https://github.com/darrinmc1",
   },
 } as const;
 

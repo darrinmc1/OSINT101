@@ -33,7 +33,7 @@ export const CASE_FILE_FAQS = [
   {
     question: "What is free vs advanced?",
     answer:
-      "Free (A$0) includes OSINT Fundamentals, OSINT Methodology & Structured Workflow, Email & Username Intelligence, this education-only Case File Planner, the Investigation Plan Template, the Source Evaluation Template, and the Sherlock and Reading Email Headers briefings. Field Pack (A$15) and Full Library (A$39) are planned one-offs. Checkout is not live, and signing in does not purchase or unlock a pack.",
+      "Free (A$0) includes OSINT Fundamentals, OSINT Methodology & Structured Workflow, Email & Username Intelligence, this education-only Case File Planner, the Investigation Plan Template, the Source Evaluation Template, and the Sherlock and Reading Email Headers briefings. Those need a free account. Field Pack (A$15) and Full Library (A$39) are planned one-offs. Checkout is not live, and a free account does not purchase or unlock a pack.",
   },
   {
     question: "Does it need an AI key?",

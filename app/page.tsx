@@ -218,10 +218,10 @@ export default function HomePage() {
                     <span className="ml-2 text-sm font-semibold text-slate-400">{plan.billingLabel}</span>
                   </p>
                   <Link
-                    href={plan.id === "free" ? "/pricing" : "/pricing#join"}
+                    href={plan.id === "free" ? "/sign-up" : "/pricing#join"}
                     className="mt-4 inline-flex text-sm font-bold text-indigo-300 hover:text-indigo-200"
                   >
-                    {plan.id === "free" ? "See what’s included" : "Coming soon / join the list"}
+                    {plan.id === "free" ? "Create a free account" : "Coming soon"}
                   </Link>
                 </div>
               ))}

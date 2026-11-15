@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 import { CaseFilePlanner } from "@/components/case-file-planner"
+import { AccountGate } from "@/components/account-gate"
+import { decideAccess, getViewer, recordUsage } from "@/lib/viewer"
 import { JsonLd } from "@/components/json-ld"
 import { CASE_FILE_FAQS } from "@/data/case-file"
 import { pricingFaqJsonLd } from "@/lib/pricing"
@@ -47,7 +49,15 @@ const appJsonLd = {
   ],
 }
 
-export default function CaseFilePage() {
+export const dynamic = "force-dynamic"
+
+export default async function CaseFilePage() {
+  const viewer = await getViewer()
+  const decision = decideAccess(viewer, "free")
+  if (decision.status === "allowed") {
+    await recordUsage(viewer, "case_file_view", "case-file", "/case-file")
+  }
+
   return (
     <div className="bg-slate-950 text-slate-50">
       <JsonLd data={appJsonLd} />
@@ -68,7 +78,11 @@ export default function CaseFilePage() {
       </section>
 
       <section className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
-        <CaseFilePlanner />
+        {decision.status === "allowed" ? (
+          <CaseFilePlanner />
+        ) : (
+          <AccountGate decision={decision} title="Case File Planner" required="free" />
+        )}
       </section>
 
       <section className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pb-20">

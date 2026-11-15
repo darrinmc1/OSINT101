@@ -75,25 +75,24 @@ export default function PricingPage() {
         </div>
 
         <section id="join" className="mx-auto mt-14 max-w-3xl rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8">
-          <h2 className="text-2xl font-bold">Coming soon / join the list</h2>
+          <h2 className="text-2xl font-bold">Coming soon</h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-400">{BILLING_NOTE}</p>
           <p className="mt-3 text-sm text-slate-500">
-            Lessons, worksheets, and the Case File Planner stay readable while checkout is closed. Signing in does not purchase a pack.
+            The free modules, Case File, two PDFs, and two briefings need a free account. Field Pack and Full Library stay on Coming soon. A free account does not purchase a pack.
           </p>
           <div className="mt-6">
             <EmailCapture
               source="pricing-waitlist"
               heading="Join the list"
               subheading="We'll tell you when Field Pack and Full Library can be bought. No payment is taken here."
-              buttonLabel="Coming soon / join the list"
+              buttonLabel="Coming soon"
             />
           </div>
           <p className="mt-6 text-center text-sm text-slate-400">
-            Want the free planner first?{" "}
-            <Link href="/case-file" className="font-semibold text-indigo-300 hover:text-indigo-200">
-              Open the Case File Planner
+            <Link href="/sign-up" className="font-semibold text-emerald-300 hover:text-emerald-200">
+              Create a free account
             </Link>
-            .
+            {" "}to open the free offer. Paid packs have no checkout.
           </p>
         </section>
       </div>

@@ -115,7 +115,7 @@ const ResourcesPage = () => {
       <div className="relative overflow-hidden border-b border-intel-green/20 py-20">
         <div className="scanline"></div>
         <div className="container relative z-10 mx-auto px-4 text-center">
-          <div className="mb-4 animate-pulse font-mono text-sm text-intel-green">// ACCESSING_SECURE_REPOSITORY //</div>
+          <div className="mb-4 animate-pulse font-mono text-sm text-intel-green">{"// ACCESSING_SECURE_REPOSITORY //"}</div>
           <h1 className="mb-6 font-mono text-5xl font-bold tracking-tighter text-white">
             INTEL <span className="glow-green text-intel-green">ASSET LIBRARY</span>
           </h1>

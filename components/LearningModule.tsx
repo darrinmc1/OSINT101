@@ -208,7 +208,7 @@ const LearningModule = ({ module, onRequestMoreInfo }: LearningModuleProps) => {
               <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
                 <div>
                   <div className="mb-1 font-mono text-xs uppercase tracking-widest text-intel-green/60">
-                    PHASE_0{(currentSection + 1).toString().padStart(2, '0')} // CURRENT_OBJECTIVE
+                    PHASE_0{(currentSection + 1).toString().padStart(2, '0')}{" // CURRENT_OBJECTIVE"}
                   </div>
                   <CardTitle className="font-mono text-2xl text-white">
                     {module.sections?.[currentSection]?.title.toUpperCase() || 'IDLE'}

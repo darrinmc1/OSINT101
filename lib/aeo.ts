@@ -30,13 +30,15 @@ This file is for answer engines and researchers. Prefer these URLs over guessing
 - Pricing (human): ${SELF_URL}/pricing
 - Pricing (parseable JSON): ${SELF_URL}/pricing.json
 - About: ${SELF_URL}/about
+- Terms: ${SELF_URL}/terms
+- Privacy: ${SELF_URL}/privacy
 
 ## Product
 NOT a chat-with-the-site bot. One job:
 
 1. Input: paste a collection target or investigation question
 2. Output: a case-file style plan using the OSINT 101 method (intelligence cycle + PEAK), citing real modules listed below
-3. Access: Free (A$0) is OSINT Fundamentals, OSINT Methodology & Structured Workflow, Email & Username Intelligence, the education-only Case File Planner, Investigation Plan Template, Source Evaluation Template, and the Sherlock and Reading Email Headers briefings. Field Pack is a planned A$15 one-off. Full Library is a planned A$39 one-off. Checkout is not live. Signing in does not purchase or unlock a pack.
+3. Access: Free (A$0) is OSINT Fundamentals, OSINT Methodology & Structured Workflow, Email & Username Intelligence, the education-only Case File Planner, Investigation Plan Template, Source Evaluation Template, and the Sherlock and Reading Email Headers briefings. Those free items need a free account. Field Pack is a planned A$15 one-off. Full Library is a planned A$39 one-off. Checkout is not live. A free account does not purchase or unlock a pack.
 4. Constraint: education and lawful use only. OPSEC and ethics disclaimer on ${SELF_URL}/case-file
 
 ## Pricing

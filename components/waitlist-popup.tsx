@@ -1,6 +1,7 @@
 ﻿"use client"
 
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 import { HoneypotField } from "@/components/HoneypotField"
 
 const POPUP_STORAGE_KEY = "osint101-waitlist-seen"
@@ -13,8 +14,11 @@ export function WaitlistPopup() {
     const [honeypot, setHoneypot] = useState("")
     const [submitted, setSubmitted] = useState(false)
     const [loading, setLoading] = useState(false)
+    const pathname = usePathname()
 
     useEffect(() => {
+        const quiet = ["/sign-in", "/sign-up", "/pricing", "/terms", "/privacy", "/modules", "/briefings", "/case-file", "/downloads", "/resources", "/admin"]
+        if (quiet.some((path) => pathname === path || pathname.startsWith(`${path}/`))) return
         const lastSeen = localStorage.getItem(POPUP_STORAGE_KEY)
         if (lastSeen) {
             const daysSince = (Date.now() - parseInt(lastSeen, 10)) / (1000 * 60 * 60 * 24)
@@ -22,7 +26,7 @@ export function WaitlistPopup() {
         }
         const timer = setTimeout(() => setIsOpen(true), SHOW_AFTER_MS)
         return () => clearTimeout(timer)
-    }, [])
+    }, [pathname])
 
     const markSeen = () => localStorage.setItem(POPUP_STORAGE_KEY, Date.now().toString())
     const handleClose = () => { setIsOpen(false); markSeen() }
@@ -95,7 +99,7 @@ export function WaitlistPopup() {
                     <>
                         <div style={{ marginBottom: "8px", fontSize: "28px" }}>🔍</div>
                         <h2 style={{ color: "#fff", fontSize: "22px", fontWeight: 700, marginBottom: "8px" }}>
-                            Coming soon / join the list
+                            Coming soon
                         </h2>
                         <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "24px", lineHeight: 1.5 }}>
                             Checkout is not live. Join the list and we&apos;ll say when Field Pack (A$15) and Full Library (A$39) can be bought. Nothing is charged today.
@@ -141,7 +145,7 @@ export function WaitlistPopup() {
                                     opacity: loading ? 0.7 : 1,
                                 }}
                             >
-                                {loading ? "Joining..." : "Coming soon / join the list"}
+                                {loading ? "Joining..." : "Coming soon"}
                             </button>
                             <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "12px", textAlign: "center" }}>
                                 No payment on this form. No spam, unsubscribe anytime.

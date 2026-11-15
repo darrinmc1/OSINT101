@@ -158,7 +158,7 @@ export function CaseFilePlanView({ plan }: { plan: CaseFilePlan }) {
                 href="/pricing#join"
                 className="inline-flex items-center rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600 px-4 py-2 text-sm font-bold text-white"
               >
-                Coming soon / join the list
+                Coming soon
               </Link>
               <Link href="/pricing" className="inline-flex items-center rounded-xl border border-white/15 px-4 py-2 text-sm font-semibold text-slate-200">
                 See the AUD offers

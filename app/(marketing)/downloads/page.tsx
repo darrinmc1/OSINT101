@@ -1,10 +1,18 @@
-import { siteConfig } from "@/lib/site-config"
 import type { Metadata } from "next"
 import Link from "next/link"
+import { pdfById } from "@/lib/offer"
+import { decideAccess, getViewer, type Viewer } from "@/lib/viewer"
+
+function downloadAction(viewer: Viewer, id: string): { href: string; label: string } {
+  const decision = decideAccess(viewer, pdfById(id)?.tier ?? "full_library")
+  if (decision.status === "allowed") return { href: `/api/downloads/${id}`, label: "Download PDF" }
+  if (decision.status === "sign_in") return { href: "/sign-up", label: "Create a free account" }
+  return { href: "/pricing#join", label: "Coming soon" }
+}
 
 export const metadata: Metadata = {
   title: "Downloads",
-  description: `OSINT 101 worksheets. The free offer includes the Investigation Plan Template and the Source Evaluation Template. Other PDFs are listed on the planned Field Pack and Full Library. Files stay downloadable while checkout is closed.`,
+  description: `OSINT 101 worksheets. The free offer includes the Investigation Plan Template and the Source Evaluation Template, behind a free account. Other PDFs are Field Pack or Full Library and are not for sale yet.`,
 }
 
 const templates = [
@@ -165,7 +173,10 @@ const templates = [
   },
 ]
 
-export default function DownloadsPage() {
+export const dynamic = "force-dynamic"
+
+export default async function DownloadsPage() {
+  const viewer = await getViewer()
   return (
     <div className="relative">
       {/* Hero Section */}
@@ -186,9 +197,9 @@ export default function DownloadsPage() {
 
           <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
             Ready-to-use PDF worksheets. The free offer includes the Investigation
-            Plan Template and the Source Evaluation Template. The other sheets are
-            listed on Field Pack (A$15) and Full Library (A$39). Checkout is not
-            live, so the files stay downloadable and are not behind a sign-in gate.
+            Plan Template and the Source Evaluation Template, after you create a
+            free account. The other sheets are Field Pack (A$15) and Full Library
+            (A$39). Checkout is not live, so those buttons say Coming soon.
           </p>
         </div>
       </section>
@@ -197,7 +208,9 @@ export default function DownloadsPage() {
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {templates.map((tpl) => (
+            {templates.map((tpl) => {
+              const action = downloadAction(viewer, tpl.id)
+              return (
               <div
                 key={tpl.id}
                 className="glass-card p-6 flex flex-col h-full"
@@ -236,10 +249,9 @@ export default function DownloadsPage() {
                     ))}
                   </ul>
 
-                  {/* Download Button */}
+                  {/* Access button. Paid files are not linked to a checkout. */}
                   <Link
-                    href={`/downloads/${tpl.id}.pdf`}
-                    download
+                    href={action.href}
                     className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 shadow-lg shadow-indigo-500/20 hover:shadow-violet-500/30 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
                   >
                     <svg
@@ -255,11 +267,12 @@ export default function DownloadsPage() {
                         d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                       />
                     </svg>
-                    Download PDF
+                    {action.label}
                   </Link>
                 </div>
               </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>

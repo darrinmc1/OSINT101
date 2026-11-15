@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowRight, BookOpen, Clock, Star } from "lucide-react"
 import { learningModules } from "@/data/modules"
+import { moduleTier, tierLabel } from "@/lib/offer"
 
 const levelAccent: Record<string, string> = {
   Beginner: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
@@ -18,7 +19,7 @@ export default function ModulesIndexPage() {
           Learning Modules
         </h1>
         <p className="text-slate-400 mt-1">
-          Structured training tracks from Rookie to Spymaster. Lessons stay readable while checkout is closed.
+          Free lessons need a free account. Field Pack and Full Library stay closed until checkout opens.
         </p>
       </div>
 
@@ -26,15 +27,15 @@ export default function ModulesIndexPage() {
         <div className="flex-1">
           <p className="text-sm font-bold text-white">Free A$0 is three beginner modules</p>
           <p className="text-xs text-slate-400 mt-1">
-            OSINT Fundamentals, OSINT Methodology &amp; Structured Workflow, and Email &amp; Username Intelligence, plus the Case File Planner, two PDFs, and two briefings. Field Pack is a planned A$15 one-off. Full Library is a planned A$39 one-off. Signing in does not purchase a pack.
+            OSINT Fundamentals, OSINT Methodology &amp; Structured Workflow, and Email &amp; Username Intelligence, plus the Case File Planner, two PDFs, and two briefings. Create a free account to open those. Field Pack is a planned A$15 one-off. Full Library is a planned A$39 one-off. A free account does not purchase a pack.
           </p>
         </div>
         <Link
-          href="/pricing#join"
-          className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 transition-all"
+          href="/sign-up"
+          className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm text-slate-950 bg-emerald-500 hover:bg-emerald-400 transition-all"
         >
           <Star className="h-4 w-4" />
-          Coming soon / join the list
+          Create a free account
         </Link>
       </div>
 
@@ -54,7 +55,7 @@ export default function ModulesIndexPage() {
                   levelAccent[mod.level] ?? levelAccent.Beginner
                 }`}
               >
-                {mod.level}
+                {tierLabel(moduleTier(mod.id))}
               </span>
             </div>
             <h3 className="text-lg font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors">

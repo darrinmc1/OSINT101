@@ -16,6 +16,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/community`, priority: 0.6, changeFrequency: 'monthly' as const },
     { url: `${BASE_URL}/contribute`, priority: 0.5, changeFrequency: 'monthly' as const },
     { url: `${BASE_URL}/contact`, priority: 0.5, changeFrequency: 'monthly' as const },
+    { url: `${BASE_URL}/terms`, priority: 0.4, changeFrequency: 'yearly' as const },
+    { url: `${BASE_URL}/privacy`, priority: 0.4, changeFrequency: 'yearly' as const },
+    { url: `${BASE_URL}/briefings`, priority: 0.6, changeFrequency: 'monthly' as const },
+    { url: `${BASE_URL}/sign-up`, priority: 0.7, changeFrequency: 'monthly' as const },
     { url: `${BASE_URL}/requests`, priority: 0.5, changeFrequency: 'monthly' as const },
   ]
 

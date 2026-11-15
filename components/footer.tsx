@@ -50,7 +50,7 @@ export function Footer() {
                   href={`mailto:${siteConfig.contact.email}`}
                   className="text-sm text-slate-400 hover:text-cyan-400 transition-colors"
                 >
-                  Email Us
+                  {siteConfig.contact.email}
                 </a>
               </li>
               <li>

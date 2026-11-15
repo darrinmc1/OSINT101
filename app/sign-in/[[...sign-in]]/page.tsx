@@ -7,12 +7,12 @@ export default function SignInPage() {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-950 px-4">
         <div className="w-full max-w-sm text-center space-y-4">
-          <h1 className="text-xl font-semibold text-white">Sign-in unavailable</h1>
+          <h1 className="text-xl font-semibold text-white">Sign in</h1>
           <p className="text-sm text-slate-400">
-            Authentication is not configured in this environment.
+            Sign-in uses Clerk. Set NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY to turn the form on. A free account does not purchase a pack.
           </p>
-          <Link href="/case-file" className="inline-block text-sm text-cyan-400 hover:text-cyan-300">
-            Continue to Case File Planner
+          <Link href="/sign-up" className="inline-block text-sm text-cyan-400 hover:text-cyan-300">
+            Create a free account
           </Link>
         </div>
       </div>

@@ -87,7 +87,7 @@ export default function DashboardPage() {
             className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 transition-all"
           >
             <Star className="h-4 w-4" />
-            Coming soon / join the list
+            Coming soon
           </Link>
         </div>
       )}
@@ -211,7 +211,7 @@ export default function DashboardPage() {
             <span className="text-3xl">📦</span>
             <div>
               <p className="text-sm font-bold text-white group-hover:text-violet-300 transition-colors">Field Pack &amp; Full Library</p>
-              <p className="text-xs text-violet-400 mt-0.5">Coming soon / join the list</p>
+              <p className="text-xs text-violet-400 mt-0.5">Coming soon</p>
             </div>
           </Link>
         </div>

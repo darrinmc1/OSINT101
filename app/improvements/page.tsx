@@ -17,7 +17,7 @@ export default function ImprovementsPage() {
           </p>
           <div className="flex items-center justify-center gap-4">
             <Link href="/pricing#join" className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800">
-              Coming soon / join the list
+              Coming soon
             </Link>
             <Link href="/" className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">
               <ArrowLeft className="h-4 w-4" /> Back to Home

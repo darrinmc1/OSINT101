@@ -22,9 +22,9 @@ export const PRICING_UPDATED = "2026-11-09"
 export const PAYMENTS_LIVE = false
 
 export const BILLING_NOTE =
-  "Card billing and checkout are not live. Paid packs are coming soon — join the list. When billing opens, card payments will be charged by TTPN Pty Ltd. Nothing is charged today. Signing in does not purchase or unlock a pack."
+  "Card billing and checkout are not live. Paid buttons say Coming soon. A free account is required for the three beginner modules, the Case File Planner, the two free PDFs, and the two free briefings. A free account does not purchase Field Pack or Full Library. When billing opens, card payments will be charged by TTPN Pty Ltd. Nothing is charged today."
 
-const PAID_CTA = "Coming soon / join the list"
+const PAID_CTA = "Coming soon"
 
 export const pricingPlans: PricingPlan[] = [
   {
@@ -41,8 +41,8 @@ export const pricingPlans: PricingPlan[] = [
       "PDFs: Investigation Plan Template; Source Evaluation Template",
       "Briefings: Sherlock; Reading Email Headers",
     ],
-    cta: "Start the free modules",
-    href: "/modules/osint-fundamentals",
+    cta: "Create a free account",
+    href: "/sign-up",
     highlighted: false,
     availability: "InStock",
   },

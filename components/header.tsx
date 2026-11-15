@@ -79,11 +79,11 @@ export function Header() {
                 Log In
               </Link>
               <Link
-                href="/case-file"
+                href="/sign-up"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-3 text-sm font-bold text-white text-center rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600"
+                className="block px-4 py-3 text-sm font-bold text-slate-950 text-center rounded-xl bg-emerald-500"
               >
-                {siteConfig.copy.ctaButton}
+                Create a free account
               </Link>
             </div>
           </div>
