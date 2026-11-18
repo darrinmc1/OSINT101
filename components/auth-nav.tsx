@@ -5,6 +5,7 @@ import Link from "next/link"
 import { siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
 import { hasClerkPublishableKey } from "@/lib/clerk"
+import { FREE_ACCOUNT_CTA, FREE_ACCOUNT_HREF } from "@/lib/pricing"
 
 function GuestCta() {
   return (
@@ -45,6 +46,9 @@ function ClerkAuthNav() {
               Log In
             </button>
           </SignInButton>
+          <Link href={FREE_ACCOUNT_HREF} className="text-sm font-bold text-indigo-300 hover:text-white">
+            {FREE_ACCOUNT_CTA}
+          </Link>
           <GuestCta />
         </>
       )}
@@ -56,6 +60,9 @@ export default function AuthNav() {
   if (!hasClerkPublishableKey()) {
     return (
       <div className="flex items-center gap-3">
+        <Link href={FREE_ACCOUNT_HREF} className="text-sm font-bold text-indigo-300 hover:text-white">
+          {FREE_ACCOUNT_CTA}
+        </Link>
         <GuestCta />
       </div>
     )

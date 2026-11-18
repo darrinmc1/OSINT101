@@ -40,12 +40,7 @@ export interface SiteConfig {
     emailCaptureSubheading: string
     feedbackPlaceholder: string
   }
-  pricing: {
-    founder: { monthly: number; yearly: number }
-    standard: { monthly: number; yearly: number }
-    premium: { monthly: number; yearly: number }
-  }
-  contact: { github: string }
+  contact: { email: string; github: string }
 }
 
 export const siteConfig: SiteConfig = {
@@ -85,6 +80,7 @@ export const siteConfig: SiteConfig = {
     marketing: [
       { label: "Case File", href: "/case-file" },
       { label: "Lessons", href: "/modules" },
+      { label: "Pricing", href: "/pricing" },
       { label: "About", href: "/about" },
     ],
     dashboard: [
@@ -106,13 +102,8 @@ export const siteConfig: SiteConfig = {
     feedbackPlaceholder: "What did you find? Be specific - vague reports get filed under 'cold case'.",
   },
 
-  pricing: {
-    founder: { monthly: 5, yearly: 48 },
-    standard: { monthly: 9, yearly: 90 },
-    premium: { monthly: 19, yearly: 180 },
-  },
-
   contact: {
+    email: "info@osint101.com",
     github: "https://github.com/darrinmc1",
   },
 } as const;

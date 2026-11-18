@@ -82,6 +82,13 @@ export function Header() {
                 Log In
               </Link>
               <Link
+                href="/sign-up"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block w-full px-4 py-3 text-sm font-bold text-indigo-300 hover:text-white text-center rounded-lg hover:bg-white/5"
+              >
+                Create a free account
+              </Link>
+              <Link
                 href="/case-file"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block px-4 py-3 text-sm font-bold text-white text-center rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600"

@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server"
-import { siteConfig } from "@/lib/site-config"
+import { pricingJson } from "@/lib/pricing"
 
 export function GET() {
-  return NextResponse.json({
-    name: siteConfig.name,
-    note: "All content is free while we finish setting up.",
-  })
+  return NextResponse.json(pricingJson())
 }

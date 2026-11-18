@@ -15,10 +15,11 @@ type ContentPageProps = {
   backTo?: string
   backLabel?: string
   cta?: { to: string; label: string }
+  notice?: ReactNode
   children?: ReactNode
 }
 
-const ContentPage = ({ title, eyebrow, description, body, backTo = '/', backLabel = 'Return to base', cta, children }: ContentPageProps) => {
+const ContentPage = ({ title, eyebrow, description, body, backTo = '/', backLabel = 'Return to base', cta, notice, children }: ContentPageProps) => {
   return (
     <div className="mx-auto max-w-5xl p-6 animate-in fade-in duration-700">
       <div className="mb-6">
@@ -39,6 +40,7 @@ const ContentPage = ({ title, eyebrow, description, body, backTo = '/', backLabe
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-8 p-8">
+          {notice}
           <MarkdownContent content={body} />
           {children}
 
