@@ -424,7 +424,7 @@ The normal plan is A$9/month, including GST. The intro price applies to the firs
 
 ### Refunds
 
-If you are charged, you can ask TTPN Pty Ltd for a refund within 3 days of the charge. Email info@osint101.com. You can cancel a subscription anytime. That refund sentence is pending legal review. The longer version is on the refunds page.
+If you are charged, you can ask TTPN Pty Ltd for a refund within 3 days of the charge. Email info@osint101.com. You can cancel a subscription anytime. The longer version is on the refunds page.
 
 ### Governing law
 

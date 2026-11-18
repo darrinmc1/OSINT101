@@ -113,7 +113,7 @@ export default function PricingPage() {
             <Link href="/refunds" className="text-slate-300 underline underline-offset-4">
               the refunds page
             </Link>
-            , and that wording is pending legal review. No checkout, no payment link.
+            . No checkout, no payment link.
           </p>
         </div>
       </main>

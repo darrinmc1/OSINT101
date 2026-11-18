@@ -2,14 +2,13 @@ import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import ContentPage from "@/components/ContentPage"
-import { PendingLegalReview } from "@/components/legal-notice"
 import { pageMeta } from "@/lib/page-meta"
 import { INTRO_RENEWAL_LINE, REFUND_SUMMARY, priceMap } from "@/lib/pricing"
 import { siteConfig } from "@/lib/site-config"
 
 export const metadata: Metadata = pageMeta({
   title: "Refunds",
-  description: `Refunds for ${priceMap.seller}. A ${priceMap.refundDays}-day refund request, cancel anytime. Pending legal review.`,
+  description: `Refunds for ${priceMap.seller}. A ${priceMap.refundDays}-day refund request, cancel anytime.`,
   path: "/refunds",
 })
 
@@ -36,14 +35,9 @@ export default function RefundsPage() {
       <main className="min-h-screen bg-slate-950 pt-16">
         <ContentPage
           title="Refunds"
-          eyebrow="Pending legal review"
+          eyebrow="Three days"
           description="Three days, then it is a conversation. Cancel a subscription whenever you like."
           body={body}
-          notice={
-            <PendingLegalReview>
-              <p>{REFUND_SUMMARY}</p>
-            </PendingLegalReview>
-          }
         />
       </main>
       <Footer />
