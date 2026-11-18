@@ -13,6 +13,7 @@ const templates = [
   {
     id: "investigation-plan-template",
     title: "Investigation Plan Template",
+    free: true,
     description:
       "Structured investigation scoping document covering objective, scope, sources, tools, time budget, stop conditions, legal boundaries, and confidence targets.",
     size: "5.4 KB",
@@ -176,7 +177,7 @@ export default function DownloadsPage() {
           <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-2 mb-8">
             <span className="text-lg">📄</span>
             <span className="text-sm font-semibold text-indigo-400 tracking-wide uppercase">
-              Free Resources
+              Worksheets
             </span>
           </div>
 
@@ -187,9 +188,10 @@ export default function DownloadsPage() {
           </h1>
 
           <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Blank PDF worksheets for the plan, the source note, and the
-            report, plus a few specialist sheets. They do not contain a
-            sample investigation. You fill them in.
+            The Investigation Plan is free. The other sheets are the A$9
+            download pack. Nothing on this page takes a card, so the files
+            still download. You fill them in. They do not contain a sample
+            investigation.
           </p>
         </div>
       </section>
@@ -210,6 +212,11 @@ export default function DownloadsPage() {
                     <div>
                       <h3 className="font-bold text-white text-lg leading-tight mb-1">
                         {tpl.title}
+                        {"free" in tpl && tpl.free ? (
+                          <span className="ml-2 rounded-full border border-emerald-400/40 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-200">
+                            Free
+                          </span>
+                        ) : null}
                       </h3>
                       <span className="text-xs text-slate-500 bg-white/5 px-2 py-0.5 rounded-full">
                         PDF &middot; {tpl.size}

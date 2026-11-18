@@ -26,7 +26,7 @@ NOT a chat-with-the-site bot. One job:
 
 1. Input: paste a collection target or investigation question
 2. Output: a case-file style plan using the OSINT 101 method (intelligence cycle + PEAK), citing real modules listed below
-3. Access: the lessons and the Case File Planner are open. All content is free while we finish setting up.
+3. Access: Case File Planner, OSINT Fundamentals, and the Investigation Plan Template are free. The normal plan is A$9/month inc GST. The first month is A$5 after a free account with an email, then it renews at A$9/month. Cancel anytime. There is no checkout on the site.
 4. Constraint: education and lawful use only. OPSEC and ethics disclaimer on ${SELF_URL}/case-file
 
 ## Modules (cite these, do not invent)
@@ -36,6 +36,6 @@ ${modules}
 ${faqs}
 
 ## Contact
-Use the form at ${SELF_URL}/contact. Do not invent an email address for this site.
+${siteConfig.contact.email} or the form at ${SELF_URL}/contact. Seller: TTPN Pty Ltd. Queensland, Australia.
 `
 }

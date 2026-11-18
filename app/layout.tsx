@@ -6,6 +6,7 @@ import { siteConfig } from "@/lib/site-config"
 import { FeedbackWidget } from "@/components/feedback-widget"
 import { WaitlistPopup } from "@/components/waitlist-popup"
 import { hasClerkPublishableKey } from "@/lib/clerk"
+import { UsageBeacon } from "@/components/usage-beacon"
 import { SELF_URL } from "@/lib/network"
 
 const inter = Inter({
@@ -65,6 +66,7 @@ export default function RootLayout({
         className={`${inter.variable} ${outfit.variable} font-sans antialiased ${siteConfig.theme.bgClass} ${siteConfig.theme.textClass}`}
       >
         {children}
+        <UsageBeacon />
         <FeedbackWidget />
         <WaitlistPopup />
       </body>

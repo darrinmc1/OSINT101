@@ -54,6 +54,14 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <a
+                  href={`mailto:${siteConfig.contact.email}`}
+                  className="text-sm text-slate-400 hover:text-cyan-400 transition-colors"
+                >
+                  {siteConfig.contact.email}
+                </a>
+              </li>
+              <li>
                 <Link
                   href="/downloads"
                   className="text-sm text-slate-400 hover:text-cyan-400 transition-colors"
@@ -110,6 +118,12 @@ export function Footer() {
                 className="text-xs text-slate-500 hover:text-slate-300 transition-colors"
               >
                 Terms of Service
+              </Link>
+              <Link
+                href="/refunds"
+                className="text-xs text-slate-500 hover:text-slate-300 transition-colors"
+              >
+                Refunds
               </Link>
             </div>
           </div>

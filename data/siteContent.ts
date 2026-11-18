@@ -376,10 +376,13 @@ The goal is a professional community with humor, not a circus with better Wi-Fi.
 
 We collect as little as possible, keep it for as short as practical, and avoid building a surveillance machine on a website that teaches responsible research. Irony has limits.
 
+TTPN Pty Ltd operates this site. Privacy questions go to info@osint101.com.
+
 ### In plain English
 
 - Lessons are readable without an account.
-- If you sign in, that account is Clerk's. This site does not publish an email address.
+- A free account is Clerk's. We keep the account id and the email you sign up with.
+- When you are signed in, we record which pages you open. That list stays with the operator. It is not published.
 - The contact form and the mailing list only keep what you submit: a name, an email, and the message.
 - Do not paste a dossier on a private person into either box.
 
@@ -387,7 +390,11 @@ If a feature needs more than that, the page that asks for it should say so.
 
 ### Governing law
 
-Queensland, Australia. The contact form is the only way to raise a privacy question. No email address is published.
+Queensland, Australia. Australian law applies. Refunds are on the refunds page.
+
+### Contact
+
+info@osint101.com. The contact form works as well. No postal address is published.
     `,
   },
   terms: {
@@ -399,22 +406,33 @@ Queensland, Australia. The contact form is the only way to raise a privacy quest
 
 Use the platform lawfully, ethically, and within the scope of authorization. If your plan depends on "nobody will notice," that is not a plan. It is a future anecdote.
 
+The seller is TTPN Pty Ltd. Write to info@osint101.com.
+
 ### Core terms
 
 - Training content is educational and must not be used to justify unlawful activity.
 - Users are responsible for following local laws, workplace rules, and common sense.
 - We can remove access for misuse, abuse, or behavior that makes the rest of the room visibly tired.
 - Content may change as tools, practices, and standards evolve.
+- There is no unlimited plan. A subscription ends when you cancel it. A one-off pack does not renew.
 
 The short version: act like a professional, not like the villain in a bargain-bin cyber thriller.
 
+### Price
+
+The normal plan is A$9/month, including GST. The intro price applies to the first month only, then renews at A$9/month, cancel anytime. That first month is A$5, and it is for people who create a free account with their email. Download packs are one-off prices of A$9 or A$19. This website does not take payment.
+
+### Refunds
+
+If you are charged, you can ask TTPN Pty Ltd for a refund within 3 days of the charge. Email info@osint101.com. You can cancel a subscription anytime. That refund sentence is pending legal review. The longer version is on the refunds page.
+
 ### Governing law
 
-Queensland, Australia.
+Queensland, Australia. Australian law applies.
 
 ### Contact
 
-The form on the contact page is the only way in. No email address is published.
+info@osint101.com. The form on the contact page also works. No postal address is published.
     `,
   },
   contact: {
@@ -424,7 +442,7 @@ The form on the contact page is the only way in. No email address is published.
     body: `
 ## Contact options
 
-Need support, want a custom training track, or found a typo so offensive it interrupted your breathing? Send a message.
+Need support, want a custom training track, or found a typo so offensive it interrupted your breathing? Send a message, or write to info@osint101.com. The seller is TTPN Pty Ltd.
 
 ### Good reasons to contact us
 

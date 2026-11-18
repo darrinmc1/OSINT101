@@ -13,10 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/resources`, priority: 0.8, changeFrequency: 'weekly' as const },
     { url: `${BASE_URL}/downloads`, priority: 0.7, changeFrequency: 'monthly' as const },
     { url: `${BASE_URL}/blog`, priority: 0.6, changeFrequency: 'monthly' as const },
+    { url: `${BASE_URL}/pricing`, priority: 0.85, changeFrequency: 'monthly' as const },
     { url: `${BASE_URL}/about`, priority: 0.6, changeFrequency: 'monthly' as const },
     { url: `${BASE_URL}/contact`, priority: 0.5, changeFrequency: 'monthly' as const },
     { url: `${BASE_URL}/privacy`, priority: 0.3, changeFrequency: 'yearly' as const },
     { url: `${BASE_URL}/terms`, priority: 0.3, changeFrequency: 'yearly' as const },
+    { url: `${BASE_URL}/refunds`, priority: 0.3, changeFrequency: 'yearly' as const },
     { url: `${BASE_URL}/llm.txt`, priority: 0.4, changeFrequency: 'weekly' as const },
     { url: `${BASE_URL}/llms.txt`, priority: 0.4, changeFrequency: 'weekly' as const },
   ]

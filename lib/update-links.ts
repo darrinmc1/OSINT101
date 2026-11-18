@@ -1,8 +1,8 @@
 import { learningModules } from "@/data/modules"
 
 // Public routes that actually answer for a signed-out visitor.
-// Clerk rewrites /community, /contribute, /requests, /dashboard, /badges,
-// and /progress to 404, so they are not link targets.
+// /dashboard, /badges, and /progress are account pages. Do not link them
+// from public update cards.
 const PUBLIC_SLUGS: Record<string, string> = {
   "case-file": "/case-file",
   about: "/about",
@@ -13,6 +13,11 @@ const PUBLIC_SLUGS: Record<string, string> = {
   downloads: "/downloads",
   privacy: "/privacy",
   terms: "/terms",
+  refunds: "/refunds",
+  pricing: "/pricing",
+  community: "/community",
+  contribute: "/contribute",
+  requests: "/requests",
 }
 
 export function resolveUpdateHref(href: string | null | undefined): string | null {
