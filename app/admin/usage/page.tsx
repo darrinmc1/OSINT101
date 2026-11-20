@@ -4,8 +4,10 @@ import Link from "next/link"
 import { auth, currentUser } from "@clerk/nextjs/server"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { getAccountsDb } from "@/lib/accounts-db"
+import { readAdminUsage } from "@/lib/accounts"
 import { hasClerkPublishableKey } from "@/lib/clerk"
-import { supabaseAdmin } from "@/lib/supabase"
+import { ENTITLEMENTS, parseEntitlement, type Entitlement } from "@/lib/entitlements"
 
 export const dynamic = "force-dynamic"
 
@@ -77,57 +79,63 @@ export default async function UsageAdminPage() {
     )
   }
 
-  if (!supabaseAdmin) {
+  const db = getAccountsDb()
+  if (!db) {
+    return (
+      <Shell>
+        <h1 className="text-3xl font-bold">Usage</h1>
+        <p className="mt-4 text-slate-300">The accounts database is not connected.</p>
+      </Shell>
+    )
+  }
+
+  const usage = await readAdminUsage(db)
+  if (!usage) {
     return (
       <Shell>
         <h1 className="text-3xl font-bold">Usage</h1>
         <p className="mt-4 text-slate-300">
-          Supabase is not configured. <code>NEXT_PUBLIC_SUPABASE_URL</code> and{" "}
-          <code>SUPABASE_SERVICE_ROLE_KEY</code> are already used by this project. They have
-          to be present for this environment, and the usage tables have to exist.
+          The tables are not there yet. On the Neon database, run{" "}
+          <code>supabase/migrations/20261120000000_accounts_usage.sql</code>. This app does not
+          apply that file itself, and it will not invent a count.
         </p>
       </Shell>
     )
   }
 
-  const profiles = await supabaseAdmin.from("profiles").select("*", { count: "exact", head: true })
-  const events = await supabaseAdmin
-    .from("usage_events")
-    .select("user_id, path, created_at")
-    .order("created_at", { ascending: false })
-    .limit(40)
-
-  if (profiles.error || events.error) {
-    return (
-      <Shell>
-        <h1 className="text-3xl font-bold">Usage</h1>
-        <p className="mt-4 text-slate-300">
-          The tables are not there yet. In the Supabase SQL editor, run{" "}
-          <code>supabase/migrations/20261118000000_accounts_usage.sql</code>. Then open a lesson
-          while signed in and come back.
-        </p>
-      </Shell>
-    )
+  const entitlementCounts = Object.fromEntries(ENTITLEMENTS.map((tier) => [tier, 0])) as Record<Entitlement, number>
+  for (const value of usage.entitlements) {
+    entitlementCounts[parseEntitlement(value)] += 1
   }
-
-  const rows = events.data ?? []
+  const rows = usage.events
 
   return (
     <Shell>
       <h1 className="text-3xl font-bold">Usage</h1>
       <p className="mt-3 text-slate-400">
-        Accounts that have opened a page while signed in: {profiles.count ?? 0}. Clerk&apos;s
-        Users list is the full sign-up count, including people who have not opened a lesson yet.
+        Accounts with a profile row: {usage.userCount}. New profiles are free. Nothing on the site
+        sets a paid entitlement. Clerk&apos;s Users list is the full sign-up count, including people
+        who have not opened a lesson yet.
       </p>
+      <ul className="mt-6 grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
+        {ENTITLEMENTS.map((tier) => (
+          <li key={tier} className="rounded-xl border border-white/10 p-3">
+            <p className="text-xs uppercase tracking-wide text-slate-500">{tier}</p>
+            <p className="mt-1 text-2xl font-bold text-white">{entitlementCounts[tier]}</p>
+          </li>
+        ))}
+      </ul>
       <ul className="mt-8 divide-y divide-white/10 rounded-2xl border border-white/10">
         {rows.length === 0 ? (
-          <li className="p-4 text-sm text-slate-400">No page views recorded yet.</li>
+          <li className="p-4 text-sm text-slate-400">No events recorded yet.</li>
         ) : (
-          rows.map((row, index) => (
-            <li key={`${row.user_id}-${row.created_at}-${index}`} className="p-4 text-sm">
-              <p className="font-mono text-indigo-200">{row.path}</p>
+          rows.map((row) => (
+            <li key={row.id} className="p-4 text-sm">
+              <p className="font-mono text-indigo-200">
+                {row.event_type} · {row.resource_id}
+              </p>
               <p className="mt-1 text-slate-500">
-                {row.user_id} · {row.created_at}
+                {row.path || "—"} · {row.user_id} · {String(row.created_at)}
               </p>
             </li>
           ))

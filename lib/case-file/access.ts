@@ -1,14 +1,7 @@
-import { hasClerkPublishableKey } from "@/lib/clerk"
+import { getViewer } from "@/lib/viewer"
 
+/** Advanced case-file lanes follow the stored entitlement. A free account does not unlock them. */
 export async function canAccessAdvanced(): Promise<boolean> {
-  if (!hasClerkPublishableKey() || !process.env.CLERK_SECRET_KEY) {
-    return false
-  }
-  try {
-    const { auth } = await import("@clerk/nextjs/server")
-    const session = await auth()
-    return Boolean(session.userId)
-  } catch {
-    return false
-  }
+  const viewer = await getViewer()
+  return viewer.entitlement === "base" || viewer.entitlement === "field_collection"
 }
