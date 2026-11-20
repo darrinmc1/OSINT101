@@ -1,8 +1,8 @@
 ﻿import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase";
 import { addToMailchimp } from "@/lib/mailchimp";
 import { sendWelcome, sendAdminNotification } from "@/lib/email";
 import { saveToHq } from "@/lib/hq-subscribe"
+import { openSubmissionsDb, SUBMISSIONS_DB_ERROR, upsertSubscriber } from "@/lib/submissions"
 
 const SITE_KEY = process.env.SITE_KEY || "osint101";
 const rateLimit = new Map<string, { count: number; reset: number }>();
@@ -39,17 +39,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
 
-  let dbWrote = false;
-  if (supabaseAdmin) {
-    const { error } = await supabaseAdmin.from("subscribers").upsert(
-      { site: SITE_KEY, email, name: name ?? null, source: source ?? null },
-      { onConflict: "site,email" }
-    );
-    if (error) console.error("[subscribe] error", error);
-    else dbWrote = true;
+  // A missing or blocked accounts URL fails closed. It does not fall back to Supabase.
+  const db = openSubmissionsDb();
+  if (!db) {
+    return NextResponse.json({ error: SUBMISSIONS_DB_ERROR }, { status: 503 });
   }
 
-  // Always copy the signup to the shared HQ subscribers list.
+  const dbWrote = await upsertSubscriber(db, {
+    site: SITE_KEY,
+    email,
+    name: name ?? null,
+    source: source ?? null,
+  });
+
+  // Copy the signup to the shared HQ subscribers list even when the local row did not land.
   const hqSaved = await saveToHq(SITE_KEY, email, source)
 
   const mc = await addToMailchimp({ email, name, tags: source ? [source] : [] });
