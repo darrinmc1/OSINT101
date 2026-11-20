@@ -19,7 +19,8 @@ Copy `.env.example` to `.env.local`. Do not commit real keys.
 | `NEXT_PUBLIC_CLERK_SIGN_UP_URL` | No | Clerk sign-up path. |
 | `NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL` | No | Post sign-in redirect. |
 | `NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL` | No | Post sign-up redirect. |
-| `NEXT_PUBLIC_SUPABASE_URL` | No | Supabase project URL. |
+| `ACCOUNTS_DATABASE_URL` | For new rows | Neon Postgres URL. Profiles, usage, new feedback, and new subscribers. If unset, or if the URL contains `radlwbqfzrzmgdldyifi`, feedback and subscribe return an error. |
+| `NEXT_PUBLIC_SUPABASE_URL` | No | Supabase project URL. New feedback and subscriber rows are not written here. |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | No | Supabase anon key. |
 | `SUPABASE_SERVICE_ROLE_KEY` | No | Supabase service role key. Server only. |
 | `RESEND_API_KEY` | No | Resend API key. |
