@@ -2,6 +2,43 @@ import { siteConfig } from "@/lib/site-config"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { pageMeta } from "@/lib/page-meta"
+import { pdfById } from "@/lib/offer"
+import { decideAccess, getViewer, type Viewer } from "@/lib/viewer"
+
+export const dynamic = "force-dynamic"
+
+function DownloadControl({ id, viewer }: { id: string; viewer: Viewer }) {
+  const decision = decideAccess(viewer, pdfById(id)?.tier ?? "download_pack")
+  if (decision.status === "allowed") {
+    return (
+      <Link
+        href={`/api/downloads/${id}`}
+        className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 shadow-lg shadow-indigo-500/20 hover:shadow-violet-500/30 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+      >
+        Download PDF
+      </Link>
+    )
+  }
+  if (decision.status === "sign_in") {
+    return (
+      <Link
+        href="/sign-up"
+        className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl font-semibold text-sm text-slate-950 bg-emerald-500 hover:bg-emerald-400"
+      >
+        Create a free account
+      </Link>
+    )
+  }
+  return (
+    <button
+      type="button"
+      disabled
+      className="inline-flex w-full cursor-not-allowed items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm text-slate-400 border border-white/10 bg-white/5"
+    >
+      Coming soon
+    </button>
+  )
+}
 
 export const metadata: Metadata = pageMeta({
   title: "Downloads",
@@ -168,7 +205,8 @@ const templates = [
   },
 ]
 
-export default function DownloadsPage() {
+export default async function DownloadsPage() {
+  const viewer = await getViewer()
   return (
     <div className="relative">
       {/* Hero Section */}
@@ -188,9 +226,9 @@ export default function DownloadsPage() {
           </h1>
 
           <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            The Investigation Plan is free. The other sheets are the A$9
-            download pack. Nothing on this page takes a card, so the files
-            still download. You fill them in. They do not contain a sample
+            The Investigation Plan is free with an account. The other sheets
+            are the A$9 download pack. Checkout is not live, so those files
+            stay closed. You fill the sheets in. They do not contain a sample
             investigation.
           </p>
         </div>
@@ -245,26 +283,7 @@ export default function DownloadsPage() {
                   </ul>
 
                   {/* Download Button */}
-                  <Link
-                    href={`/downloads/${tpl.id}.pdf`}
-                    download
-                    className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 shadow-lg shadow-indigo-500/20 hover:shadow-violet-500/30 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-                  >
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                      />
-                    </svg>
-                    Download PDF
-                  </Link>
+                  <DownloadControl id={tpl.id} viewer={viewer} />
                 </div>
               </div>
             ))}

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createCaseFile, isCaseFileRefusal } from "@/lib/case-file"
+import { decideAccess, getViewer } from "@/lib/viewer"
 
 export const maxDuration = 30
 
@@ -31,6 +32,15 @@ export async function POST(req: NextRequest) {
   const { query, acceptedDisclaimer } = body as {
     query?: unknown
     acceptedDisclaimer?: unknown
+  }
+
+  const viewer = await getViewer()
+  const decision = decideAccess(viewer, "free")
+  if (decision.status !== "allowed") {
+    return NextResponse.json(
+      { error: "Create a free account to use the Case File Planner." },
+      { status: 401 }
+    )
   }
 
   if (acceptedDisclaimer !== true) {

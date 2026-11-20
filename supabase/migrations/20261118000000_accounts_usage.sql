@@ -1,3 +1,6 @@
+-- Historical Supabase draft. Do not run this on the Neon accounts database.
+-- Accounts and usage use supabase/migrations/20261120000000_accounts_usage.sql.
+--
 -- Run this in the Supabase SQL editor for the OSINT 101 project.
 -- It does not grant the browser access. The server uses the service role.
 
