@@ -1,10 +1,11 @@
 // app/api/feedback/route.ts - unified feedback endpoint
-// Writes to Supabase, sends admin notification via Resend.
+// Writes a new row to the Neon accounts database and notifies via Resend.
+// After a successful save, kicks the existing n8n feedback webhook.
 
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase";
 import { sendAdminNotification } from "@/lib/email";
 import { notifyFeedbackWebhook } from "@/lib/feedback-webhook";
+import { insertFeedback, openSubmissionsDb, SUBMISSIONS_DB_ERROR } from "@/lib/submissions";
 
 const SITE_KEY = process.env.SITE_KEY ?? "osint101";
 const VALID_CATEGORIES = ["Bug", "Suggestion", "Content Request", "Other"];
@@ -64,29 +65,28 @@ export async function POST(req: NextRequest) {
       : category === "Content Request" ? "content_request"
       : "general";
 
-  // 1. Persist to Supabase (status "new" so the ingest workflow picks it up)
-  let dbWrote = false;
-  if (supabaseAdmin) {
-    const { error } = await supabaseAdmin
-      .from("feedback")
-      .insert({
-        site: SITE_KEY,
-        category,
-        rating,
-        message,
-        page: page ?? null,
-        page_url: pageUrl,
-        email: email ?? null,
-        ip_address: ip,
-        feedback_type: feedbackType,
-        status: "new",
-      });
-    if (error) console.error("[feedback] supabase error", error);
-    else {
-      dbWrote = true;
-      // Instant n8n kick. Failures stay inside the helper and do not change this response.
-      await notifyFeedbackWebhook();
-    }
+  // 1. Persist on Neon. Status "new" matches the value the ingest workflow looks for.
+  // A missing or blocked accounts URL fails closed. It does not fall back to Supabase.
+  const db = openSubmissionsDb();
+  if (!db) {
+    return NextResponse.json({ error: SUBMISSIONS_DB_ERROR }, { status: 503 });
+  }
+
+  const dbWrote = await insertFeedback(db, {
+    site: SITE_KEY,
+    category,
+    rating,
+    message,
+    page: page ?? null,
+    pageUrl,
+    email: email ?? null,
+    ipAddress: ip,
+    feedbackType,
+    status: "new",
+  });
+  if (dbWrote) {
+    // Instant n8n kick. Failures stay inside the helper and do not change this response.
+    await notifyFeedbackWebhook();
   }
 
   // 2. Notify admin

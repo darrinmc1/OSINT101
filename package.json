@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "tsx --test tests/accounts-usage.test.ts"
+    "test": "tsx --test tests/accounts-usage.test.ts tests/feedback-subscribers.test.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.39.3",
