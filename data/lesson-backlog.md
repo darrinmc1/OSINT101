@@ -25,7 +25,7 @@ Ordered best-first for future weekly lessons. No dates or volume promises — th
 | 3 | crt.sh / CT logs | Certificate transparency for domains and email-shaped SANs; pivoting from org to subdomain | done (`certificate-transparency-osint`) |
 | 4 | Amass (passive only) | Attack-surface enum with `-passive`; when active modes are out of scope | done (`amass-passive-enum`) |
 | 5 | subfinder | ProjectDiscovery passive subdomain discovery; chaining into dnsx carefully | done (`subfinder-passive-enum`) |
-| 6 | ExifTool | Read metadata on files you already have; geolocation ethics; strip vs preserve | todo |
+| 6 | ExifTool | Read metadata on files you already have; geolocation ethics; strip vs preserve | done (`exiftool-file-metadata`) |
 | 7 | Metagoofil | Public document search + metadata; APP notes for publishing docs | todo |
 | 8 | gau / waybackurls | Historical URLs from Wayback/Common Crawl; not vulnerability scanning | todo |
 | 9 | recon-ng | Modular framework with API keys; when a framework beats one-off CLIs | todo |
@@ -52,6 +52,6 @@ Ordered best-first for future weekly lessons. No dates or volume promises — th
 
 Sherlock, Maigret, WhatsMyName, User Scanner, GoSearch, Aliens Eye, Linkook, Holehe (`-NP` only), Socialscan, Mailcat, Numint (`--offline` only), FindMe — status `done`.
 
-Weekly backlog shipped after the 12: theHarvester — status `done`. HIBP (API) — status `done` (`hibp-breach-exposure`). Amass (passive only) — status `done` (`amass-passive-enum`). subfinder — status `done` (`subfinder-passive-enum`).
+Weekly backlog shipped after the 12: theHarvester — status `done`. HIBP (API) — status `done` (`hibp-breach-exposure`). Amass (passive only) — status `done` (`amass-passive-enum`). subfinder — status `done` (`subfinder-passive-enum`). ExifTool — status `done` (`exiftool-file-metadata`).
 
 Defensive lessons shipped 27 Oct 2026 (not tool-queue items): `read-email-headers`, `lookalike-domains-dnstwist`, `certificate-transparency-osint`, `threat-actor-profile-osint`, `sharing-threat-intel`.

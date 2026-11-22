@@ -13,10 +13,10 @@ export type LessonSpotlight = {
 
 /** Manual spotlight — bump when merging a new Consensus/backlog lesson. */
 export const lessonSpotlight: LessonSpotlight = {
-  latestModuleId: "subfinder-passive-enum",
-  latestTitle: "subfinder: Collect Published Subdomains for a Domain You Operate",
-  latestHref: "/modules/subfinder-passive-enum",
-  nextTitle: "ExifTool (not written yet)",
+  latestModuleId: "exiftool-file-metadata",
+  latestTitle: "ExifTool: Read the tags on a file you already have, then decide what to strip",
+  latestHref: "/modules/exiftool-file-metadata",
+  nextTitle: "Metagoofil (not written yet)",
   nextBlurb:
-    "Reading metadata on files you already have is next in the writing queue. Geolocation ethics, and whether you strip a tag or keep it, stay in that lesson. There is no ExifTool lesson on this site yet.",
+    "Public document search, and the metadata those documents carry, is next in the writing queue. The Australian Privacy Principles notes for publishing documents stay in that lesson. There is no Metagoofil lesson on this site yet.",
 }

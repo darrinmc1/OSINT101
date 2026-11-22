@@ -8056,6 +8056,234 @@ Holehe, if you use it in this course at all, stays \`holehe -NP\` and stays on a
     ],
   },
 
+  "exiftool-file-metadata": {
+    id: "exiftool-file-metadata",
+    title: "ExifTool: Read the tags on a file you already have, then decide what to strip",
+    description: "A read of the tags in a file you already hold: which ones are stored, which ExifTool calculated, and what a GPS strip leaves behind.",
+    level: "Beginner",
+    estimatedTime: "40 min",
+    sections: [
+      {
+        title: "What ExifTool does",
+        duration: "10 min",
+        content: `
+### The job is a tag list for a file you already hold
+
+Someone drops a photo in the work chat and writes "the EXIF says they were there." The useful reply is smaller than the pin. You take a file you already have, you ask which tags are actually in it and which group each one sits in, and you write down the sentence you are willing to repeat. A coordinate is a tag. It is not a whereabouts until something else, something you can name, says so.
+
+ExifTool is Phil Harvey's program. The homepage at https://exiftool.org/, read for this lesson on 22 November 2026, calls it a platform-independent Perl library plus a command-line application for reading, writing and editing meta information in a wide variety of files. The download line on that page was Version 13.64, dated Nov. 16, 2026. The README in the source tree, checked the same day, carries Copyright 2003-2026, Phil Harvey, and says you may redistribute it under the same terms as Perl itself: the Perl Artistic License, or the GPL. Running the binary for this exercise is ordinary use of that licence. A modified copy you ship later is the README's obligation, not a mood about open source.
+
+The format list is why "no EXIF" is a sloppy sentence. That homepage names EXIF, GPS, IPTC, XMP, JFIF, maker notes, and C2PA JUMBF among what the tool reads. The application documentation, https://exiftool.org/exiftool_pod.html, prints a table of file types marked read, write, or create, and a second table of metadata formats. GPS has its own row, and it also hides inside other formats. A JPEG can carry a GPS group and an XMP copy. A QuickTime file can carry GPSCoordinates. A PDF can carry an Author. The tables move. \`exiftool -ver\`, and the page open in front of you, are the list that counts.
+
+Two builds will not greet you the same way, which is why a cheatsheet that cannot name its version is a souvenir. The pod says the documentation is displayed if exiftool is run without an input FILE when one is expected. The binary this lesson actually ran was 12.76, from a Debian-family package, against a website that was offering 13.64. On 12.76, \`exiftool\` with no file printed two lines, \`Syntax: exiftool [OPTIONS] FILE\` and a pointer at the documentation. It did not print the manual. \`-h\` is not how you ask for the manual either. In the option overview, \`-h\` is \`-htmlFormat\`, "Use HTML formatting for output." \`-H\` is \`-hex\`, "Show tag ID numbers in hexadecimal." Case is significant for that pair because the upper-case option exists. The same overview says multiple single-character options may not be combined into one argument. On 12.76, \`exiftool -h\` with no file printed the same two-line syntax, and \`exiftool -h -Artist\` against a JPEG printed an HTML table. If your \`-ver\` and this paragraph disagree, \`-ver\` wins, and so does the pod.
+
+A default read is not everything. FAQ 3, on https://exiftool.org/faq.html, gives the command this lesson uses and explains the three flags.
+
+\`\`\`bash
+exiftool -a -G1 -s FILE
+\`\`\`
+
+\`-a\` allows duplicate tags to be extracted. Without it, one of two tags that share a name is suppressed. \`-G1\` prints the family 1 group, which is the location: GPS, ExifIFD, IFD0, a particular XMP namespace, System, Composite. \`-s\` prints tag names instead of descriptions. FAQ 2 is blunt about that difference. Descriptions often contain spaces. Tag names never do. Tag names stay English even when \`-lang\` changes the description. You file the tag name. "GPS Latitude" and \`GPSLatitude\` are not the same string, and only one of them is what you will type back.
+
+Composite tags are generated. They are not stored in the file. \`-e\` is \`--composite\`: extract existing tags only, and do not generate composite tags. \`GPSPosition\` is one of these. FAQ 14 says version 12.36 and later make \`Composite:GPSPosition\` writable, so one assignment can create the stored latitude, longitude, and the two reference tags. On a read, a line in the Composite group is ExifTool doing arithmetic. It is not a second device that agreed with the first.
+
+The GPS trap is the one FAQ 3 bothers to spell out. \`exiftool -gps:all image.jpg\` does not necessarily extract the EXIF GPS tags, because a same-named tag in another group can suppress them before the group filter runs. The FAQ's wider command, for a video as much as for a JPEG, is:
+
+\`\`\`bash
+exiftool -a "-gps*" -ee FILE
+\`\`\`
+
+The quotes stop the shell treating \`*\` as a glob. \`-ee\` extracts embedded documents. GPS that lives somewhere other than the EXIF GPS group is why the wildcard is there, not a decoration.
+
+Dates have the same shape of mistake. FAQ 5 says the standard ExifTool prints and expects is \`YYYY:mm:dd HH:MM:SS\`. XMP can carry fractions of a second and a zone, written \`+HH:MM\`, \`-HH:MM\`, or \`Z\`. The EXIF tag \`DateTimeOriginal\` is that string. A zone, when the file has one, is a different tag. The EXIF tag table on https://exiftool.org/TagNames/EXIF.html lists \`OffsetTime\` (0x9010) as the zone for ModifyDate, \`OffsetTimeOriginal\` (0x9011) as the zone for DateTimeOriginal, and \`OffsetTimeDigitized\` (0x9012) as the zone for CreateDate. An older \`TimeZoneOffset\` (0x882a) is documented there as one or two hour-offsets from GMT. None of those tags have to exist. FAQ 16's command for "which clocks are in this file" is:
+
+\`\`\`bash
+exiftool -time:all -a -G1 -s FILE
+\`\`\`
+
+\`AllDates\` is a shortcut for three names: DateTimeOriginal, CreateDate, and ModifyDate. It is not every time tag. \`FileModifyDate\` is a filesystem pseudo-tag. Copying the file, or rewriting it, moves that clock. The camera did not.
+
+QuickTime keeps yet another clock. The QuickTime tag page says integer dates should be stored as UTC, and that cameras often store local time anyway. The API option \`QuickTimeUTC\`, in the Image::ExifTool documentation, tells ExifTool to assume those integer values are UTC and to convert them to local time on the way out. The same paragraph says the default is not to convert, because of those cameras, with Canon CR3 named as the exception that does always use UTC. FAQ 16 adds the practical half: MOV and MP4 files typically have no DateTimeOriginal, so you look at CreateDate, and you add \`-api QuickTimeUTC\` only when you have a reason to believe the stored value is UTC. Adding it because a blog did is how a local clock becomes a confident error of several hours.
+
+Writing is a different mode. The pod is plain about the backup. Assigning \`-TAG=VALUE\`, or \`-TAG=\` with nothing after the equals to delete, rewrites the file. By default the previous bytes are kept under the same name with \`_original\` appended. You compare before you delete that file. \`-overwrite_original\` replaces the original by renaming a temporary file, and the pod says to use it only when you already have a separate backup. \`-overwrite_original_in_place\` is the slower variant that tries to keep some filesystem attributes. \`-P\` preserves \`FileModifyDate\`. This lesson leaves all three off, so the \`_original\` file is the before picture you can still open.
+
+Deleting is not one switch. The geotag examples in the pod say \`-geotag=\` removes GPS tags that the geotag feature added, and that it does not remove all GPS tags. The command they give for all of them is \`-gps:all=\`. \`-all=\` deletes metadata, with the exceptions written next to it. Not every group is deletable. On a JPEG, the APP14 Adobe group is not removed by a default \`-all=\`, because it can change how the picture looks, while colour-space information is removed and the colours can shift unless you copy the \`ColorSpaceTags\` shortcut back. Deleting EXIF or IFD0 on a JPEG also deletes the groups the pod lists as living inside them: ExifIFD, GlobParamIFD, GPS, IFD1, InteropIFD, MakerNotes, PrintIM, and SubIFD. The pod's own piping examples call IFD1 the thumbnail image IFD. On a TIFF, deleting EXIF does not delete IFD0, because IFD0 is the image. FAQ 7 is that limitation in one paragraph. FAQ 32 is the one that says not to strip a RAW on the theory that the metadata and the pixels come apart cleanly. They do not. FAQ 32's JPEG command, which keeps an ICC profile and writes the colour-space tags back, is:
+
+\`\`\`bash
+exiftool -all= --icc_profile:all -tagsfromfile @ -colorspacetags FILE
+\`\`\`
+
+The FAQ shows it with \`-ext jpg\` and a directory. The assignments are the same against one JPEG you name. PDF is a third object. Note 3 in the writing section says changes to a PDF are reversible, because the original information is never actually deleted from the file, and that ExifTool alone may not be used to securely edit PDF metadata. You can remove an update later with \`-PDF-update:all=\`. This exercise does not open a PDF.
+
+Maker notes are the camera's own block. The pod says that, in general, they are Permanent: they may be edited, and they are not created or deleted as individual tags. Deleting the EXIF group that contains them is a different act from deleting one maker-note field. FAQ 15 is the page for the warning about bad offsets. Some other program rewrote the file and left the pointers wrong. \`-F\` asks ExifTool to try a correction. \`-m\` ignores minor errors, and the FAQ says maker-note information can be lost when you do that. This lesson passes neither flag. A warning is a line you keep. It is not a location.
+
+Two further switches are why "I ran ExifTool" is not "I saw every tag." \`-fast2\`, in the pod, skips EXIF maker notes and stops early in some formats, including at the IDAT chunk of a PNG and the mdat atom of a QuickTime file. FAQ 30's command for absolutely all metadata is longer on purpose, because duplicates, unknown tags, embedded tags, and some system tags are off by default:
+
+\`\`\`bash
+exiftool -ee3 -U -G3:1 -api requestall=3 -api largefilesupport FILE
+\`\`\`
+
+You do not need that command to finish. You need to know the ordinary read left those out. \`-u\` and \`-U\` are the unknown-tag switches if a later question actually wants them. The homepage also lists a geolocation feature that names the nearest city from a GPS position, and the reverse. The pod's write-up example is \`-geolocate=geotag\` while geotagging from a track, and it sends you to https://exiftool.org/geolocation.html. A city that feature adds was not in the camera. This lesson does not run it. \`-password\` is documented for a protected file you are allowed to open, using a password you already have. This lesson does not run that either. There is no password to guess, and guessing is not the exercise.
+
+The Windows zip, on the homepage, includes Perl. \`exiftool(-k).exe\` pauses so a double-click can show the documentation. Renaming it to \`exiftool.exe\` is the command-line form, and the \`exiftool_files\` folder has to move with the exe. The Mac package on that page installs the command under \`/usr/local/bin\`. A distro package can lag the homepage, which is what 12.76 next to 13.64 was. Whatever you installed, \`-ver\` is the number in the note.
+
+> The useful line is a tag name, the group, and whether the file stored it or ExifTool calculated it. A pin is how a tag list starts pretending to be a whereabouts.
+`,
+      },
+      {
+        title: "Walkthrough",
+        duration: "12 min",
+        content: `
+### A file you made, or a photo you took, then the three reads
+
+Use a file you already have a right to open. A photo you took. A document you wrote. A screenshot of your own desktop. If other people are identifiable in the frame, the ethics section is the constraint, not a footnote you skip because the command is short. The lab this lesson actually ran was a picture of nothing: a 64-by-64 white JPEG, made on the machine, so the tags in it could only have come from the command that wrote them.
+
+The reads below were checked on ExifTool 12.76. Install the build you can explain. If you use the source package, the README shows unpacking it and running \`./exiftool\` against \`t/images/ExifTool.jpg\`. That image ships with the tool. It is a legal file to read once. It is a poor file to brief, because you did not make the tags and you do not know which of them are toys.
+
+One sentence before the first command: "I am reading tags in a file I already hold, and I am not turning a coordinate into a person's whereabouts."
+
+Copy first. ExifTool's own backup appears only after a write, and only beside the file you named. A copy you make yourself is the one you never pass on the command line.
+
+\`\`\`bash
+cp photo.jpg photo-copy.jpg
+exiftool -ver
+exiftool -a -G1 -s photo-copy.jpg
+exiftool -a "-gps*" -ee photo-copy.jpg
+exiftool -time:all -a -G1 -s photo-copy.jpg
+\`\`\`
+
+Put your path in place of \`photo-copy.jpg\`. Do not put a download from a profile, a listing, or a chat you were not part of. If \`-ver\` is not 12.76, keep going. Those three reads are FAQ 3 and FAQ 16. You still do not pass \`-h\` to mean help.
+
+Then sort the groups you actually got. \`System\` is the filesystem: the name, the size, \`FileModifyDate\`. \`File\` is what ExifTool worked out about the container, including width and height. \`IFD0\`, \`ExifIFD\`, \`GPS\`, \`JFIF\`, \`IPTC\`, and \`XMP-\` something are stored metadata when they appear. \`Composite\` is calculated. A \`Software\` tag or a history tag, if one is present, means some program rewrote metadata. It does not mean the rewrite told the truth. A maker-note warning goes in the note as a warning. You do not "clean it up" with \`-F\` or \`-m\` for this exercise.
+
+If you will not put a real photo in the notebook, make any small JPEG yourself and write a fictional label onto the copy only. This lesson used ImageMagick's \`convert\` to get the white square. A screenshot of an empty window is the same idea. Do not download a picture to stand in for one. The tags below are invented. Pip Tadwell is a name this course already uses for a person who does not exist. The coordinate is FAQ 14's writing example, \`-42.5\` and \`-33.25\`. ExifTool prints that pair as 42 deg 30' 0.00" S, 33 deg 15' 0.00" W. It is not a house, and it is not a suggestion to pick a more interesting one. Do not substitute a home, a school, a workplace, or anywhere you could point at on a map and name a person.
+
+On 12.76 the write was:
+
+\`\`\`bash
+exiftool -Artist="Pip Tadwell" -Copyright="Fictional lab file. Not a person." -DateTimeOriginal="2019:01:15 08:00:00" -OffsetTimeOriginal="-00:00" -gpsposition="-42.5, -33.25" photo-copy.jpg
+\`\`\`
+
+FAQ 14 says a single \`-gpsposition\` writes the EXIF coordinate tags and the reference directions from version 12.36. If your \`-ver\` is older, stop and use the separate \`-exif:gpslatitude\` and \`-exif:gpslongitude\` assignments printed in that FAQ, still with these numbers, still on the copy. Do not invent a second syntax. The date \`2019:01:15 08:00:00\` was typed. Nobody photographed the white square, in 2019 or otherwise. \`OffsetTimeOriginal\` of \`-00:00\` was typed so the zone tag would exist and could be seen beside the clock. A camera file often has no offset tag. You do not add one to a real photo so the table looks finished.
+
+Run the three reads again. On 12.76, \`-a -G1 -s\` showed \`[IFD0] Artist\` as Pip Tadwell, \`[IFD0] Copyright\` as the fictional-lab sentence, \`[ExifIFD] DateTimeOriginal\` as \`2019:01:15 08:00:00\`, \`[ExifIFD] OffsetTimeOriginal\` as \`-00:00\`, and a \`[GPS]\` block: latitude 42 deg 30' 0.00", longitude 33 deg 15' 0.00", refs South and West, \`GPSVersionID\` 2.3.0.0. \`[Composite] GPSPosition\` joined the degrees and the hemispheres into one line. \`[Composite] SubSecDateTimeOriginal\` was \`2019:01:15 08:00:00-00:00\`. \`[System] FileModifyDate\` was 22 November 2026, the day the file was written in the lab, with a numeric zone. Two clocks, both accurate about different facts, in the same printout. Your file's modify time will not be that instant. The split is the point, not the timestamp.
+
+Then the failure FAQ 3 describes, on purpose. \`exiftool -gps:all photo-copy.jpg\`, without \`-a\`, printed \`GPS Version ID\`, \`GPS Latitude Ref\`, and \`GPS Longitude Ref\`. It did not print the degrees. The composite tags had suppressed the stored coordinates, and \`-gps:all\` does not display the Composite group, so the numbers were gone from the output while still in the file. \`exiftool -a "-gps*"\` printed the stored degrees and the composite copies. \`exiftool -e -a -G1 -s -gps:all\` printed the stored GPS tags and no \`GPSPosition\`. If your binary does not reproduce the suppression, write the lines it did print. The reason to use \`-a\` is that suppression, and it is a property of a build until you have seen it.
+
+The thumbnail is a second file living inside the first, and you only pipe it when the tag is actually listed. The pod's example is:
+
+\`\`\`bash
+exiftool photo-copy.jpg -ThumbnailImage -b | exiftool -a -G1 -s -
+\`\`\`
+
+The lab JPEG had no \`ThumbnailImage\` in the \`-a -G1 -s\` read. Running the pipe anyway, on 12.76, made the second ExifTool print \`Error: File is empty\` and a \`System\` block for a zero-byte stdin. Exit status was 1. That error is about the empty pipe. It is not a finding that the JPEG has no metadata, and it is not a clean "no thumbnail" you can paste without the error line. Look for the tag first. If it is there, the pipe reads the embedded image's own tags, which a quick glance at the parent can miss. The pod says that deleting EXIF or IFD0 on a JPEG deletes IFD1 with it. Some other program's idea of a strip may have left IFD1 alone. You run the pipe on your copy, when the tag is present. You do not run it across a folder of pictures that are not yours.
+
+Strip GPS on the copy:
+
+\`\`\`bash
+exiftool -gps:all= photo-copy.jpg
+\`\`\`
+
+On 12.76 the GPS group and \`Composite GPSPosition\` were gone. Artist, Copyright, DateTimeOriginal, and OffsetTimeOriginal were still there. JFIF was still there. \`photo-copy.jpg_original\` was the file from before this delete. That pair is the comparison. Leave \`-overwrite_original\` off. Do not "tidy up" by deleting \`_original\` before you have read both. \`-geotag=\` is the wrong delete. The pod says so, and it tells you why.
+
+If you also want to see what FAQ 32 does to a JPEG, use a further copy. Do not use the only \`_original\`, and do not use a RAW.
+
+\`\`\`bash
+cp photo-copy.jpg_original photo-strip.jpg
+exiftool -all= --icc_profile:all -tagsfromfile @ -colorspacetags photo-strip.jpg
+exiftool -a -G1 -s photo-strip.jpg
+\`\`\`
+
+On 12.76, Artist, Copyright, the date, the offset, the GPS block, and JFIF were gone. A short EXIF block remained: resolution tags, \`ColorSpace\` of Uncalibrated, \`ExifVersion\`, and the related version tags FAQ 32 warns it will write back when it restores colour space. \`System\` and \`File\` lines were still printed. \`Composite ImageSize\` was still printed, because width and height are the image, and \`-e\` was not set. The lab file had no ICC profile to preserve. "The FAQ command deletes metadata" is not "ExifTool prints nothing." Write the groups that survived, and say whether an ICC profile was among them.
+
+\`-all=\` without the \`--icc_profile:all\` exclusion and without \`-tagsfromfile @ -colorspacetags\` is the command the pod warns can change colours, because colour-space information goes and the APP14 Adobe group may still remain. FAQ 32 is the safer of the two, and you still look at the picture. If it looks wrong, \`_original\` is why you kept one.
+
+You stop there. You do not add \`-geolocate\`, \`-geotag\`, \`-password\`, \`-overwrite_original\`, \`-F\`, \`-m\`, or \`-r\`. A recursive run over a home directory is how a lab file becomes every picture a phone has ever synced. You do not upload either JPEG to a website to see whether the tags are "really" gone. The read you just did is the test, and the upload is a copy you handed to someone else.
+
+> Copy, read with \`-a\`, then strip the copy. The \`_original\` file is the evidence the strip happened. A folder with one JPEG and a feeling is not.
+`,
+      },
+      {
+        title: "Limits and false positives",
+        duration: "8 min",
+        content: `
+### A wrong clock, a stripped file, and a tag ExifTool invented
+
+A GPS tag is a claim written by something that had access to the file. On a phone it is often where the phone thought it was when the shutter fired. The person in the frame can be somewhere else: a photo of a screen, a scan of a print, a shot out a window, a picture taken by someone standing on a hill of a town they are not in. The lab coordinate was FAQ 14's sample, typed by a command, into a square of white pixels. Anyone who can run that command can produce \`GPSLatitude\`. Presence of the tag proves the tag was there at read time. It does not prove a satellite fix, and it does not prove a visit.
+
+Clocks inside one honest file are allowed to disagree. The lab file's \`DateTimeOriginal\` said January 2019. \`FileModifyDate\` said November 2026. Both lines were right. One had been typed. One was the filesystem watching a write. A camera that was never set, or set to the wrong zone, writes a wrong \`DateTimeOriginal\` and does not raise an error. \`OffsetTimeOriginal\` is not implied by a date that "looks local." If that tag is absent, you do not have a zone. You do not borrow the zone of the laptop you happen to be reading on, and you do not type one in so the composite \`SubSecDateTimeOriginal\` grows a suffix. That composite, on the lab file, was the stored date joined to the offset. \`-e\` drops it. Filing the composite as a third measurement is how one clock becomes two pieces of evidence.
+
+QuickTime will do the same trick if you help it. The specification says UTC. The tag page says cameras often ignore the specification and store local time. \`-api QuickTimeUTC\` converts on the assumption the specification was followed, and it also, in the API docs, forces the 1904 epoch and turns off ExifTool's detection of a bad time-zero. Canon CR3 is the case the docs say really is UTC. On anything else, write whether you passed the flag. A converted time described as "what the file stored" is the false precision. FAQ 16 already told you to list the time tags before you pick CreateDate off a video and rename the world with it.
+
+Print conversion changes the characters. FAQ 14 says the default GPS print is degrees, minutes, and seconds, and that \`-n\` gives you a decimal. The \`-c\` option, if you set a format, is another print. \`GPSAltitudeRef\` is the FAQ's worked example of the same machinery: the tool prints "Above Sea Level" or "Below Sea Level" unless conversion is off, in which case you see \`0\` or \`1\`. Quote the form you used. Do not transcribe a hemisphere from \`Composite GPSPosition\` and the same hemisphere from \`GPSLatitudeRef\` as two sources. They are one source, rendered twice. \`-e\` is the check, and it is cheap.
+
+Duplicates hide, and the hiding looks like absence. The 12.76 run of \`-gps:all\` without \`-a\` dropped the degrees and kept the refs. A note that says "no latitude" off that command is a note about the command. The FAQ's rule is the remedy, and it is older than that binary: use \`-a\`, or accept that you did not look. The same rule is why \`-EXIF:all\` can miss an EXIF tag whose name was already taken by XMP. Group filters do not resurrect a tag the duplicate suppressor already dropped.
+
+A strip removes what that command removes. \`-gps:all=\` on the lab file left the artist and the clock and the copyright sentence. Someone who deletes GPS and calls a portrait anonymous has not looked at the portrait. The face is not a tag. A serial number in a maker note is not GPS either. The pod treats maker-note tags as permanent when you try to delete them one by one, and \`-fast2\` will not even parse them. A fast read with no serial is a read that declined to look. The thumbnail is the other pocket. IFD1 goes away when ExifTool deletes EXIF on a JPEG. A file that passed through a different tool may still have a \`ThumbnailImage\` whose own GPS the parent listing hid. The pipe is the check, and only when the tag is listed, so you do not brief stdin's "file is empty" error as a property of the picture.
+
+FAQ 32 does not produce a silent file. On the lab JPEG it left a rebuilt EXIF fragment for colour, and ExifTool went on printing \`File\` and \`System\` because those are not captions stored in a metadata block. APP14 Adobe is left in place by a default \`-all=\` even when you thought you had been thorough. The pod says so, and it says the colours can still change because other colour information does go. If your after-read still shows an \`Adobe\` group, that is the documented exception. Write it down. Do not run the command again with a fiercer flag you found in a comment and have not read.
+
+TIFF and RAW are the formats where enthusiasm deletes the picture's ability to be a picture. FAQ 7: \`-exif:all=\` on a TIFF removes ExifIFD, not IFD0, because the samples live in IFD0. FAQ 32: do not decide that a proprietary RAW is "just a JPEG with extra tags." Information required to render it can sit in the metadata you were about to call clutter. This lesson does not strip either format. If your only copy is a RAW, the exercise is the read.
+
+PDF metadata is the limit with a straight face. The pod says an edit is appended, the old bytes stay, and deleting the update puts the previous information back in reach. "The tag no longer prints" is not "a copy of this PDF no longer contains the author." This lesson does not practise PDF edits, and it does not send you off to find a shredder. The limit is the promise you will not make.
+
+Empty is a result. Screenshots, exports from a messaging app, and files a website rebuilt on the way through often have no EXIF block. That is a fact about the bytes you hold. It is not a fact about an earlier file you do not hold, and it is not a schedule of what a given platform will do next time someone uploads. If you still have the file you uploaded and the file you later downloaded, read both and write the difference in groups. If you only have the download, you only have the download. Filling the gap from a blog post about an app, written in some other year, is how a missing tag becomes a policy you cannot cite.
+
+Editors add a second kind of disagreement. FAQ 15's maker-note warning means offsets were left wrong by software that rewrote the file. FAQ 3 notes that EXIF, IPTC, and XMP can contradict each other, and that a Photoshop IPTC digest can cause one of them to be ignored. You report both values and both groups. You do not average two timestamps into a third time nobody stored, and you do not let the digest pick a winner you never checked.
+
+A city name is a further tag you would be adding. \`-geolocate=geotag\`, and the geolocation feature the homepage lists, name a nearest city from a position. Unless you can see that name in a stored tag from a previous write, it is not camera metadata. This exercise does not run the lookup. A suburb in the note that you did not read out of the file is your inference. Inferences about where a person was belong in the ethics section, and the answer there is that you do not write them.
+
+> The dangerous result is the confident one. A missing tag, a calculated tag, and a clock with no zone are allowed to stay boring.
+`,
+      },
+      {
+        title: "Ethics and legal limits",
+        duration: "6 min",
+        content: `
+### A coordinate becomes personal information when a person comes with it
+
+A JPEG of a wall is a file. A JPEG of an identifiable person, or a file whose Artist, Author, Copyright, or GPS tag you can connect to one human being, is personal information under the Privacy Act 1988 (Cth). The person does not need to be famous. You need to be able to tell who it is, including when you are wrong and the tie is a guess. Doing that as a business, or as an agency, or as anyone else the Act covers, brings in the Australian Privacy Principles. A student notebook is not a theory of why the principles are quaint.
+
+APP 3 is the purpose test. The purpose here is specific and short. Learn what a tag list contains, on a file you made or a photo you already hold, and stop when the note is written. "The folder was already on the laptop" is not a purpose. A client's gallery, a relative's camera roll, and a folder of pictures saved from a site are not a lesson. APP 6 is what happens the week after, when a practice dump starts to look useful. It is not a way to find someone, not a check on whether a story is true, and not a list of names for a later pitch. APP 10 is the pin in the chat. A FAQ sample coordinate filed as a visit, a \`FileModifyDate\` filed as the moment of the photograph, a composite \`GPSPosition\` filed as a second instrument, and a missing EXIF block filed as "this person was never there" are four ways to hand someone a fact they will act on. APP 11 is storage. The JPEG, the \`_original\` backup, and the text you pasted into a ticket are the holdings. They stay out of git, off a world-readable share, and out of a channel half the office can search. A GPS line in a chat is a location record that now has an audience.
+
+APP 8 is the disclosure a local binary makes easy to forget. The read in this lesson stays on the machine. Uploading the file to a site, or to a bot, "to check the EXIF" sends the bytes, tags included, to whoever runs that service. That is a disclosure of whatever the tags say about a person. The geolocation database is documented at https://exiftool.org/geolocation.html, including how a nearest-city name gets written back. Read that page before you decide whether a lookup stays local. This lesson will not guess from a memory of which file shipped inside which version. If you are an APP entity and the lookup leaves the machine, APP 8 is answered from the current page and from where the request actually went.
+
+Sensitive information is the narrower list in the Act. Health, biometrics, racial or ethnic origin, political and religious opinion, sexual orientation, criminal record, membership of a trade association. A coordinate is not on that list by being a coordinate. A coordinate of a clinic, a place of worship, a union office, or a support service, once you attach it to a person, is how an ordinary GPS tag becomes an inference the Act treats more strictly. APP 3.3 is unimpressed by cleverness. If the picture would let you make that inference, you do not write the inference down. The lab file is a white square and a fictional name because that is the way to learn the tags without creating the record.
+
+Platform terms sit beside the Act, and they are not the Act. A photograph someone else posted is still their photograph. Copying it off the page to read the tags can breach the site's terms when the pixels were public, and the copy is a file you did not have before you decided to be thorough. Public is not a synonym for assigned. This lesson does not take that copy. If a platform stripped or rewrote tags on upload, you will see it by comparing files you are allowed to hold, not by collecting other people's uploads to test the theory.
+
+Publishing is a separate act from reading. A notebook about your own camera, or about Pip Tadwell's blank JPEG, is coursework. A post that attaches a real person's name to a coordinate, a camera serial, or a suburb, whether to show the method or to embarrass them, can be a serious invasion of privacy under the statutory tort in force in Australia since 2025. The Criminal Code (Cth) offences about releasing personal data over a carriage service in a menacing or harassing way do not contain a research exemption. Geolocation of a person is the use this page refuses. That includes the polite version, where you only wanted to see whether the tag was "real," and the teaching version, where their house is the example that makes the slide land.
+
+Paid work has its own statute. If you do this for a fee in Queensland, the Security Providers Act 1993 still applies. Being handed a file, and reading it with a tool that feels like homework, is a poor theory of why a licence would be optional. The Criminal Code (Cth) Part 10.7 and the Queensland Criminal Code s 408E are the provisions a lawyer opens when the next step is access to a computer, an account, or a system you were not given. A GPS tag is not that access. It does not authorise a password reset, a login, or \`-password\` against a file you should not have. The option exists for a document you may open and a password someone gave you for it. Guessing is not a documented mode. The flag stays off the line.
+
+Holehe, if you use it anywhere in this course, stays \`holehe -NP\` and stays on an address you own. An Author tag, or a copyright string that looks like an email, is not a reason to ask a pile of sites whether a mailbox exists. It is not a reason to try a password anywhere. The tag is a string in a file. The file is the scope.
+
+> The authority for this lesson is a file you made, or a photo you already hold. A coordinate is not a brief to go and find the person in the frame.
+`,
+      },
+      {
+        title: "Quiz",
+        duration: "4 min",
+        content: `
+1. \`exiftool -gps:all photo.jpg\` prints a latitude ref and no degrees. What do you run before you write "no coordinates," and what did that short command do on ExifTool 12.76?
+2. A file shows \`DateTimeOriginal\` of \`2019:01:15 08:00:00\`, \`OffsetTimeOriginal\` of \`-00:00\`, \`FileModifyDate\` in 2026, and \`Composite SubSecDateTimeOriginal\` joining the first two. What is each line?
+3. You want the GPS tags gone and you want to keep the artist. Why is \`-geotag=\` the wrong delete, and what can \`-gps:all=\` leave behind that still identifies a person?
+4. After FAQ 32's command, a JPEG copy still prints \`File\`, \`System\`, and a short \`ExifIFD\`. Has the strip failed? Why do you not point the same command at a RAW or a PDF?
+5. You write the lab coordinate into a client's family photos, ask ExifTool for the nearest city, and post the suburb with their names so people "see why metadata matters." Which Australian Privacy Principles does that trip, and what else has gone wrong?
+
+**Answers**
+
+1. Run \`exiftool -a "-gps*" -ee photo.jpg\`, and the \`-a -G1 -s\` read, before you brief an absence. FAQ 3 says a same-named tag in another group is suppressed unless \`-a\` is set, and a group filter cannot show a tag that was already dropped. On 12.76, against a JPEG whose stored GPS tags were the FAQ 14 sample, \`-gps:all\` without \`-a\` printed the version and the two refs and hid the degrees. The composite names had taken the slot, and the Composite group is not what \`-gps:all\` displays. Re-check with \`exiftool -ver\` and the FAQ. If they disagree with this answer, they win. \`-h\` will not settle it. On that build \`-h\` formats HTML.
+2. \`DateTimeOriginal\` is the stored EXIF string. The zone is not inside it. \`OffsetTimeOriginal\` is the separate tag, 0x9011 in the EXIF table, and on the lab file it had been typed as \`-00:00\`. \`FileModifyDate\` is the filesystem clock. It moves when the file is copied or rewritten, which is why it said 2026 while the EXIF string said 2019. \`SubSecDateTimeOriginal\` was in the Composite group: ExifTool joined the date to the offset. It is not another timestamp the camera stored. \`-e\` drops the composite and leaves the two stored tags.
+3. The pod says \`-geotag=\` deletes GPS tags the geotag feature added, and it tells you to use \`-gps:all=\` when you mean the GPS tags. On the 12.76 lab file, \`-gps:all=\` removed the GPS group and \`Composite GPSPosition\`, and it left Artist, Copyright, DateTimeOriginal, and OffsetTimeOriginal. A real name in Artist is still personal information. The pixels of a face were never a tag. GPS was not the only identifier, and deleting it is not anonymisation.
+4. The strip has not failed merely because lines remain. FAQ 32 keeps an ICC profile when one exists and writes colour-space tags back, including defaults. The pod leaves the JPEG APP14 Adobe group in place on a default \`-all=\` because of appearance. \`File\` and \`System\` are the image structure and the filesystem, which a read prints even when the captions are gone. On a RAW or a TIFF, FAQ 7 and FAQ 32 say metadata is not safely separable from the image, and a proprietary RAW can lose information it needs in order to render. On a PDF, note 3 says the edit is reversible and the previous information is not actually deleted. You do not promise either file is clean because a tag stopped printing.
+5. APP 3 is the purpose you did not have when a family folder became a demonstration. APP 6 is the new use, a public post. APP 8 is any upload, and any nearest-city lookup that left the machine. APP 10 is a sample coordinate and a city name filed as where those people were. APP 11 is the gallery, the \`_original\` files, and the post, which you can no longer secure. The geolocation feature writes a place the camera did not store. Publishing a real person's location to make a point can be a serious invasion of privacy under the statutory tort, and the Criminal Code (Cth) carriage-service offences do not contain a teaching exemption. If the photos were taken off a platform, that platform's terms are in it as well. The file this lesson allowed was a fictional white JPEG, or a photo you took and did not publish.
+`,
+        exercise: "On one JPEG only: either a photo you took, copied first, or a blank JPEG you created and labelled as fiction. If you write tags, write them only on that blank copy, use a name that is not a real person (Pip Tadwell is the one this course already uses), and use FAQ 14's sample coordinate -42.5, -33.25 rather than any real place. Read with exiftool -a -G1 -s, with exiftool -a \"-gps*\" -ee, and with exiftool -time:all -a -G1 -s. If you strip, strip the copy with exiftool -gps:all= and read it again. Do not pass -overwrite_original, -geotag, -geolocate, -password, -F, -m, or -r. Do not use a RAW or a PDF. Do not download someone else's picture to practise on. Write five sentences: the exiftool -ver output, one stored tag and one Composite tag and how you told them apart, one clock that is not the time the picture was taken, what -gps:all= removed and which identifying tags it left, and which flags and files you refused and why. Keep the JPEG and the _original file out of git.",
+      },
+    ],
+  },
+
   ...defensiveCyberLessons,
 }
 
